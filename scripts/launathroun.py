@@ -95,6 +95,10 @@ def lykill_felags(r) -> str:
     return f"id:{r['felag_id']}" if r.get("felag_id") else "óþekkt"
 
 
+def algengast(teljari):
+    return teljari.most_common(1)[0][0] if teljari else None
+
+
 def heilleiki(y) -> str:
     """Gróft mat á því hversu treystandi keðjaða vísitalan er fyrir félagið."""
     bil = y.get("mesta_bil", 0)
@@ -187,17 +191,25 @@ def main():
         w.writeheader()
         w.writerows(ut)
 
-    # Uppflettitafla félaga
-    yfirlit = collections.defaultdict(lambda: {"n": 0, "fra": "9999", "til": "0"})
+    # Uppflettitafla félaga. Markaður og heildarsamtök eru tekin sem algengasta
+    # gildið, ekki það síðasta - stök færsla getur borið villandi flokkun.
+    yfirlit = collections.defaultdict(
+        lambda: {"n": 0, "fra": "9999", "til": "0",
+                 "markadir": collections.Counter(),
+                 "samtok": collections.Counter(),
+                 "audkenni": collections.Counter()})
     for r in ut:
         y = yfirlit[r["felag_lykill"]]
         y["n"] += 1
         y["fra"] = min(y["fra"], r["dagsetning"])
         y["til"] = max(y["til"], r["dagsetning"])
         y["felag"] = r["felag"]
-        y["felag_id"] = r["felag_id"]
-        y["markadur"] = r["markadur"]
-        y["heildarsamtok"] = r["heildarsamtok"]
+        if r["felag_id"]:
+            y["audkenni"][r["felag_id"]] += 1
+        if r["markadur"]:
+            y["markadir"][r["markadur"]] += 1
+        if r["heildarsamtok"]:
+            y["samtok"][r["heildarsamtok"]] += 1
         y["visitala_lok"] = r["visitala"]
         if r.get("bil_manudir"):
             y["mesta_bil"] = max(y.get("mesta_bil", 0), int(r["bil_manudir"]))
@@ -209,9 +221,11 @@ def main():
                                           "heilleiki"])
         w.writeheader()
         for k, y in sorted(yfirlit.items(), key=lambda kv: -kv[1]["n"]):
-            w.writerow({"felag_lykill": k, "felag_id": y.get("felag_id"),
-                        "felag": y.get("felag"), "markadur": y.get("markadur"),
-                        "heildarsamtok": y.get("heildarsamtok"),
+            w.writerow({"felag_lykill": k,
+                        "felag_id": algengast(y["audkenni"]),
+                        "felag": y.get("felag"),
+                        "markadur": algengast(y["markadir"]),
+                        "heildarsamtok": algengast(y["samtok"]),
                         "fjoldi_haekkana": y["n"], "fyrsta": y["fra"],
                         "sidasta": y["til"], "visitala_lok": y.get("visitala_lok"),
                         "mesta_bil_manudir": y.get("mesta_bil", ""),
