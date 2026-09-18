@@ -64,12 +64,18 @@ from utdrattur import MANUDIR  # noqa: E402
 
 
 def lesa_texta(leid: str, hamark_sidna: int = 60) -> str:
+    """Les texta úr PDF. Skilar tómum streng ef skjalið er ólæsilegt.
+
+    Sum skjöl í safninu eru dulkóðuð eða gölluð og kasta villu bæði við opnun
+    og þegar reynt er að telja síður, svo hvort tveggja þarf að verja.
+    """
     try:
         r = PdfReader(leid)
+        sidur = list(r.pages[:hamark_sidna])
     except Exception:
         return ""
     bitar = []
-    for bls in r.pages[:hamark_sidna]:
+    for bls in sidur:
         try:
             bitar.append(bls.extract_text() or "")
         except Exception:

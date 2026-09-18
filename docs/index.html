@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kjarasamningar — API</title>
+<style>
+  :root {
+    --bg: #fbfaf8; --texti: #22201d; --daufur: #6b6660;
+    --lina: #e2ded8; --reitur: #f3f0ec; --akser: #7a4f2c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #171614; --texti: #e8e4de; --daufur: #9a948c;
+      --lina: #302d29; --reitur: #211f1c; --akser: #d4a373;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #171614; --texti: #e8e4de; --daufur: #9a948c;
+    --lina: #302d29; --reitur: #211f1c; --akser: #d4a373;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--texti);
+    font: 16px/1.65 ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  }
+  .umgjord { max-width: 780px; margin: 0 auto; padding: 56px 16px 96px; }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .3em; letter-spacing: -.01em; }
+  h2 { font-size: 1.15rem; margin: 2.4em 0 .6em; letter-spacing: -.005em; }
+  h3 { font-size: .95rem; margin: 1.6em 0 .4em; color: var(--daufur);
+       text-transform: uppercase; letter-spacing: .06em; }
+  p, li { color: var(--texti); }
+  .inngangur { color: var(--daufur); font-size: 1.05rem; margin-bottom: 2em; }
+  a { color: var(--akser); }
+  code, pre {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .875em;
+  }
+  code { background: var(--reitur); padding: .12em .38em; border-radius: 3px; }
+  pre {
+    background: var(--reitur); padding: 14px 16px; border-radius: 6px;
+    overflow-x: auto; border: 1px solid var(--lina);
+  }
+  pre code { background: none; padding: 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: .92rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--lina);
+           vertical-align: top; }
+  th { color: var(--daufur); font-weight: 600; font-size: .82rem;
+       text-transform: uppercase; letter-spacing: .05em; }
+  .vidvorun {
+    border-left: 3px solid var(--akser); background: var(--reitur);
+    padding: 12px 16px; margin: 1.4em 0; border-radius: 0 6px 6px 0;
+  }
+  .vidvorun p { margin: .4em 0; }
+  footer { margin-top: 4em; padding-top: 1.4em; border-top: 1px solid var(--lina);
+           color: var(--daufur); font-size: .88rem; }
+</style>
+</head>
+<body>
+<div class="umgjord">
+
+<h1>Kjarasamningar</h1>
+<p class="inngangur">
+  Umsamdar launahækkanir samkvæmt íslenskum kjarasamningum, dregnar úr
+  frumtexta samninganna og birtar sem static JSON.
+</p>
+
+<p>
+  Gögnin eru unnin úr heildarskrá ríkissáttasemjara ásamt skjölum af vefjum
+  stéttarfélaga og samtaka atvinnurekenda. Hver hækkun ber beina tilvitnun í
+  frumtextann svo hægt sé að sannreyna hana.
+</p>
+
+<div class="vidvorun">
+  <p><strong>Vísitalan er ekki launavísitala.</strong> Hún leggur saman þær
+  hækkanir sem tókst að finna í samningum og er aðeins marktæk fyrir félög þar
+  sem reiturinn <code>heilleiki</code> er <code>samfelld</code>. Notið reitinn
+  til að sía áður en raðirnar eru bornar saman.</p>
+</div>
+
+<h2>Endapunktar</h2>
+
+<table>
+  <tr><th>Slóð</th><th>Inntak</th></tr>
+  <tr><td><code>api/v1/index.json</code></td><td>yfirlit, útgáfa og fyrirvarar</td></tr>
+  <tr><td><code>api/v1/felog.json</code></td><td>öll félög með auðkenni og heilleika</td></tr>
+  <tr><td><code>api/v1/felog/{audkenni}.json</code></td><td>tímaröð eins félags</td></tr>
+  <tr><td><code>api/v1/haekkanir.json</code></td><td>allar hækkanir</td></tr>
+  <tr><td><code>api/v1/haekkanir/{ar}.json</code></td><td>hækkanir eins árs</td></tr>
+  <tr><td><code>api/v1/launavisitala/…</code></td><td>launavísitala Hagstofunnar</td></tr>
+</table>
+
+<h3>Dæmi</h3>
+<pre><code>const grunnur = "https://kristinnthor.github.io/kjarasamningar/api/v1";
+
+// Félög með samfellda röð
+const { felog } = await fetch(`${grunnur}/felog.json`).then(r =&gt; r.json());
+const nothaef = felog.filter(f =&gt; f.heilleiki === "samfelld");
+
+// Tímaröð VR
+const vr = await fetch(`${grunnur}/felog/vr.json`).then(r =&gt; r.json());
+for (const h of vr.haekkanir) {
+  console.log(h.dagsetning, h.prosenta, h.visitala);
+}</code></pre>
+
+<h2>Reitir</h2>
+
+<table>
+  <tr><th>Reitur</th><th>Lýsing</th></tr>
+  <tr><td><code>dagsetning</code></td><td>hvenær hækkunin tók gildi</td></tr>
+  <tr><td><code>prosenta</code></td><td>hækkun í prósentum, <code>null</code> ef eingöngu var samið um krónutölu</td></tr>
+  <tr><td><code>kronur</code></td><td>hækkun í krónum</td></tr>
+  <tr><td><code>a_vid</code></td><td>við hvað hækkunin miðast: kauptaxtar, launatafla, almenn laun …</td></tr>
+  <tr><td><code>visitala</code></td><td>keðjuð vísitala, grunnur 100 við fyrstu mælingu félagsins</td></tr>
+  <tr><td><code>bil_manudir</code></td><td>mánuðir frá síðustu mælingu — löng bil þýða að hækkanir vanti</td></tr>
+  <tr><td><code>heilleiki</code></td><td><code>samfelld</code>, <code>eyður</code>, <code>stórar eyður</code> eða <code>of fáir punktar</code></td></tr>
+  <tr><td><code>tilvitnun</code></td><td>textabúturinn úr samningnum, til sannreyningar</td></tr>
+</table>
+
+<h2>Takmarkanir</h2>
+<ul>
+  <li><strong>Krónutöluhækkanir stöðva keðjuna.</strong> Þær er ekki hægt að
+    umbreyta í hlutfall án þess að vita launastigið, svo vísitalan stendur í
+    stað og línan er merkt.</li>
+  <li><strong>Launavísitala Hagstofunnar skiptist eftir markaði</strong> —
+    almennur, ríki, sveitarfélög — en ekki eftir stéttarfélagi. Hún mælir líka
+    raunverulega launaþróun með launaskriði, ekki umsamdar hækkanir.</li>
+  <li><strong>Gögnin eru unnin vélrænt úr OCR-texta.</strong> Eldri skjöl eru
+    misvel lesin; ártöl eru sannreynd gegn gildistíma samningsins og reiturinn
+    <code>artal_stada</code> segir til um hvert tilvik.</li>
+</ul>
+
+<footer>
+  Frumgögnin eru opinber gögn útgefenda sinna.
+  Forritin og úrvinnslan eru á
+  <a href="https://github.com/kristinnthor/kjarasamningar">GitHub</a>.
+</footer>
+
+</div>
+</body>
+</html>
