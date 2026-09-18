@@ -88,7 +88,9 @@ FYRIRVARAR = [
 def main():
     felog = lesa("felog.csv")
     rod = lesa("launathroun_eftir_felagi.csv")
-    haekkanir = lesa("haekkanir.csv")
+    # Sameinaða skráin er notuð þegar hún er til: hún ber bæði færslur með
+    # staðfest lýsigögn og þær sem raktar voru úr vefskjölum.
+    haekkanir = lesa("haekkanir_sameinad.csv") or lesa("haekkanir.csv")
 
     if not felog:
         print("gogn/felog.csv fannst ekki - keyrðu scripts/launathroun.py fyrst")

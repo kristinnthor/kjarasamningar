@@ -63,6 +63,25 @@ AR_I_NAFNI = re.compile(r"(19\d{2}|20\d{2})\s*[-–_]\s*(19\d{2}|20\d{2})")
 from utdrattur import MANUDIR  # noqa: E402
 
 
+# Félagsblöð, fréttabréf og ársskýrslur fjalla oft um gamla kjarasamninga í
+# sögulegu samhengi. Þau lesast eins og samningar en dagsetningarnar eiga við
+# frásögnina, ekki gildandi ákvæði, svo þau eru útilokuð.
+EKKI_SAMNINGUR = re.compile(
+    r"blad|blaðið|bladid|frettabref|fréttabréf|timarit|tímarit|arsrit|ársrit|"
+    r"arsskyrsl|ársskýrsl|arsreikning|ársreikning|kynningarb|frettir|fréttir|"
+    r"vrbladid|skyrsla|skýrsla|glaerur|glærur|erindi", re.I)
+
+# Skjalið þarf að líta út eins og samningur til að vera tekið gilt
+SAMNINGSMERKI = re.compile(r"kjarasamning|samningur þessi|gildistími|"
+                           r"\bgr\.\s*\d|kauptaxt|launatafl", re.I)
+
+
+def er_samningsskjal(skraarnafn: str, texti: str) -> bool:
+    if EKKI_SAMNINGUR.search(skraarnafn):
+        return False
+    return len(SAMNINGSMERKI.findall(texti[:20000])) >= 3
+
+
 def lesa_texta(leid: str, hamark_sidna: int = 60) -> str:
     """Les texta úr PDF. Skilar tómum streng ef skjalið er ólæsilegt.
 
@@ -160,11 +179,14 @@ def main(argv):
     print(f"Skjöl til vinnslu: {len(skjol)}")
 
     radir = []
-    med, an_texta = 0, 0
+    med, an_texta, ekki_samningur = 0, 0, 0
     for i, (rel, leid) in enumerate(skjol, 1):
         texti = lesa_texta(leid)
         if len(texti) < 500:
             an_texta += 1
+            continue
+        if not er_samningsskjal(os.path.basename(rel), texti):
+            ekki_samningur += 1
             continue
         kodi = rel.split("/")[0]
         fra, til = finna_gildistima(texti, os.path.basename(rel))
@@ -185,7 +207,8 @@ def main(argv):
                 **h,
             })
         if i % 100 == 0:
-            print(f"  {i}/{len(skjol)} - {len(radir)} hækkanir, {an_texta} án texta")
+            print(f"  {i}/{len(skjol)} - {len(radir)} hækkanir, "
+                  f"{an_texta} án texta, {ekki_samningur} ekki samningar")
 
     if kanna:
         for r in radir[:20]:

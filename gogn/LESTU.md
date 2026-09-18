@@ -7,6 +7,7 @@ launavísitala Hagstofunnar sem sjálfstætt viðmið.
 |---|---|
 | `haekkanir.csv` | ein lína á hverja umsamda hækkun sem fannst í samningi |
 | `haekkanir_vefskjol.csv` | sama úr PDF-um af vefjum félaganna, með veikari rakningu |
+| `haekkanir_sameinad.csv` | hvort tveggja sameinað, aðeins það sem tókst að rekja til félags |
 | `launathroun_eftir_felagi.csv` | ein lína á hvert (félag, dagsetning) með keðjaðri vísitölu |
 | `felog.csv` | uppflettitafla félaga með mati á heilleika raðarinnar |
 | `launavisitala_*.csv` | launavísitala Hagstofunnar |
@@ -69,9 +70,9 @@ marktæk fyrir félög þar sem röðin er samfelld. Tvennt takmarkar hana:
 
 | Heilleiki | Félög | Merking |
 |---|---:|---|
-| samfelld | 38 | mesta bil ≤ 18 mánuðir |
+| samfelld | 39 | mesta bil ≤ 18 mánuðir |
 | eyður | 37 | mesta bil 19–48 mánuðir |
-| stórar eyður | 42 | mesta bil > 48 mánuðir |
+| stórar eyður | 44 | mesta bil > 48 mánuðir |
 | of fáir punktar | 27 | færri en 3 mælingar |
 
 Notið `felag_lykill` til að tengja töflurnar saman - hann sameinar
@@ -85,7 +86,31 @@ Sama útdráttur á PDF-um sem sóttir voru af vefjum félaganna. Þeim fylgja e
 lýsigögn, svo samningsaðilar og gildistími eru lesin úr skjalinu sjálfu.
 Dálkurinn `rakning` segir hvort aðilar fundust í skjalinu eða hvort aðeins er
 vitað hvaðan skjalið kom. **Þessi skrá er höfð aðskilin** frá `haekkanir.csv`
-því rakningin er veikari; sameinið aðeins þær línur sem standast skoðun.
+því rakningin er veikari.
+
+Skjöl sem líta út eins og samningar en eru það ekki - félagsblöð, fréttabréf
+og ársskýrslur - eru útilokuð. Þau fjalla oft um gamla kjarasamninga í
+sögulegu samhengi, svo dagsetningarnar í þeim eiga við frásögnina en ekki
+gildandi ákvæði. 719 skjöl féllu á því prófi.
+
+## haekkanir_sameinad.csv
+
+`scripts/sameina.py` rekur hverja vefskjalsfærslu til stéttarfélags í þremur
+þrepum, og `rakning` segir hvaða þrep skilaði henni:
+
+| Rakning | Línur | Merking |
+|---|---:|---|
+| staðfest lýsigögn | 2.640 | úr heildarskrá ríkissáttasemjara |
+| vefur félagsins | 785 | skjalið kom af vef félagsins sjálfs |
+| aðili úr skjali | 178 | samningsaðili í skjalinu passar við þekkt félag |
+| *órakið* | *427* | *fellur út - fer ekki í tímaraðirnar* |
+
+Órakti hlutinn kemur nær allur af vefjum viðsemjenda (SA, Reykjavíkurborg,
+ríkið), sem geyma samninga við tugi ólíkra félaga. Þar dugar ekki að vita
+hvaðan skjalið kom.
+
+**Vefskjölin ná ekkert aftur fyrir 2000.** Félagsvefirnir geyma nær eingöngu
+gildandi og nýlega samninga, svo allt eldra hvílir á heildarskránni.
 
 ---
 

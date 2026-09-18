@@ -28,7 +28,9 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GOGN = os.path.join(ROT, "gogn")
-INN = os.path.join(GOGN, "haekkanir.csv")
+# Sameinaða skráin er notuð þegar hún er til, annars aðeins heildarskráin.
+_SAMEINAD = os.path.join(GOGN, "haekkanir_sameinad.csv")
+INN = _SAMEINAD if os.path.exists(_SAMEINAD) else os.path.join(GOGN, "haekkanir.csv")
 UT_ROD = os.path.join(GOGN, "launathroun_eftir_felagi.csv")
 UT_FELOG = os.path.join(GOGN, "felog.csv")
 
@@ -139,15 +141,17 @@ def main():
 
         ut.append({
             "felag_lykill": lykill,
-            "felag_id": besta["felag_id"],
+            "felag_id": besta.get("felag_id") or "",
             "felag": heiti.get(lykill, besta["felag"]),
-            "markadur": besta["markadur"],
-            "heildarsamtok": besta["heildarsamtok"],
+            "markadur": besta.get("markadur") or "",
+            "heildarsamtok": besta.get("heildarsamtok") or "",
             "dagsetning": dags,
             "a_vid": vidmid,
             "prosenta": round(pros, 2) if pros is not None else None,
             "kronur": int(kr) if kr is not None else None,
             "tegund": besta["tegund"],
+            "upprunar": ",".join(sorted({r.get("uppruni") or "ríkissáttasemjari"
+                                         for r in hopur})),
             "heimildir": len(hopur),
             "olik_gildi": olik,
             "skjal": besta["skjal"],
@@ -185,7 +189,7 @@ def main():
     dalkar = ["felag_lykill", "felag_id", "felag", "markadur", "heildarsamtok",
               "dagsetning", "a_vid", "prosenta", "kronur", "tegund",
               "visitala", "bil_manudir", "visitala_athugasemd",
-              "heimildir", "olik_gildi", "skjal"]
+              "heimildir", "olik_gildi", "upprunar", "skjal"]
     with open(UT_ROD, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=dalkar, extrasaction="ignore")
         w.writeheader()

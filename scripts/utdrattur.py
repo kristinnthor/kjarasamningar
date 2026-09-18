@@ -68,6 +68,7 @@ UTILOKAD = re.compile(
     r"orlofsheimil|félagsgjald|tryggingagjald|vaxta|verðbólg|"
     r"framlag í|sjóðfélag|endurmenntun|vísitala neysluverðs|"
     r"desemberuppbót|orlofsuppbót|persónuuppbót|"
+    r"eingreiðsl|uppgjörsgreiðsl|innáborgun|"
     r"vaktaálag|stórhelgi|álagsgreiðsl|ferðapening|dagpening|vátrygg|"
     r"bifreiðastyrk|fatapening|akstursgjald|námskeiðaálag|"
     r"vátryggingarfjárhæð|slysatrygg|starfsaldursálag", re.I)
