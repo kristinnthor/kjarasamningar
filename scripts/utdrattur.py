@@ -99,6 +99,13 @@ LAGMARK = re.compile(r"að lágmarki|þó (?:eigi|ekki) (?:um )?lægri|hi[ðd] m
                      r"lágmarkshækkun|krónutöluhækkun að lágmarki", re.I)
 EDA = re.compile(r"\beða\b", re.I)
 
+# Dagsetningar sem eru skilyrði eða viðmiðunarmörk fremur en gildistökudagur
+# hækkunar, t.d. "starfsmenn sem hófu störf fyrir 1. febrúar 2014".
+SKILYRDI = re.compile(
+    r"(?:hófu|hóf|hafið|hefja|hefur hafið)\s+(?:þá\s+)?störf[^.]{0,30}$|"
+    r"ráðni[rn][^.]{0,25}$|starfað[^.]{0,25}$|"
+    r"til og með\s*$|gildir til\s*$|rann út\s*$", re.I)
+
 
 def bua_til_dags(dagur: int, man: int, ar: int):
     try:
@@ -244,6 +251,11 @@ def utdrattur_ur_texta(texti: str, argr: Argreining):
 
         naesta = dagsetningar[i + 1].start() if i + 1 < len(dagsetningar) else len(texti)
         fyrri = dagsetningar[i - 1].end() if i > 0 else 0
+
+        # Dagsetningar sem eru skilyrði eiga ekki að verða gildistökudagur
+        undanfari = " ".join(texti[max(0, m.start() - 60):m.start()].split())
+        if SKILYRDI.search(undanfari):
+            continue
 
         # Fyrst er leitað fram fyrir dagsetninguna, sem er algengasta orðaröðin
         endir = min(m.end() + 90, naesta)
