@@ -1,0 +1,15 @@
+# Sóttir kjarasamningar og hráskrár - ekki geymt í útgáfustýringu.
+# Forritin í scripts/ endurheimta þetta allt frá upprunaheimildunum.
+samningar/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Ýmislegt
+.remember/
+*.log
+.DS_Store
+Thumbs.db
