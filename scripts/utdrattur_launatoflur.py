@@ -249,6 +249,17 @@ def main(argv):
         ur_skjali, haus_texti = lesa_skjal(sidur, "plain")
         if not ur_skjali:
             ur_skjali, haus_texti = lesa_skjal(sidur, "layout")
+        # Aðeins mánaðarlaun: tímakaup, yfirvinna og álög eru afleidd af þeim,
+        # eru um þrír fjórðu allra lína og bæta engu við tímaröðina.
+        ur_skjali = [r for r in ur_skjali if r["maelikvardi"] == "mánaðarlaun"]
+        sed, einstakar = set(), []
+        for r in ur_skjali:
+            lykill = (r["tafla_nr"], r["launaflokkur"], r["threp_nr"], r["fjarhaed"])
+            if lykill in sed:
+                continue
+            sed.add(lykill)
+            einstakar.append(r)
+        ur_skjali = einstakar
         if not ur_skjali:
             continue
         med += 1
@@ -266,20 +277,7 @@ def main(argv):
         if i % 100 == 0:
             print(f"  {i}/{len(skjol)} - {len(allar)} taxtalínur úr {med} skjölum")
 
-    # Aðeins mánaðarlaun: tímakaup, yfirvinna og álög eru afleidd af þeim og
-    # margfalda umfangið án þess að bæta við upplýsingum.
-    allar = [r for r in allar if r["maelikvardi"] == "mánaðarlaun"]
-
-    sed = set()
-    einstakar = []
-    for r in allar:
-        lykill = (r["skjal"], r["tafla_nr"], r["launaflokkur"],
-                  r["threp_nr"], r["fjarhaed"])
-        if lykill in sed:
-            continue
-        sed.add(lykill)
-        einstakar.append(r)
-    allar = stadfesta(einstakar)
+    allar = stadfesta(allar)
 
     if kanna:
         for r in allar[:30]:
