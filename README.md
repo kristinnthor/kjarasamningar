@@ -20,6 +20,20 @@ Mappan `samningar/` er undanskilin í `.gitignore`; forritin í `scripts/` sækj
 hana aftur frá upprunaheimildunum þegar þarf. Ástæðan er stærð (um 7 GB) og að
 frumskjölin eiga sér þegar opinberan samastað hjá útgefendum sínum.
 
+## Prófaðu gögnin
+
+```bash
+pip install matplotlib requests
+python daemi/graf.py                      # fjögur félög með samfellda röð
+python daemi/graf.py samidnar             # eitt félag, með viðmiði Hagstofunnar
+python daemi/graf.py --listi              # öll fáanleg auðkenni
+python daemi/graf.py vr --vista graf.png  # vista í skrá
+```
+
+Forritið sækir allt yfir netið af API-inu - ekkert af gögnunum er innbyggt í
+það. Sjá [docs/index.html](https://kristinnthor.github.io/kjarasamningar/) fyrir
+endapunktana og [sýnidæmi í vafra](https://kristinnthor.github.io/kjarasamningar/demo.html).
+
 ---
 
 ## Áfangi 1: söfnun
