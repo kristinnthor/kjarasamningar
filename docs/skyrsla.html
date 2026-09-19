@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kjarasamningar — samanburður</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #fbfaf8; --yfirbord: #fcfcfb;
+    --texti: #0b0b0b; --texti-2: #52514e; --texti-3: #86847e;
+    --lina: #e2ded8; --reitur: #f3f0ec; --akser: #7a4f2c;
+    --rod-1:#2a78d6; --rod-2:#eb6834; --rod-3:#1baf7a; --rod-4:#eda100;
+    --rod-5:#e87ba4; --rod-6:#008300; --rod-7:#4a3aa7; --rod-8:#e34948;
+    --vidmid: #8d8b82;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg:#171614; --yfirbord:#1a1a19;
+      --texti:#ffffff; --texti-2:#c3c2b7; --texti-3:#8d8b82;
+      --lina:#302d29; --reitur:#211f1c; --akser:#d4a373;
+      --rod-1:#3987e5; --rod-2:#d95926; --rod-3:#199e70; --rod-4:#c98500;
+      --rod-5:#d55181; --rod-6:#008300; --rod-7:#9085e9; --rod-8:#e66767;
+      --vidmid:#6f6d66;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg:#171614; --yfirbord:#1a1a19;
+    --texti:#ffffff; --texti-2:#c3c2b7; --texti-3:#8d8b82;
+    --lina:#302d29; --reitur:#211f1c; --akser:#d4a373;
+    --rod-1:#3987e5; --rod-2:#d95926; --rod-3:#199e70; --rod-4:#c98500;
+    --rod-5:#d55181; --rod-6:#008300; --rod-7:#9085e9; --rod-8:#e66767;
+    --vidmid:#6f6d66;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--texti);
+    font: 15px/1.6 ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  }
+  .umgjord { max-width: 1060px; margin: 0 auto; padding: 40px 16px 80px; }
+  h1 { font-size: 1.6rem; margin: 0 0 .2em; letter-spacing: -.01em; }
+  .undir { color: var(--texti-2); margin: 0 0 1.8em; max-width: 62ch; }
+  a { color: var(--akser); }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .86em;
+         background: var(--reitur); padding: .1em .35em; border-radius: 3px; }
+
+  .stjornbord {
+    display: grid; gap: 16px; grid-template-columns: 300px minmax(0, 1fr);
+    align-items: start; margin-bottom: 18px;
+  }
+  /* Grid-hólf fá sjálfgefið min-width: auto og geta því ekki minnkað undir
+     náttúrulega breidd innihaldsins. Án þessa þvingar SVG-myndin síðuna
+     breiðari en skjáinn á farsíma. */
+  .stjornbord > * { min-width: 0; }
+  @media (max-width: 760px) { .stjornbord { grid-template-columns: minmax(0, 1fr); } }
+
+  .spjald { background: var(--yfirbord); border: 1px solid var(--lina);
+            border-radius: 8px; padding: 14px; }
+  .merki { font-size: .74rem; font-weight: 700; color: var(--texti-3);
+           text-transform: uppercase; letter-spacing: .06em; margin: 0 0 8px; }
+
+  input[type=search], select {
+    width: 100%; height: 36px; padding: 0 10px; font: inherit; font-size: .9rem;
+    color: var(--texti); background: var(--bg);
+    border: 1px solid var(--lina); border-radius: 5px; outline: none;
+  }
+  input[type=search]:focus, select:focus { border-color: var(--texti-3); }
+
+  .listi { max-height: 320px; overflow-y: auto; margin-top: 10px;
+           border-top: 1px solid var(--lina); }
+  .val { display: flex; align-items: center; gap: 8px; padding: 6px 2px;
+         cursor: pointer; border-bottom: 1px solid var(--lina); font-size: .88rem; }
+  .val:hover { background: var(--reitur); }
+  .val input { margin: 0; accent-color: var(--akser); flex: 0 0 auto; }
+  .val .heiti { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis;
+                white-space: nowrap; }
+  .val.oflest { opacity: .45; cursor: not-allowed; }
+  .gaedi { font-size: .68rem; padding: 1px 6px; border-radius: 99px;
+           border: 1px solid var(--lina); color: var(--texti-3);
+           white-space: nowrap; flex: 0 0 auto; }
+  .gaedi[data-g="samfelld"] { color: #1f7a4d; border-color: #1f7a4d55; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .gaedi[data-g="samfelld"] {
+      color: #4fbd85; border-color: #4fbd8555;
+    }
+  }
+  :root[data-theme="dark"] .gaedi[data-g="samfelld"] {
+    color: #4fbd85; border-color: #4fbd8555;
+  }
+
+  .valin { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .kubbur { display: inline-flex; align-items: center; gap: 6px;
+            font-size: .8rem; padding: 3px 8px; border-radius: 99px;
+            background: var(--reitur); border: 1px solid var(--lina); }
+  .kubbur button { all: unset; cursor: pointer; color: var(--texti-3);
+                   font-size: .95rem; line-height: 1; }
+  .kubbur button:hover { color: var(--texti); }
+  .depill { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
+
+  .stillingar { display: flex; flex-wrap: wrap; gap: 14px; align-items: end;
+                margin-bottom: 12px; }
+  .stilling { display: flex; flex-direction: column; gap: 5px; }
+  .stilling label { font-size: .74rem; font-weight: 700; color: var(--texti-3);
+                    text-transform: uppercase; letter-spacing: .06em; }
+  .gatreitur { display: flex; align-items: center; gap: 7px; font-size: .86rem;
+               color: var(--texti-2); height: 36px; }
+  .gatreitur input { accent-color: var(--akser); }
+
+  .hnappar { display: flex; gap: 6px; }
+  button.flipa {
+    font: inherit; font-size: .82rem; padding: 5px 12px; cursor: pointer;
+    background: var(--yfirbord); color: var(--texti-2);
+    border: 1px solid var(--lina); border-radius: 5px;
+  }
+  button.flipa[aria-pressed="true"] { color: var(--texti); border-color: var(--texti-3); }
+
+  .myndspjald { background: var(--yfirbord); border: 1px solid var(--lina);
+                border-radius: 8px; padding: 16px 16px 8px; position: relative; }
+  .skyringar { display: flex; flex-wrap: wrap; gap: 12px 18px; margin: 0 0 8px;
+               padding: 0; list-style: none; font-size: .84rem; color: var(--texti-2); }
+  .skyringar li { display: flex; align-items: center; gap: 6px; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .grid line { stroke: var(--lina); }
+  .as text { fill: var(--texti-3); font-size: 11px; }
+  .merking { font-size: 11px; font-weight: 700; }
+  .stada { color: var(--texti-2); text-align: center; padding: 48px 0; font-size: .9rem; }
+
+  .visir { position: absolute; pointer-events: none; opacity: 0;
+           transition: opacity .1s; z-index: 5; }
+  .abending {
+    position: absolute; pointer-events: none; opacity: 0; transition: opacity .1s;
+    background: var(--yfirbord); border: 1px solid var(--lina); border-radius: 6px;
+    padding: 8px 10px; font-size: .82rem; box-shadow: 0 4px 14px rgba(0,0,0,.14);
+    z-index: 6; min-width: 160px;
+  }
+  .abending h4 { margin: 0 0 5px; font-size: .78rem; color: var(--texti-3);
+                 font-weight: 700; }
+  .abending .rod { display: flex; align-items: center; gap: 6px;
+                   justify-content: space-between; margin: 2px 0; }
+  .abending .rod span:last-child { font-variant-numeric: tabular-nums;
+                                   font-weight: 600; }
+
+  table { border-collapse: collapse; width: 100%; font-size: .84rem; margin-top: 10px; }
+  th, td { text-align: right; padding: 5px 8px; border-bottom: 1px solid var(--lina);
+           font-variant-numeric: tabular-nums; }
+  th:first-child, td:first-child { text-align: left; font-variant-numeric: normal; }
+  th { color: var(--texti-3); font-weight: 700; font-size: .74rem;
+       text-transform: uppercase; letter-spacing: .04em; }
+  [hidden] { display: none !important; }
+
+  .vidvorun { border-left: 3px solid var(--akser); background: var(--reitur);
+              padding: 10px 14px; margin: 18px 0; border-radius: 0 6px 6px 0;
+              font-size: .88rem; color: var(--texti-2); }
+  footer { margin-top: 2.6em; padding-top: 1.2em; border-top: 1px solid var(--lina);
+           color: var(--texti-2); font-size: .85rem; }
+</style>
+</head>
+<body>
+<div class="umgjord">
+
+<h1>Samanburður stéttarfélaga</h1>
+<p class="undir">
+  Veldu eitt eða fleiri félög og berðu saman umsamdar launahækkanir á sameiginlegum
+  tímaás. Gögnin eru sótt beint af API-inu.
+</p>
+
+<div class="stjornbord">
+  <div class="spjald">
+    <p class="merki">Félög</p>
+    <input type="search" id="leit" placeholder="Leita að félagi…" autocomplete="off">
+    <div class="gatreitur" style="height:auto;margin-top:8px">
+      <input type="checkbox" id="adeins-samfelld">
+      <label for="adeins-samfelld" style="all:unset;cursor:pointer">
+        Aðeins félög með samfellda röð
+      </label>
+    </div>
+    <div class="listi" id="listi"></div>
+  </div>
+
+  <div>
+    <div class="stillingar">
+      <div class="stilling">
+        <label for="grunnur">Grunnur</label>
+        <select id="grunnur">
+          <option value="">Eigin grunnur hvers félags</option>
+        </select>
+      </div>
+      <div class="gatreitur">
+        <input type="checkbox" id="hagstofa">
+        <label for="hagstofa" style="all:unset;cursor:pointer">
+          Launavísitala Hagstofunnar
+        </label>
+      </div>
+      <div class="hnappar" style="margin-left:auto">
+        <button class="flipa" id="f-mynd" aria-pressed="true">Mynd</button>
+        <button class="flipa" id="f-tafla" aria-pressed="false">Tafla</button>
+      </div>
+    </div>
+
+    <div class="valin" id="valin"></div>
+
+    <div class="myndspjald" id="myndspjald" style="margin-top:10px">
+      <ul class="skyringar" id="skyringar"></ul>
+      <div class="stada" id="stada">Sæki félagalista…</div>
+      <div id="mynd" hidden></div>
+      <div id="tafla" hidden></div>
+      <div class="visir" id="visir"></div>
+      <div class="abending" id="abending"></div>
+    </div>
+  </div>
+</div>
+
+<div class="vidvorun" id="vidvorun">
+  <strong>Vísitalan er ekki launavísitala.</strong> Hún leggur saman þær hækkanir sem
+  tókst að finna í samningum. Merkingin við hvert félag segir hversu samfelld röðin
+  er — félög með eyður vanmeta þróunina, því hækkanir vantar inn í keðjuna.
+</div>
+
+<footer>
+  <a href="./">Skjölun API-sins</a> ·
+  <a href="./demo.html">Einfalt sýnidæmi</a> ·
+  <a href="https://github.com/kristinnthor/kjarasamningar">GitHub</a>
+</footer>
+
+</div>
+
+<script type="module">
+const GRUNNUR = new URL("api/v1/", location.href).href;
+const LITIR = ["var(--rod-1)","var(--rod-2)","var(--rod-3)","var(--rod-4)",
+               "var(--rod-5)","var(--rod-6)","var(--rod-7)","var(--rod-8)"];
+const HAMARK = LITIR.length;
+
+const E = (id) => document.getElementById(id);
+const dagur = (s) => new Date(s + "T00:00:00Z").getTime();
+const isl = (n, aukastafir = 0) =>
+  n.toLocaleString("is-IS", { minimumFractionDigits: aukastafir,
+                              maximumFractionDigits: aukastafir });
+
+const stada = {
+  felog: [],
+  valin: new Map(),      // audkenni -> gögn félagsins
+  grunnur: "",           // "" eða "YYYY"
+  hagstofa: false,
+  mynd: true,
+  visitala: null,        // gögn Hagstofunnar, sótt við fyrstu þörf
+};
+
+// ------------------------------------------------------------------ //
+// Gagnasókn                                                          //
+// ------------------------------------------------------------------ //
+
+async function saekja(slod) {
+  const svar = await fetch(GRUNNUR + slod);
+  if (!svar.ok) throw new Error(`${slod}: HTTP ${svar.status}`);
+  return svar.json();
+}
+
+async function saekjaFelag(audkenni) {
+  if (stada.valin.has(audkenni)) return stada.valin.get(audkenni);
+  const g = await saekja(`felog/${audkenni}.json`);
+  return {
+    audkenni,
+    heiti: g.felag,
+    heilleiki: g.heilleiki,
+    punktar: g.haekkanir
+      .filter((h) => h.visitala != null)
+      .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning, v: h.visitala })),
+  };
+}
+
+async function saekjaVisitolu() {
+  if (stada.visitala) return stada.visitala;
+  const g = await saekja("launavisitala/launavisitala_manadarleg.json");
+  stada.visitala = g.gildi
+    .filter((x) => x["Eining"] === "Vísitölugildi")
+    .map((x) => {
+      const m = x["Mánuður"];
+      return { t: Date.UTC(+m.slice(0, 4), +m.slice(5) - 1, 1), v: +x.gildi };
+    })
+    .sort((a, b) => a.t - b.t);
+  return stada.visitala;
+}
+
+// ------------------------------------------------------------------ //
+// Grunnfærsla                                                        //
+// ------------------------------------------------------------------ //
+
+/* Vísitalan er þrepafall - hún breytist aðeins þegar hækkun tekur gildi -
+   svo gildið á grunndegi er síðasta mæling á undan honum. Röð sem hefst
+   eftir grunndaginn verður ekki endurgrunnuð án þess að giska á það sem
+   á undan fór, og er því sleppt. */
+function endurgrunna(punktar, grunnT) {
+  const fyrir = punktar.filter((p) => p.t <= grunnT);
+  if (!fyrir.length) return null;
+  const grunngildi = fyrir[fyrir.length - 1].v;
+  if (!(grunngildi > 0)) return null;
+  const eftir = punktar.filter((p) => p.t > grunnT)
+                       .map((p) => ({ ...p, v: (p.v / grunngildi) * 100 }));
+  // Akkeri á grunndeginum sjálfum, svo línan byrji sýnilega í 100
+  return [{ t: grunnT, d: new Date(grunnT).toISOString().slice(0, 10), v: 100 },
+          ...eftir];
+}
+
+function serier() {
+  const grunnT = stada.grunnur ? Date.UTC(+stada.grunnur, 0, 1) : null;
+  const ut = [];
+  let i = 0;
+  for (const f of stada.valin.values()) {
+    let punktar = f.punktar;
+    if (grunnT !== null) {
+      punktar = endurgrunna(punktar, grunnT);
+      if (!punktar || punktar.length < 2) {
+        ut.push({ ...f, punktar: [], sleppt: true });
+        continue;
+      }
+    }
+    if (punktar.length < 2) continue;
+    ut.push({ ...f, punktar, litur: LITIR[i++ % LITIR.length] });
+  }
+  return ut;
+}
+
+function vidmidsrod(serierList) {
+  if (!stada.hagstofa || !stada.visitala) return null;
+  const allir = serierList.flatMap((s) => s.punktar);
+  if (!allir.length) return null;
+  const fra = Math.min(...allir.map((p) => p.t));
+  const til = Math.max(...allir.map((p) => p.t));
+  const innan = stada.visitala.filter((p) => p.t >= fra && p.t <= til);
+  if (innan.length < 2) return null;
+  let grunngildi;
+  if (stada.grunnur) {
+    const grunnT = Date.UTC(+stada.grunnur, 0, 1);
+    const fyrir = stada.visitala.filter((p) => p.t <= grunnT);
+    if (!fyrir.length) return null;
+    grunngildi = fyrir[fyrir.length - 1].v;
+  } else {
+    grunngildi = innan[0].v;
+  }
+  return {
+    heiti: "Launavísitala Hagstofunnar",
+    vidmid: true,
+    litur: "var(--vidmid)",
+    punktar: innan.map((p) => ({ ...p, v: (p.v / grunngildi) * 100,
+                                 d: new Date(p.t).toISOString().slice(0, 10) })),
+  };
+}
+
+// ------------------------------------------------------------------ //
+// Teikning                                                           //
+// ------------------------------------------------------------------ //
+
+function teikna(allar) {
+  const B = 900, H = 400, M = { t: 14, r: 96, b: 30, l: 50 };
+  const punktar = allar.flatMap((s) => s.punktar);
+  const x0 = Math.min(...punktar.map((p) => p.t));
+  const x1 = Math.max(...punktar.map((p) => p.t));
+  const yMax = Math.max(...punktar.map((p) => p.v));
+  const yTop = yMax * 1.06;
+  const yBotn = stada.grunnur ? Math.min(100, ...punktar.map((p) => p.v)) * 0.98 : 0;
+
+  const sx = (t) => M.l + ((t - x0) / (x1 - x0 || 1)) * (B - M.l - M.r);
+  const sy = (v) => H - M.b - ((v - yBotn) / (yTop - yBotn || 1)) * (H - M.t - M.b);
+
+  const fraAr = new Date(x0).getUTCFullYear();
+  const tilAr = new Date(x1).getUTCFullYear();
+  const bil = Math.max(1, Math.ceil((tilAr - fraAr) / 9));
+  const arMerki = [];
+  for (let a = Math.ceil(fraAr / bil) * bil; a <= tilAr; a += bil) {
+    arMerki.push({ a, x: sx(Date.UTC(a, 0, 1)) });
+  }
+
+  const yBil = (yTop - yBotn) > 400 ? 100 : (yTop - yBotn) > 150 ? 50 : 20;
+  const yMerki = [];
+  for (let v = Math.ceil(yBotn / yBil) * yBil; v <= yTop; v += yBil) {
+    yMerki.push({ v, y: sy(v) });
+  }
+
+  const beinMerking = allar.filter((s) => !s.vidmid).length <= 4;
+
+  const linur = allar.map((s) => {
+    const d = s.punktar.map((p, i) =>
+      `${i ? "L" : "M"}${sx(p.t).toFixed(1)},${sy(p.v).toFixed(1)}`).join("");
+    const sid = s.punktar[s.punktar.length - 1];
+    const stroke = s.vidmid
+      ? `stroke="${s.litur}" stroke-width="1.6" stroke-dasharray="5 4"`
+      : `stroke="${s.litur}" stroke-width="2"`;
+    let endi = "";
+    if (!s.vidmid) {
+      endi = `<circle cx="${sx(sid.t).toFixed(1)}" cy="${sy(sid.v).toFixed(1)}"
+                r="4" fill="${s.litur}" stroke="var(--yfirbord)" stroke-width="2"/>`;
+      if (beinMerking) {
+        endi += `<text class="merking" x="${(sx(sid.t) + 8).toFixed(1)}"
+                   y="${(sy(sid.v) + 4).toFixed(1)}" fill="${s.litur}"
+                   >${isl(sid.v)}</text>`;
+      }
+    }
+    return `<path d="${d}" fill="none" ${stroke} stroke-linejoin="round"
+              stroke-linecap="round"/>${endi}`;
+  }).join("");
+
+  return `<svg viewBox="0 0 ${B} ${H}" id="svgmynd" role="img"
+      aria-label="Keðjuð vísitala umsaminna launahækkana eftir stéttarfélagi">
+    <g class="grid">${yMerki.map((m) =>
+      `<line x1="${M.l}" x2="${B - M.r}" y1="${m.y.toFixed(1)}" y2="${m.y.toFixed(1)}"
+         stroke-width="${stada.grunnur && m.v === 100 ? 1.6 : 1}"/>`).join("")}</g>
+    <g class="as">
+      ${yMerki.map((m) => `<text x="${M.l - 8}" y="${(m.y + 4).toFixed(1)}"
+          text-anchor="end">${isl(m.v)}</text>`).join("")}
+      ${arMerki.map((m) => `<text x="${m.x.toFixed(1)}" y="${H - 10}"
+          text-anchor="middle">${m.a}</text>`).join("")}
+    </g>
+    ${linur}
+    <rect id="naemt" x="${M.l}" y="${M.t}" width="${B - M.l - M.r}"
+      height="${H - M.t - M.b}" fill="transparent"/>
+  </svg>`;
+}
+
+/* Gildi raðar á tilteknum tíma. Vísitalan er þrepafall, svo rétt gildi er
+   síðasta mæling á undan - ekki brúun milli punkta. */
+function gildiVid(s, t) {
+  let svar = null;
+  for (const p of s.punktar) { if (p.t <= t) svar = p; else break; }
+  return svar;
+}
+
+function tengjaAbendingu(allar, B, H, M) {
+  const svg = E("svgmynd");
+  const naemt = E("naemt");
+  const visir = E("visir");
+  const ab = E("abending");
+  if (!svg || !naemt) return;
+
+  const punktar = allar.flatMap((s) => s.punktar);
+  const x0 = Math.min(...punktar.map((p) => p.t));
+  const x1 = Math.max(...punktar.map((p) => p.t));
+
+  const fela = () => { visir.style.opacity = 0; ab.style.opacity = 0; };
+
+  naemt.addEventListener("mouseleave", fela);
+  naemt.addEventListener("mousemove", (ev) => {
+    const kassi = svg.getBoundingClientRect();
+    const hlutf = kassi.width / B;
+    const svgX = (ev.clientX - kassi.left) / hlutf;
+    const t = x0 + ((svgX - M.l) / (B - M.l - M.r)) * (x1 - x0);
+
+    const gildi = allar
+      .map((s) => ({ s, p: gildiVid(s, t) }))
+      .filter((x) => x.p);
+    if (!gildi.length) { fela(); return; }
+
+    const spjald = E("myndspjald").getBoundingClientRect();
+    const px = ev.clientX - spjald.left;
+    visir.style.left = `${px}px`;
+    visir.style.top = `${kassi.top - spjald.top + M.t * hlutf}px`;
+    visir.style.height = `${(H - M.t - M.b) * hlutf}px`;
+    visir.style.borderLeft = "1px solid var(--texti-3)";
+    visir.style.opacity = .6;
+
+    const dags = new Date(t).toISOString().slice(0, 7);
+    ab.innerHTML = `<h4>${dags}</h4>` + gildi
+      .sort((a, b) => b.p.v - a.p.v)
+      .map(({ s, p }) => `<div class="rod">
+          <span style="display:flex;align-items:center;gap:6px">
+            <span class="depill" style="background:${s.litur}"></span>${s.heiti}
+          </span><span>${isl(p.v, 1)}</span></div>`).join("");
+    const haegri = px > spjald.width / 2;
+    ab.style.left = haegri ? "" : `${px + 14}px`;
+    ab.style.right = haegri ? `${spjald.width - px + 14}px` : "";
+    ab.style.top = `${kassi.top - spjald.top + 20}px`;
+    ab.style.opacity = 1;
+  });
+}
+
+function taflan(allar) {
+  const arSet = new Set();
+  allar.forEach((s) => s.punktar.forEach((p) => arSet.add(p.d.slice(0, 4))));
+  const ar = [...arSet].sort();
+  const skref = Math.max(1, Math.ceil(ar.length / 12));
+  const syna = ar.filter((_, i) => i % skref === 0);
+  return `<table><thead><tr><th>Félag</th>${
+      syna.map((a) => `<th>${a}</th>`).join("")}</tr></thead><tbody>${
+    allar.map((s) => `<tr><td>${s.heiti}</td>${syna.map((a) => {
+      const p = gildiVid(s, Date.UTC(+a, 11, 31));
+      return `<td>${p ? isl(p.v) : ""}</td>`;
+    }).join("")}</td></tr>`).join("")}</tbody></table>`;
+}
+
+// ------------------------------------------------------------------ //
+// Birting                                                            //
+// ------------------------------------------------------------------ //
+
+function birta() {
+  const raðir = serier();
+  const sleppt = raðir.filter((s) => s.sleppt);
+  const virkar = raðir.filter((s) => !s.sleppt && s.punktar.length > 1);
+  const vidmid = vidmidsrod(virkar);
+  const allar = vidmid ? [vidmid, ...virkar] : virkar;
+
+  E("skyringar").innerHTML = allar.map((s) =>
+    `<li><span class="depill" style="background:${s.litur};
+       ${s.vidmid ? "opacity:.8" : ""}"></span>${s.heiti}${
+       s.vidmid ? " (viðmið)" : ""}</li>`).join("");
+
+  if (!virkar.length) {
+    E("mynd").hidden = true; E("tafla").hidden = true;
+    E("stada").hidden = false;
+    E("stada").textContent = stada.valin.size
+      ? `Engin röð nær aftur til ${stada.grunnur}. Veldu seinni grunn eða önnur félög.`
+      : "Veldu eitt eða fleiri félög til vinstri.";
+    return;
+  }
+
+  E("stada").hidden = true;
+  E("mynd").innerHTML = teikna(allar);
+  E("tafla").innerHTML = taflan(allar);
+  E("mynd").hidden = !stada.mynd;
+  E("tafla").hidden = stada.mynd;
+  if (stada.mynd) tengjaAbendingu(allar, 900, 400, { t: 14, r: 96, b: 30, l: 50 });
+
+  const adv = sleppt.length
+    ? `<br><strong>Sleppt:</strong> ${sleppt.map((s) => s.heiti).join(", ")} —
+       engin mæling fyrir ${stada.grunnur}, svo ekki er hægt að endurgrunna.`
+    : "";
+  E("vidvorun").innerHTML = E("vidvorun").dataset.grunn + adv;
+
+  skraSlod();
+}
+
+function tegraKubba() {
+  const raðir = serier();
+  E("valin").innerHTML = raðir.map((s) =>
+    `<span class="kubbur">
+       <span class="depill" style="background:${s.litur || "var(--texti-3)"}"></span>
+       ${s.heiti}
+       <button data-fjarlaegja="${s.audkenni}" aria-label="Fjarlægja ${s.heiti}">×</button>
+     </span>`).join("");
+  E("valin").querySelectorAll("[data-fjarlaegja]").forEach((b) =>
+    b.addEventListener("click", () => {
+      stada.valin.delete(b.dataset.fjarlaegja);
+      teiknaLista(); tegraKubba(); birta();
+    }));
+}
+
+function teiknaLista() {
+  const leit = E("leit").value.trim().toLowerCase();
+  const adeins = E("adeins-samfelld").checked;
+  const fullt = stada.valin.size >= HAMARK;
+  const syna = stada.felog.filter((f) =>
+    (!adeins || f.heilleiki === "samfelld") &&
+    (!leit || f.felag.toLowerCase().includes(leit)));
+
+  E("listi").innerHTML = syna.slice(0, 200).map((f) => {
+    const valid = stada.valin.has(f.audkenni);
+    const laest = fullt && !valid;
+    return `<label class="val ${laest ? "oflest" : ""}">
+      <input type="checkbox" value="${f.audkenni}" ${valid ? "checked" : ""}
+        ${laest ? "disabled" : ""}>
+      <span class="heiti">${f.felag}</span>
+      <span class="gaedi" data-g="${f.heilleiki}">${f.heilleiki}</span>
+    </label>`;
+  }).join("") || `<p class="stada">Ekkert félag fannst.</p>`;
+
+  E("listi").querySelectorAll("input").forEach((i) =>
+    i.addEventListener("change", async () => {
+      if (i.checked) {
+        if (stada.valin.size >= HAMARK) { i.checked = false; return; }
+        stada.valin.set(i.value, await saekjaFelag(i.value));
+      } else {
+        stada.valin.delete(i.value);
+      }
+      teiknaLista(); tegraKubba(); birta();
+    }));
+}
+
+function skraSlod() {
+  const p = new URLSearchParams();
+  if (stada.valin.size) p.set("felog", [...stada.valin.keys()].join(","));
+  if (stada.grunnur) p.set("grunnur", stada.grunnur);
+  if (stada.hagstofa) p.set("hagstofa", "1");
+  history.replaceState(null, "", p.toString() ? `?${p}` : location.pathname);
+}
+
+// ------------------------------------------------------------------ //
+
+async function raesa() {
+  E("vidvorun").dataset.grunn = E("vidvorun").innerHTML;
+  try {
+    const { felog } = await saekja("felog.json");
+    stada.felog = felog.sort((a, b) => b.fjoldi_haekkana - a.fjoldi_haekkana);
+  } catch (e) {
+    E("stada").textContent = "Tókst ekki að sækja félagalistann: " + e.message;
+    return;
+  }
+
+  const ar = new Set();
+  stada.felog.forEach((f) => {
+    for (let a = +f.fyrsta.slice(0, 4); a <= +f.sidasta.slice(0, 4); a++) ar.add(a);
+  });
+  E("grunnur").innerHTML = `<option value="">Eigin grunnur hvers félags</option>` +
+    [...ar].sort().map((a) => `<option value="${a}">${a}</option>`).join("");
+
+  const p = new URLSearchParams(location.search);
+  stada.grunnur = p.get("grunnur") || "";
+  stada.hagstofa = p.get("hagstofa") === "1";
+  E("grunnur").value = stada.grunnur;
+  E("hagstofa").checked = stada.hagstofa;
+  if (stada.hagstofa) await saekjaVisitolu();
+
+  const fra_slod = (p.get("felog") || "").split(",").filter(Boolean);
+  const sjalfgefin = fra_slod.length ? fra_slod
+    : stada.felog.filter((f) => f.heilleiki === "samfelld")
+                 .slice(0, 3).map((f) => f.audkenni);
+  for (const a of sjalfgefin) {
+    try { stada.valin.set(a, await saekjaFelag(a)); } catch { /* óþekkt auðkenni */ }
+  }
+
+  E("leit").addEventListener("input", teiknaLista);
+  E("adeins-samfelld").addEventListener("change", teiknaLista);
+  E("grunnur").addEventListener("change", async (e) => {
+    stada.grunnur = e.target.value;
+    if (stada.hagstofa) await saekjaVisitolu();
+    tegraKubba(); birta();
+  });
+  E("hagstofa").addEventListener("change", async (e) => {
+    stada.hagstofa = e.target.checked;
+    if (stada.hagstofa) await saekjaVisitolu();
+    birta();
+  });
+  E("f-mynd").addEventListener("click", () => {
+    stada.mynd = true;
+    E("f-mynd").setAttribute("aria-pressed", "true");
+    E("f-tafla").setAttribute("aria-pressed", "false");
+    birta();
+  });
+  E("f-tafla").addEventListener("click", () => {
+    stada.mynd = false;
+    E("f-mynd").setAttribute("aria-pressed", "false");
+    E("f-tafla").setAttribute("aria-pressed", "true");
+    birta();
+  });
+
+  teiknaLista(); tegraKubba(); birta();
+}
+
+raesa();
+</script>
+</body>
+</html>

@@ -34,7 +34,7 @@ GRUNNUR = "https://kristinnthor.github.io/kjarasamningar/api/v1"
 # Litir í fastri röð. Þeir eru valdir svo aðgreining haldist fyrir
 # litblindu og eru aldrei endurnýttir í hringi - fimmta félagið fær ekki
 # aftur fyrsta litinn heldur er sleppt.
-LITIR = ["#2a78d6", "#eb6834", "#1baf7a", "#4a3aa7"]
+LITIR = ["#2a78d6", "#eb6834", "#1baf7a", "#4a3aa7", "#f50b3e", "#d14f9c", "#6b6660"]
 VIDMID = "#9a948c"
 
 
