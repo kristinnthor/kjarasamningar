@@ -233,6 +233,12 @@ const LITIR = ["var(--rod-1)","var(--rod-2)","var(--rod-3)","var(--rod-4)",
 const HAMARK = LITIR.length;
 
 const E = (id) => document.getElementById(id);
+
+/* Ver texta sem skeytt er inn í innerHTML. Félagsheitin koma að vísu úr
+   okkar eigin API, en gildi úr slóðinni gera það ekki - og það er ódýrara
+   að verja allt en að muna hvað er óhætt. */
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({
+  "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const dagur = (s) => new Date(s + "T00:00:00Z").getTime();
 const isl = (n, aukastafir = 0) =>
   n.toLocaleString("is-IS", { minimumFractionDigits: aukastafir,
@@ -464,7 +470,7 @@ function tengjaAbendingu(allar, B, H, M) {
       .sort((a, b) => b.p.v - a.p.v)
       .map(({ s, p }) => `<div class="rod">
           <span style="display:flex;align-items:center;gap:6px">
-            <span class="depill" style="background:${s.litur}"></span>${s.heiti}
+            <span class="depill" style="background:${s.litur}"></span>${esc(s.heiti)}
           </span><span>${isl(p.v, 1)}</span></div>`).join("");
     const haegri = px > spjald.width / 2;
     ab.style.left = haegri ? "" : `${px + 14}px`;
@@ -482,7 +488,7 @@ function taflan(allar) {
   const syna = ar.filter((_, i) => i % skref === 0);
   return `<table><thead><tr><th>Félag</th>${
       syna.map((a) => `<th>${a}</th>`).join("")}</tr></thead><tbody>${
-    allar.map((s) => `<tr><td>${s.heiti}</td>${syna.map((a) => {
+    allar.map((s) => `<tr><td>${esc(s.heiti)}</td>${syna.map((a) => {
       const p = gildiVid(s, Date.UTC(+a, 11, 31));
       return `<td>${p ? isl(p.v) : ""}</td>`;
     }).join("")}</td></tr>`).join("")}</tbody></table>`;
@@ -501,7 +507,7 @@ function birta() {
 
   E("skyringar").innerHTML = allar.map((s) =>
     `<li><span class="depill" style="background:${s.litur};
-       ${s.vidmid ? "opacity:.8" : ""}"></span>${s.heiti}${
+       ${s.vidmid ? "opacity:.8" : ""}"></span>${esc(s.heiti)}${
        s.vidmid ? " (viðmið)" : ""}</li>`).join("");
 
   if (!virkar.length) {
@@ -520,11 +526,16 @@ function birta() {
   E("tafla").hidden = stada.mynd;
   if (stada.mynd) tengjaAbendingu(allar, 900, 400, { t: 14, r: 96, b: 30, l: 50 });
 
-  const adv = sleppt.length
-    ? `<br><strong>Sleppt:</strong> ${sleppt.map((s) => s.heiti).join(", ")} —
-       engin mæling fyrir ${stada.grunnur}, svo ekki er hægt að endurgrunna.`
-    : "";
-  E("vidvorun").innerHTML = E("vidvorun").dataset.grunn + adv;
+  const vidv = E("vidvorun");
+  vidv.innerHTML = vidv.dataset.grunn;
+  if (sleppt.length) {
+    vidv.append(document.createElement("br"));
+    const feitt = document.createElement("strong");
+    feitt.textContent = "Sleppt: ";
+    vidv.append(feitt, document.createTextNode(
+      `${sleppt.map((s) => s.heiti).join(", ")} — engin mæling fyrir `
+      + `${stada.grunnur}, svo ekki er hægt að endurgrunna.`));
+  }
 
   skraSlod();
 }
@@ -534,8 +545,9 @@ function tegraKubba() {
   E("valin").innerHTML = raðir.map((s) =>
     `<span class="kubbur">
        <span class="depill" style="background:${s.litur || "var(--texti-3)"}"></span>
-       ${s.heiti}
-       <button data-fjarlaegja="${s.audkenni}" aria-label="Fjarlægja ${s.heiti}">×</button>
+       ${esc(s.heiti)}
+       <button data-fjarlaegja="${esc(s.audkenni)}"
+               aria-label="Fjarlægja ${esc(s.heiti)}">×</button>
      </span>`).join("");
   E("valin").querySelectorAll("[data-fjarlaegja]").forEach((b) =>
     b.addEventListener("click", () => {
@@ -556,10 +568,10 @@ function teiknaLista() {
     const valid = stada.valin.has(f.audkenni);
     const laest = fullt && !valid;
     return `<label class="val ${laest ? "oflest" : ""}">
-      <input type="checkbox" value="${f.audkenni}" ${valid ? "checked" : ""}
+      <input type="checkbox" value="${esc(f.audkenni)}" ${valid ? "checked" : ""}
         ${laest ? "disabled" : ""}>
-      <span class="heiti">${f.felag}</span>
-      <span class="gaedi" data-g="${f.heilleiki}">${f.heilleiki}</span>
+      <span class="heiti">${esc(f.felag)}</span>
+      <span class="gaedi" data-g="${esc(f.heilleiki)}">${esc(f.heilleiki)}</span>
     </label>`;
   }).join("") || `<p class="stada">Ekkert félag fannst.</p>`;
 
@@ -602,14 +614,19 @@ async function raesa() {
   E("grunnur").innerHTML = `<option value="">Eigin grunnur hvers félags</option>` +
     [...ar].sort().map((a) => `<option value="${a}">${a}</option>`).join("");
 
+  // Gildi úr slóðinni eru staðfest áður en þau eru notuð. Ógilt ártal skilar
+  // NaN úr Date.UTC, sem fellir allar raðir út - og þá birtist gildið í
+  // viðvöruninni. Það er nákvæmlega leiðin sem ekki má standa opin.
   const p = new URLSearchParams(location.search);
-  stada.grunnur = p.get("grunnur") || "";
+  const grunnurUrSlod = p.get("grunnur") || "";
+  stada.grunnur = /^\d{4}$/.test(grunnurUrSlod) ? grunnurUrSlod : "";
   stada.hagstofa = p.get("hagstofa") === "1";
   E("grunnur").value = stada.grunnur;
   E("hagstofa").checked = stada.hagstofa;
   if (stada.hagstofa) await saekjaVisitolu();
 
-  const fra_slod = (p.get("felog") || "").split(",").filter(Boolean);
+  const fra_slod = (p.get("felog") || "").split(",")
+    .filter((a) => /^[a-z0-9-]{1,60}$/.test(a));
   const sjalfgefin = fra_slod.length ? fra_slod
     : stada.felog.filter((f) => f.heilleiki === "samfelld")
                  .slice(0, 3).map((f) => f.audkenni);
@@ -620,7 +637,7 @@ async function raesa() {
   E("leit").addEventListener("input", teiknaLista);
   E("adeins-samfelld").addEventListener("change", teiknaLista);
   E("grunnur").addEventListener("change", async (e) => {
-    stada.grunnur = e.target.value;
+    stada.grunnur = /^\d{4}$/.test(e.target.value) ? e.target.value : "";
     if (stada.hagstofa) await saekjaVisitolu();
     tegraKubba(); birta();
   });
