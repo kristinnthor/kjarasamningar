@@ -8,10 +8,16 @@ Uppsetning:
     pip install matplotlib requests
 
 Notkun:
-    python daemi/graf.py                      # fjögur félög með samfellda röð
-    python daemi/graf.py vr samidnar efling   # tiltekin félög eftir auðkenni
-    python daemi/graf.py --listi              # sýnir öll fáanleg auðkenni
-    python daemi/graf.py --vista graf.png     # vistar í skrá í stað þess að birta
+    python daemi/graf.py                       # fjögur félög með samfellda röð
+    python daemi/graf.py vr samidnar efling    # tiltekin félög eftir auðkenni
+    python daemi/graf.py --grunnur 2015        # allar raðir á sama grunn
+    python daemi/graf.py --listi               # sýnir öll fáanleg auðkenni
+    python daemi/graf.py --vista graf.png      # vistar í skrá í stað þess að birta
+
+Án --grunnur hefst hver röð í 100 við sína eigin fyrstu mælingu, sem sýnir
+heildarþróun hvers félags en gerir þau ekki samanburðarhæf innbyrðis. Með
+--grunnur eru þær allar settar á 100 á sama degi, og þá er samanburður gildur
+- líka við launavísitölu Hagstofunnar.
 """
 from __future__ import annotations
 
@@ -53,35 +59,83 @@ def velja_felog(audkenni: list[str]):
     return samfelld[:4]
 
 
-def hagstofan(fra: str, til: str):
-    """Launavísitala Hagstofunnar, endurgrunnuð á sama upphafspunkt.
+def hagstofan(fra: str, til: str, grunndagur: date | None = None):
+    """Launavísitala Hagstofunnar, endurgrunnuð á 100.
 
     Hún er höfð með sem viðmið því hún mælir aðra stærð: raunverulega
     launaþróun með launaskriði, ekki umsamdar hækkanir. Samningsraðirnar eiga
     því að liggja undir henni.
+
+    Án `grunndagur` er grunnurinn fyrsti punktur tímabilsins; með honum er
+    hann sá sami og raðirnar nota, svo allt sé samanburðarhæft.
     """
     gogn = saekja("launavisitala/launavisitala_manadarleg.json")["gildi"]
-    rod = [(g["Mánuður"], float(g["gildi"])) for g in gogn
-           if g["Eining"] == "Vísitölugildi"]
-    rod.sort()
+    rod = sorted((g["Mánuður"], float(g["gildi"])) for g in gogn
+                 if g["Eining"] == "Vísitölugildi")
     innan = [(m, v) for m, v in rod
              if fra[:4] + "M" + fra[5:7] <= m <= til[:4] + "M" + til[5:7]]
     if not innan:
         return [], []
-    grunnur = innan[0][1]
+    if grunndagur is None:
+        grunnur = innan[0][1]
+    else:
+        lykill = f"{grunndagur.year:04d}M{grunndagur.month:02d}"
+        fyrir = [v for m, v in rod if m <= lykill]
+        if not fyrir:
+            return [], []
+        grunnur = fyrir[-1]
     dagar = [date(int(m[:4]), int(m[5:]), 1) for m, _ in innan]
-    gildi = [v / grunnur * 100 for _, v in innan]
-    return dagar, gildi
+    return dagar, [v / grunnur * 100 for _, v in innan]
 
 
-def teikna(felog, vista=None):
+def lesa_grunndag(s: str) -> date:
+    """Tekur við '2015', '2015-05' eða '2015-05-01'."""
+    hlutar = s.split("-")
+    try:
+        ar = int(hlutar[0])
+        man = int(hlutar[1]) if len(hlutar) > 1 else 1
+        dagur = int(hlutar[2]) if len(hlutar) > 2 else 1
+        return date(ar, man, dagur)
+    except (ValueError, IndexError):
+        sys.exit(f"Ólæsilegur grunndagur: {s!r}. Notaðu ÁÁÁÁ, ÁÁÁÁ-MM "
+                 f"eða ÁÁÁÁ-MM-DD.")
+
+
+def endurgrunna(punktar, grunndagur: date):
+    """Færir tímaröð á 100 við `grunndagur`.
+
+    Vísitalan er þrepafall - hún breytist aðeins þegar hækkun tekur gildi - svo
+    gildið á grunndegi er síðasta mæling á undan honum. Röð sem hefst eftir
+    grunndaginn er ekki hægt að endurgrunna án þess að giska á það sem á undan
+    fór, og skilar því engu.
+    """
+    fyrir = [v for d, v in punktar if d <= grunndagur]
+    if not fyrir:
+        return None
+    grunnur = fyrir[-1]
+    if grunnur <= 0:
+        return None
+    eftir = [(d, v / grunnur * 100) for d, v in punktar if d > grunndagur]
+    # Akkeri á grunndeginum sjálfum. Án þess hæfist línan við næstu hækkun á
+    # eftir og virtist þá byrja yfir 100, þótt grunnurinn sé þar.
+    return [(grunndagur, 100.0)] + eftir
+
+
+def teikna(felog, vista=None, grunndagur=None):
     radir = []
     for f in felog:
         gogn = saekja(f"felog/{f['audkenni']}.json")
         punktar = [(date.fromisoformat(h["dagsetning"]), h["visitala"])
                    for h in gogn["haekkanir"] if h["visitala"] is not None]
-        if len(punktar) > 1:
-            radir.append((gogn["felag"], gogn["heilleiki"], punktar))
+        if len(punktar) <= 1:
+            continue
+        if grunndagur is not None:
+            punktar = endurgrunna(punktar, grunndagur)
+            if not punktar or len(punktar) < 2:
+                print(f"  sleppi {gogn['felag']}: engin mæling fyrir "
+                      f"{grunndagur.isoformat()}")
+                continue
+        radir.append((gogn["felag"], gogn["heilleiki"], punktar))
 
     if not radir:
         sys.exit("Engin nothæf tímaröð fannst.")
@@ -91,18 +145,21 @@ def teikna(felog, vista=None):
 
     fig, ax = plt.subplots(figsize=(11, 5.5))
 
-    # Viðmiðslínan er aðeins dregin þegar eitt félag er sýnt. Hver röð er
-    # grunnuð á 100 við sína eigin fyrstu mælingu, svo ein viðmiðslína getur
-    # ekki átt við fleiri en eina þeirra - hún myndi láta félag sem hefur
-    # styttri sögu líta út fyrir að hafa dregist aftur úr.
-    if len(radir) == 1:
+    # Viðmiðslínan á aðeins við þegar allar raðir deila grunni. Án --grunnur
+    # er hver röð grunnuð á sinni eigin fyrstu mælingu, og þá getur ein
+    # viðmiðslína ekki átt við fleiri en eina þeirra - hún myndi láta félag
+    # með styttri sögu líta út fyrir að hafa dregist aftur úr.
+    if grunndagur is not None:
+        hx, hy = hagstofan(grunndagur.isoformat(), til, grunndagur)
+    elif len(radir) == 1:
         hx, hy = hagstofan(radir[0][2][0][0].isoformat(), til)
-        if hx:
-            ax.plot(hx, hy, color=VIDMID, linewidth=1.6, linestyle=(0, (4, 3)),
-                    label="Launavísitala Hagstofunnar (viðmið)", zorder=1)
     else:
-        print("Viðmiðslína Hagstofunnar er sleppt: hún á aðeins við eitt félag "
-              "í senn, því hver röð er grunnuð á sinni eigin fyrstu mælingu.")
+        hx, hy = [], []
+        print("Viðmiðslína Hagstofunnar er sleppt: raðirnar hafa ekki sama "
+              "grunn. Notaðu --grunnur ÁÁÁÁ til að setja þær á sama grunn.")
+    if hx:
+        ax.plot(hx, hy, color=VIDMID, linewidth=1.6, linestyle=(0, (4, 3)),
+                label="Launavísitala Hagstofunnar (viðmið)", zorder=1)
 
     for i, (heiti, heilleiki, punktar) in enumerate(radir):
         litur = LITIR[i % len(LITIR)]
@@ -120,7 +177,12 @@ def teikna(felog, vista=None):
 
     ax.set_title("Umsamdar launahækkanir, keðjuð vísitala",
                  fontsize=13, loc="left", pad=14)
-    ax.set_ylabel("Vísitala (100 við fyrstu mælingu)", fontsize=9)
+    if grunndagur is not None:
+        ax.set_ylabel(f"Vísitala (100 = {grunndagur.isoformat()})", fontsize=9)
+        ax.axhline(100, color="#e2ded8", linewidth=1)
+    else:
+        ax.set_ylabel("Vísitala (100 við fyrstu mælingu hvers félags)",
+                      fontsize=9)
     ax.xaxis.set_major_locator(mdates.YearLocator(base=4))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
     ax.grid(axis="y", color="#e2ded8", linewidth=0.8)
@@ -147,6 +209,14 @@ def main(argv):
                   f"{f['fyrsta']}–{f['sidasta']}  {f['heilleiki']}")
         return
 
+    grunndagur = None
+    if "--grunnur" in argv:
+        i = argv.index("--grunnur")
+        if i + 1 >= len(argv):
+            sys.exit("--grunnur vantar dagsetningu, t.d. --grunnur 2015")
+        grunndagur = lesa_grunndag(argv[i + 1])
+        argv = argv[:i] + argv[i + 2:]
+
     vista = None
     if "--vista" in argv:
         i = argv.index("--vista")
@@ -157,7 +227,7 @@ def main(argv):
     audkenni = [a for a in argv if not a.startswith("--")]
     felog = velja_felog(audkenni)
     print("Sæki: " + ", ".join(f["felag"] for f in felog))
-    teikna(felog, vista)
+    teikna(felog, vista, grunndagur)
 
 
 if __name__ == "__main__":

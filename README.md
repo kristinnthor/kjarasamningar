@@ -24,11 +24,19 @@ frumskjölin eiga sér þegar opinberan samastað hjá útgefendum sínum.
 
 ```bash
 pip install matplotlib requests
-python daemi/graf.py                      # fjögur félög með samfellda röð
-python daemi/graf.py samidnar             # eitt félag, með viðmiði Hagstofunnar
-python daemi/graf.py --listi              # öll fáanleg auðkenni
-python daemi/graf.py vr --vista graf.png  # vista í skrá
+python daemi/graf.py                          # fjögur félög með samfellda röð
+python daemi/graf.py samidnar                 # eitt félag, með viðmiði Hagstofunnar
+python daemi/graf.py vr efling sgs --grunnur 2019-04   # sami grunnur, samanburðarhæft
+python daemi/graf.py --listi                  # öll fáanleg auðkenni
+python daemi/graf.py vr --vista graf.png      # vista í skrá
 ```
+
+Án `--grunnur` hefst hver röð í 100 við **sína eigin** fyrstu mælingu. Það sýnir
+heildarþróun hvers félags en gerir þau ekki samanburðarhæf innbyrðis, því þau
+byrja á ólíkum tíma. Með `--grunnur ÁÁÁÁ[-MM[-DD]]` eru allar raðir settar á 100
+sama dag - og þá fyrst er samanburður gildur, líka við launavísitölu
+Hagstofunnar. Félög sem hafa enga mælingu fyrir grunndaginn falla út með
+skýringu, því ekki er hægt að endurgrunna þau án þess að giska.
 
 Forritið sækir allt yfir netið af API-inu - ekkert af gögnunum er innbyggt í
 það. Sjá [docs/index.html](https://kristinnthor.github.io/kjarasamningar/) fyrir
