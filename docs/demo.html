@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kjarasamningar — sýnidæmi</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #fbfaf8; --yfirbord: #fcfcfb;
+    --texti: #0b0b0b; --texti-2: #52514e; --texti-3: #86847e;
+    --lina: #e2ded8; --reitur: #f3f0ec; --akser: #7a4f2c;
+    --rod-1: #2a78d6; --rod-2: #eb6834; --rod-3: #1baf7a; --rod-4: #4a3aa7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #171614; --yfirbord: #1a1a19;
+      --texti: #ffffff; --texti-2: #c3c2b7; --texti-3: #8d8b82;
+      --lina: #302d29; --reitur: #211f1c; --akser: #d4a373;
+      --rod-1: #3987e5; --rod-2: #d95926; --rod-3: #199e70; --rod-4: #9085e9;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #171614; --yfirbord: #1a1a19;
+    --texti: #ffffff; --texti-2: #c3c2b7; --texti-3: #8d8b82;
+    --lina: #302d29; --reitur: #211f1c; --akser: #d4a373;
+    --rod-1: #3987e5; --rod-2: #d95926; --rod-3: #199e70; --rod-4: #9085e9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--texti);
+    font: 16px/1.6 ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  }
+  .umgjord { max-width: 880px; margin: 0 auto; padding: 48px 16px 80px; }
+  h1 { font-size: 1.7rem; margin: 0 0 .25em; letter-spacing: -.01em; }
+  .undir { color: var(--texti-2); margin: 0 0 2em; }
+  h2 { font-size: 1.05rem; margin: 2.4em 0 .5em; }
+  a { color: var(--akser); }
+  code, pre { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .85em; }
+  pre { background: var(--reitur); border: 1px solid var(--lina); padding: 14px 16px;
+        border-radius: 6px; overflow-x: auto; }
+  .spjald { background: var(--yfirbord); border: 1px solid var(--lina);
+            border-radius: 8px; padding: 18px 18px 10px; }
+  .stada { color: var(--texti-2); font-size: .9rem; padding: 28px 0; text-align: center; }
+  .skyringar { display: flex; flex-wrap: wrap; gap: 14px; margin: 0 0 6px; padding: 0;
+               list-style: none; font-size: .86rem; color: var(--texti-2); }
+  .skyringar li { display: flex; align-items: center; gap: 6px; }
+  .depill { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .grid line { stroke: var(--lina); stroke-width: 1; }
+  .as text { fill: var(--texti-3); font-size: 11px; }
+  .merking { font-size: 11.5px; font-weight: 600; }
+  .hnappar { display: flex; gap: 8px; margin: 14px 0 0; }
+  button {
+    font: inherit; font-size: .85rem; padding: 5px 12px; cursor: pointer;
+    background: var(--yfirbord); color: var(--texti-2);
+    border: 1px solid var(--lina); border-radius: 5px;
+  }
+  button[aria-pressed="true"] { color: var(--texti); border-color: var(--texti-3); }
+  table { border-collapse: collapse; width: 100%; font-size: .85rem; margin-top: 12px; }
+  th, td { text-align: right; padding: 5px 8px; border-bottom: 1px solid var(--lina); }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--texti-3); font-weight: 600; font-size: .78rem;
+       text-transform: uppercase; letter-spacing: .04em; }
+  #tafla[hidden], #mynd[hidden] { display: none; }
+  .vidvorun { border-left: 3px solid var(--akser); background: var(--reitur);
+              padding: 10px 14px; margin: 1.6em 0; border-radius: 0 6px 6px 0;
+              font-size: .92rem; color: var(--texti-2); }
+  footer { margin-top: 3em; padding-top: 1.2em; border-top: 1px solid var(--lina);
+           color: var(--texti-2); font-size: .88rem; }
+  #abending { min-height: 1.4em; font-size: .85rem; color: var(--texti-2); margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="umgjord">
+
+<h1>Sýnidæmi</h1>
+<p class="undir">
+  Þessi síða sækir gögnin beint af API-inu í vafranum þínum — ekkert er innbyggt
+  í hana. Ef myndin birtist er API-ið í lagi.
+</p>
+
+<div class="spjald">
+  <ul class="skyringar" id="skyringar"></ul>
+  <div id="stada" class="stada">Sæki gögn af API-inu …</div>
+  <div id="mynd" hidden></div>
+  <div id="tafla" hidden></div>
+  <div class="hnappar">
+    <button id="hnappur-mynd" aria-pressed="true">Mynd</button>
+    <button id="hnappur-tafla" aria-pressed="false">Tafla</button>
+  </div>
+  <div id="abending"></div>
+</div>
+
+<div class="vidvorun">
+  Vísitalan leggur saman þær hækkanir sem fundust í samningum og er hér sýnd fyrir
+  félög sem bera merkinguna <code>samfelld</code>. Hún er ekki launavísitala
+  Hagstofunnar.
+</div>
+
+<h2>Kóðinn á bak við myndina</h2>
+<pre><code>const grunnur = "https://kristinnthor.github.io/kjarasamningar/api/v1";
+
+// 1. Sækja félagalistann og velja þau sem bera samfellda röð
+const { felog } = await fetch(`${grunnur}/felog.json`).then(r =&gt; r.json());
+const valin = felog.filter(f =&gt; f.heilleiki === "samfelld");
+
+// 2. Sækja tímaröð hvers félags
+const rod = await fetch(`${grunnur}/felog/${valin[0].audkenni}.json`)
+  .then(r =&gt; r.json());
+
+// 3. Nota hana
+rod.haekkanir.forEach(h =&gt;
+  console.log(h.dagsetning, h.prosenta, h.visitala));</code></pre>
+
+<footer>
+  <a href="./">Aftur í skjölun API-sins</a> ·
+  <a href="https://github.com/kristinnthor/kjarasamningar">GitHub</a>
+</footer>
+
+</div>
+
+<script type="module">
+const GRUNNUR = new URL("api/v1/", location.href).href;
+const LITIR = ["var(--rod-1)", "var(--rod-2)", "var(--rod-3)", "var(--rod-4)"];
+const stada = document.getElementById("stada");
+
+const mnd = (d) => new Date(d + "T00:00:00Z").getTime();
+const tala = (n) => n.toLocaleString("is-IS", { maximumFractionDigits: 0 });
+
+async function saekja() {
+  const { felog } = await fetch(GRUNNUR + "felog.json").then(r => r.json());
+  const samfelld = felog
+    .filter((f) => f.heilleiki === "samfelld" && f.fjoldi_haekkana >= 12)
+    .sort((a, b) => b.fjoldi_haekkana - a.fjoldi_haekkana)
+    .slice(0, 4);
+  const radir = await Promise.all(
+    samfelld.map((f) =>
+      fetch(`${GRUNNUR}felog/${f.audkenni}.json`).then((r) => r.json())
+    )
+  );
+  return radir.map((r, i) => ({
+    heiti: r.felag,
+    litur: LITIR[i],
+    punktar: r.haekkanir
+      .filter((h) => h.visitala != null)
+      .map((h) => ({ x: mnd(h.dagsetning), y: h.visitala, d: h.dagsetning })),
+  })).filter((s) => s.punktar.length > 1);
+}
+
+function teikna(serier) {
+  const B = 860, H = 360, M = { t: 16, r: 92, b: 34, l: 48 };
+  const allir = serier.flatMap((s) => s.punktar);
+  const x0 = Math.min(...allir.map((p) => p.x)), x1 = Math.max(...allir.map((p) => p.x));
+  const y1 = Math.max(...allir.map((p) => p.y)) * 1.05;
+  const sx = (v) => M.l + ((v - x0) / (x1 - x0)) * (B - M.l - M.r);
+  const sy = (v) => H - M.b - (v / y1) * (H - M.t - M.b);
+
+  const arMerki = [];
+  const fraAr = new Date(x0).getUTCFullYear(), tilAr = new Date(x1).getUTCFullYear();
+  const skref = Math.max(2, Math.ceil((tilAr - fraAr) / 8 / 2) * 2);
+  for (let a = Math.ceil(fraAr / skref) * skref; a <= tilAr; a += skref) {
+    arMerki.push({ ar: a, x: sx(Date.UTC(a, 0, 1)) });
+  }
+  const yMerki = [];
+  const yskref = y1 > 400 ? 100 : 50;
+  for (let v = 100; v <= y1; v += yskref) yMerki.push({ v, y: sy(v) });
+
+  const linur = serier.map((s) => {
+    const d = s.punktar.map((p, i) => `${i ? "L" : "M"}${sx(p.x).toFixed(1)},${sy(p.y).toFixed(1)}`).join("");
+    const sidasti = s.punktar[s.punktar.length - 1];
+    return `<path d="${d}" fill="none" stroke="${s.litur}" stroke-width="2"
+             stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="${sx(sidasti.x).toFixed(1)}" cy="${sy(sidasti.y).toFixed(1)}" r="4.5"
+              fill="${s.litur}" stroke="var(--yfirbord)" stroke-width="2"/>
+      <text class="merking" x="${(sx(sidasti.x) + 9).toFixed(1)}"
+            y="${(sy(sidasti.y) + 4).toFixed(1)}" fill="${s.litur}">${tala(sidasti.y)}</text>`;
+  }).join("");
+
+  return `<svg viewBox="0 0 ${B} ${H}" role="img"
+      aria-label="Keðjuð vísitala umsaminna launahækkana eftir stéttarfélagi">
+    <g class="grid">${yMerki.map((m) =>
+      `<line x1="${M.l}" x2="${B - M.r}" y1="${m.y.toFixed(1)}" y2="${m.y.toFixed(1)}"/>`).join("")}</g>
+    <g class="as">
+      ${yMerki.map((m) => `<text x="${M.l - 8}" y="${(m.y + 4).toFixed(1)}"
+          text-anchor="end">${m.v}</text>`).join("")}
+      ${arMerki.map((m) => `<text x="${m.x.toFixed(1)}" y="${H - 12}"
+          text-anchor="middle">${m.ar}</text>`).join("")}
+    </g>
+    ${linur}
+  </svg>`;
+}
+
+function taflan(serier) {
+  const ar = [...new Set(serier.flatMap((s) => s.punktar.map((p) => p.d.slice(0, 4))))].sort();
+  const gildiVid = (s, a) => {
+    const fyrir = s.punktar.filter((p) => p.d.slice(0, 4) <= a);
+    return fyrir.length ? tala(fyrir[fyrir.length - 1].y) : "";
+  };
+  const syna = ar.filter((_, i) => i % Math.max(1, Math.ceil(ar.length / 14)) === 0);
+  return `<table><thead><tr><th>Félag</th>${syna.map((a) =>
+      `<th>${a}</th>`).join("")}</tr></thead><tbody>
+    ${serier.map((s) => `<tr><td>${s.heiti}</td>${syna.map((a) =>
+      `<td>${gildiVid(s, a)}</td>`).join("")}</tr>`).join("")}
+    </tbody></table>`;
+}
+
+try {
+  const serier = await saekja();
+  if (!serier.length) throw new Error("engin nothæf tímaröð");
+  document.getElementById("skyringar").innerHTML = serier.map((s) =>
+    `<li><span class="depill" style="background:${s.litur}"></span>${s.heiti}</li>`).join("");
+  document.getElementById("mynd").innerHTML = teikna(serier);
+  document.getElementById("tafla").innerHTML = taflan(serier);
+  stada.hidden = true;
+  document.getElementById("mynd").hidden = false;
+  document.getElementById("abending").textContent =
+    `Vísitala, grunnur 100 við fyrstu mælingu hvers félags. ${serier.length} félög sótt af API-inu.`;
+
+  const hm = document.getElementById("hnappur-mynd");
+  const ht = document.getElementById("hnappur-tafla");
+  const skipta = (mynd) => {
+    document.getElementById("mynd").hidden = !mynd;
+    document.getElementById("tafla").hidden = mynd;
+    hm.setAttribute("aria-pressed", String(mynd));
+    ht.setAttribute("aria-pressed", String(!mynd));
+  };
+  hm.addEventListener("click", () => skipta(true));
+  ht.addEventListener("click", () => skipta(false));
+} catch (e) {
+  stada.textContent = "Tókst ekki að sækja gögn af API-inu: " + e.message;
+}
+</script>
+</body>
+</html>

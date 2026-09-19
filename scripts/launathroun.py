@@ -101,6 +101,43 @@ def algengast(teljari):
     return teljari.most_common(1)[0][0] if teljari else None
 
 
+def dagar_milli(a: str, b: str) -> int:
+    from datetime import date
+    return abs((date.fromisoformat(b) - date.fromisoformat(a)).days)
+
+
+def fella_saman_tvitok(rod, dagamork: int = 90):
+    """Fellir saman sömu hækkun sem birtist á lítillega ólíkum dagsetningum.
+
+    Sami áfangi er iðulega skráður með ólíkri dagsetningu eftir skjölum - ýmist
+    vegna OCR-villu eða af því að eitt skjal nefnir undirritunardag og annað
+    gildistökudag. Keðjist þeir báðir tvöfaldast hækkunin.
+
+    Tvær færslur eru taldar sama áfanginn ef prósentan er sú sama og innan við
+    `dagamork` dagar skilja þær að. Sú sem fleiri heimildir styðja heldur sér.
+    """
+    rod = sorted(rod, key=lambda r: r["dagsetning"])
+    haldid, felld = [], 0
+    for r in rod:
+        tviburi = None
+        if r["prosenta"]:
+            for fyrri in reversed(haldid):
+                if dagar_milli(fyrri["dagsetning"], r["dagsetning"]) > dagamork:
+                    break
+                if fyrri["prosenta"] == r["prosenta"]:
+                    tviburi = fyrri
+                    break
+        if tviburi is None:
+            haldid.append(r)
+            continue
+        felld += 1
+        if r["heimildir"] > tviburi["heimildir"]:
+            tviburi.update({k: r[k] for k in ("a_vid", "tegund", "skjal", "kronur")})
+            tviburi["heimildir"] = r["heimildir"]
+        tviburi["sameinad"] = tviburi.get("sameinad", 0) + 1
+    return haldid, felld
+
+
 def heilleiki(y) -> str:
     """Gróft mat á því hversu treystandi keðjaða vísitalan er fyrir félagið."""
     bil = y.get("mesta_bil", 0)
@@ -157,6 +194,17 @@ def main():
             "skjal": besta["skjal"],
         })
 
+    # Fella saman tvítalningu innan hvers félags áður en keðjað er
+    eftir_felagi = collections.defaultdict(list)
+    for r in ut:
+        eftir_felagi[r["felag_lykill"]].append(r)
+    ut, felld_alls = [], 0
+    for linur in eftir_felagi.values():
+        haldid, felld = fella_saman_tvitok(linur)
+        ut.extend(haldid)
+        felld_alls += felld
+    print(f"Tvítalningar felldar saman:  {felld_alls}")
+
     ut.sort(key=lambda r: (r["felag"] or "", r["dagsetning"]))
 
     # Keðjuð vísitala á hvert félag, ásamt mælingu á eyðum.
@@ -189,7 +237,7 @@ def main():
     dalkar = ["felag_lykill", "felag_id", "felag", "markadur", "heildarsamtok",
               "dagsetning", "a_vid", "prosenta", "kronur", "tegund",
               "visitala", "bil_manudir", "visitala_athugasemd",
-              "heimildir", "olik_gildi", "upprunar", "skjal"]
+              "heimildir", "olik_gildi", "sameinad", "upprunar", "skjal"]
     with open(UT_ROD, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=dalkar, extrasaction="ignore")
         w.writeheader()

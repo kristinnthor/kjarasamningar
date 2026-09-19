@@ -47,8 +47,11 @@ MAN_RE = "|".join(sorted((re.escape(m) for m in MANUDIR), key=len, reverse=True)
 # "1. júní 1988", "1. des. 1977", "1. janúar"
 DAGS_RE = rf"(\d{{1,2}})\s*\.\s*(?:dag[i]?\s+)?({MAN_RE})\s*\.?\s*(\d{{4}})?"
 
-PROSENTA_RE = r"(\d{1,2}(?:[.,]\d{1,2})?)\s*%"
-KRONUR_RE = r"(?:kr\.?\s*(\d{1,3}(?:\.\d{3})+|\d{4,7})|(\d{1,3}(?:\.\d{3})+|\d{4,7})\s*(?:kr\.?|krón\w*))"
+# Neikvæða framsýnin kemur í veg fyrir að aftasti hluti lengri tölu sé lesinn
+# sem sjálfstæð prósenta: án hennar varð "0,615%" að "15%".
+PROSENTA_RE = r"(?<![\d.,])(\d{1,2}(?:[.,]\d{1,2})?)\s*%"
+KRONUR_RE = (r"(?:kr\.?\s*(?<![\d.,])(\d{1,3}(?:\.\d{3})+|\d{4,7})"
+             r"|(?<![\d.,])(\d{1,3}(?:\.\d{3})+|\d{4,7})\s*(?:kr\.?|krón\w*))")
 
 # --------------------------------------------------------------------------- #
 # Samhengisorð                                                                 #
