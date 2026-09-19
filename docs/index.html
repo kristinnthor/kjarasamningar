@@ -87,6 +87,7 @@
   <tr><td><code>api/v1/felog/{audkenni}.json</code></td><td>tímaröð eins félags</td></tr>
   <tr><td><code>api/v1/haekkanir.json</code></td><td>allar hækkanir</td></tr>
   <tr><td><code>api/v1/haekkanir/{ar}.json</code></td><td>hækkanir eins árs</td></tr>
+  <tr><td><code>api/v1/taxtahaekkanir.json</code></td><td>hækkanir mældar beint úr launatöflum</td></tr>
   <tr><td><code>api/v1/launavisitala/…</code></td><td>launavísitala Hagstofunnar</td></tr>
 </table>
 
@@ -116,6 +117,19 @@ for (const h of vr.haekkanir) {
   <tr><td><code>heilleiki</code></td><td><code>samfelld</code>, <code>eyður</code>, <code>stórar eyður</code> eða <code>of fáir punktar</code></td></tr>
   <tr><td><code>tilvitnun</code></td><td>textabúturinn úr samningnum, til sannreyningar</td></tr>
 </table>
+
+<h2>Tvær mælingar á sömu stærð</h2>
+<p>
+  Hækkanir eru mældar tvisvar með ólíkum aðferðum. <code>haekkanir</code> eru
+  lesnar úr texta samninganna. <code>taxtahaekkanir</code> eru reiknaðar með því
+  að bera sama launaflokk og þrep saman milli dagsettra launataflna — án þess að
+  lesa eitt einasta orð.
+</p>
+<p>
+  Taflan mælist oft hærri, og það er ekki ósamræmi. Þar sem samið var um
+  „3,50% eða 23.750 kr.“ ræður krónutalan á lægstu töxtunum og mælist sem 5,58%.
+  Textinn gefur umsamda formúlu, taflan raunverulega útkomu.
+</p>
 
 <h2>Takmarkanir</h2>
 <ul>

@@ -13,3 +13,7 @@ venv/
 *.log
 .DS_Store
 Thumbs.db
+
+# Fullar launatöflur eru 43 MB og endurgeranlegar; þjappaða
+# útgáfan (launatoflur.csv.gz) er í útgáfustýringu í staðinn.
+gogn/launatoflur.csv

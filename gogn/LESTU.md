@@ -10,6 +10,8 @@ launavísitala Hagstofunnar sem sjálfstætt viðmið.
 | `haekkanir_sameinad.csv` | hvort tveggja sameinað, aðeins það sem tókst að rekja til félags |
 | `launathroun_eftir_felagi.csv` | ein lína á hvert (félag, dagsetning) með keðjaðri vísitölu |
 | `felog.csv` | uppflettitafla félaga með mati á heilleika raðarinnar |
+| `launatoflur.csv.gz` | fullar launatöflur: fjárhæð á launaflokk og þrep |
+| `taxtahaekkanir.csv` | hækkanir mældar beint úr töflunum, óháð texta |
 | `launavisitala_*.csv` | launavísitala Hagstofunnar |
 
 ---
@@ -133,3 +135,60 @@ launaskriði, ekki umsamdar hækkanir.
 
 Grunnárin eru ólík milli taflna og því þarf að keðja þær saman til að fá
 samfellda röð frá 1990.
+
+---
+
+## launatoflur.csv.gz
+
+257.582 taxtalínur úr 303 skjölum: fjárhæð á hvert (skjal, tafla, launaflokkur,
+starfsaldursþrep) ásamt gildistökudegi. Aðeins mánaðarlaun - tímakaup, yfirvinna
+og álög eru afleidd af þeim og þrefölduðu umfangið án þess að bæta við neinu.
+
+Skráin er þjöppuð því hún er 43 MB óþjöppuð. Hún er endurgeranleg með
+`scripts/utdrattur_launatoflur.py`.
+
+Þrennt heldur töflunum aðgreindum, og án þess eru tölurnar merkingarlausar:
+
+- `gildir_fra` - hvenær taflan tók gildi
+- `tafla_nr` - samningur geymir iðulega eina töflu á hvert ár samningstímans,
+  og eitt skjal getur borið töflur fyrir ólíka viðsemjendur. Ný tafla er greind
+  þegar dálkahaus, mælikvarði eða dagsetning breytist, eða þegar sami
+  launaflokkur kemur fyrir öðru sinni.
+- `threp_nr` / `threp` - starfsaldursþrep dálkanna
+
+`athugasemd` er merkt þegar fjárhæð er lægri en næsta þrep á undan innan sama
+launaflokks. Það brýtur innri reglu töflunnar og bendir til OCR-villu eða
+rangrar þáttunar. 1.188 línur af 257.582 (0,46%) bera slíka athugasemd.
+
+## taxtahaekkanir.csv
+
+Hækkanir **mældar beint úr töflunum**: sami launaflokkur og sama þrep borið
+saman milli tveggja dagsettra taflna í sama skjali. Þetta er sjálfstæð mæling
+á sömu stærð og textaútdrátturinn gefur, og því raunverulegt viðmið.
+
+Samanburður er alltaf innan sama skjals. Milli skjala er hann ótækur því eitt
+skjal geymir oft ósambærilegar töflur - eina fyrir sveitarfélög, aðra fyrir
+almenna markaðinn.
+
+| Dálkur | Lýsing |
+|---|---|
+| `fra_dags`, `til_dags` | töflurnar tvær sem bornar eru saman |
+| `prosenta` | miðgildi mældrar hækkunar yfir alla flokka og þrep |
+| `spennt` | munur á hæstu og lægstu mældu hækkun |
+| `samraemd` | 1 þegar `spennt` er 0,5 prósentustig eða minna |
+
+Almenn prósentuhækkun mælist eins í öllum launaflokkum. Mikil dreifing þýðir
+að taflan breyttist að gerð en ekki bara að fjárhæð, og þá er mælingin ekki
+hrein hækkun. Af 102 mældum hækkunum eru 28 samræmdar.
+
+### Þegar töflunni og textanum ber ekki saman
+
+Mælingin úr töflunni er oft hærri en prósentan í textanum. Það er ekki
+ósamræmi heldur eðli samninganna:
+
+> AFL, 1. janúar 2025 — textinn segir „3,50% eða 23.750 kr.", taflan mælir 5,58%.
+> Á lægstu töxtunum er krónutalan hærri en prósentan: 23.750 af 425.600 kr. eru
+> einmitt 5,58%.
+
+Textinn gefur því **umsamda formúlu**, taflan **raunverulega útkomu**. Hvort
+tveggja á rétt á sér; notið það sem spurningin kallar á.

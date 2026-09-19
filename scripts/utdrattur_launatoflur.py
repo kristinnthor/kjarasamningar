@@ -23,6 +23,7 @@ import os
 import re
 import sys
 import warnings
+from concurrent.futures import ProcessPoolExecutor
 
 warnings.filterwarnings("ignore")
 logging.disable(logging.CRITICAL)
@@ -209,6 +210,43 @@ DALKAR = ["heimild", "heimild_heiti", "skjal", "adili_1", "adili_2",
           "launaflokkur", "threp_nr", "threp", "fjarhaed", "athugasemd"]
 
 
+def vinna_skjal(verk):
+    """Vinnur eitt skjal. Sjálfstætt fall svo hægt sé að dreifa á ferli."""
+    rel, leid = verk
+    try:
+        lesari = PdfReader(leid)
+        sidur = list(lesari.pages[:200])
+    except Exception:
+        return rel, []
+
+    ur_skjali, haus_texti = lesa_skjal(sidur, "plain")
+    if not ur_skjali:
+        ur_skjali, haus_texti = lesa_skjal(sidur, "layout")
+    ur_skjali = [r for r in ur_skjali if r["maelikvardi"] == "mánaðarlaun"]
+
+    sed, einstakar = set(), []
+    for r in ur_skjali:
+        lykill = (r["tafla_nr"], r["launaflokkur"], r["threp_nr"], r["fjarhaed"])
+        if lykill in sed:
+            continue
+        sed.add(lykill)
+        einstakar.append(r)
+    if not einstakar:
+        return rel, []
+
+    a1, a2 = finna_adila(haus_texti)
+    fra, til = finna_gildistima(haus_texti, os.path.basename(rel))
+    kodi = rel.split("/")[0]
+    for r in einstakar:
+        r.update({"heimild": kodi,
+                  "heimild_heiti": HEIMILDANOFN.get(kodi, kodi),
+                  "skjal": rel, "adili_1": a1, "adili_2": a2,
+                  "samningur_fra": fra or "", "samningur_til": til or ""})
+        if not r["gildir_fra"]:
+            r["gildir_fra"] = fra or ""
+    return rel, einstakar
+
+
 def lesa_skjal(sidur, hamur: str):
     """Les allar blaðsíður skjalsins í tilteknum textaham."""
     stada: dict = {}
@@ -228,54 +266,23 @@ def lesa_skjal(sidur, hamur: str):
 def main(argv):
     kanna = "--kanna" in argv
     hamark = int(argv[argv.index("--kanna") + 1]) if kanna else 0
+    ferli = int(argv[argv.index("--ferli") + 1]) if "--ferli" in argv else (os.cpu_count() or 4)
 
     skjol = skjol_til_vinnslu()
     if kanna:
         skjol = [s for s in skjol if re.search(r"taxt|launatafl|kjarasamn",
                                                s[0], re.I)][:hamark]
-    print(f"Skjöl til vinnslu: {len(skjol)}")
+    print(f"Skjöl til vinnslu: {len(skjol)} ({ferli} ferli)")
 
     allar = []
     med = 0
-    for i, (rel, leid) in enumerate(skjol, 1):
-        try:
-            lesari = PdfReader(leid)
-            sidur = list(lesari.pages[:200])
-        except Exception:
-            continue
-        # Venjulegi textahamurinn heldur taxtalínum saman í flestum skjölum og
-        # er margfalt fljótari. Layout-hamur er dýr og aðeins reyndur þegar
-        # sá fyrri skilar engu, því hann bjargar skjölum með breiðari dálkum.
-        ur_skjali, haus_texti = lesa_skjal(sidur, "plain")
-        if not ur_skjali:
-            ur_skjali, haus_texti = lesa_skjal(sidur, "layout")
-        # Aðeins mánaðarlaun: tímakaup, yfirvinna og álög eru afleidd af þeim,
-        # eru um þrír fjórðu allra lína og bæta engu við tímaröðina.
-        ur_skjali = [r for r in ur_skjali if r["maelikvardi"] == "mánaðarlaun"]
-        sed, einstakar = set(), []
-        for r in ur_skjali:
-            lykill = (r["tafla_nr"], r["launaflokkur"], r["threp_nr"], r["fjarhaed"])
-            if lykill in sed:
-                continue
-            sed.add(lykill)
-            einstakar.append(r)
-        ur_skjali = einstakar
-        if not ur_skjali:
-            continue
-        med += 1
-        a1, a2 = finna_adila(haus_texti)
-        fra, til = finna_gildistima(haus_texti, os.path.basename(rel))
-        kodi = rel.split("/")[0]
-        for r in ur_skjali:
-            r.update({"heimild": kodi,
-                      "heimild_heiti": HEIMILDANOFN.get(kodi, kodi),
-                      "skjal": rel, "adili_1": a1, "adili_2": a2,
-                      "samningur_fra": fra or "", "samningur_til": til or ""})
-            if not r["gildir_fra"]:
-                r["gildir_fra"] = fra or ""
-        allar.extend(ur_skjali)
-        if i % 100 == 0:
-            print(f"  {i}/{len(skjol)} - {len(allar)} taxtalínur úr {med} skjölum")
+    with ProcessPoolExecutor(max_workers=ferli) as safn:
+        for i, (rel, radir) in enumerate(safn.map(vinna_skjal, skjol, chunksize=4), 1):
+            if radir:
+                med += 1
+                allar.extend(radir)
+            if i % 200 == 0:
+                print(f"  {i}/{len(skjol)} - {len(allar)} taxtalínur úr {med} skjölum")
 
     allar = stadfesta(allar)
 

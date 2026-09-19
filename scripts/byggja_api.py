@@ -82,6 +82,10 @@ FYRIRVARAR = [
     "og mælir raunverulega launaþróun með launaskriði - ekki umsamdar hækkanir.",
     "Gögnin eru unnin vélrænt úr OCR-texta. Hver hækkun ber tilvitnun í "
     "frumtextann svo hægt sé að sannreyna hana.",
+    "Hækkanir mældar úr launatöflum (taxtahaekkanir) geta verið hærri en þær "
+    "sem lesnar eru úr textanum. Það er ekki ósamræmi: þar sem samið var um "
+    "prósentu eða krónutölu, hvort sem er hærra, ræður krónutalan á lægstu "
+    "töxtunum og mælist þá sem hærri prósenta.",
 ]
 
 
@@ -91,6 +95,12 @@ def main():
     # Sameinaða skráin er notuð þegar hún er til: hún ber bæði færslur með
     # staðfest lýsigögn og þær sem raktar voru úr vefskjölum.
     haekkanir = lesa("haekkanir_sameinad.csv") or lesa("haekkanir.csv")
+    taxtahaekk = lesa("taxtahaekkanir.csv")
+    maelt = [tolur(r, ("maelingar", "samraemd"), ("prosenta", "spennt"))
+             for r in taxtahaekk]
+    eftir_felagi_taxta = defaultdict(list)
+    for r in maelt:
+        eftir_felagi_taxta[r["felag"]].append(r)
 
     if not felog:
         print("gogn/felog.csv fannst ekki - keyrðu scripts/launathroun.py fyrst")
@@ -132,6 +142,9 @@ def main():
             "heilleiki": f["heilleiki"],
             "mesta_bil_manudir": int(f["mesta_bil_manudir"]) if f["mesta_bil_manudir"] else None,
             "haekkanir": linur,
+            "taxtahaekkanir": sorted(
+                eftir_felagi_taxta.get(f["felag"], []),
+                key=lambda r: r["til_dags"]),
         })
 
     # ---- listi félaga ---- #
@@ -161,6 +174,15 @@ def main():
         skrifa(os.path.join(API, "haekkanir", f"{ar}.json"),
                {"ar": ar, "fjoldi": len(linur), "haekkanir": linur})
 
+    # ---- hækkanir mældar beint úr launatöflum ---- #
+    if taxtahaekk:
+        skrifa(os.path.join(API, "taxtahaekkanir.json"),
+               {"fjoldi": len(maelt),
+                "skyring": "Hækkanir mældar með því að bera sama launaflokk og "
+                           "þrep saman milli dagsettra launataflna í sama skjali. "
+                           "Sjálfstæð mæling, óháð textaútdrættinum.",
+                "haekkanir": maelt})
+
     # ---- launavísitala ---- #
     visitolur = {}
     for skra in sorted(os.listdir(GOGN)):
@@ -189,12 +211,14 @@ def main():
             "felag": f"{GRUNNSLOD}/felog/{{audkenni}}.json",
             "haekkanir": f"{GRUNNSLOD}/haekkanir.json",
             "haekkanir_eftir_ari": f"{GRUNNSLOD}/haekkanir/{{ar}}.json",
+            "taxtahaekkanir": f"{GRUNNSLOD}/taxtahaekkanir.json",
             "launavisitala": visitolur,
         },
         "tolur": {
             "felog": len(felog),
             "haekkanir": len(allar),
             "maelipunktar": len(rod),
+            "taxtahaekkanir": len(taxtahaekk),
             "ar": [min(eftir_ari), max(eftir_ari)] if eftir_ari else None,
         },
     })
