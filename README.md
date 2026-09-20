@@ -1,4 +1,10 @@
-# Kjarasamningar – gagnasett um launahækkanir á Íslandi
+<img src="docs/icon-192.png" alt="" width="64" align="left" hspace="12">
+
+# Kjarasamningar
+
+**Gagnasett og opið API um umsamdar launahækkanir á Íslandi**
+
+<br clear="left">
 
 Markmið: gagnasett sem heldur utan um allar umsamdar launahækkanir samkvæmt
 kjarasamningum á Íslandi, helst aftur til 1990.

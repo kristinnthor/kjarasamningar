@@ -1,0 +1,15 @@
+{
+  "name": "Kjarasamningar — umsamdar launahækkanir á Íslandi",
+  "short_name": "Kjarasamningar",
+  "description": "Gagnasett og opið API um umsamdar launahækkanir samkvæmt íslenskum kjarasamningum.",
+  "lang": "is",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#171614",
+  "theme_color": "#7a4f2c",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any" }
+  ]
+}

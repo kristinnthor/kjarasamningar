@@ -76,6 +76,31 @@ UTILOKAD = re.compile(
     r"bifreiðastyrk|fatapening|akstursgjald|námskeiðaálag|"
     r"vátryggingarfjárhæð|slysatrygg|starfsaldursálag", re.I)
 
+# Framlög í sjóði eru hlutfall af launum en ekki launahækkun: "Atvinnurekendur
+# greiða 0,13% í VIRK-Starfsendurhæfingarsjóð".
+#
+# Tvennt gerir þetta vandasamara en það sýnist. Ríkissjóður er vinnuveitandi,
+# ekki sjóður sem greitt er í, svo blind sía á "sjóð" fellir út réttar færslur
+# úr opinbera geiranum. Og orðið "trygging" á við launaþróunartryggingu og
+# kauptryggingu, sem eru launahugtök - það má alls ekki sía burt.
+SJODSGJALD = re.compile(
+    r"(?<!ríkis)sjóð|virk-?starfsendurhæf|\bvirk\b|starfsendurhæfing|"
+    r"iðgjald|mótframlag|\bframlag\s+(?:í|til)\b|gjald\s+(?:í|til)\b|"
+    r"greið\w*\s+\d[\d.,]*\s*%\s*(?:af|í|til)\b", re.I)
+
+# Orðalagið verður að standa við sjálfa prósentuna. Án þeirrar kröfu féllu
+# réttar hækkanir út þegar "á rétt á orlofi" stóð tilviljanakennt í glugganum.
+#
+# Hlutföll sem lýsa réttindum en ekki hækkun: orlofsprósentan (10,17% /
+# 11,59% / 13,04%) fer eftir starfsaldri og er réttur, ekki launabreyting.
+# Þetta verður að meta í þröngum glugga - orðið "orlof" kemur víða fyrir í
+# samningum þar sem hækkunin sjálf er fullgild.
+RETTINDAHLUTFALL = re.compile(
+    r"orlofs(?:laun|prósent|ávinnsl|rétt\w*|fé)[^.]{0,30}?\d[\d.,]*\s*%|"
+    r"(?:skal\s+(?:hann|hún|starfsma\w+)\s+fá|á\s+rétt\s+á|fá\s+þó)"
+    r"[^.]{0,20}?\d[\d.,]*\s*%|"
+    r"starfsaldri?\s+eða\s+\d+\s*ára\s+aldur", re.I)
+
 # Orðalag sem lýsir launastigi fremur en hækkun: "breytist í 467.000 kr.",
 # "skal vera 15% hærri". Slíkar fjárhæðir eiga heima í launatöflunum.
 LAUNASTIG = re.compile(
@@ -283,6 +308,10 @@ def utdrattur_ur_texta(texti: str, argr: Argreining):
         # Þrengra samhengi til að greina launastig frá hækkun
         naerumhverfi = " ".join(texti[span[0]:span[1] + 40].split())
         if LAUNASTIG.search(naerumhverfi):
+            continue
+        if SJODSGJALD.search(naerumhverfi):
+            continue
+        if RETTINDAHLUTFALL.search(naerumhverfi):
             continue
 
         d, stada = argr.leysa(int(m.group(1)), man_n,

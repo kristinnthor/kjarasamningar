@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img"
+     aria-label="Kjarasamningar">
+  <!-- Merkið er þrepalína: laun hækka ekki jafnt og þétt heldur í stökkum
+       þegar samningar taka gildi. Sama form og vísitalan teiknar.
+       Þrepin eru þrjú en ekki fleiri - við 16 díla renna fjögur saman. -->
+  <rect width="32" height="32" rx="7" fill="#7a4f2c"/>
+  <path d="M5 25 H13 V18 H21 V11 H27"
+        fill="none" stroke="#f7f0e6" stroke-width="4"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

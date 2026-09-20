@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kjarasamningar — API</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#7a4f2c">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kjarasamningar">
+<meta property="og:title" content="Kjarasamningar — opið API um launahækkanir á Íslandi">
+<meta property="og:description" content="Umsamdar launahækkanir samkvæmt íslenskum kjarasamningum, dregnar úr frumtexta samninganna og birtar sem static JSON.">
+<meta property="og:image" content="https://kristinnthor.github.io/kjarasamningar/deilimynd.png">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root {
     --bg: #fbfaf8; --texti: #22201d; --daufur: #6b6660;
@@ -54,12 +65,15 @@
   .vidvorun p { margin: .4em 0; }
   footer { margin-top: 4em; padding-top: 1.4em; border-top: 1px solid var(--lina);
            color: var(--daufur); font-size: .88rem; }
+  .merki-mynd { width: 34px; height: 34px; flex: 0 0 auto; }
+  .hausmerki { display: flex; align-items: center; gap: 12px; margin-bottom: .3em; }
+  .hausmerki h1 { margin: 0; }
 </style>
 </head>
 <body>
 <div class="umgjord">
 
-<h1>Kjarasamningar</h1>
+<div class="hausmerki"><svg class="merki-mynd" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#7a4f2c"/><path d="M5 25 H13 V18 H21 V11 H27" fill="none" stroke="#f7f0e6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>Kjarasamningar</h1></div>
 <p class="inngangur">
   Umsamdar launahækkanir samkvæmt íslenskum kjarasamningum, dregnar úr
   frumtexta samninganna og birtar sem static JSON.
