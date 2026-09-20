@@ -28,6 +28,7 @@ ROT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GOGN = os.path.join(ROT, "gogn")
 SKRA = os.path.join(GOGN, "haekkanir.csv")
 VEF = os.path.join(GOGN, "haekkanir_vefskjol.csv")
+HANDVIRKT = os.path.join(GOGN, "handvirkar_leidrettingar.csv")
 UT = os.path.join(GOGN, "haekkanir_sameinad.csv")
 
 # Vefir stéttarfélaga: skjal þaðan á við það félag nema annað komi fram.
@@ -125,6 +126,27 @@ def main():
             "prosenta": r["prosenta"], "kronur": r["kronur"],
             "a_vid": r["a_vid"], "artal_stada": r["artal_stada"],
             "skjal": r["skjal"], "tilvitnun": r["tilvitnun"],
+        })
+
+    # Handvirkar leiðréttingar eru geymdar sérstaklega svo þær lifi af
+    # endurkeyrslu útdráttarins. Þær bera eigin uppruna og rakningu, svo
+    # alltaf sé ljóst hvað var vélrænt lesið og hvað var lagfært af manni.
+    handvirkt = lesa(HANDVIRKT)
+    for r in handvirkt:
+        ut.append({
+            "uppruni": "handvirk leiðrétting",
+            "rakning": "yfirfarið handvirkt",
+            "felag": r["felag"], "felag_id": "",
+            "atvinnurekandi": "", "markadur": "", "heildarsamtok": "",
+            "gildir_fra": r["gildir_fra"],
+            "tegund": ("prósenta" if r["prosenta"] and not r["kronur"]
+                       else "krónutala" if r["kronur"] and not r["prosenta"]
+                       else "prósenta og krónutala"),
+            "prosenta": r["prosenta"], "kronur": r["kronur"],
+            "a_vid": r["a_vid"], "artal_stada": "úr texta",
+            "skjal": r.get("heimild") or "",
+            "tilvitnun": (r.get("athugasemd")
+                          or "Handvirk leiðrétting við yfirferð eyðu."),
         })
 
     ut.sort(key=lambda r: (r["gildir_fra"] or "", str(r["felag"])))
