@@ -41,6 +41,10 @@ FORGANGUR = ["almenn laun", "launatafla", "kauptaxtar",
 # Ártalsstöður sem eru nógu traustar til að fara í tímaröðina
 TRAUST = {"úr texta", "leiðrétt", "ályktað"}
 
+# Bil sem telst rof á samfellu. Kjarasamningar bera oftast árlega áfanga, svo
+# lengra bil en 18 mánuðir þýðir að hækkun vanti eða félagið hafi ekki samið.
+EYDUMORK = 18
+
 
 def manudir_milli(a: str, b: str) -> int:
     ay, am = int(a[:4]), int(a[5:7])
@@ -138,16 +142,70 @@ def fella_saman_tvitok(rod, dagamork: int = 90):
     return haldid, felld
 
 
+def merkja_hlidarsamninga(linur, gluggi_dagar: int = 100, hlutfall: int = 3):
+    """Merkir hækkanir sem líklega tilheyra hliðarsamningi en ekki aðalröðinni.
+
+    Stéttarfélag semur oft við marga viðsemjendur samtímis - RSÍ semur við SA,
+    Samtök rafverktaka, Landsnet og Orkuveituna, hvert með eigin áföngum. Séu
+    þeir allir keðjaðir saman margfaldast hækkunin: RSÍ mældist með tólf
+    hækkanir á tveimur árum sem námu +56%, langt yfir raunverulegri launaþróun.
+
+    Aðalsamningurinn er sá sem flest skjöl staðfesta. Standi hækkun sem aðeins
+    eitt skjal nefnir við hlið annarrar sem margfalt fleiri staðfesta er hún
+    talin hliðarsamningur og ekki keðjuð - en hún hverfur ekki úr gögnunum.
+    """
+    linur = sorted(linur, key=lambda r: r["dagsetning"])
+    for r in linur:
+        r["i_kedju"] = 1
+    for r in linur:
+        h = int(r.get("heimildir") or 1)
+        for o in linur:
+            if o is r:
+                continue
+            if abs(dagar_milli(o["dagsetning"], r["dagsetning"])) > gluggi_dagar:
+                continue
+            ho = int(o.get("heimildir") or 1)
+            if ho >= h * hlutfall and ho >= 3:
+                r["i_kedju"] = 0
+                break
+    return linur
+
+
+def finna_samfellu(linur, mork: int = EYDUMORK):
+    """Finnur hvenær samfelld röð félagsins hefst, talið aftur á bak frá endanum.
+
+    Samfella er mæld frá nýjustu mælingu aftur að fyrsta rofi - ekki yfir alla
+    söguna. Eyða frá 1991 á ekki að ógilda röð sem hefur verið samfelld síðan
+    2004: gömul göt skipta engu máli fyrir greiningu á síðustu tveimur áratugum,
+    en gamla skilgreiningin útilokaði slíkar raðir alfarið.
+
+    Skilar (samfelld_fra, fjöldi punkta í samfellunni, fjöldi eldri eyða).
+    """
+    linur = sorted(linur, key=lambda r: r["dagsetning"])
+    rof = None
+    for i in range(len(linur) - 1, 0, -1):
+        if manudir_milli(linur[i - 1]["dagsetning"], linur[i]["dagsetning"]) > mork:
+            rof = i
+            break
+    if rof is None:
+        return linur[0]["dagsetning"], len(linur), 0
+    eldri = sum(1 for i in range(1, rof)
+                if manudir_milli(linur[i - 1]["dagsetning"],
+                                 linur[i]["dagsetning"]) > mork)
+    return linur[rof]["dagsetning"], len(linur) - rof, eldri + 1
+
+
 def heilleiki(y) -> str:
-    """Gróft mat á því hversu treystandi keðjaða vísitalan er fyrir félagið."""
-    bil = y.get("mesta_bil", 0)
-    if y["n"] < 3:
+    """Mat á samfellu, miðað við nýjasta óslitna kaflann.
+
+    `samfelld_fra` segir hvenær sá kafli hefst; þessi einkunn segir aðeins
+    hvort hann sé nógu langur til að byggja á.
+    """
+    if y.get("samfelld_n", 0) < 3:
         return "of fáir punktar"
-    if bil <= 18:
+    if y.get("samfelld_ar", 0) >= 3:
         return "samfelld"
-    if bil <= 48:
-        return "eyður"
-    return "stórar eyður"
+    return "eyður"
 
 
 def main():
@@ -194,6 +252,13 @@ def main():
             "skjal": besta["skjal"],
         })
 
+    # Merkja hliðarsamninga áður en keðjað er
+    _eftir_felagi = collections.defaultdict(list)
+    for r in ut:
+        _eftir_felagi[r["felag_lykill"]].append(r)
+    for linur in _eftir_felagi.values():
+        merkja_hlidarsamninga(linur)
+
     # Fella saman tvítalningu innan hvers félags áður en keðjað er
     eftir_felagi = collections.defaultdict(list)
     for r in ut:
@@ -226,7 +291,9 @@ def main():
             continue
         bil = manudir_milli(sidasta[f], d)
         r["bil_manudir"] = bil
-        if r["prosenta"]:
+        if not r.get("i_kedju", 1):
+            r["visitala_athugasemd"] = "hliðarsamningur - ekki keðjað"
+        elif r["prosenta"]:
             visitala[f] *= (1 + r["prosenta"] / 100)
             r["visitala_athugasemd"] = "" if bil <= 24 else "löng eyða á undan"
         else:
@@ -234,9 +301,34 @@ def main():
         r["visitala"] = round(visitala[f], 2)
         sidasta[f] = d
 
+    # Samfella hvers félags, talin aftur á bak frá nýjustu mælingu
+    eftir_felagi_lokad = collections.defaultdict(list)
+    for r in ut:
+        eftir_felagi_lokad[r["felag_lykill"]].append(r)
+    samfella = {}
+    for lykill, linur in eftir_felagi_lokad.items():
+        if not linur:
+            continue
+        fra, n, eldri = finna_samfellu(linur)
+        sidasta = max(r["dagsetning"] for r in linur)
+        samfella[lykill] = {
+            "fra": fra, "n": n, "eldri": eldri,
+            "ar": int(sidasta[:4]) - int(fra[:4]),
+        }
+        # Vísitala endurgrunnuð á upphaf samfellunnar. Það er talan sem má
+        # nota - keðjan yfir eyðuna er einmitt sá hluti sem ekki er treystandi.
+        grunnur = next((r["visitala"] for r in sorted(
+            linur, key=lambda x: x["dagsetning"]) if r["dagsetning"] >= fra), None)
+        for r in linur:
+            innan = r["dagsetning"] >= fra
+            r["innan_samfellu"] = int(innan)
+            r["visitala_samfella"] = (round(r["visitala"] / grunnur * 100, 2)
+                                      if innan and grunnur else "")
+
     dalkar = ["felag_lykill", "felag_id", "felag", "markadur", "heildarsamtok",
               "dagsetning", "a_vid", "prosenta", "kronur", "tegund",
-              "visitala", "bil_manudir", "visitala_athugasemd",
+              "visitala", "visitala_samfella", "innan_samfellu", "i_kedju",
+              "bil_manudir", "visitala_athugasemd",
               "heimildir", "olik_gildi", "sameinad", "upprunar", "skjal"]
     with open(UT_ROD, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=dalkar, extrasaction="ignore")
@@ -263,14 +355,18 @@ def main():
         if r["heildarsamtok"]:
             y["samtok"][r["heildarsamtok"]] += 1
         y["visitala_lok"] = r["visitala"]
+        if r.get("visitala_samfella") not in ("", None):
+            y["visitala_samfellu_lok"] = r["visitala_samfella"]
         if r.get("bil_manudir"):
             y["mesta_bil"] = max(y.get("mesta_bil", 0), int(r["bil_manudir"]))
     with open(UT_FELOG, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["felag_lykill", "felag_id", "felag",
                                           "markadur", "heildarsamtok",
                                           "fjoldi_haekkana", "fyrsta", "sidasta",
-                                          "visitala_lok", "mesta_bil_manudir",
-                                          "heilleiki"])
+                                          "samfelld_fra", "samfelld_ar",
+                                          "samfelld_punktar", "eldri_eydur",
+                                          "visitala_lok", "visitala_samfellu_lok",
+                                          "mesta_bil_manudir", "heilleiki"])
         w.writeheader()
         for k, y in sorted(yfirlit.items(), key=lambda kv: -kv[1]["n"]):
             w.writerow({"felag_lykill": k,
@@ -280,8 +376,16 @@ def main():
                         "heildarsamtok": algengast(y["samtok"]),
                         "fjoldi_haekkana": y["n"], "fyrsta": y["fra"],
                         "sidasta": y["til"], "visitala_lok": y.get("visitala_lok"),
+                        "samfelld_fra": (samfella.get(k) or {}).get("fra", ""),
+                        "samfelld_ar": (samfella.get(k) or {}).get("ar", ""),
+                        "samfelld_punktar": (samfella.get(k) or {}).get("n", ""),
+                        "eldri_eydur": (samfella.get(k) or {}).get("eldri", ""),
+                        "visitala_samfellu_lok": y.get("visitala_samfellu_lok", ""),
                         "mesta_bil_manudir": y.get("mesta_bil", ""),
-                        "heilleiki": heilleiki(y)})
+                        "heilleiki": heilleiki({
+                            **y,
+                            "samfelld_n": (samfella.get(k) or {}).get("n", 0),
+                            "samfelld_ar": (samfella.get(k) or {}).get("ar", 0)})})
 
     print(f"Hækkanir inn:          {len(radir)}")
     print(f"Línur í tímaröð:       {len(ut)}")

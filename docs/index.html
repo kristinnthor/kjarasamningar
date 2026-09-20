@@ -88,8 +88,11 @@
 <div class="vidvorun">
   <p><strong>Vísitalan er ekki launavísitala.</strong> Hún leggur saman þær
   hækkanir sem tókst að finna í samningum og er aðeins marktæk fyrir félög þar
-  sem reiturinn <code>heilleiki</code> er <code>samfelld</code>. Notið reitinn
-  til að sía áður en raðirnar eru bornar saman.</p>
+  sem reiturinn <code>heilleiki</code> er <code>samfelld</code>.</p>
+  <p>Samfella er mæld aftur á bak frá nýjustu mælingu að fyrsta rofi, svo gömul
+  göt ógilda ekki röð sem hefur verið samfelld í tvo áratugi.
+  <code>samfelld_fra</code> segir frá hvaða degi hún gildir og
+  <code>visitala_samfella</code> er keðjuð þaðan — það er talan sem á að nota.</p>
 </div>
 
 <h2>Skoða gögnin</h2>
@@ -138,7 +141,11 @@ for (const h of vr.haekkanir) {
   <tr><td><code>a_vid</code></td><td>við hvað hækkunin miðast: kauptaxtar, launatafla, almenn laun …</td></tr>
   <tr><td><code>visitala</code></td><td>keðjuð vísitala, grunnur 100 við fyrstu mælingu félagsins</td></tr>
   <tr><td><code>bil_manudir</code></td><td>mánuðir frá síðustu mælingu — löng bil þýða að hækkanir vanti</td></tr>
-  <tr><td><code>heilleiki</code></td><td><code>samfelld</code>, <code>eyður</code>, <code>stórar eyður</code> eða <code>of fáir punktar</code></td></tr>
+  <tr><td><code>heilleiki</code></td><td><code>samfelld</code>, <code>eyður</code> eða <code>of fáir punktar</code> — lýsir samfellda kaflanum</td></tr>
+  <tr><td><code>samfelld_fra</code></td><td>hvenær samfelldi kaflinn hefst</td></tr>
+  <tr><td><code>visitala_samfella</code></td><td>vísitala keðjuð frá <code>samfelld_fra</code> — <strong>talan sem á að nota</strong></td></tr>
+  <tr><td><code>innan_samfellu</code></td><td>1 ef línan er innan samfellda kaflans</td></tr>
+  <tr><td><code>i_kedju</code></td><td>0 ef hækkunin tilheyrir líklega hliðarsamningi og er ekki keðjuð</td></tr>
   <tr><td><code>tilvitnun</code></td><td>textabúturinn úr samningnum, til sannreyningar</td></tr>
 </table>
 

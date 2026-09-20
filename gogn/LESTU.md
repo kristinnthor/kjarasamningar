@@ -78,6 +78,43 @@ hærra en 1 ef heimildum ber ekki saman.
 `visitala` er keðjuð út frá prósentuhækkunum, með grunn 100 við fyrstu mælingu
 hvers félags.
 
+### Samfella er mæld aftur á bak
+
+`samfelld_fra` segir hvenær samfelldi kafli raðarinnar hefst. Hann er fundinn
+með því að telja aftur á bak frá nýjustu mælingu að fyrsta rofi — ekki yfir
+alla söguna.
+
+Ástæðan er einföld: eyða frá 1991 á ekki að ógilda röð sem hefur verið
+samfelld síðan 2004. Gömul göt skipta engu fyrir greiningu á síðustu tveimur
+áratugum, en fyrri skilgreining útilokaði slíkar raðir alfarið. Við breytinguna
+fóru nothæf félög úr 39 í 74.
+
+| Reitur | Merking |
+|---|---|
+| `samfelld_fra` | upphaf samfellda kaflans |
+| `samfelld_ar` | fjöldi ára sem hann spannar |
+| `eldri_eydur` | eyður á undan honum — þær ógilda ekki röðina |
+| `visitala_samfella` | vísitala keðjuð frá `samfelld_fra`, **talan sem á að nota** |
+| `innan_samfellu` | 1 ef línan er innan samfellda kaflans |
+
+`heilleiki` lýsir nú aðeins samfellda kaflanum: `samfelld` ef hann spannar
+þrjú ár eða meira, annars `eyður` eða `of fáir punktar`.
+
+### Hliðarsamningar
+
+Stéttarfélag semur oft við marga viðsemjendur samtímis. RSÍ semur við SA,
+Samtök rafverktaka, Landsnet og Orkuveituna, hvert með eigin áföngum. Séu
+þeir allir keðjaðir saman margfaldast hækkunin — RSÍ mældist með tólf
+hækkanir á tveimur árum sem námu +56%.
+
+Hækkun sem aðeins eitt skjal nefnir, og stendur við hlið annarrar sem margfalt
+fleiri staðfesta, er því merkt `i_kedju = 0` og ekki keðjuð. Hún hverfur ekki
+úr gögnunum og sést áfram sem sjálfstæð færsla.
+
+Það var samanburðurinn við launavísitölu Hagstofunnar sem afhjúpaði þetta:
+RSÍ mældist 265 þar sem raunveruleg launaþróun var 244, og umsamdar hækkanir
+geta ekki farið yfir mælda launaþróun sem inniheldur launaskrið.
+
 ### Þetta er ekki launavísitala
 
 Vísitalan leggur saman **þær hækkanir sem tókst að finna**. Hún er því aðeins
@@ -93,10 +130,9 @@ marktæk fyrir félög þar sem röðin er samfelld. Tvennt takmarkar hana:
 
 | Heilleiki | Félög | Merking |
 |---|---:|---|
-| samfelld | 39 | mesta bil ≤ 18 mánuðir |
-| eyður | 37 | mesta bil 19–48 mánuðir |
-| stórar eyður | 44 | mesta bil > 48 mánuðir |
-| of fáir punktar | 27 | færri en 3 mælingar |
+| samfelld | 74 | samfelldi kaflinn spannar 3 ár eða meira |
+| eyður | 28 | samfelldi kaflinn er styttri en 3 ár |
+| of fáir punktar | 44 | færri en 3 mælingar í samfellda kaflanum |
 
 Notið `felag_lykill` til að tengja töflurnar saman - hann sameinar
 beygingarmyndir og skammstafanir sama félags.

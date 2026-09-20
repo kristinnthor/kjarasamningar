@@ -84,19 +84,43 @@ def main():
           f"{len(lyklar) - len(set(lyklar))} tvítök")
 
     print("\nSamanburður við launavísitölu Hagstofunnar")
+
+    # Vísitala félagsins á tilteknum degi. Samningar ná fram í tímann (2028) en
+    # launavísitalan aðeins til dagsins í dag, svo bera verður saman á sama degi
+    # - annars er verið að mæla ólík tímabil hvort gegn öðru.
+    eftir_lykli = {}
+    for r in rod:
+        eftir_lykli.setdefault(r["felag_lykill"], []).append(r)
+    for linur in eftir_lykli.values():
+        linur.sort(key=lambda r: r["dagsetning"])
+
+    def visitala_vid(lykill, dagur):
+        svar = None
+        for r in eftir_lykli.get(lykill, []):
+            if r["dagsetning"] > dagur:
+                break
+            if r.get("visitala_samfella") not in ("", None):
+                svar = float(r["visitala_samfella"])
+        return svar
+
     yfir = []
     profud = 0
     for f in felog:
         if f["heilleiki"] != "samfelld":
             continue
-        fra, til = f["fyrsta"], f["sidasta"]
-        til = min(til, "2026-07-01")
+        # Samanburðurinn verður að miðast við sama upphaf og vísitalan.
+        # Frá og með nýju samfelluskilgreiningunni hefst hún við samfelld_fra,
+        # ekki fyrstu mælingu félagsins.
+        fra = f.get("samfelld_fra") or f["fyrsta"]
+        til = min(f["sidasta"], "2026-07-01")
         m1, m2 = f"{fra[:4]}M{fra[5:7]}", f"{til[:4]}M{til[5:7]}"
         if m1 not in lv or m2 not in lv or fra >= til:
             continue
+        okkar = visitala_vid(f["felag_lykill"], til)
+        if okkar is None:
+            continue
         profud += 1
         hag = lv[m2] / lv[m1] * 100
-        okkar = float(f["visitala_lok"])
         if okkar > hag * 1.02:
             yfir.append(f"{f['felag']} {okkar:.0f} > {hag:.0f}")
     profa(f"engin samfelld röð yfir launavísitölu ({profud} prófuð)",

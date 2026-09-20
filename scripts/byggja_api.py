@@ -76,6 +76,13 @@ FYRIRVARAR = [
     "Vísitalan leggur saman þær hækkanir sem tókst að finna í samningum. "
     "Hún er ekki launavísitala og er aðeins marktæk fyrir félög þar sem "
     "reiturinn heilleiki er 'samfelld'.",
+    "Samfella er mæld aftur á bak frá nýjustu mælingu að fyrsta rofi. "
+    "samfelld_fra segir hvenær samfelldi kaflinn hefst; visitala_samfella er "
+    "keðjuð frá þeim degi og er talan sem á að nota. Eldri eyður ógilda ekki "
+    "röðina, enda skipta þær litlu fyrir greiningu á síðustu árum.",
+    "Hækkun sem merkt er i_kedju = 0 tilheyrir líklega hliðarsamningi við "
+    "annan viðsemjanda og er því ekki keðjuð. Félag semur oft við marga "
+    "viðsemjendur samtímis og keðjun allra saman margfaldar hækkunina.",
     "Krónutöluhækkanir er ekki hægt að umbreyta í hlutfall án þess að vita "
     "launastigið. Þar stendur vísitalan í stað og línan er merkt.",
     "Launavísitala Hagstofunnar skiptist eftir markaði en ekki stéttarfélagi, "
@@ -107,8 +114,9 @@ def main():
         return
 
     HEIL = ("fjoldi_haekkana", "kronur", "heimildir", "olik_gildi",
-            "bil_manudir", "mesta_bil_manudir")
-    FLEYTI = ("prosenta", "visitala")
+            "bil_manudir", "mesta_bil_manudir", "innan_samfellu", "i_kedju",
+            "samfelld_ar", "samfelld_punktar", "eldri_eydur")
+    FLEYTI = ("prosenta", "visitala", "visitala_samfella")
 
     # ---- auðkenni félaga ---- #
     slod_eftir_lykli = {}
@@ -140,6 +148,9 @@ def main():
             "sidasta": f["sidasta"],
             "fjoldi_haekkana": int(f["fjoldi_haekkana"]),
             "heilleiki": f["heilleiki"],
+            "samfelld_fra": f.get("samfelld_fra") or None,
+            "samfelld_ar": int(f["samfelld_ar"]) if f.get("samfelld_ar") else None,
+            "eldri_eydur": int(f["eldri_eydur"]) if f.get("eldri_eydur") else 0,
             "mesta_bil_manudir": int(f["mesta_bil_manudir"]) if f["mesta_bil_manudir"] else None,
             "haekkanir": linur,
             "taxtahaekkanir": sorted(
@@ -158,6 +169,9 @@ def main():
             "fyrsta": f["fyrsta"], "sidasta": f["sidasta"],
             "fjoldi_haekkana": int(f["fjoldi_haekkana"]),
             "heilleiki": f["heilleiki"],
+            "samfelld_fra": f.get("samfelld_fra") or None,
+            "samfelld_ar": int(f["samfelld_ar"]) if f.get("samfelld_ar") else None,
+            "eldri_eydur": int(f["eldri_eydur"]) if f.get("eldri_eydur") else 0,
             "slod": f"{GRUNNSLOD}/felog/{slod_eftir_lykli[f['felag_lykill']]}.json",
         } for f in felog],
     })

@@ -125,8 +125,11 @@ def teikna(felog, vista=None, grunndagur=None):
     radir = []
     for f in felog:
         gogn = saekja(f"felog/{f['audkenni']}.json")
-        punktar = [(date.fromisoformat(h["dagsetning"]), h["visitala"])
-                   for h in gogn["haekkanir"] if h["visitala"] is not None]
+        # Samfelldi hlutinn er notaður: keðjan yfir eyðu er einmitt sá hluti
+        # sem ekki er treystandi. samfelld_fra segir hvenær hann hefst.
+        punktar = [(date.fromisoformat(h["dagsetning"]), h["visitala_samfella"])
+                   for h in gogn["haekkanir"]
+                   if h.get("innan_samfellu") and h.get("visitala_samfella")]
         if len(punktar) <= 1:
             continue
         if grunndagur is not None:
@@ -181,7 +184,7 @@ def teikna(felog, vista=None, grunndagur=None):
         ax.set_ylabel(f"Vísitala (100 = {grunndagur.isoformat()})", fontsize=9)
         ax.axhline(100, color="#e2ded8", linewidth=1)
     else:
-        ax.set_ylabel("Vísitala (100 við fyrstu mælingu hvers félags)",
+        ax.set_ylabel("Vísitala (100 við upphaf samfellu hvers félags)",
                       fontsize=9)
     ax.xaxis.set_major_locator(mdates.YearLocator(base=4))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))

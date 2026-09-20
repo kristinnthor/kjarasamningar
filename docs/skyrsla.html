@@ -202,6 +202,12 @@
         </select>
       </div>
       <div class="gatreitur">
+        <input type="checkbox" id="ollsagan">
+        <label for="ollsagan" style="all:unset;cursor:pointer">
+          Öll sagan (líka fyrir eyður)
+        </label>
+      </div>
+      <div class="gatreitur">
         <input type="checkbox" id="hagstofa">
         <label for="hagstofa" style="all:unset;cursor:pointer">
           Launavísitala Hagstofunnar
@@ -228,8 +234,10 @@
 
 <div class="vidvorun" id="vidvorun">
   <strong>Vísitalan er ekki launavísitala.</strong> Hún leggur saman þær hækkanir sem
-  tókst að finna í samningum. Merkingin við hvert félag segir hversu samfelld röðin
-  er — félög með eyður vanmeta þróunina, því hækkanir vantar inn í keðjuna.
+  tókst að finna í samningum. Samfella er mæld aftur á bak frá nýjustu mælingu að
+  fyrsta rofi, svo gömul göt ógilda ekki röð sem hefur verið samfelld í tvo áratugi.
+  Merkingin við hvert félag segir frá hvaða ári röðin er samfelld, og myndin sýnir
+  þann hluta — hakaðu við „öll sagan“ til að sjá eldri gögn með eyðum.
 </div>
 
 <footer>
@@ -263,6 +271,7 @@ const stada = {
   valin: new Map(),      // audkenni -> gögn félagsins
   grunnur: "",           // "" eða "YYYY"
   hagstofa: false,
+  ollsagan: false,
   mynd: true,
   visitala: null,        // gögn Hagstofunnar, sótt við fyrstu þörf
 };
@@ -284,9 +293,16 @@ async function saekjaFelag(audkenni) {
     audkenni,
     heiti: g.felag,
     heilleiki: g.heilleiki,
-    punktar: g.haekkanir
+    samfelld_fra: g.samfelld_fra,
+    samfelld_ar: g.samfelld_ar,
+    eldri_eydur: g.eldri_eydur,
+    allt: g.haekkanir
       .filter((h) => h.visitala != null)
       .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning, v: h.visitala })),
+    samfella: g.haekkanir
+      .filter((h) => h.innan_samfellu && h.visitala_samfella != null)
+      .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning,
+                     v: h.visitala_samfella })),
   };
 }
 
@@ -328,7 +344,10 @@ function serier() {
   const ut = [];
   let i = 0;
   for (const f of stada.valin.values()) {
-    let punktar = f.punktar;
+    // Samfelldi hlutinn er sjálfgefinn: keðjan yfir eyðu er einmitt sá hluti
+    // sem ekki er treystandi. Öll sagan er þó í boði.
+    let punktar = stada.ollsagan ? f.allt : (f.samfella.length > 1 ? f.samfella
+                                                                  : f.allt);
     if (grunnT !== null) {
       punktar = endurgrunna(punktar, grunnT);
       if (!punktar || punktar.length < 2) {
@@ -585,7 +604,10 @@ function teiknaLista() {
       <input type="checkbox" value="${esc(f.audkenni)}" ${valid ? "checked" : ""}
         ${laest ? "disabled" : ""}>
       <span class="heiti">${esc(f.felag)}</span>
-      <span class="gaedi" data-g="${esc(f.heilleiki)}">${esc(f.heilleiki)}</span>
+      <span class="gaedi" data-g="${esc(f.heilleiki)}">${
+        f.heilleiki === "samfelld" && f.samfelld_fra
+          ? "samfelld frá " + esc(f.samfelld_fra.slice(0, 4))
+          : esc(f.heilleiki)}</span>
     </label>`;
   }).join("") || `<p class="stada">Ekkert félag fannst.</p>`;
 
@@ -606,6 +628,7 @@ function skraSlod() {
   if (stada.valin.size) p.set("felog", [...stada.valin.keys()].join(","));
   if (stada.grunnur) p.set("grunnur", stada.grunnur);
   if (stada.hagstofa) p.set("hagstofa", "1");
+  if (stada.ollsagan) p.set("ollsagan", "1");
   history.replaceState(null, "", p.toString() ? `?${p}` : location.pathname);
 }
 
@@ -635,6 +658,8 @@ async function raesa() {
   const grunnurUrSlod = p.get("grunnur") || "";
   stada.grunnur = /^\d{4}$/.test(grunnurUrSlod) ? grunnurUrSlod : "";
   stada.hagstofa = p.get("hagstofa") === "1";
+  stada.ollsagan = p.get("ollsagan") === "1";
+  E("ollsagan").checked = stada.ollsagan;
   E("grunnur").value = stada.grunnur;
   E("hagstofa").checked = stada.hagstofa;
   if (stada.hagstofa) await saekjaVisitolu();
@@ -654,6 +679,10 @@ async function raesa() {
     stada.grunnur = /^\d{4}$/.test(e.target.value) ? e.target.value : "";
     if (stada.hagstofa) await saekjaVisitolu();
     tegraKubba(); birta();
+  });
+  E("ollsagan").addEventListener("change", (e) => {
+    stada.ollsagan = e.target.checked;
+    birta();
   });
   E("hagstofa").addEventListener("change", async (e) => {
     stada.hagstofa = e.target.checked;
