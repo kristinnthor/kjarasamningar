@@ -17,9 +17,14 @@ from __future__ import annotations
 
 import collections
 import csv
+import json
 import os
+import re
 import sys
 from datetime import date
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from launathroun import samhaefa_heiti  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -72,12 +77,76 @@ def algengt_a_bili(allar_radir, fra: str, til: str, sleppa_lykli: str,
     return "; ".join(bestu)
 
 
+def lesa_samninga():
+    """Samningar heildarskrárinnar með beinni PDF-slóð og gildistíma.
+
+    Ríkissáttasemjari birtir hvern samning á fastri slóð, svo hægt er að
+    vísa beint á skjalið sem ætti að geyma hækkunina sem vantar.
+    """
+    leid = os.path.join(ROT, "samningar", "rikissattasemjari", "lysigogn.json")
+    if not os.path.exists(leid):
+        return []
+    with open(leid, encoding="utf-8") as f:
+        allir = json.load(f)
+    ut = []
+    for x in allir:
+        if not x.get("pdf_url"):
+            continue
+        heiti = f"{x.get('launthegi_canonical') or ''} ; {x.get('launthegi') or ''}"
+        ut.append({
+            "nafn": samhaefa_heiti(heiti),
+            "hratt": heiti.lower(),
+            "fra": (x.get("fra") or "")[:10],
+            "til": (x.get("til") or "")[:10],
+            "tegund": x.get("tegund") or "",
+            # Skráarheitin eru ekki lýsandi - "SA_v_kvikmyndahusa.pdf" er
+            # RSÍ-samningur. Viðsemjandinn segir notandanum hvað hann opnar.
+            "atvinnurekandi": (x.get("atvinnurekandi") or "").strip(),
+            "slod": x["pdf_url"],
+        })
+    return ut
+
+
+def samningar_a_bili(samningar, felag: str, fra: str, til: str, hamark: int = 3):
+    """Samningar félagsins sem gilda yfir eyðuna.
+
+    Hækkun sem vantar á að standa í samningi sem var í gildi á tímabilinu, svo
+    skörun gildistíma er rétta viðmiðið - ekki undirritunardagur.
+    """
+    n = samhaefa_heiti(felag)
+    if not n or len(n) < 3:
+        return []
+    # Stuttar skammstafanir ("rsí", "vm", "kí") mega ekki lenda inni í öðrum
+    # orðum, svo þær eru bornar saman á orðamörkum.
+    if len(n) <= 4:
+        mynstur = re.compile(rf"(?<!\w){re.escape(n)}(?!\w)")
+        passar = lambda s: bool(mynstur.search(s["nafn"]) or mynstur.search(s["hratt"]))
+    else:
+        passar = lambda s: n in s["nafn"] or n in s["hratt"]
+    fundnir = []
+    for s in samningar:
+        if not passar(s):
+            continue
+        if not s["fra"]:
+            continue
+        # Skörun: samningurinn hefst fyrir lok eyðunnar og lýkur eftir upphaf hennar
+        if s["fra"] > til:
+            continue
+        if s["til"] and s["til"] < fra:
+            continue
+        fundnir.append(s)
+    # Þeir sem hefjast innan eyðunnar eru líklegastir til að geyma hækkunina
+    fundnir.sort(key=lambda s: (not (fra <= s["fra"] <= til), s["fra"]))
+    return fundnir[:hamark]
+
+
 DALKAR = [
     # Til útfyllingar
     "stada", "dagsetning", "prosenta", "kronur", "a_vid", "heimild", "athugasemd",
     # Samhengi, forútfyllt
     "felag", "felag_audkenni", "eyda_fra", "eyda_til", "manudir",
     "haekkun_a_undan", "haekkun_a_eftir", "algengt_hja_odrum",
+    "samningar_fjoldi", "samningar", "slodir",
     "heilleiki", "fjoldi_haekkana", "timabil_felags",
 ]
 
@@ -89,6 +158,7 @@ def main(argv):
 
     felog = lesa("felog.csv")
     rod = lesa("launathroun_eftir_felagi.csv")
+    samningar = lesa_samninga()
 
     # Auðkenni félaga eins og API-ið notar
     audkenni = {}
@@ -119,7 +189,15 @@ def main(argv):
             bil = manudir(fyrri["dagsetning"], thessi["dagsetning"])
             if bil <= EYDUMORK:
                 continue
+            tengdir = samningar_a_bili(samningar, f["felag"],
+                                       fyrri["dagsetning"], thessi["dagsetning"])
             linur.append({
+                "_tengdir": tengdir,
+                "samningar_fjoldi": len(tengdir),
+                "samningar": " | ".join(
+                    f"{s['fra']}–{s['til'] or '?'} {s['atvinnurekandi'] or '?'} "
+                    f"({s['tegund']})" for s in tengdir),
+                "slodir": " ".join(s["slod"] for s in tengdir),
                 "stada": "", "dagsetning": "", "prosenta": "", "kronur": "",
                 "a_vid": "", "heimild": "", "athugasemd": "",
                 "felag": f["felag"],
@@ -140,7 +218,8 @@ def main(argv):
     os.makedirs(YFIRFERD, exist_ok=True)
     ut = os.path.join(YFIRFERD, "eydur.csv")
     with open(ut, "w", encoding="utf-8-sig", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=DALKAR)
+        # _tengdir er hjálparreitur fyrir markdown-útgáfuna
+        w = csv.DictWriter(f, fieldnames=DALKAR, extrasaction="ignore")
         w.writeheader()
         w.writerows(linur)
 
@@ -157,12 +236,22 @@ def main(argv):
         md.append(f"\n## {heiti}\n")
         md.append(f"{hop[0]['fjoldi_haekkana']} hækkanir, "
                   f"{hop[0]['timabil_felags']}, {len(hop)} eyður\n")
-        md.append("| Frá | Til | Mán. | Á undan | Á eftir | Aðrir á tímabilinu |")
-        md.append("|---|---|---:|---|---|---|")
         for l in sorted(hop, key=lambda x: x["eyda_fra"]):
-            md.append(f"| {l['eyda_fra']} | {l['eyda_til']} | {l['manudir']} | "
-                      f"{l['haekkun_a_undan']} | {l['haekkun_a_eftir']} | "
-                      f"{l['algengt_hja_odrum'] or '—'} |")
+            md.append(f"\n**{l['eyda_fra']} → {l['eyda_til']}** "
+                      f"({l['manudir']} mán.)  ")
+            md.append(f"Á undan: {l['haekkun_a_undan']} · "
+                      f"Á eftir: {l['haekkun_a_eftir']}  ")
+            if l["algengt_hja_odrum"]:
+                md.append(f"Aðrir á tímabilinu: {l['algengt_hja_odrum']}  ")
+            if l["_tengdir"]:
+                md.append("Samningar í gildi:  ")
+                for t in l["_tengdir"]:
+                    md.append(f"- [{t['fra']}–{t['til'] or '?'} · "
+                              f"{t['atvinnurekandi'] or 'óþekktur viðsemjandi'} · "
+                              f"{t['tegund']}]({t['slod']})")
+            else:
+                md.append("*Enginn samningur fannst í heildarskránni "
+                          "fyrir þetta tímabil.*  ")
     with open(os.path.join(YFIRFERD, "eydur.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(md) + "\n")
 

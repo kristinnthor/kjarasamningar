@@ -31,6 +31,19 @@ Fremstu sjö dálkarnir eru auðir og ætlaðir þér. Hinir eru samhengi.
 Vanti fleiri en eina hækkun í sömu eyðu: afritaðu línuna og fylltu út aftur.
 Línur sem eru látnar standa auðar eru einfaldlega ekki yfirfarnar enn.
 
+### Tenglar á samningana
+
+`slodir` og `samningar` vísa á þá samninga úr heildarskrá ríkissáttasemjara
+sem **voru í gildi yfir eyðuna** — það eru skjölin sem ættu að geyma hækkunina
+sem vantar. Skörun gildistíma er viðmiðið, ekki undirritunardagur.
+
+Lýsingin nefnir viðsemjandann því skráarheitin eru ekki lýsandi:
+`SA_v_kvikmyndahusa.pdf` er RSÍ-samningur við SA um kvikmyndahús.
+
+**92 af 101 eyðum** hafa a.m.k. einn tengil. Í `eydur.md` eru þeir smellanlegir.
+Finnist enginn samningur er það sjálfstæð vísbending — annaðhvort vantar
+skjalið í heildarskrána eða félagið samdi ekki á tímabilinu.
+
 ### Samhengisdálkarnir
 
 `haekkun_a_undan` og `haekkun_a_eftir` sýna hvað var skráð sitt hvorum megin
