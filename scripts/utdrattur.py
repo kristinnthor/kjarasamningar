@@ -88,6 +88,11 @@ SJODSGJALD = re.compile(
     r"iðgjald|mótframlag|\bframlag\s+(?:í|til)\b|gjald\s+(?:í|til)\b|"
     r"greið\w*\s+\d[\d.,]*\s*%\s*(?:af|í|til)\b", re.I)
 
+# Persónuálag er álagshlutfall, en orðið stendur iðulega í grein sem kemur
+# beint á eftir hækkanalistanum. Sé leitað í báðar áttir fellur allur listinn
+# út, svo þessi regla horfir aðeins aftur fyrir töluna.
+UNDANFARANDI_ALAG = re.compile(r"persónuálag|starfsaldursálag", re.I)
+
 # Orðalagið verður að standa við sjálfa prósentuna. Án þeirrar kröfu féllu
 # réttar hækkanir út þegar "á rétt á orlofi" stóð tilviljanakennt í glugganum.
 #
@@ -306,12 +311,23 @@ def utdrattur_ur_texta(texti: str, argr: Argreining):
         if not HAEKKUNARORD.search(samhengi):
             continue
         # Þrengra samhengi til að greina launastig frá hækkun
+        # Hver regla fær þann glugga sem hún þolir.
+        #
+        # LAUNASTIG og SJODSGJALD leita að orðum sem geta staðið hvar sem er í
+        # setningu, svo þær verða að halda sig við þröngan glugga - víkkun um
+        # 100 stafi felldi 114 fullgildar hækkanir.
+        #
+        # RETTINDAHLUTFALL krefst þess aftur á móti að orðið standi við sjálfa
+        # töluna ("orlofslaunum sem nema 13,04%"), svo hún má leita víðar og
+        # þarf þess: orðið stendur oftast á undan tölunni.
         naerumhverfi = " ".join(texti[span[0]:span[1] + 40].split())
-        if LAUNASTIG.search(naerumhverfi):
+        if LAUNASTIG.search(naerumhverfi) or SJODSGJALD.search(naerumhverfi):
             continue
-        if SJODSGJALD.search(naerumhverfi):
+        vidara = " ".join(texti[max(0, span[0] - 120):span[1] + 40].split())
+        if RETTINDAHLUTFALL.search(vidara):
             continue
-        if RETTINDAHLUTFALL.search(naerumhverfi):
+        undanfari = " ".join(texti[max(0, span[0] - 150):span[0]].split())
+        if UNDANFARANDI_ALAG.search(undanfari):
             continue
 
         d, stada = argr.leysa(int(m.group(1)), man_n,

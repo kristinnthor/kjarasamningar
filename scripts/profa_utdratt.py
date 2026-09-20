@@ -56,6 +56,10 @@ PROFANIR = [
     ("orlofslaun reiknuð", False,
      "Hlutfall orlofslauna af heildarlaunum, ekki hækkun.",
      "Orlofslaun reiknast 10,17% af heildarlaunum frá 1. maí 2020."),
+    ("persónuálag sem stig", False,
+     "Persónuálag er álagshlutfall; listinn telur upp stig þess, ekki hækkun.",
+     "Persónuálag tekur eftirfarandi breytingum á samningstímanum: "
+     "Frá 1. apríl 2024 — 1,6% Frá 1. apríl 2025 — 1,7% Frá 1. apríl 2027 — 1,8%"),
     ("eingreiðsla", False,
      "Stök uppgjörsgreiðsla, ekki hækkun á launum.",
      "1.2.1 Uppgjörsgreiðsla fyrir tímabilið 1. apríl 2019 til "
@@ -84,6 +88,14 @@ PROFANIR = [
     ("krónutöluhækkun", True,
      "Hækkun sem eingöngu er krónutala.",
      "2. gr. Launahækkanir 1. apríl 2020: Laun hækka um 18.000 kr."),
+    ("áfangalisti með persónuálagsgrein á eftir", True,
+     "Persónuálagsgreinin kemur beint á eftir hækkanalistanum. Sía sem leitar "
+     "í báðar áttir fellir allan listann - þetta varð til þess að 80 "
+     "fullgildar hækkanir hurfu úr gagnasettinu.",
+     "Mánaðarlaun taka eftirfarandi hlutfallshækkunum með krónutöluhækkun að "
+     "lágmarki: 1. apríl 2024 3,25% eða 23.750 kr. 1. apríl 2025 3,50% eða "
+     "23.750 kr. Persónuálag tekur eftirfarandi breytingum á samningstímanum: "
+     "Frá 1. apríl 2024 — 1,6%"),
     ("hækkun þótt orlof sé nefnt", True,
      "Orðið orlof stendur tilviljanakennt í sama glugga og fullgild hækkun; "
      "sían má ekki fella hana.",

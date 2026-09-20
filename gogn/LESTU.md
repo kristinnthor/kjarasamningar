@@ -43,6 +43,27 @@ Unnið úr OCR-texta heildarskrár ríkissáttasemjara, sem fylgja staðfest lý
   Þær eru viðmiðunarmörk, ekki gildistökudagur.
 - **Greiðslur sem eru ekki laun**: iðgjöld, lífeyrisframlög, ferðapeningar,
   vátryggingarfjárhæðir, desember- og orlofsuppbót.
+- **Framlög í sjóði** („Atvinnurekendur greiða 0,13% í VIRK-Starfsendurhæfingar-
+  sjóð"). Hlutfall af launum, ekki launabreyting.
+- **Orlofsréttindi** („skal hann fá 13,04%"). Orlofsprósentan fer eftir
+  starfsaldri og er réttur, ekki hækkun.
+- **Persónuálag** („Frá 1. apríl 2027 — 1,8%"). Álagsstig, ekki breyting.
+
+### Hvers vegna síurnar eru mismunandi víðar
+
+Hver regla fær þann samhengisglugga sem hún þolir, og það er ekki
+smekksatriði:
+
+- Reglur sem leita að orðum sem geta staðið hvar sem er í setningu halda sig
+  við þröngan glugga. Víkkun um 100 stafi felldi 114 fullgildar hækkanir.
+- Reglur sem krefjast þess að orðið standi við sjálfa töluna
+  („orlofslaunum sem nema 13,04%") mega leita víðar og þurfa þess.
+- Persónuálagsreglan horfir **aðeins aftur fyrir** töluna. Persónuálagsgrein
+  stendur iðulega beint á eftir hækkanalista, svo leit í báðar áttir felldi
+  alla áfanga 2024-2027 hjá tugum félaga.
+
+`scripts/profa_utdratt.py` ver þetta með 18 aðhvarfsprófum: níu tilvik sem
+eiga að falla og níu sem verða að lifa af, þar á meðal öll þrjú ofangreind.
 
 Prósentur eru takmarkaðar við 0–15% og krónutölur við 500–100.000 kr.
 
