@@ -24,7 +24,11 @@ Auðveldast er að skrá í vefviðmótinu: https://claude.ai/artifact/LMzAy44rB
 (`eydur.html`, gögnin úr `eydur.json`). Þar er valið félag, eyðurnar sýndar með
 tenglum á líklega samninga og hækkanir skráðar beint. Skráningar eru tillögur;
 aðeins eigandinn samþykkir eða hafnar, og samþykktar skráningar má sækja sem
-`handvirkar_leidrettingar.csv` eða láta Claude lesa þær úr gagnagrunni síðunnar.
+`handvirkar_leidrettingar.csv` eða láta Claude lesa þær úr gagnagrunni síðunnar og festa með
+`scripts/nota_vefskraningar.py`. Samþykkt „engin hækkun“ fer í
+`gogn/stadfestar_eydur.csv`: sú eyða rýfur þá ekki samfellu og birtist ekki aftur.
+Handvirk leiðrétting ræður á sínum degi — vélrænt lesnar hækkanir sama félags
+sama dag víkja fyrir henni.
 
 ## Skrárnar
 

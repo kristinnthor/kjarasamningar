@@ -149,6 +149,18 @@ def main():
                           or "Handvirk leiðrétting við yfirferð eyðu."),
         })
 
+    # Handvirk leiðrétting ræður á sínum degi. Sá sem skráði hana fór yfir
+    # samninginn og skráði það sem gildir þann dag, svo vélrænt lesnar
+    # hækkanir sama félags sama dag víkja - annars tvítelst hækkunin, eða
+    # röng tala úr útdrættinum lifir áfram við hlið þeirrar réttu.
+    if handvirkt:
+        from launathroun import samhaefa_heiti
+        leidrettir = {(samhaefa_heiti(r["felag"]), r["gildir_fra"]) for r in handvirkt}
+        fyrir = len(ut)
+        ut = [r for r in ut if r["uppruni"] == "handvirk leiðrétting"
+              or (samhaefa_heiti(str(r["felag"] or "")), r["gildir_fra"]) not in leidrettir]
+        print(f"Vélrænar hækkanir sem víkja fyrir leiðréttingu: {fyrir - len(ut)}")
+
     ut.sort(key=lambda r: (r["gildir_fra"] or "", str(r["felag"])))
     with open(UT, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=DALKAR, extrasaction="ignore")

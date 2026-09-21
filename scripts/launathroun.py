@@ -171,7 +171,21 @@ def merkja_hlidarsamninga(linur, gluggi_dagar: int = 100, hlutfall: int = 3):
     return linur
 
 
-def finna_samfellu(linur, mork: int = EYDUMORK):
+def lesa_stadfestar_eydur():
+    """Eyður sem hafa verið yfirfarnar og staðfestar réttar.
+
+    Félagið samdi ekki um hækkun á tímabilinu, svo bilið er raunverulegt en
+    ekki gat í gögnunum - það á því ekki að rjúfa samfellu.
+    """
+    leid = os.path.join(os.path.dirname(UT_ROD), "stadfestar_eydur.csv")
+    if not os.path.exists(leid):
+        return set()
+    with open(leid, encoding="utf-8-sig", newline="") as f:
+        return {(samhaefa_heiti(r["felag"]), r["eyda_fra"], r["eyda_til"])
+                for r in csv.DictReader(f)}
+
+
+def finna_samfellu(linur, mork: int = EYDUMORK, stadfestar=frozenset()):
     """Finnur hvenær samfelld röð félagsins hefst, talið aftur á bak frá endanum.
 
     Samfella er mæld frá nýjustu mælingu aftur að fyrsta rofi - ekki yfir alla
@@ -182,16 +196,19 @@ def finna_samfellu(linur, mork: int = EYDUMORK):
     Skilar (samfelld_fra, fjöldi punkta í samfellunni, fjöldi eldri eyða).
     """
     linur = sorted(linur, key=lambda r: r["dagsetning"])
+
+    def er_rof(i):
+        a, b = linur[i - 1]["dagsetning"], linur[i]["dagsetning"]
+        return manudir_milli(a, b) > mork and (a, b) not in stadfestar
+
     rof = None
     for i in range(len(linur) - 1, 0, -1):
-        if manudir_milli(linur[i - 1]["dagsetning"], linur[i]["dagsetning"]) > mork:
+        if er_rof(i):
             rof = i
             break
     if rof is None:
         return linur[0]["dagsetning"], len(linur), 0
-    eldri = sum(1 for i in range(1, rof)
-                if manudir_milli(linur[i - 1]["dagsetning"],
-                                 linur[i]["dagsetning"]) > mork)
+    eldri = sum(1 for i in range(1, rof) if er_rof(i))
     return linur[rof]["dagsetning"], len(linur) - rof, eldri + 1
 
 
@@ -306,10 +323,13 @@ def main():
     for r in ut:
         eftir_felagi_lokad[r["felag_lykill"]].append(r)
     samfella = {}
+    stadfestar = lesa_stadfestar_eydur()
     for lykill, linur in eftir_felagi_lokad.items():
         if not linur:
             continue
-        fra, n, eldri = finna_samfellu(linur)
+        nafn = samhaefa_heiti(linur[0]["felag"])
+        eigin = {(a, b) for f, a, b in stadfestar if f == nafn}
+        fra, n, eldri = finna_samfellu(linur, stadfestar=eigin)
         sidasta = max(r["dagsetning"] for r in linur)
         samfella[lykill] = {
             "fra": fra, "n": n, "eldri": eldri,

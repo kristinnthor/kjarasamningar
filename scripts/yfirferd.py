@@ -202,6 +202,11 @@ def main(argv):
         eydur_fra = argv[argv.index("--eydur-fra") + 1]
     eydumork_dags = f"{eydur_fra}-01-01"
     fyrri_utfylling = lesa_fyrri_utfyllingu()
+    # Eyður sem hafa verið staðfestar réttar ("engin hækkun á tímabilinu")
+    stadfestar = set()
+    if os.path.exists(os.path.join(GOGN, "stadfestar_eydur.csv")):
+        stadfestar = {(r["felag"], r["eyda_fra"], r["eyda_til"])
+                      for r in lesa("stadfestar_eydur.csv")}
 
     felog = lesa("felog.csv")
     rod = lesa("launathroun_eftir_felagi.csv")
@@ -239,6 +244,8 @@ def main(argv):
             if bil <= EYDUMORK:
                 continue
             if thessi["dagsetning"] < eydumork_dags:
+                continue
+            if (f["felag"], fyrri["dagsetning"], thessi["dagsetning"]) in stadfestar:
                 continue
             tengdir = samningar_a_bili(samningar, f["felag"],
                                        fyrri["dagsetning"], thessi["dagsetning"])

@@ -139,72 +139,10 @@
    ]
   },
   {
-   "audkenni": "samidnar",
-   "felag": "Samiðnar",
-   "heilleiki": "samfelld",
-   "fjoldi_haekkana": 54,
-   "timabil": "1997-03-01 – 2027-01-01",
-   "eydur": [
-    {
-     "id": "2012-02-29_2014-01-01",
-     "fra": "2012-02-29",
-     "til": "2014-01-01",
-     "manudir": 23,
-     "undan": "18.000 kr",
-     "eftir": "2,80%",
-     "algengt": [
-      {
-       "dagsetning": "2013-02-01",
-       "prosenta": 3.25,
-       "felog": 10
-      },
-      {
-       "dagsetning": "2013-03-01",
-       "prosenta": 3.25,
-       "felog": 6
-      },
-      {
-       "dagsetning": "2012-03-01",
-       "prosenta": 3.5,
-       "felog": 5
-      },
-      {
-       "dagsetning": "2014-01-01",
-       "prosenta": 2.8,
-       "felog": 3
-      }
-     ],
-     "samningar": [
-      {
-       "fra": "2014-01-01",
-       "til": "2015-02-28",
-       "atvinnurekandi": "Meistarasamband byggingamanna",
-       "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_189.pdf"
-      },
-      {
-       "fra": "2014-01-01",
-       "til": "2015-02-28",
-       "atvinnurekandi": "Landsvirkjun",
-       "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_47.pdf"
-      },
-      {
-       "fra": "2014-01-01",
-       "til": "2014-12-31",
-       "atvinnurekandi": "Félag pípulagningameistara",
-       "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_223.pdf"
-      }
-     ]
-    }
-   ]
-  },
-  {
    "audkenni": "samtok-starfsmanna-fjarmalafyrirtaekja",
    "felag": "Samtök starfsmanna fjármálafyrirtækja",
    "heilleiki": "samfelld",
-   "fjoldi_haekkana": 52,
+   "fjoldi_haekkana": 59,
    "timabil": "1977-02-01 – 2027-01-01",
    "eydur": [
     {
@@ -269,143 +207,68 @@
        "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1091.pdf"
       }
      ]
-    },
+    }
+   ]
+  },
+  {
+   "audkenni": "samidnar",
+   "felag": "Samiðnar",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 54,
+   "timabil": "1997-03-01 – 2027-01-01",
+   "eydur": [
     {
-     "id": "2000-01-01_2004-10-01",
-     "fra": "2000-01-01",
-     "til": "2004-10-01",
-     "manudir": 57,
-     "undan": "3,50%",
-     "eftir": "4,00%",
+     "id": "2012-02-29_2014-01-01",
+     "fra": "2012-02-29",
+     "til": "2014-01-01",
+     "manudir": 23,
+     "undan": "18.000 kr",
+     "eftir": "2,80%",
      "algengt": [
       {
-       "dagsetning": "2002-01-01",
-       "prosenta": 3.0,
-       "felog": 19
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
       },
       {
-       "dagsetning": "2003-01-01",
-       "prosenta": 3.0,
-       "felog": 19
-      },
-      {
-       "dagsetning": "2001-01-01",
-       "prosenta": 3.0,
-       "felog": 9
-      },
-      {
-       "dagsetning": "2004-01-01",
-       "prosenta": 3.0,
+       "dagsetning": "2013-03-01",
+       "prosenta": 3.25,
        "felog": 6
+      },
+      {
+       "dagsetning": "2012-03-01",
+       "prosenta": 3.5,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2014-01-01",
+       "prosenta": 2.8,
+       "felog": 3
       }
      ],
      "samningar": [
       {
-       "fra": "2001-01-01",
-       "til": "2004-10-01",
-       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "fra": "2014-01-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Meistarasamband byggingamanna",
        "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1088.pdf"
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_189.pdf"
       },
       {
-       "fra": "2004-10-01",
-       "til": "2008-10-01",
-       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "fra": "2014-01-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Landsvirkjun",
        "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1087.pdf"
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_47.pdf"
       },
       {
-       "fra": "1999-07-01",
-       "til": "2000-12-01",
-       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "fra": "2014-01-01",
+       "til": "2014-12-31",
+       "atvinnurekandi": "Félag pípulagningameistara",
        "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1089.pdf"
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_223.pdf"
       }
      ]
-    },
-    {
-     "id": "2004-10-01_2008-11-01",
-     "fra": "2004-10-01",
-     "til": "2008-11-01",
-     "manudir": 49,
-     "undan": "4,00%",
-     "eftir": "20.500 kr",
-     "algengt": [
-      {
-       "dagsetning": "2007-01-01",
-       "prosenta": 2.25,
-       "felog": 19
-      },
-      {
-       "dagsetning": "2005-01-01",
-       "prosenta": 3.0,
-       "felog": 14
-      },
-      {
-       "dagsetning": "2006-01-01",
-       "prosenta": 2.5,
-       "felog": 14
-      },
-      {
-       "dagsetning": "2008-01-01",
-       "prosenta": 2.0,
-       "felog": 6
-      }
-     ],
-     "samningar": [
-      {
-       "fra": "2004-10-01",
-       "til": "2008-10-01",
-       "atvinnurekandi": "Samtök atvinnulífsins, SA",
-       "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1087.pdf"
-      },
-      {
-       "fra": "2008-11-01",
-       "til": "2010-12-31",
-       "atvinnurekandi": "Samtök atvinnulífsins, SA",
-       "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1086.pdf"
-      },
-      {
-       "fra": "2001-01-01",
-       "til": "2004-10-01",
-       "atvinnurekandi": "Samtök atvinnulífsins, SA",
-       "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1088.pdf"
-      }
-     ]
-    },
-    {
-     "id": "2014-02-01_2015-09-08",
-     "fra": "2014-02-01",
-     "til": "2015-09-08",
-     "manudir": 19,
-     "undan": "2,80% / 8.000 kr",
-     "eftir": "7,20%",
-     "algengt": [
-      {
-       "dagsetning": "2015-05-01",
-       "prosenta": 7.7,
-       "felog": 12
-      },
-      {
-       "dagsetning": "2014-12-31",
-       "prosenta": 3.2,
-       "felog": 4
-      },
-      {
-       "dagsetning": "2015-05-01",
-       "prosenta": 7.2,
-       "felog": 3
-      },
-      {
-       "dagsetning": "2015-05-02",
-       "prosenta": 5.5,
-       "felog": 3
-      }
-     ],
-     "samningar": []
     }
    ]
   },
@@ -586,12 +449,12 @@
       {
        "dagsetning": "2003-01-01",
        "prosenta": 3.0,
-       "felog": 19
+       "felog": 20
       },
       {
        "dagsetning": "2004-01-01",
        "prosenta": 3.0,
-       "felog": 6
+       "felog": 7
       }
      ],
      "samningar": []
@@ -648,7 +511,7 @@
       {
        "dagsetning": "2008-01-01",
        "prosenta": 2.25,
-       "felog": 5
+       "felog": 6
       },
       {
        "dagsetning": "2007-05-01",
@@ -779,7 +642,7 @@
       {
        "dagsetning": "2004-01-01",
        "prosenta": 3.0,
-       "felog": 6
+       "felog": 7
       },
       {
        "dagsetning": "2004-12-01",
@@ -947,7 +810,7 @@
       {
        "dagsetning": "2008-01-01",
        "prosenta": 2.25,
-       "felog": 5
+       "felog": 6
       },
       {
        "dagsetning": "2007-05-01",
@@ -997,18 +860,18 @@
      "eftir": "4,25% / 12.000 kr",
      "algengt": [
       {
-       "dagsetning": "2007-01-01",
-       "prosenta": 2.25,
-       "felog": 19
-      },
-      {
        "dagsetning": "2002-01-01",
        "prosenta": 3.0,
-       "felog": 19
+       "felog": 20
       },
       {
        "dagsetning": "2003-01-01",
        "prosenta": 3.0,
+       "felog": 20
+      },
+      {
+       "dagsetning": "2007-01-01",
+       "prosenta": 2.25,
        "felog": 19
       },
       {
@@ -1393,7 +1256,7 @@
       {
        "dagsetning": "2008-01-01",
        "prosenta": 2.25,
-       "felog": 5
+       "felog": 6
       },
       {
        "dagsetning": "2007-05-01",
@@ -1513,7 +1376,7 @@
       {
        "dagsetning": "2008-01-01",
        "prosenta": 2.25,
-       "felog": 5
+       "felog": 6
       }
      ],
      "samningar": [
@@ -2796,7 +2659,7 @@
       {
        "dagsetning": "2004-01-01",
        "prosenta": 3.0,
-       "felog": 6
+       "felog": 7
       },
       {
        "dagsetning": "2004-12-01",
@@ -3762,18 +3625,18 @@
      "eftir": "17.000 kr",
      "algengt": [
       {
-       "dagsetning": "2007-01-01",
-       "prosenta": 2.25,
-       "felog": 19
-      },
-      {
        "dagsetning": "2002-01-01",
        "prosenta": 3.0,
-       "felog": 19
+       "felog": 20
       },
       {
        "dagsetning": "2003-01-01",
        "prosenta": 3.0,
+       "felog": 20
+      },
+      {
+       "dagsetning": "2007-01-01",
+       "prosenta": 2.25,
        "felog": 19
       },
       {
@@ -4740,18 +4603,18 @@
        "felog": 24
       },
       {
-       "dagsetning": "2007-01-01",
-       "prosenta": 2.25,
-       "felog": 19
-      },
-      {
        "dagsetning": "2002-01-01",
        "prosenta": 3.0,
-       "felog": 19
+       "felog": 20
       },
       {
        "dagsetning": "2003-01-01",
        "prosenta": 3.0,
+       "felog": 20
+      },
+      {
+       "dagsetning": "2007-01-01",
+       "prosenta": 2.25,
        "felog": 19
       }
      ],

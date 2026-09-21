@@ -2,48 +2,8 @@
 
 Félög með gögn frá og með 2025. Aðeins eyður sem ljúka 1990 eða síðar eru teknar með.
 
-**50 félög, 96 eyður.** Eyða telst bil lengra en 18 mánuðir.
+**50 félög, 93 eyður.** Eyða telst bil lengra en 18 mánuðir.
 
-
-## Samtök starfsmanna fjármálafyrirtækja
-
-52 hækkanir, 1977-02-01 – 2027-01-01, 5 eyður
-
-
-**1992-05-01 → 1995-04-01** (35 mán.)  
-Á undan: 1,70% · Á eftir: 1,00%  
-Samningar í gildi:  
-- [1992-05-01–1993-02-28 · Samninganefnd bankanna · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1093.pdf)
-- [1993-03-01–1994-12-31 · Samninganefnd bankanna · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1092.pdf)
-- [1995-04-01–1996-12-31 · Samninganefnd bankanna · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1091.pdf)
-
-**1996-01-01 → 1998-01-01** (24 mán.)  
-Á undan: 3,70% · Á eftir: 3,70%  
-Aðrir á tímabilinu: 1998-01-01 4,00% (12 félög)  
-Samningar í gildi:  
-- [1997-03-01–1999-09-01 · Samninganefnd bankanna · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1090.pdf)
-- [1995-04-01–1996-12-31 · Samninganefnd bankanna · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1091.pdf)
-
-**2000-01-01 → 2004-10-01** (57 mán.)  
-Á undan: 3,50% · Á eftir: 4,00%  
-Aðrir á tímabilinu: 2002-01-01 3,00% (19 félög); 2003-01-01 3,00% (19 félög); 2001-01-01 3,00% (9 félög); 2004-01-01 3,00% (6 félög)  
-Samningar í gildi:  
-- [2001-01-01–2004-10-01 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1088.pdf)
-- [2004-10-01–2008-10-01 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1087.pdf)
-- [1999-07-01–2000-12-01 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1089.pdf)
-
-**2004-10-01 → 2008-11-01** (49 mán.)  
-Á undan: 4,00% · Á eftir: 20.500 kr  
-Aðrir á tímabilinu: 2007-01-01 2,25% (19 félög); 2005-01-01 3,00% (14 félög); 2006-01-01 2,50% (14 félög); 2008-01-01 2,00% (6 félög)  
-Samningar í gildi:  
-- [2004-10-01–2008-10-01 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1087.pdf)
-- [2008-11-01–2010-12-31 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1086.pdf)
-- [2001-01-01–2004-10-01 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1088.pdf)
-
-**2014-02-01 → 2015-09-08** (19 mán.)  
-Á undan: 2,80% / 8.000 kr · Á eftir: 7,20%  
-Aðrir á tímabilinu: 2015-05-01 7,70% (12 félög); 2014-12-31 3,20% (4 félög); 2015-05-01 7,20% (3 félög); 2015-05-02 5,50% (3 félög)  
-*Enginn samningur fannst í heildarskránni fyrir þetta tímabil.*  
 
 ## Efling
 
@@ -68,7 +28,7 @@ Samningar í gildi:
 
 **2003-01-01 → 2006-01-01** (36 mán.)  
 Á undan: 2,25% / 70.000 kr · Á eftir: 3,00%  
-Aðrir á tímabilinu: 2005-01-01 3,00% (14 félög); 2006-01-01 2,50% (14 félög); 2004-01-01 3,00% (6 félög); 2004-12-01 3,25% (4 félög)  
+Aðrir á tímabilinu: 2005-01-01 3,00% (14 félög); 2006-01-01 2,50% (14 félög); 2004-01-01 3,00% (7 félög); 2004-12-01 3,25% (4 félög)  
 Samningar í gildi:  
 - [2004-01-01–2006-12-31 · Samtök atvinnulífsins, SA · Sérkjarasamningur](https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100215220.pdf)
 - [2004-02-01–2019-12-31 · Samskip hf · Vinnustaðasamningur](https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100215280.pdf)
@@ -127,7 +87,7 @@ Aðrir á tímabilinu: 1998-01-01 4,00% (12 félög); 2001-01-01 3,00% (8 félö
 
 **2002-01-01 → 2004-04-16** (27 mán.)  
 Á undan: 2,75% · Á eftir: 3,25% / 5.000 kr  
-Aðrir á tímabilinu: 2003-01-01 3,00% (19 félög); 2004-01-01 3,00% (6 félög)  
+Aðrir á tímabilinu: 2003-01-01 3,00% (20 félög); 2004-01-01 3,00% (7 félög)  
 *Enginn samningur fannst í heildarskránni fyrir þetta tímabil.*  
 
 **2005-01-01 → 2007-01-01** (24 mán.)  
@@ -137,7 +97,7 @@ Aðrir á tímabilinu: 2007-01-01 2,25% (19 félög); 2006-01-01 2,50% (14 fél�
 
 **2007-01-01 → 2009-11-01** (34 mán.)  
 Á undan: 5,50% · Á eftir: 3,50%  
-Aðrir á tímabilinu: 2009-03-01 3,50% (9 félög); 2008-01-01 2,00% (6 félög); 2008-01-01 2,25% (5 félög); 2007-05-01 2,00% (4 félög)  
+Aðrir á tímabilinu: 2009-03-01 3,50% (9 félög); 2008-01-01 2,00% (6 félög); 2008-01-01 2,25% (6 félög); 2007-05-01 2,00% (4 félög)  
 *Enginn samningur fannst í heildarskránni fyrir þetta tímabil.*  
 
 ## Eining-Iðja
@@ -247,7 +207,7 @@ Samningar í gildi:
 
 **2007-01-01 → 2011-05-05** (52 mán.)  
 Á undan: 2,25% / 41.800 kr · Á eftir: 4,25%  
-Aðrir á tímabilinu: 2009-03-01 3,50% (9 félög); 2010-01-01 2,50% (9 félög); 2008-01-01 2,00% (6 félög); 2008-01-01 2,25% (5 félög)  
+Aðrir á tímabilinu: 2009-03-01 3,50% (9 félög); 2010-01-01 2,50% (9 félög); 2008-01-01 2,00% (6 félög); 2008-01-01 2,25% (6 félög)  
 Samningar í gildi:  
 - [2004-12-01–2007-01-01 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_282.pdf)
 
@@ -327,7 +287,7 @@ Samningar í gildi:
 
 **2003-01-01 → 2005-05-01** (28 mán.)  
 Á undan: 3,00% · Á eftir: 1,75%  
-Aðrir á tímabilinu: 2005-01-01 3,00% (14 félög); 2004-01-01 3,00% (6 félög); 2004-12-01 3,25% (4 félög)  
+Aðrir á tímabilinu: 2005-01-01 3,00% (14 félög); 2004-01-01 3,00% (7 félög); 2004-12-01 3,25% (4 félög)  
 Samningar í gildi:  
 - [2005-05-01–2008-10-31 · Ríkissjóður, SNR · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_566.pdf)
 - [2001-05-01–2005-11-30 · Ríkissjóður, SNR · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_565.pdf)
@@ -355,7 +315,7 @@ Samningar í gildi:
 
 **1995-06-09 → 2019-05-01** (287 mán.)  
 Á undan: 3,20% · Á eftir: 17.000 kr  
-Aðrir á tímabilinu: 2007-01-01 2,25% (19 félög); 2002-01-01 3,00% (19 félög); 2003-01-01 3,00% (19 félög); 2016-06-01 5,50% (16 félög)  
+Aðrir á tímabilinu: 2002-01-01 3,00% (20 félög); 2003-01-01 3,00% (20 félög); 2007-01-01 2,25% (19 félög); 2016-06-01 5,50% (16 félög)  
 Samningar í gildi:  
 - [1995-09-01–1996-12-01 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23091414100.pdf)
 - [2014-04-01–2015-04-01 · Steinull hf. · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/Steinull_hf.pdf)
@@ -405,6 +365,25 @@ Samningar í gildi:
 - [2023-01-01–2024-03-31 · Félag ráðgjafarverkfræðinga · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_177.pdf)
 - [2023-04-01–2024-03-01 · Samband íslenskra sveitarfélaga · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_980.pdf)
 
+## Samtök starfsmanna fjármálafyrirtækja
+
+59 hækkanir, 1977-02-01 – 2027-01-01, 2 eyður
+
+
+**1992-05-01 → 1995-04-01** (35 mán.)  
+Á undan: 1,70% · Á eftir: 1,00%  
+Samningar í gildi:  
+- [1992-05-01–1993-02-28 · Samninganefnd bankanna · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1093.pdf)
+- [1993-03-01–1994-12-31 · Samninganefnd bankanna · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1092.pdf)
+- [1995-04-01–1996-12-31 · Samninganefnd bankanna · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1091.pdf)
+
+**1996-01-01 → 1998-01-01** (24 mán.)  
+Á undan: 3,70% · Á eftir: 3,70%  
+Aðrir á tímabilinu: 1998-01-01 4,00% (12 félög)  
+Samningar í gildi:  
+- [1997-03-01–1999-09-01 · Samninganefnd bankanna · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1090.pdf)
+- [1995-04-01–1996-12-31 · Samninganefnd bankanna · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1091.pdf)
+
 ## Félag flugmálastarfsmanna
 
 25 hækkanir, 2005-03-01 – 2027-01-01, 2 eyður
@@ -431,7 +410,7 @@ Samningar í gildi:
 
 **2007-01-01 → 2009-03-01** (26 mán.)  
 Á undan: 5,50% · Á eftir: 3,50%  
-Aðrir á tímabilinu: 2009-03-01 3,50% (8 félög); 2008-01-01 2,00% (6 félög); 2008-01-01 2,25% (5 félög); 2007-05-01 2,00% (4 félög)  
+Aðrir á tímabilinu: 2009-03-01 3,50% (8 félög); 2008-01-01 2,00% (6 félög); 2008-01-01 2,25% (6 félög); 2007-05-01 2,00% (4 félög)  
 Samningar í gildi:  
 - [2008-02-01–2010-11-01 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23090616351.pdf)
 - [2008-05-01–2009-03-01 · Ríkissjóður, SNR, Landhelgisgæsla Íslands · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_858.pdf)
@@ -672,7 +651,7 @@ Samningar í gildi:
 
 **2007-01-01 → 2009-07-01** (30 mán.)  
 Á undan: 2,25% · Á eftir: 0,70%  
-Aðrir á tímabilinu: 2009-03-01 3,50% (9 félög); 2008-01-01 2,00% (6 félög); 2008-01-01 2,25% (5 félög); 2007-05-01 2,00% (4 félög)  
+Aðrir á tímabilinu: 2009-03-01 3,50% (9 félög); 2008-01-01 2,00% (6 félög); 2008-01-01 2,25% (6 félög); 2007-05-01 2,00% (4 félög)  
 Samningar í gildi:  
 - [2008-05-01–2009-03-31 · Ríkissjóður, SNR · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_851.pdf)
 - [2009-07-01–2010-11-01 · Ríkissjóður, SNR · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_850.pdf)
@@ -685,7 +664,7 @@ Samningar í gildi:
 
 **1986-12-01 → 2011-06-01** (294 mán.)  
 Á undan: 3,00% · Á eftir: 4,25% / 12.000 kr  
-Aðrir á tímabilinu: 2007-01-01 2,25% (19 félög); 2002-01-01 3,00% (19 félög); 2003-01-01 3,00% (19 félög); 2005-01-01 3,00% (14 félög)  
+Aðrir á tímabilinu: 2002-01-01 3,00% (20 félög); 2003-01-01 3,00% (20 félög); 2007-01-01 2,25% (19 félög); 2005-01-01 3,00% (14 félög)  
 Samningar í gildi:  
 - [2011-05-01–2014-12-01 · RARIK ohf. · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_599.pdf)
 - [2011-05-01–2014-03-01 · Samtök fyrirtækja í velferðarþjónustu · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_465.pdf)
@@ -931,7 +910,7 @@ Samningar í gildi:
 
 **1999-01-01 → 2024-02-01** (301 mán.)  
 Á undan: 4,00% · Á eftir: 3,25% / 23.750 kr  
-Aðrir á tímabilinu: 2024-02-01 3,25% (24 félög); 2007-01-01 2,25% (19 félög); 2002-01-01 3,00% (19 félög); 2003-01-01 3,00% (19 félög)  
+Aðrir á tímabilinu: 2024-02-01 3,25% (24 félög); 2002-01-01 3,00% (20 félög); 2003-01-01 3,00% (20 félög); 2007-01-01 2,25% (19 félög)  
 Samningar í gildi:  
 - [2014-02-01–2015-02-28 · Samtök atvinnulífsins, SA · Kjarasamningur](https://kjarasamningar.hestafl.is/pdfs/f13b6784-a257-43ae-be29-af47fe6f8f49.pdf)
 - [2024-01-01–2028-02-01 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1702.pdf)
