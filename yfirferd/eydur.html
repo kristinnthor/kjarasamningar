@@ -370,7 +370,9 @@ form.skra { display: grid; gap: 10px; border-top: 1px dashed var(--lina); paddin
     const form = el("form", { class: "skra", "data-eyda": e.id, novalidate: true, onsubmit: (ev) => { ev.preventDefault(); skraHaekkun(f, e, form, villa); } },
       el("div", { class: "reitir" },
         el("label", { for: id("dags") }, "Gildistaka",
-          el("input", { id: id("dags"), name: "dagsetning", type: "date", min: e.fra, max: e.til, value: v.dagsetning || "", required: true })),
+          el("input", { id: id("dags"), name: "dagsetning", type: "text", inputmode: "numeric", maxlength: "10",
+            placeholder: "áááá-mm-dd", pattern: "\\d{4}-\\d{2}-\\d{2}", class: "tolur", autocomplete: "off",
+            value: v.dagsetning || "", required: true, oninput: lagaDags })),
         el("label", { for: id("pros") }, "Prósenta",
           el("input", { id: id("pros"), name: "prosenta", inputmode: "decimal", placeholder: "t.d. 3,5", value: v.prosenta || "" })),
         el("label", { for: id("kr") }, "Krónur",
@@ -389,6 +391,17 @@ form.skra { display: grid; gap: 10px; border-top: 1px dashed var(--lina); paddin
     return form;
   }
 
+  // Dagsetning alltaf á forminu áááá-mm-dd, óháð stillingum vafrans.
+  // Bandstrikum er bætt inn sjálfkrafa þegar slegnir eru inn tölustafir.
+  function lagaDags(ev) {
+    const n = ev.target, tolur = n.value.replace(/\D/g, "").slice(0, 8);
+    const ut = tolur.length > 6 ? `${tolur.slice(0, 4)}-${tolur.slice(4, 6)}-${tolur.slice(6)}`
+      : tolur.length > 4 ? `${tolur.slice(0, 4)}-${tolur.slice(4)}` : tolur;
+    if (ev.inputType?.startsWith("delete")) return;
+    if (ut !== n.value) n.value = ut;
+  }
+  const gildDags = (s) => { if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false; const d = new Date(s + "T00:00:00Z"); return !isNaN(d) && d.toISOString().slice(0, 10) === s; };
+
   function fyllaUt(eydaId, gildi) {
     const form = $(`form.skra[data-eyda="${CSS.escape(eydaId)}"]`);
     if (!form) return;
@@ -401,8 +414,9 @@ form.skra { display: grid; gap: 10px; border-top: 1px dashed var(--lina); paddin
     const d = Object.fromEntries(new FormData(form));
     const pros = lesaTolu(d.prosenta), kr = lesaKronur(d.kronur);
     const villur = [];
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(d.dagsetning || "")) villur.push("Veldu gildistökudag.");
-    else if (d.dagsetning <= e.fra || d.dagsetning >= e.til) villur.push(`Gildistakan þarf að vera á milli ${e.fra} og ${e.til} — annars lokar hún ekki eyðunni.`);
+    d.dagsetning = (d.dagsetning || "").trim();
+    if (!gildDags(d.dagsetning)) villur.push("Skrifaðu gildistökudag á forminu áááá-mm-dd, t.d. 2014-02-01.");
+    else if (d.dagsetning < e.fra || d.dagsetning >= e.til) villur.push(`Gildistakan þarf að vera frá ${e.fra} og fyrir ${e.til} — annars lokar hún ekki eyðunni.`);
     if (pros == null && kr == null) villur.push("Settu inn prósentu, krónutölu eða hvort tveggja.");
     if (Number.isNaN(pros) || (pros != null && !(pros > 0 && pros <= 25))) villur.push("Prósentan þarf að vera á bilinu 0–25.");
     if (Number.isNaN(kr) || (kr != null && !(kr >= 500 && kr <= 200000))) villur.push("Krónutalan þarf að vera heil tala á bilinu 500–200.000.");
