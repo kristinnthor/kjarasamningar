@@ -7,6 +7,17 @@ valdið því og vélin getur ekki greint þar á milli:
   útdrátturinn missti af ákvæðinu.
 - **Félagið samdi ekki** á tímabilinu — eyðan er rétt og engu þarf að breyta.
 
+## Hvaða eyður eru með
+
+Öll félög með gögn frá og með 2025 koma til greina, líka þau sem teljast
+samfelld — samfella er mæld aftur á bak frá nýjustu mælingu, og eyðurnar fyrir
+hana eru einmitt það sem styttir röðina. **Eyður sem ljúka fyrir 1990 eru ekki
+teknar með**; eyða sem spannar 1990 (t.d. 1987 → 1995) er með.
+
+Skráin er endurbyggð með `python scripts/yfirferd.py` (`--eydur-fra 1995`
+færir markið). Útfylltar línur flytjast yfir í nýju útgáfuna, og eyður sem
+leiðrétting hefur þegar lokað hverfa úr skránni.
+
 ## Skrárnar
 
 | Skrá | Til hvers |
@@ -40,7 +51,7 @@ sem vantar. Skörun gildistíma er viðmiðið, ekki undirritunardagur.
 Lýsingin nefnir viðsemjandann því skráarheitin eru ekki lýsandi:
 `SA_v_kvikmyndahusa.pdf` er RSÍ-samningur við SA um kvikmyndahús.
 
-**92 af 101 eyðum** hafa a.m.k. einn tengil. Í `eydur.md` eru þeir smellanlegir.
+**87 af 96 eyðum** hafa a.m.k. einn tengil. Í `eydur.md` eru þeir smellanlegir.
 Finnist enginn samningur er það sjálfstæð vísbending — annaðhvort vantar
 skjalið í heildarskrána eða félagið samdi ekki á tímabilinu.
 

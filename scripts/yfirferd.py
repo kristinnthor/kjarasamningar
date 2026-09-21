@@ -12,6 +12,16 @@ hvað önnur félög sömdu um á sama tímabili.
 Notkun:
     python scripts/yfirferd.py
     python scripts/yfirferd.py --fra 2025    # félög með gögn frá og með 2025
+    python scripts/yfirferd.py --eydur-fra 1990   # sleppa eyðum sem enda fyrr
+
+Eyður sem ljúka fyrir 1990 eru ekki teknar með: gögn frá þeim tíma eru rýr
+og skipta litlu í greiningum. Eyða sem spannar 1990 (t.d. 1987 → 1992) er
+tekin með, því hluti hennar fellur innan tímabilsins sem skiptir máli.
+
+Útfylltar línur úr fyrri útgáfu skrárinnar haldast: þær eru paraðar við nýju
+línurnar eftir (félag, eyda_fra, eyda_til). Útfylltar línur sem eiga sér enga
+eyðu lengur - t.d. af því að leiðréttingin hefur þegar lokað henni - eru
+ekki felldar niður nema þær séu þegar komnar í gogn/handvirkar_leidrettingar.csv.
 """
 from __future__ import annotations
 
@@ -151,10 +161,43 @@ DALKAR = [
 ]
 
 
+TIL_UTFYLLINGAR = DALKAR[:7]
+
+
+def lesa_fyrri_utfyllingu():
+    """Útfylltar línur úr núverandi eydur.csv, flokkaðar eftir eyðu.
+
+    Ein eyða getur átt margar útfylltar línur - notandinn afritar línuna
+    einu sinni fyrir hverja hækkun sem vantar.
+    """
+    leid = os.path.join(YFIRFERD, "eydur.csv")
+    if not os.path.exists(leid):
+        return {}
+    eftir_eydu = collections.defaultdict(list)
+    with open(leid, encoding="utf-8-sig", newline="") as f:
+        for r in csv.DictReader(f):
+            if any((r.get(d) or "").strip() for d in TIL_UTFYLLINGAR):
+                eftir_eydu[(r["felag"], r["eyda_fra"], r["eyda_til"])].append(r)
+    return eftir_eydu
+
+
+def thegar_festar():
+    leid = os.path.join(GOGN, "handvirkar_leidrettingar.csv")
+    if not os.path.exists(leid):
+        return set()
+    with open(leid, encoding="utf-8-sig", newline="") as f:
+        return {(r["felag"], r["gildir_fra"]) for r in csv.DictReader(f)}
+
+
 def main(argv):
     fra_ar = "2025"
     if "--fra" in argv:
         fra_ar = argv[argv.index("--fra") + 1]
+    eydur_fra = "1990"
+    if "--eydur-fra" in argv:
+        eydur_fra = argv[argv.index("--eydur-fra") + 1]
+    eydumork_dags = f"{eydur_fra}-01-01"
+    fyrri_utfylling = lesa_fyrri_utfyllingu()
 
     felog = lesa("felog.csv")
     rod = lesa("launathroun_eftir_felagi.csv")
@@ -175,9 +218,11 @@ def main(argv):
     for r in rod:
         eftir_felagi[r["felag_lykill"]].append(r)
 
-    valin = [f for f in felog
-             if f["sidasta"] >= f"{fra_ar}-01-01"
-             and f["heilleiki"] != "samfelld"]
+    # Samfella er mæld aftur á bak frá nýjustu mælingu, svo félag getur talist
+    # samfellt en samt átt eyður fyrir samfelld_fra. Þær eyður eru einmitt það
+    # sem stöðvar röðina, svo öll nýleg félög koma til greina - valið ræðst af
+    # því hvort þau eigi eyðu eftir markinu, ekki af heilleika.
+    valin = [f for f in felog if f["sidasta"] >= f"{fra_ar}-01-01"]
     valin.sort(key=lambda f: -int(f["fjoldi_haekkana"]))
 
     linur = []
@@ -188,6 +233,8 @@ def main(argv):
             fyrri, thessi = eigin[i - 1], eigin[i]
             bil = manudir(fyrri["dagsetning"], thessi["dagsetning"])
             if bil <= EYDUMORK:
+                continue
+            if thessi["dagsetning"] < eydumork_dags:
                 continue
             tengdir = samningar_a_bili(samningar, f["felag"],
                                        fyrri["dagsetning"], thessi["dagsetning"])
@@ -215,6 +262,32 @@ def main(argv):
                 "timabil_felags": f"{f['fyrsta']} – {f['sidasta']}",
             })
 
+    valin = [f for f in valin if any(l["felag"] == f["felag"] for l in linur)]
+
+    # Fyrri útfylling flutt yfir. Eyða með fleiri en eina útfyllta línu fær
+    # eina línu á hverja.
+    festar = thegar_festar()
+    notadar, fluttar = set(), 0
+    med_utfyllingu = []
+    for l in linur:
+        lykill = (l["felag"], l["eyda_fra"], l["eyda_til"])
+        fyrri = fyrri_utfylling.get(lykill)
+        if not fyrri:
+            med_utfyllingu.append(l)
+            continue
+        notadar.add(lykill)
+        for r in fyrri:
+            med_utfyllingu.append({**l, **{d: r.get(d, "") for d in TIL_UTFYLLINGAR}})
+            fluttar += 1
+    # Útfylltar línur sem eiga enga eyðu lengur og eru ekki þegar festar
+    munadarlausar = [r for k, rr in fyrri_utfylling.items() if k not in notadar
+                     for r in rr
+                     if (r["felag"], (r.get("dagsetning") or "").strip()) not in festar]
+    for r in munadarlausar:
+        med_utfyllingu.append({**r, "_tengdir": []})
+    linur = med_utfyllingu
+    fjoldi_eyda = len({(l["felag"], l["eyda_fra"], l["eyda_til"]) for l in linur})
+
     os.makedirs(YFIRFERD, exist_ok=True)
     ut = os.path.join(YFIRFERD, "eydur.csv")
     with open(ut, "w", encoding="utf-8-sig", newline="") as f:
@@ -225,8 +298,9 @@ def main(argv):
 
     # Læsilegt yfirlit til að skanna hratt
     md = [f"# Eyður til yfirferðar\n",
-          f"Félög með gögn frá og með {fra_ar} þar sem röðin er ekki samfelld.\n",
-          f"**{len(valin)} félög, {len(linur)} eyður.** "
+          f"Félög með gögn frá og með {fra_ar}. Aðeins eyður sem ljúka "
+          f"{eydur_fra} eða síðar eru teknar með.\n",
+          f"**{len(valin)} félög, {fjoldi_eyda} eyður.** "
           f"Eyða telst bil lengra en {EYDUMORK} mánuðir.\n"]
     eftir_heiti = collections.defaultdict(list)
     for l in linur:
@@ -256,7 +330,9 @@ def main(argv):
         f.write("\n".join(md) + "\n")
 
     print(f"Félög til yfirferðar: {len(valin)}")
-    print(f"Eyður: {len(linur)}")
+    print(f"Eyður: {fjoldi_eyda} (sem ljúka {eydur_fra} eða síðar)")
+    print(f"Útfylltar línur fluttar yfir: {fluttar}"
+          + (f", auk {len(munadarlausar)} án eyðu" if munadarlausar else ""))
     print(f"\n{ut}\n{os.path.join(YFIRFERD, 'eydur.md')}")
 
 
