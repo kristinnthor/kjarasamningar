@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hækkanir félags</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#7a4f2c">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kjarasamningar">
+<meta property="og:title" content="Hækkanir félags — kjarasamningar">
+<meta property="og:description" content="Allar umsamdar launahækkanir stéttarfélags í tímaröð, með bilum þar sem meira en ár líður milli hækkana.">
+<meta property="og:image" content="https://kristinnthor.github.io/kjarasamningar/deilimynd.png">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #fbfaf8; --yfirbord: #ffffff;
+    --texti: #0b0b0b; --texti-2: #52514e; --texti-3: #86847e;
+    --lina: #e2ded8; --reitur: #f3f0ec; --akser: #7a4f2c;
+    --til-stadar: #7a4f2c; --vantar: #e9c9a8;
+    --bil: #9a3412; --bil-bg: #fbeee2; --bil-lina: #e9b98f;
+    --dauft: #b9b5ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg:#171614; --yfirbord:#1d1c1a;
+      --texti:#ffffff; --texti-2:#c3c2b7; --texti-3:#8d8b82;
+      --lina:#302d29; --reitur:#211f1c; --akser:#d4a373;
+      --til-stadar: #d4a373; --vantar: #4a3322;
+      --bil: #f4b183; --bil-bg: #2c1f15; --bil-lina: #6b4527;
+      --dauft: #55524c;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg:#171614; --yfirbord:#1d1c1a;
+    --texti:#ffffff; --texti-2:#c3c2b7; --texti-3:#8d8b82;
+    --lina:#302d29; --reitur:#211f1c; --akser:#d4a373;
+    --til-stadar: #d4a373; --vantar: #4a3322;
+    --bil: #f4b183; --bil-bg: #2c1f15; --bil-lina: #6b4527;
+    --dauft: #55524c;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--texti);
+         font: 15px/1.6 ui-sans-serif, system-ui, "Segoe UI", sans-serif; }
+  .umgjord { max-width: 1060px; margin: 0 auto; padding: 40px 16px 80px; }
+  h1 { font-size: 1.6rem; margin: 0 0 .2em; letter-spacing: -.01em; }
+  .undir { color: var(--texti-2); margin: 0 0 1.6em; max-width: 62ch; }
+  a { color: var(--akser); }
+  .tolur, td, time { font-variant-numeric: tabular-nums; }
+  :focus-visible { outline: 2px solid var(--akser); outline-offset: 2px; }
+
+  .stjornbord { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 12px 16px;
+                align-items: end; margin-bottom: 20px; }
+  @media (max-width: 640px) { .stjornbord { grid-template-columns: minmax(0, 1fr); } }
+  .stjornbord label { display: grid; gap: 4px; font-size: .78rem; color: var(--texti-2);
+                      text-transform: uppercase; letter-spacing: .06em; }
+  .stjornbord select, .stjornbord input[type=number] {
+    font: inherit; font-size: 15px; text-transform: none; letter-spacing: 0; color: var(--texti);
+    padding: 8px 10px; border: 1px solid var(--lina); border-radius: 8px; background: var(--yfirbord); width: 100%; }
+  .maerk { display: flex; gap: 8px; align-items: center; }
+  .maerk input { width: 5.5em !important; }
+  .maerk span { text-transform: none; letter-spacing: 0; font-size: .9rem; color: var(--texti-2); }
+
+  .yfirlit { display: flex; flex-wrap: wrap; gap: 8px 28px; padding: 14px 0; margin-bottom: 18px;
+             border-block: 1px solid var(--lina); }
+  .yfirlit div { display: grid; }
+  .yfirlit b { font-size: 1.25rem; }
+  .yfirlit span { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--texti-3); }
+  .yfirlit .bil-tala b { color: var(--bil); }
+
+  /* Árarönd: einn reitur á ár */
+  .arastrik-umgjord { margin-bottom: 22px; }
+  .arastrik-haus { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap;
+                   font-size: .78rem; color: var(--texti-3); margin-bottom: 6px; }
+  .skyring { display: flex; gap: 14px; flex-wrap: wrap; }
+  .skyring i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  .arastrik { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 2px; height: 26px; }
+  .arastrik a, .arastrik span { display: block; border-radius: 2px; background: var(--til-stadar); }
+  .arastrik .tomt { background: var(--vantar); }
+  .arastrik a.tomt:hover { outline: 2px solid var(--bil); outline-offset: 1px; }
+  .arastrik .utan { background: var(--reitur); }
+  .arastrik-as { display: flex; justify-content: space-between; font-size: .74rem; color: var(--texti-3); margin-top: 4px; }
+
+  .sia { display: flex; gap: 8px; align-items: center; font-size: .9rem; color: var(--texti-2); margin-bottom: 10px; }
+
+  .tafla-umgjord { overflow-x: auto; border: 1px solid var(--lina); border-radius: 10px; background: var(--yfirbord); }
+  table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+  th { text-align: left; font-weight: 600; font-size: .72rem; text-transform: uppercase; letter-spacing: .06em;
+       color: var(--texti-3); padding: 10px 12px; border-bottom: 1px solid var(--lina); white-space: nowrap;
+       position: sticky; top: 0; background: var(--yfirbord); }
+  td { padding: 7px 12px; border-bottom: 1px solid var(--lina); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  td.tala { text-align: right; white-space: nowrap; }
+  th.tala { text-align: right; }
+  td.dags { white-space: nowrap; font-weight: 600; }
+  td.bilmán { color: var(--texti-3); text-align: right; white-space: nowrap; }
+  td.upp { color: var(--texti-3); font-size: .82rem; }
+  tr.utan-samfellu td { color: var(--texti-2); }
+  .merki { display: inline-block; font-size: .7rem; padding: 1px 7px; border-radius: 999px;
+           background: var(--reitur); color: var(--texti-2); margin-left: 6px; white-space: nowrap; font-weight: 400; }
+
+  tr.bil td { background: var(--bil-bg); color: var(--bil); border-bottom-color: var(--bil-lina);
+              border-top: 1px solid var(--bil-lina); padding-block: 9px; }
+  tr.bil strong { font-size: 1rem; }
+  tr.bil .timabil { color: var(--texti-2); margin-left: 8px; }
+  tr.bil.markad td { box-shadow: inset 4px 0 0 var(--bil); }
+  .tomur { padding: 40px 12px; text-align: center; color: var(--texti-3); }
+
+  .ath { margin-top: 22px; color: var(--texti-2); font-size: .88rem; max-width: 70ch; }
+  footer { margin-top: 40px; font-size: .88rem; color: var(--texti-3); }
+</style>
+</head>
+<body>
+<div class="umgjord">
+  <h1>Hækkanir félags</h1>
+  <p class="undir">Allar umsamdar launahækkanir eins stéttarfélags í tímaröð. Þar sem lengra
+    líður milli hækkana en markið segir til um er bilið merkt, svo auðvelt sé að sjá hvar gögn gætu vantað.</p>
+
+  <div class="stjornbord">
+    <label for="felag">Stéttarfélag
+      <select id="felag"><option>Hleð félögum…</option></select>
+    </label>
+    <label for="mork">Merkja bil lengri en
+      <span class="maerk"><input id="mork" type="number" min="6" max="60" step="1" value="12"><span>mánuði</span></span>
+    </label>
+  </div>
+
+  <div id="efni"><p class="tomur">Hleð gögnum…</p></div>
+
+  <p class="ath">Bil þýðir ekki endilega að hækkun vanti: stundum samdi félagið einfaldlega
+    ekki á tímabilinu. Hækkanir utan samfellu eru eldri en síðasta rof í röðinni
+    (<code>samfelld_fra</code> í API-inu) og hliðarsamningar eru ekki keðjaðir í vísitöluna.</p>
+
+  <footer>
+    <a href="./">Skjölun API-sins</a> ·
+    <a href="./skyrsla.html">Samanburður stéttarfélaga</a> ·
+    <a href="./demo.html">Einfalt sýnidæmi</a> ·
+    <a href="https://github.com/kristinnthor/kjarasamningar">GitHub</a>
+  </footer>
+</div>
+
+<script>
+const GRUNNUR = new URL("api/v1/", location.href).href;
+const $ = (s) => document.querySelector(s);
+const el = (tag, attrs = {}, ...born) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v == null || v === false) continue;
+    if (k === "class") n.className = v; else if (k === "text") n.textContent = v; else n.setAttribute(k, v);
+  }
+  for (const b of born.flat()) if (b != null) n.append(b.nodeType ? b : document.createTextNode(String(b)));
+  return n;
+};
+const manudir = (a, b) => (+b.slice(0, 4) - +a.slice(0, 4)) * 12 + (+b.slice(5, 7) - +a.slice(5, 7));
+// Íslenskt talnasnið smíðað í höndunum - ekki allir vafrar bera is-IS
+const kommu = (x) => Number(x).toFixed(2).replace(".", ",");
+const kronur = (x) => String(Math.round(Number(x))).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " kr";
+const arOgMan = (m) => { const a = Math.floor(m / 12), r = m % 12;
+  return [a ? `${a} ár` : "", r ? `${r} mán.` : ""].filter(Boolean).join(" og "); };
+
+let felog = [], gogn = null, synaBaraBil = false;
+const skyndiminni = new Map();
+
+async function saekja(slod) {
+  if (skyndiminni.has(slod)) return skyndiminni.get(slod);
+  const p = fetch(GRUNNUR + slod).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+  skyndiminni.set(slod, p);
+  return p;
+}
+
+function lesaMork() {
+  const v = parseInt($("#mork").value, 10);
+  return Number.isFinite(v) ? Math.min(60, Math.max(6, v)) : 12;
+}
+
+function uppfaeraSlod() {
+  const p = new URLSearchParams();
+  p.set("felag", $("#felag").value);
+  if (lesaMork() !== 12) p.set("mork", lesaMork());
+  history.replaceState(null, "", "?" + p.toString());
+}
+
+async function veljaFelag(audkenni) {
+  $("#efni").replaceChildren(el("p", { class: "tomur", text: "Hleð gögnum…" }));
+  try {
+    gogn = await saekja(`felog/${encodeURIComponent(audkenni)}.json`);
+  } catch {
+    $("#efni").replaceChildren(el("p", { class: "tomur", text: "Ekki tókst að sækja gögn félagsins. Reyndu aftur." }));
+    return;
+  }
+  teikna();
+}
+
+function teikna() {
+  if (!gogn) return;
+  const mork = lesaMork();
+  const haekkanir = [...gogn.haekkanir].sort((a, b) => a.dagsetning.localeCompare(b.dagsetning));
+
+  // Einstakir gildistökudagar; bil eru reiknuð milli daga, ekki lína
+  const dagar = [...new Set(haekkanir.map(h => h.dagsetning))];
+  const bilin = [];
+  for (let i = 1; i < dagar.length; i++) {
+    const m = manudir(dagar[i - 1], dagar[i]);
+    if (m > mork) bilin.push({ fra: dagar[i - 1], til: dagar[i], manudir: m, id: `bil-${dagar[i - 1]}` });
+  }
+  const bilEftirUpphafi = new Map(bilin.map(b => [b.fra, b]));
+
+  // Yfirlit
+  const fyrsta = dagar[0], sidasta = dagar[dagar.length - 1];
+  const idag = new Date().toISOString().slice(0, 10);
+  const nyleg = bilin.filter(b => b.til >= "1990-01-01").length;
+  const yfirlit = el("div", { class: "yfirlit" },
+    el("div", {}, el("b", { class: "tolur", text: String(haekkanir.length) }), el("span", { text: "Hækkanir" })),
+    el("div", {}, el("b", { class: "tolur", text: `${fyrsta?.slice(0, 4)}–${sidasta?.slice(0, 4)}` }), el("span", { text: "Tímabil" })),
+    el("div", { class: "bil-tala" }, el("b", { class: "tolur", text: String(bilin.length) }), el("span", { text: `Bil > ${mork} mán.` })),
+    el("div", { class: "bil-tala" }, el("b", { class: "tolur", text: String(nyleg) }), el("span", { text: "Þar af frá 1990" })),
+    el("div", {}, el("b", { class: "tolur", text: gogn.samfelld_fra ? gogn.samfelld_fra.slice(0, 4) : "–" }), el("span", { text: "Samfellt frá" })),
+  );
+
+  // Árarönd: ár með a.m.k. einni hækkun, eða ár sem lendir inni í merktu bili
+  const fyrstaAr = +fyrsta.slice(0, 4), sidastaAr = +sidasta.slice(0, 4);
+  const arMedHaekkun = new Set(dagar.map(d => +d.slice(0, 4)));
+  const reitir = [];
+  for (let ar = fyrstaAr; ar <= sidastaAr; ar++) {
+    const bil = bilin.find(b => +b.fra.slice(0, 4) < ar && ar < +b.til.slice(0, 4))
+      || (!arMedHaekkun.has(ar) ? bilin.find(b => +b.fra.slice(0, 4) <= ar && ar <= +b.til.slice(0, 4)) : null);
+    if (arMedHaekkun.has(ar)) reitir.push(el("span", { title: `${ar}: hækkun skráð` }));
+    else if (bil) reitir.push(el("a", { class: "tomt", href: "#" + bil.id, title: `${ar}: engin hækkun — bil ${bil.fra} → ${bil.til}` }));
+    else reitir.push(el("span", { class: "utan", title: `${ar}: engin hækkun, en innan við ${mork} mán. milli hækkana` }));
+  }
+  const arastrik = el("div", { class: "arastrik-umgjord" },
+    el("div", { class: "arastrik-haus" },
+      el("span", { text: "Hvert ár frá fyrstu til síðustu hækkunar — smelltu á bil til að fara þangað" }),
+      el("span", { class: "skyring" },
+        el("span", {}, el("i", { style: "background:var(--til-stadar)" }), "hækkun"),
+        el("span", {}, el("i", { style: "background:var(--vantar)" }), "í bili"),
+        el("span", {}, el("i", { style: "background:var(--reitur);border:1px solid var(--lina)" }), "engin hækkun, ekki bil"))),
+    el("div", { class: "arastrik", role: "img", "aria-label": `Ár með hækkunum ${fyrstaAr}–${sidastaAr}, ${bilin.length} bil` }, reitir),
+    el("div", { class: "arastrik-as" }, el("span", { text: String(fyrstaAr) }), el("span", { text: String(sidastaAr) })));
+
+  // Tafla
+  const sia = el("label", { class: "sia", for: "baraBil" },
+    el("input", { id: "baraBil", type: "checkbox" }), "Sýna aðeins bilin");
+  sia.querySelector("input").checked = synaBaraBil;
+  sia.querySelector("input").addEventListener("change", (e) => { synaBaraBil = e.target.checked; teikna(); });
+
+  const radir = [];
+  let fyrriDagur = null;
+  for (const h of haekkanir) {
+    const nyrDagur = h.dagsetning !== fyrriDagur;
+    const bilTil = nyrDagur && fyrriDagur ? manudir(fyrriDagur, h.dagsetning) : null;
+    // Bilið er sett inn á undan fyrstu hækkun eftir það
+    if (nyrDagur && fyrriDagur && bilEftirUpphafi.has(fyrriDagur)) {
+      const b = bilEftirUpphafi.get(fyrriDagur);
+      radir.push(el("tr", { class: "bil" + (location.hash === "#" + b.id ? " markad" : ""), id: b.id },
+        el("td", { colspan: "6" },
+          el("strong", { text: `${arOgMan(b.manudir)} án hækkunar` }),
+          el("span", { class: "timabil tolur", text: `${b.fra} → ${b.til}` }))));
+    }
+    if (!synaBaraBil) {
+      const merki = [];
+      if (!h.innan_samfellu) merki.push(el("span", { class: "merki", text: "utan samfellu" }));
+      if (h.i_kedju === 0) merki.push(el("span", { class: "merki", text: "hliðarsamningur" }));
+      if (h.dagsetning > idag) merki.push(el("span", { class: "merki", text: "framundan" }));
+      radir.push(el("tr", { class: h.innan_samfellu ? "" : "utan-samfellu" },
+        el("td", { class: "dags" }, el("time", { datetime: h.dagsetning, text: nyrDagur ? h.dagsetning : "" }), merki),
+        el("td", { class: "tala", text: h.prosenta != null && h.prosenta !== "" ? kommu(h.prosenta) + "%" : "" }),
+        el("td", { class: "tala", text: h.kronur ? kronur(h.kronur) : "" }),
+        el("td", { text: h.a_vid || "" }),
+        el("td", { class: "bilmán", text: bilTil != null ? `${bilTil} mán.` : "" }),
+        el("td", { class: "upp", text: (h.upprunar || "").replaceAll(",", ", ") })));
+    }
+    fyrriDagur = h.dagsetning;
+  }
+  const tafla = el("div", { class: "tafla-umgjord" },
+    el("table", {},
+      el("thead", {}, el("tr", {},
+        el("th", { text: "Gildistaka" }), el("th", { class: "tala", text: "Prósenta" }),
+        el("th", { class: "tala", text: "Krónur" }), el("th", { text: "Á við" }),
+        el("th", { class: "tala", text: "Frá síðustu" }), el("th", { text: "Heimild" }))),
+      el("tbody", {}, radir.length ? radir
+        : el("tr", {}, el("td", { colspan: "6", class: "tomur", text: `Ekkert bil lengra en ${mork} mánuðir.` })))));
+
+  $("#efni").replaceChildren(yfirlit, arastrik, sia, tafla);
+  if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: "center" });
+}
+
+async function raesa() {
+  const leit = new URLSearchParams(location.search);
+  const m = parseInt(leit.get("mork"), 10);
+  if (Number.isFinite(m) && m >= 6 && m <= 60) $("#mork").value = m;
+  try {
+    ({ felog } = await saekja("felog.json"));
+  } catch {
+    $("#efni").replaceChildren(el("p", { class: "tomur", text: "Ekki tókst að sækja lista yfir félög." }));
+    return;
+  }
+  const radad = [...felog].sort((a, b) => a.felag.localeCompare(b.felag, "is"));
+  $("#felag").replaceChildren(...radad.map(f =>
+    el("option", { value: f.audkenni, text: `${f.felag} (${f.fjoldi_haekkana})` })));
+  const beidni = leit.get("felag");
+  const upphaf = felog.some(f => f.audkenni === beidni) ? beidni
+    : ([...felog].sort((a, b) => b.fjoldi_haekkana - a.fjoldi_haekkana)[0]?.audkenni);
+  $("#felag").value = upphaf;
+  $("#felag").addEventListener("change", () => { history.replaceState(null, "", location.pathname + location.search); uppfaeraSlod(); veljaFelag($("#felag").value); });
+  $("#mork").addEventListener("input", () => { uppfaeraSlod(); teikna(); });
+  window.addEventListener("hashchange", teikna);
+  uppfaeraSlod();
+  veljaFelag(upphaf);
+}
+raesa();
+</script>
+</body>
+</html>
