@@ -164,7 +164,9 @@ async function saekja() {
     litur: LITIR[i],
     // Samfelldi hlutinn: keðjan yfir eyðu er sá hluti sem ekki er treystandi
     punktar: r.haekkanir
-      .filter((h) => h.innan_samfellu && h.visitala_samfella != null)
+      // Aldrei lengra en til loka yfirstandandi árs - framtíðin er ekki samanburðarhæf
+      .filter((h) => h.innan_samfellu && h.visitala_samfella != null
+                     && h.dagsetning <= `${new Date().getFullYear()}-12-31`)
       .map((h) => ({ x: mnd(h.dagsetning), y: h.visitala_samfella,
                      d: h.dagsetning })),
   })).filter((s) => s.punktar.length > 1);

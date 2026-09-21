@@ -61,7 +61,10 @@ def gildi_vid(rod, d):
 def ein_sida(felag, hag, idag):
     punktar = [(date.fromisoformat(h["dagsetning"]), h["visitala_samfella"])
                for h in felag["haekkanir"]
-               if h.get("innan_samfellu") and h.get("visitala_samfella")]
+               if h.get("innan_samfellu") and h.get("visitala_samfella")
+               # Aldrei lengra en til loka yfirstandandi árs: umsamdar
+               # hækkanir fram í tímann eru ekki samanburðarhæfar
+               and h["dagsetning"] <= f"{date.today().year}-12-31"]
     if len(punktar) < 2:
         return None
     punktar.sort()
@@ -201,6 +204,10 @@ def main():
             felag = json.load(f)
         if ein_sida(felag, hag, idag):
             gerdar.append(x["audkenni"])
+    # Síður félaga sem eiga ekki lengur nothæfa röð eru fjarlægðar
+    for n in os.listdir(UT):
+        if n != "index.json" and os.path.splitext(n)[0] not in gerdar:
+            os.remove(os.path.join(UT, n))
     # Listi sem samanburðarsíðan les til að vita hvaða félög eiga deilisíðu
     with open(os.path.join(UT, "index.json"), "w", encoding="utf-8") as f:
         json.dump({"felog": gerdar}, f)

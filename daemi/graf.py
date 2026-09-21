@@ -127,9 +127,13 @@ def teikna(felog, vista=None, grunndagur=None):
         gogn = saekja(f"felog/{f['audkenni']}.json")
         # Samfelldi hlutinn er notaður: keðjan yfir eyðu er einmitt sá hluti
         # sem ekki er treystandi. samfelld_fra segir hvenær hann hefst.
+        # Aldrei lengra en til loka yfirstandandi árs: umsamdar hækkanir fram
+        # í tímann eru ekki samanburðarhæfar milli félaga eða við Hagstofuna.
+        lok = date(date.today().year, 12, 31)
         punktar = [(date.fromisoformat(h["dagsetning"]), h["visitala_samfella"])
                    for h in gogn["haekkanir"]
-                   if h.get("innan_samfellu") and h.get("visitala_samfella")]
+                   if h.get("innan_samfellu") and h.get("visitala_samfella")
+                   and date.fromisoformat(h["dagsetning"]) <= lok]
         if len(punktar) <= 1:
             continue
         if grunndagur is not None:

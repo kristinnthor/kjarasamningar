@@ -308,6 +308,10 @@ const E = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const dagur = (s) => new Date(s + "T00:00:00Z").getTime();
+/* Grafið nær aldrei lengra en til loka yfirstandandi árs. Umsamdar hækkanir
+   fram í tímann eru ekki samanburðarhæfar: sum félög hafa samið lengra fram
+   en önnur, og launavísitalan nær aðeins til dagsins í dag. */
+const LOKADAGUR = `${new Date().getUTCFullYear()}-12-31`;
 const isl = (n, aukastafir = 0) =>
   n.toLocaleString("is-IS", { minimumFractionDigits: aukastafir,
                               maximumFractionDigits: aukastafir });
@@ -343,10 +347,11 @@ async function saekjaFelag(audkenni) {
     samfelld_ar: g.samfelld_ar,
     eldri_eydur: g.eldri_eydur,
     allt: g.haekkanir
-      .filter((h) => h.visitala != null)
+      .filter((h) => h.visitala != null && h.dagsetning <= LOKADAGUR)
       .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning, v: h.visitala })),
     samfella: g.haekkanir
-      .filter((h) => h.innan_samfellu && h.visitala_samfella != null)
+      .filter((h) => h.innan_samfellu && h.visitala_samfella != null
+                     && h.dagsetning <= LOKADAGUR)
       .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning,
                      v: h.visitala_samfella })),
   };
