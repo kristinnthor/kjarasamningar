@@ -2,7 +2,7 @@
 
 Félög með gögn frá og með 2025. Aðeins eyður sem ljúka 1990 eða síðar eru teknar með.
 
-**50 félög, 93 eyður.** Eyða telst bil lengra en 18 mánuðir.
+**49 félög, 91 eyður.** Eyða telst bil lengra en 18 mánuðir.
 
 
 ## Efling
@@ -36,7 +36,7 @@ Samningar í gildi:
 
 **2010-06-01 → 2015-05-01** (59 mán.)  
 Á undan: 6.500 kr · Á eftir: 25.000 kr  
-Aðrir á tímabilinu: 2011-06-01 4,25% (14 félög); 2015-05-01 7,70% (12 félög); 2012-02-01 3,50% (11 félög); 2013-02-01 3,25% (10 félög)  
+Aðrir á tímabilinu: 2011-06-01 4,25% (15 félög); 2015-05-01 7,70% (12 félög); 2012-02-01 3,50% (12 félög); 2013-02-01 3,25% (11 félög)  
 Samningar í gildi:  
 - [2011-05-01–2014-03-31 · Faxaflóahafnir sf. · Kjarasamningur](https://kjarasamningar.hestafl.is/pdfs/6e41e5df-9032-4ac0-8b79-d858560e6a75.pdf)
 - [2014-03-01–2015-04-01 · Ríkissjóður, SNR · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_156.pdf)
@@ -67,7 +67,7 @@ Aðrir á tímabilinu: 1998-01-01 4,00% (12 félög); 1999-01-01 4,00% (7 félö
 
 **2012-03-01 → 2014-02-01** (23 mán.)  
 Á undan: 5.250 kr · Á eftir: 3,25% / 23.750 kr  
-Aðrir á tímabilinu: 2013-02-01 3,25% (10 félög); 2013-03-01 3,25% (6 félög); 2014-02-01 2,80% (5 félög); 2014-01-01 2,80% (4 félög)  
+Aðrir á tímabilinu: 2013-02-01 3,25% (11 félög); 2013-03-01 3,25% (6 félög); 2014-02-01 2,80% (5 félög); 2014-01-01 2,80% (4 félög)  
 *Enginn samningur fannst í heildarskránni fyrir þetta tímabil.*  
 
 **2017-04-01 → 2019-01-01** (21 mán.)  
@@ -131,7 +131,7 @@ Samningar í gildi:
 
 **2010-01-01 → 2021-01-01** (132 mán.)  
 Á undan: 2,00% · Á eftir: 24.000 kr  
-Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (14 félög); 2015-05-01 7,70% (12 félög)  
+Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (15 félög); 2015-05-01 7,70% (12 félög)  
 Samningar í gildi:  
 - [2011-05-01–2014-01-01 · Norðurorka hf. · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_40.pdf)
 - [2015-09-01–2018-12-31 · Norðurorka hf. · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_101.pdf)
@@ -144,7 +144,7 @@ Samningar í gildi:
 
 **2011-10-01 → 2014-03-01** (29 mán.)  
 Á undan: 2,50% · Á eftir: 1,30%  
-Aðrir á tímabilinu: 2012-02-01 3,50% (11 félög); 2013-02-01 3,25% (10 félög); 2013-03-01 3,25% (6 félög); 2014-02-01 2,80% (5 félög)  
+Aðrir á tímabilinu: 2012-02-01 3,50% (12 félög); 2013-02-01 3,25% (11 félög); 2013-03-01 3,25% (6 félög); 2014-02-01 2,80% (5 félög)  
 Samningar í gildi:  
 - [2014-03-01–2016-10-01 · Ríkissjóður, SNR · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_826.pdf)
 - [2014-03-01–2016-10-01 · Tækniskólinn ehf. · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_642.pdf)
@@ -194,7 +194,7 @@ Samningar í gildi:
 
 **2011-10-31 → 2014-02-01** (28 mán.)  
 Á undan: 4,25% · Á eftir: 2,80%  
-Aðrir á tímabilinu: 2012-02-01 3,50% (11 félög); 2013-02-01 3,25% (10 félög); 2013-03-01 3,25% (6 félög); 2012-03-01 3,50% (5 félög)  
+Aðrir á tímabilinu: 2012-02-01 3,50% (12 félög); 2013-02-01 3,25% (11 félög); 2013-03-01 3,25% (6 félög); 2012-03-01 3,50% (5 félög)  
 Samningar í gildi:  
 - [2014-01-01–2015-02-28 · RARIK ohf. · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_1067.pdf)
 - [2014-01-01–2015-02-01 · Landsvirkjun · Viðauki](https://kjarasamningar.hestafl.is/pdfs/samningur_924.pdf)
@@ -213,7 +213,7 @@ Samningar í gildi:
 
 **2011-05-05 → 2015-05-01** (48 mán.)  
 Á undan: 4,25% · Á eftir: 7,20%  
-Aðrir á tímabilinu: 2011-06-01 4,25% (14 félög); 2015-05-01 7,70% (12 félög); 2012-02-01 3,50% (11 félög); 2013-02-01 3,25% (10 félög)  
+Aðrir á tímabilinu: 2011-06-01 4,25% (15 félög); 2015-05-01 7,70% (12 félög); 2012-02-01 3,50% (12 félög); 2013-02-01 3,25% (11 félög)  
 Samningar í gildi:  
 - [2011-06-22–2014-01-31 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_284.pdf)
 - [2011-06-22–2014-01-01 · Samtök atvinnulífsins, SA · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_284.pdf)
@@ -260,7 +260,7 @@ Samningar í gildi:
 
 **2010-01-01 → 2014-12-31** (59 mán.)  
 Á undan: 2,50% · Á eftir: 3,20%  
-Aðrir á tímabilinu: 2011-06-01 4,25% (14 félög); 2012-02-01 3,50% (11 félög); 2013-02-01 3,25% (10 félög); 2011-06-01 4,60% (8 félög)  
+Aðrir á tímabilinu: 2011-06-01 4,25% (15 félög); 2012-02-01 3,50% (12 félög); 2013-02-01 3,25% (11 félög); 2011-06-01 4,60% (8 félög)  
 Samningar í gildi:  
 - [2011-06-01–2014-01-01 · Ríkisútvarpið ohf. · Heildarsamningur](https://kjarasamningar.is/pdfs/samningur_657.pdf)
 - [2014-02-01–2015-02-01 · Ríkisútvarpið ohf. · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_660.pdf)
@@ -294,7 +294,7 @@ Samningar í gildi:
 
 **2008-01-01 → 2019-04-01** (135 mán.)  
 Á undan: 2,50% · Á eftir: 17.000 kr  
-Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (14 félög); 2015-05-01 7,70% (12 félög)  
+Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (15 félög); 2015-05-01 7,70% (12 félög)  
 Samningar í gildi:  
 - [2008-11-01–2009-05-01 · Ríkissjóður, SNR · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_571.pdf)
 - [2009-07-01–2010-11-30 · Ríkissjóður, SNR · Gerðardómur](https://kjarasamningar.hestafl.is/pdfs/samningur_568.pdf)
@@ -343,7 +343,7 @@ Samningar í gildi:
 
 **2009-03-01 → 2019-04-01** (121 mán.)  
 Á undan: 3,50% · Á eftir: 17.000 kr  
-Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (14 félög); 2015-05-01 7,70% (12 félög)  
+Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (15 félög); 2015-05-01 7,70% (12 félög)  
 Samningar í gildi:  
 - [2011-05-01–2014-03-01 · Samband íslenskra sveitarfélaga · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_981.pdf)
 - [2011-05-01–2014-03-01 · Ríkissjóður, SNR · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_521.pdf)
@@ -391,7 +391,7 @@ Samningar í gildi:
 
 **2008-01-01 → 2011-06-01** (41 mán.)  
 Á undan: 2,00% · Á eftir: 4,25% / 12.000 kr  
-Aðrir á tímabilinu: 2011-06-01 4,25% (13 félög); 2009-03-01 3,50% (9 félög); 2010-01-01 2,50% (9 félög); 2011-06-01 4,60% (8 félög)  
+Aðrir á tímabilinu: 2011-06-01 4,25% (14 félög); 2009-03-01 3,50% (9 félög); 2010-01-01 2,50% (9 félög); 2011-06-01 4,60% (8 félög)  
 Samningar í gildi:  
 - [2011-05-01–2014-03-01 · Ríkissjóður, SNR · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_824.pdf)
 - [2005-03-01–2008-04-30 · Ríkissjóður, SNR · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_822.pdf)
@@ -418,32 +418,11 @@ Samningar í gildi:
 
 **2010-01-01 → 2015-05-01** (64 mán.)  
 Á undan: 2,50% · Á eftir: 7,70% / 25.000 kr  
-Aðrir á tímabilinu: 2011-06-01 4,25% (14 félög); 2015-05-01 7,70% (11 félög); 2012-02-01 3,50% (11 félög); 2013-02-01 3,25% (10 félög)  
+Aðrir á tímabilinu: 2011-06-01 4,25% (15 félög); 2012-02-01 3,50% (12 félög); 2015-05-01 7,70% (11 félög); 2013-02-01 3,25% (11 félög)  
 Samningar í gildi:  
 - [2010-08-01–2011-01-01 · Ríkissjóður, SNR, Landhelgisgæsla Íslands · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_859.pdf)
 - [2011-05-01–2014-04-30 · Landhelgisgæsla Íslands · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_856.pdf)
 - [2011-05-01–2014-04-01 · Ríkissjóður, SNR, Landhelgisgæsla Íslands · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_860.pdf)
-
-## Flugvirkjafélag Íslands
-
-19 hækkanir, 2011-06-01 – 2027-04-01, 2 eyður
-
-
-**2011-06-01 → 2014-07-01** (37 mán.)  
-Á undan: 2.001 kr · Á eftir: 2,80%  
-Aðrir á tímabilinu: 2012-02-01 3,50% (11 félög); 2013-02-01 3,25% (10 félög); 2013-03-01 3,25% (6 félög); 2014-02-01 2,80% (5 félög)  
-Samningar í gildi:  
-- [2011-06-01–2014-01-31 · Bláfugls ehf. · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_544.pdf)
-- [2014-02-01–2018-01-31 · Bláfugls ehf. · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_546.pdf)
-- [2014-07-01–2017-08-01 · Icelandair ehf. · Viðauki](https://kjarasamningar.hestafl.is/pdfs/samningur_182.pdf)
-
-**2020-02-01 → 2022-01-01** (23 mán.)  
-Á undan: 4,00% · Á eftir: 17.250 kr  
-Aðrir á tímabilinu: 2022-01-01 2,50% (11 félög); 2021-01-01 2,50% (8 félög)  
-Samningar í gildi:  
-- [2020-03-01–2023-03-31 · Samgöngustofa · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_185.pdf)
-- [2018-02-01–2021-02-01 · Bláfugls ehf. · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_147.pdf)
-- [2018-02-01–2021-02-01 · Bláfugls ehf. · Viðauki](https://kjarasamningar.hestafl.is/pdfs/samningur_147.pdf)
 
 ## AFL - Starfsgreinafélag
 
@@ -452,7 +431,7 @@ Samningar í gildi:
 
 **2008-12-01 → 2015-05-01** (77 mán.)  
 Á undan: 20.300 kr · Á eftir: 7,70% / 25.000 kr  
-Aðrir á tímabilinu: 2011-06-01 4,25% (14 félög); 2012-02-01 3,50% (11 félög); 2015-05-01 7,70% (11 félög); 2013-02-01 3,25% (10 félög)  
+Aðrir á tímabilinu: 2011-06-01 4,25% (15 félög); 2012-02-01 3,50% (12 félög); 2013-02-01 3,25% (11 félög); 2015-05-01 7,70% (11 félög)  
 Samningar í gildi:  
 - [2008-12-01–2009-08-01 · Samband íslenskra sveitarfélaga · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100414340.pdf)
 - [2009-07-01–2010-11-01 · Samband íslenskra sveitarfélaga · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100414350.pdf)
@@ -479,7 +458,7 @@ Samningar í gildi:
 
 **2007-05-01 → 2019-04-01** (143 mán.)  
 Á undan: 2,00% · Á eftir: 17.000 kr  
-Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (14 félög); 2015-05-01 7,70% (12 félög)  
+Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (15 félög); 2015-05-01 7,70% (12 félög)  
 Samningar í gildi:  
 - [2011-05-01–2014-03-01 · Samband íslenskra sveitarfélaga · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_981.pdf)
 - [2011-05-01–2014-03-01 · Samband íslenskra sveitarfélaga · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_326.pdf)
@@ -492,7 +471,7 @@ Samningar í gildi:
 
 **2011-07-01 → 2015-09-01** (50 mán.)  
 Á undan: 4,25% · Á eftir: 7,70%  
-Aðrir á tímabilinu: 2015-05-01 7,70% (12 félög); 2012-02-01 3,50% (11 félög); 2013-02-01 3,25% (10 félög); 2013-03-01 3,25% (6 félög)  
+Aðrir á tímabilinu: 2015-05-01 7,70% (12 félög); 2012-02-01 3,50% (12 félög); 2013-02-01 3,25% (11 félög); 2013-03-01 3,25% (6 félög)  
 Samningar í gildi:  
 - [2014-02-01–2015-02-01 · Ríkisútvarpið ohf. · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_684.pdf)
 - [2014-02-01–2015-02-28 · Orkuveita Reykjavíkur · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_514.pdf)
@@ -513,7 +492,7 @@ Samningar í gildi:
 
 **2011-06-01 → 2015-03-01** (45 mán.)  
 Á undan: 4,60% / 12.000 kr · Á eftir: 6,35%  
-Aðrir á tímabilinu: 2012-02-01 3,50% (11 félög); 2013-02-01 3,25% (10 félög); 2013-03-01 3,25% (6 félög); 2014-02-01 2,80% (5 félög)  
+Aðrir á tímabilinu: 2012-02-01 3,50% (12 félög); 2013-02-01 3,25% (11 félög); 2013-03-01 3,25% (6 félög); 2014-02-01 2,80% (5 félög)  
 Samningar í gildi:  
 - [2014-02-01–2015-02-28 · Ríkissjóður, SNR · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/b829ae5c-c4cd-42f1-825f-a11095762130.pdf)
 - [2014-02-01–2015-02-28 · Samtök fyrirtækja í velferðarþjónustu · Samkomulag](https://kjarasamningar.is/pdfs/samningur_205.pdf)
@@ -575,7 +554,7 @@ Samningar í gildi:
 
 **2003-11-01 → 2022-01-01** (218 mán.)  
 Á undan: 3,00% · Á eftir: 2,50%  
-Aðrir á tímabilinu: 2007-01-01 2,25% (19 félög); 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2005-01-01 3,00% (14 félög)  
+Aðrir á tímabilinu: 2007-01-01 2,25% (19 félög); 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (15 félög)  
 Samningar í gildi:  
 - [2003-11-01–2004-10-01 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23092615440.pdf)
 - [2006-01-01–2008-11-30 · Íslenska útvarpsfélagið hf. · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_874.pdf)
@@ -617,7 +596,7 @@ Samningar í gildi:
 
 **2010-01-01 → 2019-11-01** (118 mán.)  
 Á undan: 2,50% · Á eftir: 10.000 kr  
-Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (14 félög); 2015-05-01 7,70% (12 félög)  
+Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (15 félög); 2015-05-01 7,70% (12 félög)  
 Samningar í gildi:  
 - [2014-01-01–2017-01-01 · Klafi ehf. · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_249.pdf)
 - [2014-04-29–2019-03-31 · Klafi ehf. · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_248.pdf)
@@ -638,7 +617,7 @@ Samningar í gildi:
 
 **2012-02-29 → 2014-01-01** (23 mán.)  
 Á undan: 18.000 kr · Á eftir: 2,80%  
-Aðrir á tímabilinu: 2013-02-01 3,25% (10 félög); 2013-03-01 3,25% (6 félög); 2012-03-01 3,50% (5 félög); 2014-01-01 2,80% (3 félög)  
+Aðrir á tímabilinu: 2013-02-01 3,25% (11 félög); 2013-03-01 3,25% (6 félög); 2012-03-01 3,50% (5 félög); 2014-01-01 2,80% (3 félög)  
 Samningar í gildi:  
 - [2014-01-01–2015-02-28 · Meistarasamband byggingamanna · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_189.pdf)
 - [2014-01-01–2015-02-28 · Landsvirkjun · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_47.pdf)
@@ -677,7 +656,7 @@ Samningar í gildi:
 
 **2012-03-01 → 2015-11-01** (44 mán.)  
 Á undan: 3,30% / 11.000 kr · Á eftir: 25.000 kr  
-Aðrir á tímabilinu: 2015-05-01 7,70% (12 félög); 2013-02-01 3,25% (10 félög); 2013-03-01 3,25% (6 félög); 2014-02-01 2,80% (5 félög)  
+Aðrir á tímabilinu: 2015-05-01 7,70% (12 félög); 2013-02-01 3,25% (11 félög); 2013-03-01 3,25% (6 félög); 2014-02-01 2,80% (5 félög)  
 Samningar í gildi:  
 - [2014-03-01–2015-04-01 · Ríkissjóður, SNR, Landhelgisgæsla Íslands · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/samningur_383.pdf)
 - [2015-11-01–2019-03-01 · Samband íslenskra sveitarfélaga · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_288.pdf)
@@ -690,7 +669,7 @@ Samningar í gildi:
 
 **2008-01-01 → 2019-04-01** (135 mán.)  
 Á undan: 2,00% · Á eftir: 17.000 kr  
-Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (14 félög); 2015-05-01 7,70% (12 félög)  
+Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (15 félög); 2015-05-01 7,70% (12 félög)  
 Samningar í gildi:  
 - [2011-05-01–2014-03-31 · Samtök fyrirtækja í velferðarþjónustu · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_203.pdf)
 - [2014-02-01–2015-02-28 · Ríkissjóður, SNR · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/b829ae5c-c4cd-42f1-825f-a11095762130.pdf)
@@ -703,7 +682,7 @@ Samningar í gildi:
 
 **2009-10-31 → 2019-04-01** (114 mán.)  
 Á undan: 4,75% · Á eftir: 17.000 kr  
-Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (14 félög); 2015-05-01 7,70% (12 félög)  
+Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2011-06-01 4,25% (15 félög); 2015-05-01 7,70% (12 félög)  
 Samningar í gildi:  
 - [2013-03-01–2014-08-31 · Ríkissjóður, SNR · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_420.pdf)
 - [2014-02-01–2015-02-28 · Ríkissjóður, SNR · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/b829ae5c-c4cd-42f1-825f-a11095762130.pdf)
@@ -755,7 +734,7 @@ Samningar í gildi:
 
 **2011-06-01 → 2019-04-01** (94 mán.)  
 Á undan: 4,60% / 12.000 kr · Á eftir: 17.000 kr  
-Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2015-05-01 7,70% (12 félög); 2012-02-01 3,50% (11 félög)  
+Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2015-05-01 7,70% (12 félög); 2012-02-01 3,50% (12 félög)  
 Samningar í gildi:  
 - [2014-02-01–2015-02-28 · Ríkissjóður, SNR · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/b829ae5c-c4cd-42f1-825f-a11095762130.pdf)
 - [2014-02-01–2015-02-28 · Ríkissjóður, SNR · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_252.pdf)
@@ -768,7 +747,7 @@ Samningar í gildi:
 
 **2011-06-01 → 2019-04-01** (94 mán.)  
 Á undan: 4,60% / 12.000 kr · Á eftir: 17.000 kr  
-Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2015-05-01 7,70% (12 félög); 2012-02-01 3,50% (11 félög)  
+Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2015-05-01 7,70% (12 félög); 2012-02-01 3,50% (12 félög)  
 Samningar í gildi:  
 - [2014-02-01–2015-02-28 · Ríkissjóður, SNR · Samkomulag](https://kjarasamningar.hestafl.is/pdfs/b829ae5c-c4cd-42f1-825f-a11095762130.pdf)
 - [2014-02-01–2015-02-28 · Samtök fyrirtækja í velferðarþjónustu · Samkomulag](https://kjarasamningar.is/pdfs/samningur_205.pdf)
@@ -806,7 +785,7 @@ Samningar í gildi:
 
 **2012-02-01 → 2020-01-01** (95 mán.)  
 Á undan: 11.000 kr · Á eftir: 17.000 kr  
-Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2015-05-01 7,70% (12 félög); 2013-02-01 3,25% (10 félög)  
+Aðrir á tímabilinu: 2016-06-01 5,50% (16 félög); 2017-06-01 2,50% (15 félög); 2015-05-01 7,70% (12 félög); 2013-02-01 3,25% (11 félög)  
 Samningar í gildi:  
 - [2019-04-01–2022-11-01 · Samtök atvinnulífsins, SA · Heildarsamningur](https://kjarasamningar.hestafl.is/pdfs/samningur_432.pdf)
 - [2020-01-01–2023-09-30 · Samband íslenskra sveitarfélaga · Kjarasamningur](https://kjarasamningar.hestafl.is/pdfs/7ac86eb5-a952-435b-8e32-64452d3c4554.pdf)

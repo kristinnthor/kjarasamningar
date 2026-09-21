@@ -94,12 +94,12 @@
       {
        "dagsetning": "2012-02-01",
        "prosenta": 3.5,
-       "felog": 11
+       "felog": 12
       },
       {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       },
       {
        "dagsetning": "2013-03-01",
@@ -228,7 +228,7 @@
       {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       },
       {
        "dagsetning": "2013-03-01",
@@ -347,7 +347,7 @@
       {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       },
       {
        "dagsetning": "2013-03-01",
@@ -685,7 +685,7 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
       },
       {
        "dagsetning": "2015-05-01",
@@ -695,12 +695,12 @@
       {
        "dagsetning": "2012-02-01",
        "prosenta": 3.5,
-       "felog": 11
+       "felog": 12
       },
       {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       }
      ],
      "samningar": [
@@ -1093,7 +1093,7 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
       },
       {
        "dagsetning": "2015-05-01",
@@ -1145,7 +1145,7 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 13
+       "felog": 14
       },
       {
        "dagsetning": "2009-03-01",
@@ -1299,7 +1299,12 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
+      },
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 12
       },
       {
        "dagsetning": "2015-05-01",
@@ -1307,14 +1312,9 @@
        "felog": 11
       },
       {
-       "dagsetning": "2012-02-01",
-       "prosenta": 3.5,
-       "felog": 11
-      },
-      {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       }
      ],
      "samningar": [
@@ -1400,7 +1400,7 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
       },
       {
        "dagsetning": "2015-05-01",
@@ -1410,12 +1410,12 @@
       {
        "dagsetning": "2012-02-01",
        "prosenta": 3.5,
-       "felog": 11
+       "felog": 12
       },
       {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       }
      ],
      "samningar": [
@@ -1498,111 +1498,6 @@
    ]
   },
   {
-   "audkenni": "flugvirkjafelag-islands",
-   "felag": "Flugvirkjafélag Íslands",
-   "heilleiki": "samfelld",
-   "fjoldi_haekkana": 19,
-   "timabil": "2011-06-01 – 2027-04-01",
-   "eydur": [
-    {
-     "id": "2011-06-01_2014-07-01",
-     "fra": "2011-06-01",
-     "til": "2014-07-01",
-     "manudir": 37,
-     "undan": "2.001 kr",
-     "eftir": "2,80%",
-     "algengt": [
-      {
-       "dagsetning": "2012-02-01",
-       "prosenta": 3.5,
-       "felog": 11
-      },
-      {
-       "dagsetning": "2013-02-01",
-       "prosenta": 3.25,
-       "felog": 10
-      },
-      {
-       "dagsetning": "2013-03-01",
-       "prosenta": 3.25,
-       "felog": 6
-      },
-      {
-       "dagsetning": "2014-02-01",
-       "prosenta": 2.8,
-       "felog": 5
-      }
-     ],
-     "samningar": [
-      {
-       "fra": "2011-06-01",
-       "til": "2014-01-31",
-       "atvinnurekandi": "Bláfugls ehf.",
-       "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_544.pdf"
-      },
-      {
-       "fra": "2014-02-01",
-       "til": "2018-01-31",
-       "atvinnurekandi": "Bláfugls ehf.",
-       "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_546.pdf"
-      },
-      {
-       "fra": "2014-07-01",
-       "til": "2017-08-01",
-       "atvinnurekandi": "Icelandair ehf.",
-       "tegund": "Viðauki",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_182.pdf"
-      }
-     ]
-    },
-    {
-     "id": "2020-02-01_2022-01-01",
-     "fra": "2020-02-01",
-     "til": "2022-01-01",
-     "manudir": 23,
-     "undan": "4,00%",
-     "eftir": "17.250 kr",
-     "algengt": [
-      {
-       "dagsetning": "2022-01-01",
-       "prosenta": 2.5,
-       "felog": 11
-      },
-      {
-       "dagsetning": "2021-01-01",
-       "prosenta": 2.5,
-       "felog": 8
-      }
-     ],
-     "samningar": [
-      {
-       "fra": "2020-03-01",
-       "til": "2023-03-31",
-       "atvinnurekandi": "Samgöngustofa",
-       "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_185.pdf"
-      },
-      {
-       "fra": "2018-02-01",
-       "til": "2021-02-01",
-       "atvinnurekandi": "Bláfugls ehf.",
-       "tegund": "Heildarsamningur",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_147.pdf"
-      },
-      {
-       "fra": "2018-02-01",
-       "til": "2021-02-01",
-       "atvinnurekandi": "Bláfugls ehf.",
-       "tegund": "Viðauki",
-       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_147.pdf"
-      }
-     ]
-    }
-   ]
-  },
-  {
    "audkenni": "felag-skipstjornarmanna",
    "felag": "Félag skipstjórnarmanna",
    "heilleiki": "samfelld",
@@ -1625,7 +1520,7 @@
       {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       },
       {
        "dagsetning": "2013-03-01",
@@ -1682,12 +1577,12 @@
       {
        "dagsetning": "2012-02-01",
        "prosenta": 3.5,
-       "felog": 11
+       "felog": 12
       },
       {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       },
       {
        "dagsetning": "2013-03-01",
@@ -1898,22 +1793,22 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
       },
       {
        "dagsetning": "2012-02-01",
        "prosenta": 3.5,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
        "felog": 11
       },
       {
        "dagsetning": "2015-05-01",
        "prosenta": 7.7,
        "felog": 11
-      },
-      {
-       "dagsetning": "2013-02-01",
-       "prosenta": 3.25,
-       "felog": 10
       }
      ],
      "samningar": [
@@ -2062,7 +1957,7 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
       },
       {
        "dagsetning": "2015-05-01",
@@ -2124,7 +2019,7 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
       },
       {
        "dagsetning": "2015-05-01",
@@ -2186,7 +2081,7 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
       },
       {
        "dagsetning": "2015-05-01",
@@ -2385,17 +2280,17 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
       },
       {
        "dagsetning": "2012-02-01",
        "prosenta": 3.5,
-       "felog": 11
+       "felog": 12
       },
       {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       },
       {
        "dagsetning": "2011-06-01",
@@ -2544,12 +2439,12 @@
       {
        "dagsetning": "2012-02-01",
        "prosenta": 3.5,
-       "felog": 11
+       "felog": 12
       },
       {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       },
       {
        "dagsetning": "2013-03-01",
@@ -2705,7 +2600,7 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
       },
       {
        "dagsetning": "2015-05-01",
@@ -2810,12 +2705,12 @@
       {
        "dagsetning": "2012-02-01",
        "prosenta": 3.5,
-       "felog": 11
+       "felog": 12
       },
       {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       },
       {
        "dagsetning": "2013-03-01",
@@ -3339,7 +3234,7 @@
       {
        "dagsetning": "2012-02-01",
        "prosenta": 3.5,
-       "felog": 11
+       "felog": 12
       }
      ],
      "samningar": [
@@ -3401,7 +3296,7 @@
       {
        "dagsetning": "2012-02-01",
        "prosenta": 3.5,
-       "felog": 11
+       "felog": 12
       }
      ],
      "samningar": [
@@ -3580,7 +3475,7 @@
       {
        "dagsetning": "2013-02-01",
        "prosenta": 3.25,
-       "felog": 10
+       "felog": 11
       }
      ],
      "samningar": [
@@ -4098,7 +3993,7 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
       },
       {
        "dagsetning": "2015-05-01",
@@ -4321,9 +4216,9 @@
        "felog": 15
       },
       {
-       "dagsetning": "2005-01-01",
-       "prosenta": 3.0,
-       "felog": 14
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 15
       }
      ],
      "samningar": [
@@ -4672,7 +4567,7 @@
       {
        "dagsetning": "2011-06-01",
        "prosenta": 4.25,
-       "felog": 14
+       "felog": 15
       },
       {
        "dagsetning": "2015-05-01",
