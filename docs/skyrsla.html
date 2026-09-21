@@ -161,6 +161,28 @@
        text-transform: uppercase; letter-spacing: .04em; }
   [hidden] { display: none !important; }
 
+  button.deila { font: inherit; font-size: .82rem; padding: 5px 12px; cursor: pointer;
+    background: var(--akser); color: var(--bg); border: 1px solid var(--akser); border-radius: 5px; font-weight: 600; }
+  button.deila:hover { filter: brightness(1.08); }
+  dialog.deiling { border: 1px solid var(--lina); border-radius: 12px; padding: 0; width: min(640px, calc(100vw - 32px));
+    background: var(--yfirbord); color: var(--texti); box-shadow: 0 18px 48px rgba(0,0,0,.25); }
+  dialog.deiling::backdrop { background: rgba(20,18,15,.45); }
+  .deiling-innri { padding: 18px 18px 16px; display: grid; gap: 12px; }
+  .deiling-haus { display: flex; justify-content: space-between; align-items: center; }
+  .deiling h2 { margin: 0; font-size: 1.1rem; }
+  .deiling .loka { all: unset; cursor: pointer; font-size: 1.4rem; line-height: 1; color: var(--texti-3); padding: 0 4px; }
+  .deiling .loka:hover { color: var(--texti); }
+  .deiling img { width: 100%; height: auto; border: 1px solid var(--lina); border-radius: 8px; background: var(--bg); aspect-ratio: 1200 / 630; }
+  .deiling textarea { width: 100%; font: inherit; font-size: .9rem; color: var(--texti); background: var(--bg);
+    border: 1px solid var(--lina); border-radius: 6px; padding: 8px 10px; resize: vertical; }
+  .deilihnappar { display: flex; flex-wrap: wrap; gap: 8px; }
+  .deilihnappar a, .deilihnappar button { font: inherit; font-size: .86rem; padding: 7px 13px; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--lina); background: var(--bg); color: var(--texti); text-decoration: none; display: inline-flex; align-items: center; gap: 7px; }
+  .deilihnappar a:hover, .deilihnappar button:hover { border-color: var(--texti-3); }
+  .deilihnappar svg { width: 15px; height: 15px; display: inline; flex: none; }
+  .deiling .ath { margin: 0; font-size: .8rem; color: var(--texti-3); }
+  .deiling .tokst { color: #1f7a4d; font-size: .82rem; min-height: 1.2em; margin: 0; }
+
   .vidvorun { border-left: 3px solid var(--akser); background: var(--reitur);
               padding: 10px 14px; margin: 18px 0; border-radius: 0 6px 6px 0;
               font-size: .88rem; color: var(--texti-2); }
@@ -216,6 +238,7 @@
       <div class="hnappar" style="margin-left:auto">
         <button class="flipa" id="f-mynd" aria-pressed="true">Mynd</button>
         <button class="flipa" id="f-tafla" aria-pressed="false">Tafla</button>
+        <button class="deila" id="deila" type="button" disabled>Deila grafi</button>
       </div>
     </div>
 
@@ -239,6 +262,28 @@
   Merkingin við hvert félag segir frá hvaða ári röðin er samfelld, og myndin sýnir
   þann hluta — hakaðu við „öll sagan“ til að sjá eldri gögn með eyðum.
 </div>
+
+<dialog class="deiling" id="deiligluggi" aria-labelledby="deili-titill">
+  <div class="deiling-innri">
+    <div class="deiling-haus">
+      <h2 id="deili-titill">Deila grafi</h2>
+      <button class="loka" id="deili-loka" type="button" aria-label="Loka">×</button>
+    </div>
+    <img id="deili-forsyn" alt="Mynd af grafinu sem verður deilt">
+    <label for="deili-texti" class="merki" style="margin:0">Texti með færslunni</label>
+    <textarea id="deili-texti" rows="3"></textarea>
+    <div class="deilihnappar">
+      <a id="d-li" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0a66c2" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>
+      <a id="d-fb" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877f2" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>Facebook</a>
+      <a id="d-x" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.48 3.24H4.3l13.31 17.41z"/></svg>X</a>
+      <button id="d-deila" type="button" hidden>Deila mynd…</button>
+      <button id="d-saekja" type="button">Sækja mynd</button>
+      <button id="d-afrita" type="button">Afrita tengil og texta</button>
+    </div>
+    <p class="tokst" id="deili-tokst" role="status"></p>
+    <p class="ath" id="deili-ath"></p>
+  </div>
+</dialog>
 
 <footer>
   <a href="./">Skjölun API-sins</a> ·
@@ -545,6 +590,7 @@ function birta() {
        s.vidmid ? " (viðmið)" : ""}</li>`).join("");
 
   if (!virkar.length) {
+    stada.birt = null; E("deila").disabled = true;
     E("mynd").hidden = true; E("tafla").hidden = true;
     E("stada").hidden = false;
     E("stada").textContent = stada.valin.size
@@ -554,6 +600,8 @@ function birta() {
   }
 
   E("stada").hidden = true;
+  stada.birt = { allar, virkar, vidmid };
+  E("deila").disabled = false;
   E("mynd").innerHTML = teikna(allar);
   E("tafla").innerHTML = taflan(allar);
   E("mynd").hidden = !stada.mynd;
@@ -634,8 +682,203 @@ function skraSlod() {
 }
 
 // ------------------------------------------------------------------ //
+// Deiling                                                            //
+// ------------------------------------------------------------------ //
+
+/* Myndin sem deilt er fylgir alltaf ljósa litasettinu, óháð þema þess sem
+   deilir: hún birtist á annarra manna skjám, í þeirra þema. */
+const LJOS = {
+  "--rod-1": "#2a78d6", "--rod-2": "#eb6834", "--rod-3": "#1baf7a", "--rod-4": "#eda100",
+  "--rod-5": "#e87ba4", "--rod-6": "#008300", "--rod-7": "#4a3aa7", "--rod-8": "#e34948",
+  "--vidmid": "#8d8b82", "--yfirbord": "#fbfaf8", "--bg": "#fbfaf8", "--lina": "#e2ded8",
+  "--texti": "#0b0b0b", "--texti-2": "#52514e", "--texti-3": "#86847e", "--akser": "#7a4f2c",
+};
+const ljos = (s) => String(s).replace(/var\((--[a-z0-9-]+)\)/g, (_, n) => LJOS[n] || "#888");
+const pros = (x) => (x >= 0 ? "+" : "−") + Math.abs(x).toFixed(1).replace(".", ",") + "%";
+const VEFUR = new URL("./", location.href).href;
+
+function samantekt() {
+  const { virkar, vidmid } = stada.birt;
+  const breyting = (s) => {
+    const a = s.punktar[0], b = s.punktar[s.punktar.length - 1];
+    return { heiti: s.heiti, litur: s.litur, fra: a.d.slice(0, 4), til: b.d.slice(0, 4),
+             breyting: (b.v / a.v - 1) * 100 };
+  };
+  const radir = virkar.map(breyting);
+  const vm = vidmid ? breyting(vidmid) : null;
+  const saman = stada.grunnur || (radir.every((r) => r.fra === radir[0].fra) ? radir[0].fra : null);
+  let texti;
+  if (saman) {
+    texti = `Umsamdar launahækkanir frá ${saman}: `
+      + radir.map((r) => `${r.heiti} ${pros(r.breyting)}`).join(", ") + ".";
+    if (vm) texti += ` Launavísitala Hagstofunnar sama tímabil: ${pros(vm.breyting)}.`;
+  } else {
+    texti = "Umsamdar launahækkanir: "
+      + radir.map((r) => `${r.heiti} ${pros(r.breyting)} (${r.fra}–${r.til})`).join(", ") + ".";
+  }
+  return { radir, vm, saman, texti };
+}
+
+/* Tengillinn sem deilt er. Samfélagsmiðlar lesa aðeins föst og:-merki, svo
+   rík forskoðun (mynd og tölur félagsins) er aðeins til fyrir eitt félag í
+   einu - á sérstakri deilisíðu þess. Annars er deilt slóð grafsins sjálfs. */
+function deiliSlod() {
+  const valin = [...stada.valin.keys()];
+  if (valin.length === 1 && !stada.grunnur && !stada.ollsagan && stada.deilisidur?.has(valin[0])) {
+    return { slod: new URL(`deila/${valin[0]}.html`, VEFUR).href, rik: true };
+  }
+  return { slod: location.href, rik: false };
+}
+
+function styttaTexta(g, texti, breidd) {
+  if (g.measureText(texti).width <= breidd) return texti;
+  while (texti.length > 1 && g.measureText(texti + "…").width > breidd) texti = texti.slice(0, -1);
+  return texti + "…";
+}
+
+async function teiknaDeilimynd() {
+  const W = 1200, H = 630, KV = 2;
+  const c = document.createElement("canvas");
+  c.width = W * KV; c.height = H * KV;
+  const g = c.getContext("2d");
+  g.scale(KV, KV);
+  const letur = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+  const { radir, vm, saman } = samantekt();
+
+  g.fillStyle = LJOS["--bg"]; g.fillRect(0, 0, W, H);
+
+  // Merki
+  g.fillStyle = LJOS["--akser"];
+  g.beginPath(); g.roundRect?.(42, 34, 32, 32, 7); if (!g.roundRect) g.rect(42, 34, 32, 32); g.fill();
+  g.strokeStyle = "#f7f0e6"; g.lineWidth = 3; g.lineCap = "round"; g.lineJoin = "round";
+  g.beginPath(); g.moveTo(47, 59); g.lineTo(55, 59); g.lineTo(55, 52); g.lineTo(63, 52); g.lineTo(63, 45); g.lineTo(69, 45); g.stroke();
+  g.fillStyle = LJOS["--texti-2"]; g.font = `15px ${letur}`; g.textBaseline = "middle";
+  g.fillText("Kjarasamningar · umsamdar launahækkanir", 86, 50);
+
+  // Titill og undirtitill
+  g.fillStyle = LJOS["--texti"]; g.font = `700 32px ${letur}`; g.textBaseline = "alphabetic";
+  g.fillText(styttaTexta(g, radir.map((r) => r.heiti).join(" · "), W - 84), 42, 118);
+  g.fillStyle = LJOS["--texti-2"]; g.font = `17px ${letur}`;
+  g.fillText(stada.grunnur ? `Keðjuð vísitala, 100 = ${stada.grunnur}`
+    : saman ? `Keðjuð vísitala, 100 = ${saman}` : "Keðjuð vísitala, 100 við upphaf samfellu hvers félags", 42, 150);
+
+  // Grafið sjálft, úr sama SVG og síðan sýnir, í ljósum litum
+  const svg = ljos(teikna(stada.birt.allar))
+    .replace(/<rect id="naemt"[^>]*\/>/, "")
+    .replace(/^\s*<svg/, '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="400"')
+    .replace(/(<svg[^>]*>)/, `$1<style>.grid line{stroke:${LJOS["--lina"]}}`
+      + `.as text{fill:${LJOS["--texti-3"]};font:11px ${letur}}`
+      + `.merking{font:700 11px ${letur}}</style>`);
+  const mynd = new Image();
+  mynd.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  await mynd.decode();
+  g.drawImage(mynd, 24, 172, 810, 360);
+
+  // Lykiltölur hægra megin
+  const x0 = 862, breidd = W - x0 - 36;
+  const allar = vm ? [...radir, { ...vm, heiti: "Launavísitala Hagstofunnar", litur: "var(--vidmid)", vidmid: true }] : radir;
+  const thett = allar.length > 4;
+  const hae = thett ? Math.min(44, 370 / allar.length) : 86;
+  let y = 196;
+  for (const r of allar) {
+    const litur = ljos(r.litur);
+    g.fillStyle = litur;
+    g.beginPath(); g.arc(x0 + 6, y + 8, 6, 0, Math.PI * 2); g.fill();
+    g.fillStyle = LJOS["--texti-2"]; g.font = `15px ${letur}`; g.textBaseline = "middle";
+    if (thett) {
+      g.font = `700 20px ${letur}`;
+      const tala = pros(r.breyting), tb = g.measureText(tala).width;
+      g.fillStyle = litur; g.textAlign = "right"; g.fillText(tala, W - 36, y + 8); g.textAlign = "left";
+      g.fillStyle = LJOS["--texti-2"]; g.font = `15px ${letur}`;
+      g.fillText(styttaTexta(g, r.heiti, breidd - tb - 32), x0 + 20, y + 8);
+    } else {
+      g.fillText(styttaTexta(g, r.heiti, breidd - 20), x0 + 20, y + 8);
+      g.fillStyle = litur; g.font = `700 34px ${letur}`; g.textBaseline = "alphabetic";
+      g.fillText(pros(r.breyting), x0, y + 54);
+      g.fillStyle = LJOS["--texti-3"]; g.font = `13px ${letur}`;
+      g.fillText(r.vidmid ? "sama tímabil" : `${r.fra}–${r.til}`, x0, y + 74);
+    }
+    y += hae;
+  }
+
+  // Fótur
+  g.textBaseline = "alphabetic"; g.font = `13px ${letur}`; g.fillStyle = LJOS["--texti-3"];
+  g.fillText("kristinnthor.github.io/kjarasamningar · umsamdar hækkanir, ekki mæld launaþróun", 42, 604);
+  if (vm) { g.textAlign = "right"; g.fillText("Launavísitala: Hagstofa Íslands", W - 36, 604); g.textAlign = "left"; }
+
+  return new Promise((leysa) => c.toBlob(leysa, "image/png"));
+}
+
+let deiliMynd = null, deiliMyndSlod = null;
+
+function syna(skilabod) { E("deili-tokst").textContent = skilabod; }
+
+function uppfaeraDeilitengla() {
+  const { slod } = deiliSlod();
+  const texti = E("deili-texti").value.trim();
+  const u = encodeURIComponent(slod);
+  E("d-li").href = `https://www.linkedin.com/sharing/share-offsite/?url=${u}`;
+  E("d-fb").href = `https://www.facebook.com/sharer/sharer.php?u=${u}`;
+  E("d-x").href = `https://x.com/intent/post?text=${encodeURIComponent(texti)}&url=${u}`;
+}
+
+async function opnaDeilingu() {
+  if (!stada.birt) return;
+  const { slod, rik } = deiliSlod();
+  E("deili-texti").value = samantekt().texti;
+  E("deili-ath").textContent = rik
+    ? "Facebook, LinkedIn og X sýna mynd og lykiltölur félagsins í forskoðun tengilsins."
+    : "Forskoðun samfélagsmiðla sýnir mynd og tölur aðeins þegar eitt félag er valið, án grunns. "
+      + "Hér birtist almenn mynd - hengdu grafið við færsluna með „Sækja mynd“ eða „Deila mynd“.";
+  syna("");
+  uppfaeraDeilitengla();
+  E("deiligluggi").showModal();
+  E("deili-forsyn").removeAttribute("src");
+  try {
+    deiliMynd = await teiknaDeilimynd();
+    if (deiliMyndSlod) URL.revokeObjectURL(deiliMyndSlod);
+    deiliMyndSlod = URL.createObjectURL(deiliMynd);
+    E("deili-forsyn").src = deiliMyndSlod;
+    const skra = new File([deiliMynd], "launahaekkanir.png", { type: "image/png" });
+    E("d-deila").hidden = !(navigator.canShare && navigator.canShare({ files: [skra] }));
+  } catch {
+    syna("Ekki tókst að búa til mynd í þessum vafra - tenglarnir virka samt.");
+  }
+}
+
+async function raesaDeilingu() {
+  try {
+    const { felog } = await fetch(new URL("deila/index.json", VEFUR)).then((r) => r.json());
+    stada.deilisidur = new Set(felog);
+  } catch { stada.deilisidur = new Set(); }
+  E("deila").addEventListener("click", opnaDeilingu);
+  E("deili-loka").addEventListener("click", () => E("deiligluggi").close());
+  E("deiligluggi").addEventListener("click", (e) => { if (e.target === E("deiligluggi")) E("deiligluggi").close(); });
+  E("deili-texti").addEventListener("input", uppfaeraDeilitengla);
+  E("d-saekja").addEventListener("click", () => {
+    if (!deiliMyndSlod) return;
+    const a = document.createElement("a");
+    a.href = deiliMyndSlod; a.download = "launahaekkanir.png";
+    document.body.append(a); a.click(); a.remove();
+    syna("Mynd sótt.");
+  });
+  E("d-afrita").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(`${E("deili-texti").value.trim()}\n${deiliSlod().slod}`);
+      syna("Tengill og texti afritaður.");
+    } catch { syna("Afritun tókst ekki - veldu textann og afritaðu handvirkt."); }
+  });
+  E("d-deila").addEventListener("click", async () => {
+    const skra = new File([deiliMynd], "launahaekkanir.png", { type: "image/png" });
+    try {
+      await navigator.share({ files: [skra], title: "Umsamdar launahækkanir",
+                              text: `${E("deili-texti").value.trim()}\n${deiliSlod().slod}` });
+    } catch { /* hætt við */ }
+  });
+}
 
 async function raesa() {
+  raesaDeilingu();
   E("vidvorun").dataset.grunn = E("vidvorun").innerHTML;
   try {
     const { felog } = await saekja("felog.json");
