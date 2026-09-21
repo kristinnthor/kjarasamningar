@@ -67,7 +67,7 @@ def lysa(r) -> str:
 
 
 def algengt_a_bili(allar_radir, fra: str, til: str, sleppa_lykli: str,
-                   hamark: int = 4) -> str:
+                   hamark: int = 4) -> list[dict]:
     """Hvað sömdu önnur félög um á þessu tímabili?
 
     Íslenskir kjarasamningar fylgjast að og oftast er sama prósenta í gildi
@@ -82,9 +82,13 @@ def algengt_a_bili(allar_radir, fra: str, til: str, sleppa_lykli: str,
         if not (fra < r["dagsetning"] <= til) or not r["prosenta"]:
             continue
         teljari[(r["dagsetning"], float(r["prosenta"]))] += 1
-    bestu = [f"{d} {p:.2f}%".replace(".", ",") + f" ({n} félög)"
-             for (d, p), n in teljari.most_common(hamark) if n >= 3]
-    return "; ".join(bestu)
+    return [{"dagsetning": d, "prosenta": p, "felog": n}
+            for (d, p), n in teljari.most_common(hamark) if n >= 3]
+
+
+def lysa_algengt(algengt: list[dict]) -> str:
+    return "; ".join(f"{a['dagsetning']} {a['prosenta']:.2f}%".replace(".", ",")
+                     + f" ({a['felog']} félög)" for a in algengt)
 
 
 def lesa_samninga():
@@ -254,9 +258,10 @@ def main(argv):
                 "manudir": bil,
                 "haekkun_a_undan": lysa(fyrri),
                 "haekkun_a_eftir": lysa(thessi),
-                "algengt_hja_odrum": algengt_a_bili(
+                "_algengt": (algengt := algengt_a_bili(
                     rod, fyrri["dagsetning"], thessi["dagsetning"],
-                    f["felag_lykill"]),
+                    f["felag_lykill"])),
+                "algengt_hja_odrum": lysa_algengt(algengt),
                 "heilleiki": f["heilleiki"],
                 "fjoldi_haekkana": f["fjoldi_haekkana"],
                 "timabil_felags": f"{f['fyrsta']} – {f['sidasta']}",
@@ -295,6 +300,31 @@ def main(argv):
         w = csv.DictWriter(f, fieldnames=DALKAR, extrasaction="ignore")
         w.writeheader()
         w.writerows(linur)
+
+    # Skipulögð útgáfa fyrir vefviðmótið (yfirferd.html), eitt skjal á félag
+    vefur = {}
+    for l in linur:
+        if "_algengt" not in l:
+            continue
+        a = l["felag_audkenni"] or re.sub(r"[^a-z0-9]+", "-", l["felag"].lower())
+        f = vefur.setdefault(a, {
+            "audkenni": a, "felag": l["felag"], "heilleiki": l["heilleiki"],
+            "fjoldi_haekkana": int(l["fjoldi_haekkana"]),
+            "timabil": l["timabil_felags"], "eydur": []})
+        if any(e["id"] == f"{l['eyda_fra']}_{l['eyda_til']}" for e in f["eydur"]):
+            continue
+        f["eydur"].append({
+            "id": f"{l['eyda_fra']}_{l['eyda_til']}",
+            "fra": l["eyda_fra"], "til": l["eyda_til"], "manudir": l["manudir"],
+            "undan": l["haekkun_a_undan"], "eftir": l["haekkun_a_eftir"],
+            "algengt": l["_algengt"],
+            "samningar": [{k: s[k] for k in ("fra", "til", "atvinnurekandi",
+                                               "tegund", "slod")}
+                          for s in l["_tengdir"]],
+        })
+    with open(os.path.join(YFIRFERD, "eydur.json"), "w", encoding="utf-8") as f:
+        json.dump({"eydur_fra": eydur_fra, "felog": list(vefur.values())},
+                  f, ensure_ascii=False, indent=1)
 
     # Læsilegt yfirlit til að skanna hratt
     md = [f"# Eyður til yfirferðar\n",

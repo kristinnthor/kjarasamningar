@@ -1,0 +1,5072 @@
+{
+ "eydur_fra": "1990",
+ "felog": [
+  {
+   "audkenni": "rsi",
+   "felag": "RSÍ",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 64,
+   "timabil": "1987-02-01 – 2028-03-01",
+   "eydur": [
+    {
+     "id": "1987-02-01_1998-01-01",
+     "fra": "1987-02-01",
+     "til": "1998-01-01",
+     "manudir": 131,
+     "undan": "2,00%",
+     "eftir": "4,00%",
+     "algengt": [
+      {
+       "dagsetning": "1998-01-01",
+       "prosenta": 4.0,
+       "felog": 11
+      },
+      {
+       "dagsetning": "1990-12-01",
+       "prosenta": 2.0,
+       "felog": 4
+      },
+      {
+       "dagsetning": "1991-03-01",
+       "prosenta": 2.5,
+       "felog": 4
+      },
+      {
+       "dagsetning": "1991-06-01",
+       "prosenta": 2.0,
+       "felog": 4
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "1995-06-09",
+       "til": "1996-12-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23092516370.pdf"
+      },
+      {
+       "fra": "1997-01-04",
+       "til": "2000-03-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA, kvikmyndahús",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SA_v_kvikmyndahusa.pdf"
+      }
+     ]
+    },
+    {
+     "id": "1998-01-01_2000-01-01",
+     "fra": "1998-01-01",
+     "til": "2000-01-01",
+     "manudir": 24,
+     "undan": "4,00%",
+     "eftir": "1,20%",
+     "algengt": [
+      {
+       "dagsetning": "1999-01-01",
+       "prosenta": 4.0,
+       "felog": 7
+      },
+      {
+       "dagsetning": "2000-01-01",
+       "prosenta": 4.0,
+       "felog": 3
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "1997-01-04",
+       "til": "2000-03-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA, kvikmyndahús",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SA_v_kvikmyndahusa.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2011-10-31_2014-02-01",
+     "fra": "2011-10-31",
+     "til": "2014-02-01",
+     "manudir": 28,
+     "undan": "4,25%",
+     "eftir": "2,80%",
+     "algengt": [
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      },
+      {
+       "dagsetning": "2013-03-01",
+       "prosenta": 3.25,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2012-03-01",
+       "prosenta": 3.5,
+       "felog": 5
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-01-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "RARIK ohf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1067.pdf"
+      },
+      {
+       "fra": "2014-01-01",
+       "til": "2015-02-01",
+       "atvinnurekandi": "Landsvirkjun",
+       "tegund": "Viðauki",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_924.pdf"
+      },
+      {
+       "fra": "2014-01-01",
+       "til": "2017-04-30",
+       "atvinnurekandi": "Félag atvinnurekenda",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/Félag_atvinnurekenda.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "samidnar",
+   "felag": "Samiðnar",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 54,
+   "timabil": "1997-03-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "2012-02-29_2014-01-01",
+     "fra": "2012-02-29",
+     "til": "2014-01-01",
+     "manudir": 23,
+     "undan": "18.000 kr",
+     "eftir": "2,80%",
+     "algengt": [
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      },
+      {
+       "dagsetning": "2013-03-01",
+       "prosenta": 3.25,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2012-03-01",
+       "prosenta": 3.5,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2014-01-01",
+       "prosenta": 2.8,
+       "felog": 3
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-01-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Meistarasamband byggingamanna",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_189.pdf"
+      },
+      {
+       "fra": "2014-01-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Landsvirkjun",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_47.pdf"
+      },
+      {
+       "fra": "2014-01-01",
+       "til": "2014-12-31",
+       "atvinnurekandi": "Félag pípulagningameistara",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_223.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "samtok-starfsmanna-fjarmalafyrirtaekja",
+   "felag": "Samtök starfsmanna fjármálafyrirtækja",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 52,
+   "timabil": "1977-02-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "1992-05-01_1995-04-01",
+     "fra": "1992-05-01",
+     "til": "1995-04-01",
+     "manudir": 35,
+     "undan": "1,70%",
+     "eftir": "1,00%",
+     "algengt": [],
+     "samningar": [
+      {
+       "fra": "1992-05-01",
+       "til": "1993-02-28",
+       "atvinnurekandi": "Samninganefnd bankanna",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1093.pdf"
+      },
+      {
+       "fra": "1993-03-01",
+       "til": "1994-12-31",
+       "atvinnurekandi": "Samninganefnd bankanna",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1092.pdf"
+      },
+      {
+       "fra": "1995-04-01",
+       "til": "1996-12-31",
+       "atvinnurekandi": "Samninganefnd bankanna",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1091.pdf"
+      }
+     ]
+    },
+    {
+     "id": "1996-01-01_1998-01-01",
+     "fra": "1996-01-01",
+     "til": "1998-01-01",
+     "manudir": 24,
+     "undan": "3,70%",
+     "eftir": "3,70%",
+     "algengt": [
+      {
+       "dagsetning": "1998-01-01",
+       "prosenta": 4.0,
+       "felog": 12
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "1997-03-01",
+       "til": "1999-09-01",
+       "atvinnurekandi": "Samninganefnd bankanna",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1090.pdf"
+      },
+      {
+       "fra": "1995-04-01",
+       "til": "1996-12-31",
+       "atvinnurekandi": "Samninganefnd bankanna",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1091.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2000-01-01_2004-10-01",
+     "fra": "2000-01-01",
+     "til": "2004-10-01",
+     "manudir": 57,
+     "undan": "3,50%",
+     "eftir": "4,00%",
+     "algengt": [
+      {
+       "dagsetning": "2002-01-01",
+       "prosenta": 3.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2003-01-01",
+       "prosenta": 3.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2001-01-01",
+       "prosenta": 3.0,
+       "felog": 9
+      },
+      {
+       "dagsetning": "2004-01-01",
+       "prosenta": 3.0,
+       "felog": 6
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2001-01-01",
+       "til": "2004-10-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1088.pdf"
+      },
+      {
+       "fra": "2004-10-01",
+       "til": "2008-10-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1087.pdf"
+      },
+      {
+       "fra": "1999-07-01",
+       "til": "2000-12-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1089.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2004-10-01_2008-11-01",
+     "fra": "2004-10-01",
+     "til": "2008-11-01",
+     "manudir": 49,
+     "undan": "4,00%",
+     "eftir": "20.500 kr",
+     "algengt": [
+      {
+       "dagsetning": "2007-01-01",
+       "prosenta": 2.25,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2005-01-01",
+       "prosenta": 3.0,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2006-01-01",
+       "prosenta": 2.5,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2008-01-01",
+       "prosenta": 2.0,
+       "felog": 6
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2004-10-01",
+       "til": "2008-10-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1087.pdf"
+      },
+      {
+       "fra": "2008-11-01",
+       "til": "2010-12-31",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1086.pdf"
+      },
+      {
+       "fra": "2001-01-01",
+       "til": "2004-10-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1088.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2014-02-01_2015-09-08",
+     "fra": "2014-02-01",
+     "til": "2015-09-08",
+     "manudir": 19,
+     "undan": "2,80% / 8.000 kr",
+     "eftir": "7,20%",
+     "algengt": [
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2014-12-31",
+       "prosenta": 3.2,
+       "felog": 4
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.2,
+       "felog": 3
+      },
+      {
+       "dagsetning": "2015-05-02",
+       "prosenta": 5.5,
+       "felog": 3
+      }
+     ],
+     "samningar": []
+    }
+   ]
+  },
+  {
+   "audkenni": "vm",
+   "felag": "VM",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 44,
+   "timabil": "1983-01-01 – 2028-01-01",
+   "eydur": [
+    {
+     "id": "1990-02-01_1996-01-01",
+     "fra": "1990-02-01",
+     "til": "1996-01-01",
+     "manudir": 71,
+     "undan": "2,50%",
+     "eftir": "3,00%",
+     "algengt": [
+      {
+       "dagsetning": "1990-12-01",
+       "prosenta": 2.0,
+       "felog": 4
+      },
+      {
+       "dagsetning": "1991-03-01",
+       "prosenta": 2.5,
+       "felog": 4
+      },
+      {
+       "dagsetning": "1991-06-01",
+       "prosenta": 2.0,
+       "felog": 4
+      },
+      {
+       "dagsetning": "1995-06-09",
+       "prosenta": 3.2,
+       "felog": 3
+      }
+     ],
+     "samningar": []
+    },
+    {
+     "id": "1996-01-01_2000-12-01",
+     "fra": "1996-01-01",
+     "til": "2000-12-01",
+     "manudir": 59,
+     "undan": "3,00%",
+     "eftir": "5,40%",
+     "algengt": [
+      {
+       "dagsetning": "1998-01-01",
+       "prosenta": 4.0,
+       "felog": 12
+      },
+      {
+       "dagsetning": "1999-01-01",
+       "prosenta": 4.0,
+       "felog": 7
+      },
+      {
+       "dagsetning": "2000-01-01",
+       "prosenta": 4.0,
+       "felog": 3
+      }
+     ],
+     "samningar": []
+    },
+    {
+     "id": "2012-03-01_2014-02-01",
+     "fra": "2012-03-01",
+     "til": "2014-02-01",
+     "manudir": 23,
+     "undan": "5.250 kr",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      },
+      {
+       "dagsetning": "2013-03-01",
+       "prosenta": 3.25,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2014-02-01",
+       "prosenta": 2.8,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2014-01-01",
+       "prosenta": 2.8,
+       "felog": 4
+      }
+     ],
+     "samningar": []
+    },
+    {
+     "id": "2017-04-01_2019-01-01",
+     "fra": "2017-04-01",
+     "til": "2019-01-01",
+     "manudir": 21,
+     "undan": "4,50%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.0,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2017-05-01",
+       "prosenta": 3.0,
+       "felog": 7
+      },
+      {
+       "dagsetning": "2017-05-01",
+       "prosenta": 4.5,
+       "felog": 7
+      }
+     ],
+     "samningar": []
+    }
+   ]
+  },
+  {
+   "audkenni": "vr",
+   "felag": "VR",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 40,
+   "timabil": "1988-06-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "1989-03-01_2001-01-01",
+     "fra": "1989-03-01",
+     "til": "2001-01-01",
+     "manudir": 142,
+     "undan": "1,25%",
+     "eftir": "3,00%",
+     "algengt": [
+      {
+       "dagsetning": "1998-01-01",
+       "prosenta": 4.0,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2001-01-01",
+       "prosenta": 3.0,
+       "felog": 8
+      },
+      {
+       "dagsetning": "1999-01-01",
+       "prosenta": 4.0,
+       "felog": 7
+      },
+      {
+       "dagsetning": "1990-12-01",
+       "prosenta": 2.0,
+       "felog": 4
+      }
+     ],
+     "samningar": []
+    },
+    {
+     "id": "2002-01-01_2004-04-16",
+     "fra": "2002-01-01",
+     "til": "2004-04-16",
+     "manudir": 27,
+     "undan": "2,75%",
+     "eftir": "3,25% / 5.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2003-01-01",
+       "prosenta": 3.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2004-01-01",
+       "prosenta": 3.0,
+       "felog": 6
+      }
+     ],
+     "samningar": []
+    },
+    {
+     "id": "2005-01-01_2007-01-01",
+     "fra": "2005-01-01",
+     "til": "2007-01-01",
+     "manudir": 24,
+     "undan": "3.000 kr",
+     "eftir": "5,50%",
+     "algengt": [
+      {
+       "dagsetning": "2007-01-01",
+       "prosenta": 2.25,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2006-01-01",
+       "prosenta": 2.5,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2006-01-01",
+       "prosenta": 3.0,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2006-01-01",
+       "prosenta": 3.5,
+       "felog": 3
+      }
+     ],
+     "samningar": []
+    },
+    {
+     "id": "2007-01-01_2009-11-01",
+     "fra": "2007-01-01",
+     "til": "2009-11-01",
+     "manudir": 34,
+     "undan": "5,50%",
+     "eftir": "3,50%",
+     "algengt": [
+      {
+       "dagsetning": "2009-03-01",
+       "prosenta": 3.5,
+       "felog": 9
+      },
+      {
+       "dagsetning": "2008-01-01",
+       "prosenta": 2.0,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2008-01-01",
+       "prosenta": 2.25,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2007-05-01",
+       "prosenta": 2.0,
+       "felog": 4
+      }
+     ],
+     "samningar": []
+    }
+   ]
+  },
+  {
+   "audkenni": "efling",
+   "felag": "Efling",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 39,
+   "timabil": "1984-06-01 – 2028-03-01",
+   "eydur": [
+    {
+     "id": "1989-04-30_1995-06-09",
+     "fra": "1989-04-30",
+     "til": "1995-06-09",
+     "manudir": 74,
+     "undan": "15,00%",
+     "eftir": "3,20%",
+     "algengt": [
+      {
+       "dagsetning": "1990-12-01",
+       "prosenta": 2.0,
+       "felog": 4
+      },
+      {
+       "dagsetning": "1991-03-01",
+       "prosenta": 2.5,
+       "felog": 4
+      },
+      {
+       "dagsetning": "1991-06-01",
+       "prosenta": 2.0,
+       "felog": 4
+      },
+      {
+       "dagsetning": "1990-02-01",
+       "prosenta": 1.5,
+       "felog": 3
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "1989-04-30",
+       "til": "1989-12-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23092816500.pdf"
+      },
+      {
+       "fra": "1995-02-01",
+       "til": "1996-12-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Sérkjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23092817390.pdf"
+      },
+      {
+       "fra": "1995-02-18",
+       "til": "1997-02-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Viðauki",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100416040.pdf"
+      }
+     ]
+    },
+    {
+     "id": "1996-01-01_1998-01-01",
+     "fra": "1996-01-01",
+     "til": "1998-01-01",
+     "manudir": 24,
+     "undan": "3,00%",
+     "eftir": "4,00%",
+     "algengt": [
+      {
+       "dagsetning": "1998-01-01",
+       "prosenta": 4.0,
+       "felog": 11
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "1998-01-01",
+       "til": "2000-02-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23092915100.pdf"
+      },
+      {
+       "fra": "1987-01-01",
+       "til": "2000-01-01",
+       "atvinnurekandi": "Reykjavíkurborg",
+       "tegund": "Sérkjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23092816480.pdf"
+      },
+      {
+       "fra": "1995-02-01",
+       "til": "1996-12-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Sérkjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23092817390.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2003-01-01_2006-01-01",
+     "fra": "2003-01-01",
+     "til": "2006-01-01",
+     "manudir": 36,
+     "undan": "2,25% / 70.000 kr",
+     "eftir": "3,00%",
+     "algengt": [
+      {
+       "dagsetning": "2005-01-01",
+       "prosenta": 3.0,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2006-01-01",
+       "prosenta": 2.5,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2004-01-01",
+       "prosenta": 3.0,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2004-12-01",
+       "prosenta": 3.25,
+       "felog": 4
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2004-01-01",
+       "til": "2006-12-31",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Sérkjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100215220.pdf"
+      },
+      {
+       "fra": "2004-02-01",
+       "til": "2019-12-31",
+       "atvinnurekandi": "Samskip hf",
+       "tegund": "Vinnustaðasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100215280.pdf"
+      },
+      {
+       "fra": "2004-02-01",
+       "til": "2006-01-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Sérkjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100215301.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2010-06-01_2015-05-01",
+     "fra": "2010-06-01",
+     "til": "2015-05-01",
+     "manudir": 59,
+     "undan": "6.500 kr",
+     "eftir": "25.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-31",
+       "atvinnurekandi": "Faxaflóahafnir sf.",
+       "tegund": "Kjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/6e41e5df-9032-4ac0-8b79-d858560e6a75.pdf"
+      },
+      {
+       "fra": "2014-03-01",
+       "til": "2015-04-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_156.pdf"
+      },
+      {
+       "fra": "2015-05-01",
+       "til": "2019-03-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_360.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2015-05-01_2019-04-01",
+     "fra": "2015-05-01",
+     "til": "2019-04-01",
+     "manudir": 47,
+     "undan": "25.000 kr",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.0,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2016-01-01",
+       "prosenta": 6.2,
+       "felog": 8
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2015-05-01",
+       "til": "2019-03-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_360.pdf"
+      },
+      {
+       "fra": "2015-05-01",
+       "til": "2019-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_143.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2022-11-01",
+       "atvinnurekandi": "SA Greiðasala",
+       "tegund": "Kjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/27654a71-4b37-422b-8e54-0e23d55b928a.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "sgs",
+   "felag": "SGS",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 35,
+   "timabil": "2004-04-19 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "2007-01-01_2009-07-01",
+     "fra": "2007-01-01",
+     "til": "2009-07-01",
+     "manudir": 30,
+     "undan": "2,25%",
+     "eftir": "0,70%",
+     "algengt": [
+      {
+       "dagsetning": "2009-03-01",
+       "prosenta": 3.5,
+       "felog": 9
+      },
+      {
+       "dagsetning": "2008-01-01",
+       "prosenta": 2.0,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2008-01-01",
+       "prosenta": 2.25,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2007-05-01",
+       "prosenta": 2.0,
+       "felog": 4
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2008-05-01",
+       "til": "2009-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_851.pdf"
+      },
+      {
+       "fra": "2009-07-01",
+       "til": "2010-11-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_850.pdf"
+      },
+      {
+       "fra": "2004-04-19",
+       "til": "2007-12-31",
+       "atvinnurekandi": "Landsvirkjun",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_787.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "sameyki",
+   "felag": "Sameyki",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 30,
+   "timabil": "1986-06-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "1986-12-01_2011-06-01",
+     "fra": "1986-12-01",
+     "til": "2011-06-01",
+     "manudir": 294,
+     "undan": "3,00%",
+     "eftir": "4,25% / 12.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2007-01-01",
+       "prosenta": 2.25,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2002-01-01",
+       "prosenta": 3.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2003-01-01",
+       "prosenta": 3.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2005-01-01",
+       "prosenta": 3.0,
+       "felog": 14
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2011-05-01",
+       "til": "2014-12-01",
+       "atvinnurekandi": "RARIK ohf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_599.pdf"
+      },
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-01",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_465.pdf"
+      },
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_445.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "eining-idja",
+   "felag": "Eining-Iðja",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 25,
+   "timabil": "1989-04-30 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "1989-07-01_1997-03-09",
+     "fra": "1989-07-01",
+     "til": "1997-03-09",
+     "manudir": 92,
+     "undan": "0,50%",
+     "eftir": "70.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "1990-12-01",
+       "prosenta": 2.0,
+       "felog": 4
+      },
+      {
+       "dagsetning": "1991-03-01",
+       "prosenta": 2.5,
+       "felog": 4
+      },
+      {
+       "dagsetning": "1991-06-01",
+       "prosenta": 2.0,
+       "felog": 4
+      },
+      {
+       "dagsetning": "1996-01-01",
+       "prosenta": 3.0,
+       "felog": 4
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "1995-01-01",
+       "til": "2000-12-31",
+       "atvinnurekandi": "Flutningamiðstöðvar Norðurlands ehf.",
+       "tegund": "Sérkjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100415101.pdf"
+      },
+      {
+       "fra": "1997-03-01",
+       "til": "2000-02-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Viðauki",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23092913490.pdf"
+      },
+      {
+       "fra": "1989-05-01",
+       "til": "2000-01-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100414471.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2004-01-01_2006-01-01",
+     "fra": "2004-01-01",
+     "til": "2006-01-01",
+     "manudir": 24,
+     "undan": "0,50%",
+     "eftir": "3,50%",
+     "algengt": [
+      {
+       "dagsetning": "2005-01-01",
+       "prosenta": 3.0,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2006-01-01",
+       "prosenta": 2.5,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2006-01-01",
+       "prosenta": 3.0,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2004-12-01",
+       "prosenta": 3.25,
+       "felog": 4
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2004-01-01",
+       "til": "2007-12-01",
+       "atvinnurekandi": "Nordurorka hf.",
+       "tegund": "Sérkjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100415281.pdf"
+      },
+      {
+       "fra": "2005-01-01",
+       "til": "2008-11-01",
+       "atvinnurekandi": "Nordurorka hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100414530.pdf"
+      },
+      {
+       "fra": "2000-01-01",
+       "til": "",
+       "atvinnurekandi": "Kaupfélag Eyfirðinga",
+       "tegund": "Sérkjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100415270.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2008-01-01_2010-01-01",
+     "fra": "2008-01-01",
+     "til": "2010-01-01",
+     "manudir": 24,
+     "undan": "2,25%",
+     "eftir": "2,00%",
+     "algengt": [
+      {
+       "dagsetning": "2009-03-01",
+       "prosenta": 3.5,
+       "felog": 9
+      },
+      {
+       "dagsetning": "2010-01-01",
+       "prosenta": 2.5,
+       "felog": 9
+      },
+      {
+       "dagsetning": "2009-11-01",
+       "prosenta": 3.5,
+       "felog": 4
+      },
+      {
+       "dagsetning": "2008-02-01",
+       "prosenta": 5.5,
+       "felog": 3
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2009-08-01",
+       "til": "",
+       "atvinnurekandi": "TDK Foil Iceland ehf.",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100415300.pdf"
+      },
+      {
+       "fra": "2000-01-01",
+       "til": "",
+       "atvinnurekandi": "Kaupfélag Eyfirðinga",
+       "tegund": "Sérkjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100415270.pdf"
+      },
+      {
+       "fra": "2000-01-01",
+       "til": "",
+       "atvinnurekandi": "Skinnaiðnaður hf.",
+       "tegund": "Sérkjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100415261.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2010-01-01_2021-01-01",
+     "fra": "2010-01-01",
+     "til": "2021-01-01",
+     "manudir": 132,
+     "undan": "2,00%",
+     "eftir": "24.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2011-05-01",
+       "til": "2014-01-01",
+       "atvinnurekandi": "Norðurorka hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_40.pdf"
+      },
+      {
+       "fra": "2015-09-01",
+       "til": "2018-12-31",
+       "atvinnurekandi": "Norðurorka hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_101.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2022-11-01",
+       "atvinnurekandi": "Norðurorka hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_425.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-flugmalastarfsmanna",
+   "felag": "Félag flugmálastarfsmanna",
+   "heilleiki": "of fáir punktar",
+   "fjoldi_haekkana": 25,
+   "timabil": "2005-03-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "2008-01-01_2011-06-01",
+     "fra": "2008-01-01",
+     "til": "2011-06-01",
+     "manudir": 41,
+     "undan": "2,00%",
+     "eftir": "4,25% / 12.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 13
+      },
+      {
+       "dagsetning": "2009-03-01",
+       "prosenta": 3.5,
+       "felog": 9
+      },
+      {
+       "dagsetning": "2010-01-01",
+       "prosenta": 2.5,
+       "felog": 9
+      },
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.6,
+       "felog": 8
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_824.pdf"
+      },
+      {
+       "fra": "2005-03-01",
+       "til": "2008-04-30",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_822.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2025-01-01_2027-01-01",
+     "fra": "2025-01-01",
+     "til": "2027-01-01",
+     "manudir": 24,
+     "undan": "3,50% / 23.750 kr",
+     "eftir": "3,50% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2026-04-01",
+       "prosenta": 3.5,
+       "felog": 34
+      },
+      {
+       "dagsetning": "2025-04-01",
+       "prosenta": 3.5,
+       "felog": 33
+      },
+      {
+       "dagsetning": "2027-01-01",
+       "prosenta": 3.5,
+       "felog": 27
+      },
+      {
+       "dagsetning": "2026-01-01",
+       "prosenta": 3.5,
+       "felog": 25
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2024-01-01",
+       "til": "2028-01-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1632.pdf"
+      },
+      {
+       "fra": "2024-02-01",
+       "til": "2028-01-31",
+       "atvinnurekandi": "Isavia ohf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1664.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "matvis",
+   "felag": "MATVÍS",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 22,
+   "timabil": "2005-01-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "2007-01-01_2009-03-01",
+     "fra": "2007-01-01",
+     "til": "2009-03-01",
+     "manudir": 26,
+     "undan": "5,50%",
+     "eftir": "3,50%",
+     "algengt": [
+      {
+       "dagsetning": "2009-03-01",
+       "prosenta": 3.5,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2008-01-01",
+       "prosenta": 2.0,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2008-01-01",
+       "prosenta": 2.25,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2007-05-01",
+       "prosenta": 2.0,
+       "felog": 4
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2008-02-01",
+       "til": "2010-11-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23090616351.pdf"
+      },
+      {
+       "fra": "2008-05-01",
+       "til": "2009-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR, Landhelgisgæsla Íslands",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_858.pdf"
+      },
+      {
+       "fra": "2004-05-01",
+       "til": "2019-12-31",
+       "atvinnurekandi": "ESS Support Services",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23090615060.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2010-01-01_2015-05-01",
+     "fra": "2010-01-01",
+     "til": "2015-05-01",
+     "manudir": 64,
+     "undan": "2,50%",
+     "eftir": "7,70% / 25.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2010-08-01",
+       "til": "2011-01-01",
+       "atvinnurekandi": "Ríkissjóður, SNR, Landhelgisgæsla Íslands",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_859.pdf"
+      },
+      {
+       "fra": "2011-05-01",
+       "til": "2014-04-30",
+       "atvinnurekandi": "Landhelgisgæsla Íslands",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_856.pdf"
+      },
+      {
+       "fra": "2011-05-01",
+       "til": "2014-04-01",
+       "atvinnurekandi": "Ríkissjóður, SNR, Landhelgisgæsla Íslands",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_860.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "bifreidastjorafelagid-sleipnir",
+   "felag": "Bifreiðastjórafélagið Sleipnir",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 19,
+   "timabil": "2002-01-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "2007-01-01_2011-05-05",
+     "fra": "2007-01-01",
+     "til": "2011-05-05",
+     "manudir": 52,
+     "undan": "2,25% / 41.800 kr",
+     "eftir": "4,25%",
+     "algengt": [
+      {
+       "dagsetning": "2009-03-01",
+       "prosenta": 3.5,
+       "felog": 9
+      },
+      {
+       "dagsetning": "2010-01-01",
+       "prosenta": 2.5,
+       "felog": 9
+      },
+      {
+       "dagsetning": "2008-01-01",
+       "prosenta": 2.0,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2008-01-01",
+       "prosenta": 2.25,
+       "felog": 5
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2004-12-01",
+       "til": "2007-01-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_282.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2011-05-05_2015-05-01",
+     "fra": "2011-05-05",
+     "til": "2015-05-01",
+     "manudir": 48,
+     "undan": "4,25%",
+     "eftir": "7,20%",
+     "algengt": [
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2011-06-22",
+       "til": "2014-01-31",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_284.pdf"
+      },
+      {
+       "fra": "2011-06-22",
+       "til": "2014-01-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_284.pdf"
+      },
+      {
+       "fra": "2014-01-01",
+       "til": "2014-12-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_286.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2018-05-01_2024-02-01",
+     "fra": "2018-05-01",
+     "til": "2024-02-01",
+     "manudir": 69,
+     "undan": "4,50%",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 24
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      },
+      {
+       "dagsetning": "2022-01-01",
+       "prosenta": 2.5,
+       "felog": 11
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2020-01-01",
+       "til": "2023-09-30",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_277.pdf"
+      },
+      {
+       "fra": "2024-02-01",
+       "til": "2028-02-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_43.pdf"
+      },
+      {
+       "fra": "2015-05-01",
+       "til": "2018-12-31",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_285.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "flugvirkjafelag-islands",
+   "felag": "Flugvirkjafélag Íslands",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 19,
+   "timabil": "2011-06-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2011-06-01_2014-07-01",
+     "fra": "2011-06-01",
+     "til": "2014-07-01",
+     "manudir": 37,
+     "undan": "2.001 kr",
+     "eftir": "2,80%",
+     "algengt": [
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      },
+      {
+       "dagsetning": "2013-03-01",
+       "prosenta": 3.25,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2014-02-01",
+       "prosenta": 2.8,
+       "felog": 5
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2011-06-01",
+       "til": "2014-01-31",
+       "atvinnurekandi": "Bláfugls ehf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_544.pdf"
+      },
+      {
+       "fra": "2014-02-01",
+       "til": "2018-01-31",
+       "atvinnurekandi": "Bláfugls ehf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_546.pdf"
+      },
+      {
+       "fra": "2014-07-01",
+       "til": "2017-08-01",
+       "atvinnurekandi": "Icelandair ehf.",
+       "tegund": "Viðauki",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_182.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2020-02-01_2022-01-01",
+     "fra": "2020-02-01",
+     "til": "2022-01-01",
+     "manudir": 23,
+     "undan": "4,00%",
+     "eftir": "17.250 kr",
+     "algengt": [
+      {
+       "dagsetning": "2022-01-01",
+       "prosenta": 2.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2021-01-01",
+       "prosenta": 2.5,
+       "felog": 8
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2020-03-01",
+       "til": "2023-03-31",
+       "atvinnurekandi": "Samgöngustofa",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_185.pdf"
+      },
+      {
+       "fra": "2018-02-01",
+       "til": "2021-02-01",
+       "atvinnurekandi": "Bláfugls ehf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_147.pdf"
+      },
+      {
+       "fra": "2018-02-01",
+       "til": "2021-02-01",
+       "atvinnurekandi": "Bláfugls ehf.",
+       "tegund": "Viðauki",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_147.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-skipstjornarmanna",
+   "felag": "Félag skipstjórnarmanna",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 19,
+   "timabil": "2011-06-01 – 2028-01-01",
+   "eydur": [
+    {
+     "id": "2012-03-01_2015-11-01",
+     "fra": "2012-03-01",
+     "til": "2015-11-01",
+     "manudir": 44,
+     "undan": "3,30% / 11.000 kr",
+     "eftir": "25.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      },
+      {
+       "dagsetning": "2013-03-01",
+       "prosenta": 3.25,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2014-02-01",
+       "prosenta": 2.8,
+       "felog": 5
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-03-01",
+       "til": "2015-04-01",
+       "atvinnurekandi": "Ríkissjóður, SNR, Landhelgisgæsla Íslands",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_383.pdf"
+      },
+      {
+       "fra": "2015-11-01",
+       "til": "2019-03-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_288.pdf"
+      },
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-31",
+       "atvinnurekandi": "Faxaflóahafnir sf.",
+       "tegund": "Kjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/6e41e5df-9032-4ac0-8b79-d858560e6a75.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "kennarasamband-islands",
+   "felag": "Kennarasamband Íslands",
+   "heilleiki": "eyður",
+   "fjoldi_haekkana": 18,
+   "timabil": "2011-06-01 – 2025-08-01",
+   "eydur": [
+    {
+     "id": "2011-10-01_2014-03-01",
+     "fra": "2011-10-01",
+     "til": "2014-03-01",
+     "manudir": 29,
+     "undan": "2,50%",
+     "eftir": "1,30%",
+     "algengt": [
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      },
+      {
+       "dagsetning": "2013-03-01",
+       "prosenta": 3.25,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2014-02-01",
+       "prosenta": 2.8,
+       "felog": 5
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-03-01",
+       "til": "2016-10-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_826.pdf"
+      },
+      {
+       "fra": "2014-03-01",
+       "til": "2016-10-01",
+       "atvinnurekandi": "Tækniskólinn ehf.",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_642.pdf"
+      },
+      {
+       "fra": "2014-03-01",
+       "til": "2016-10-01",
+       "atvinnurekandi": "Menntaskóli Borgarfjarðar",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_639.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2016-01-01_2019-04-01",
+     "fra": "2016-01-01",
+     "til": "2019-04-01",
+     "manudir": 39,
+     "undan": "2,00%",
+     "eftir": "2,40% / 17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.0,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2017-05-01",
+       "prosenta": 3.0,
+       "felog": 7
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2016-09-01",
+       "til": "2017-10-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_644.pdf"
+      },
+      {
+       "fra": "2016-12-01",
+       "til": "2017-11-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_755.pdf"
+      },
+      {
+       "fra": "2017-01-01",
+       "til": "2018-03-31",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Gerðardómur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_297.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2020-04-01_2023-04-01",
+     "fra": "2020-04-01",
+     "til": "2023-04-01",
+     "manudir": 36,
+     "undan": "2,40% / 18.000 kr",
+     "eftir": "5,00%",
+     "algengt": [
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 18
+      },
+      {
+       "dagsetning": "2022-01-01",
+       "prosenta": 2.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2023-03-31",
+       "prosenta": 0.85,
+       "felog": 9
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2020-09-01",
+       "til": "2021-12-31",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_757.pdf"
+      },
+      {
+       "fra": "2020-09-01",
+       "til": "2021-12-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_294.pdf"
+      },
+      {
+       "fra": "2021-01-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_829.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2023-04-01_2024-11-29",
+     "fra": "2023-04-01",
+     "til": "2024-11-29",
+     "manudir": 19,
+     "undan": "5,00%",
+     "eftir": "3,95% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 21
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.5,
+       "felog": 14
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_640.pdf"
+      },
+      {
+       "fra": "2023-04-01",
+       "til": "2024-05-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_292.pdf"
+      },
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Menntaskóli Borgarfjarðar",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_128.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "afl-starfsgreinafelag-2",
+   "felag": "AFL - Starfsgreinafélag",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 17,
+   "timabil": "2008-12-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "2008-12-01_2015-05-01",
+     "fra": "2008-12-01",
+     "til": "2015-05-01",
+     "manudir": 77,
+     "undan": "20.300 kr",
+     "eftir": "7,70% / 25.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2008-12-01",
+       "til": "2009-08-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100414340.pdf"
+      },
+      {
+       "fra": "2009-07-01",
+       "til": "2010-11-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23100414350.pdf"
+      },
+      {
+       "fra": "2011-05-01",
+       "til": "2014-06-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1056.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2022-01-01_2024-02-01",
+     "fra": "2022-01-01",
+     "til": "2024-02-01",
+     "manudir": 25,
+     "undan": "17.250 kr",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 24
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      },
+      {
+       "dagsetning": "2023-03-31",
+       "prosenta": 0.85,
+       "felog": 9
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-03-01",
+       "til": "2025-02-28",
+       "atvinnurekandi": "Alcoa Fjarðaáls sf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_868.pdf"
+      },
+      {
+       "fra": "2023-03-01",
+       "til": "2025-02-01",
+       "atvinnurekandi": "Alcoa Fjarðaáls sf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_868.pdf"
+      },
+      {
+       "fra": "2023-10-01",
+       "til": "2024-03-31",
+       "atvinnurekandi": "Samband Íslenskra Sveitarfélaga",
+       "tegund": "Kjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/f9f903ff-d7f0-4f0e-8d70-ed785e71f939.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-islenskra-natturufraedinga",
+   "felag": "Félag íslenskra náttúrufræðinga",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 17,
+   "timabil": "2001-12-31 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2004-01-01_2007-05-01",
+     "fra": "2004-01-01",
+     "til": "2007-05-01",
+     "manudir": 40,
+     "undan": "3,00%",
+     "eftir": "2,00%",
+     "algengt": [
+      {
+       "dagsetning": "2007-01-01",
+       "prosenta": 2.25,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2005-01-01",
+       "prosenta": 3.0,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2006-01-01",
+       "prosenta": 2.5,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2006-01-01",
+       "prosenta": 3.0,
+       "felog": 5
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2005-03-01",
+       "til": "2008-04-30",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/26c0c969-f5d9-4273-8172-cbc3700e425a.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2007-05-01_2019-04-01",
+     "fra": "2007-05-01",
+     "til": "2019-04-01",
+     "manudir": 143,
+     "undan": "2,00%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_981.pdf"
+      },
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_326.pdf"
+      },
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_791.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "idjuthjalfafelag-islands",
+   "felag": "Iðjuþjálfafélag Íslands",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 15,
+   "timabil": "2006-01-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2008-01-01_2019-04-01",
+     "fra": "2008-01-01",
+     "til": "2019-04-01",
+     "manudir": 135,
+     "undan": "2,00%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-31",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_203.pdf"
+      },
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/b829ae5c-c4cd-42f1-825f-a11095762130.pdf"
+      },
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.is/pdfs/samningur_205.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "leikarafelag-islands",
+   "felag": "Leikarafélag Íslands",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 15,
+   "timabil": "2008-06-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2009-10-31_2019-04-01",
+     "fra": "2009-10-31",
+     "til": "2019-04-01",
+     "manudir": 114,
+     "undan": "4,75%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2013-03-01",
+       "til": "2014-08-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_420.pdf"
+      },
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/b829ae5c-c4cd-42f1-825f-a11095762130.pdf"
+      },
+      {
+       "fra": "2015-03-01",
+       "til": "2019-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_423.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "framsyn",
+   "felag": "Framsýn",
+   "heilleiki": "eyður",
+   "fjoldi_haekkana": 14,
+   "timabil": "2011-05-05 – 2026-04-01",
+   "eydur": [
+    {
+     "id": "2014-02-01_2016-01-21",
+     "fra": "2014-02-01",
+     "til": "2016-01-21",
+     "manudir": 23,
+     "undan": "2,80% / 8.000 kr",
+     "eftir": "6,20% / 15.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2016-01-01",
+       "prosenta": 6.2,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2014-12-31",
+       "prosenta": 3.2,
+       "felog": 4
+      },
+      {
+       "dagsetning": "2016-01-21",
+       "prosenta": 3.0,
+       "felog": 4
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-08-01",
+       "til": "2024-01-31",
+       "atvinnurekandi": "Landssamband smábátaeigenda, Samband smærri útgerða",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_96.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2016-01-21_2019-04-01",
+     "fra": "2016-01-21",
+     "til": "2019-04-01",
+     "manudir": 39,
+     "undan": "6,20% / 15.000 kr",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.0,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2017-05-01",
+       "prosenta": 3.0,
+       "felog": 7
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2018-05-01",
+       "til": "2023-09-30",
+       "atvinnurekandi": "PCC BakkiSilicon hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_69.pdf"
+      },
+      {
+       "fra": "2014-08-01",
+       "til": "2024-01-31",
+       "atvinnurekandi": "Landssamband smábátaeigenda, Samband smærri útgerða",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_96.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2022-01-01_2024-04-01",
+     "fra": "2022-01-01",
+     "til": "2024-04-01",
+     "manudir": 27,
+     "undan": "21.125 kr",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 20
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-10-01",
+       "til": "2024-03-31",
+       "atvinnurekandi": "Samband Íslenskra Sveitarfélaga",
+       "tegund": "Kjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/f9f903ff-d7f0-4f0e-8d70-ed785e71f939.pdf"
+      },
+      {
+       "fra": "2024-02-01",
+       "til": "2028-02-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1687.pdf"
+      },
+      {
+       "fra": "2024-02-01",
+       "til": "2028-02-01",
+       "atvinnurekandi": "PCC BakkiSilicon hf.",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1449.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-frettamanna",
+   "felag": "Félag fréttamanna",
+   "heilleiki": "of fáir punktar",
+   "fjoldi_haekkana": 14,
+   "timabil": "2009-03-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "2010-01-01_2014-12-31",
+     "fra": "2010-01-01",
+     "til": "2014-12-31",
+     "manudir": 59,
+     "undan": "2,50%",
+     "eftir": "3,20%",
+     "algengt": [
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      },
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.6,
+       "felog": 8
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2011-06-01",
+       "til": "2014-01-01",
+       "atvinnurekandi": "Ríkisútvarpið ohf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.is/pdfs/samningur_657.pdf"
+      },
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-01",
+       "atvinnurekandi": "Ríkisútvarpið ohf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_660.pdf"
+      },
+      {
+       "fra": "2008-07-01",
+       "til": "2010-12-01",
+       "atvinnurekandi": "Ríkisútvarpið ohf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.is/pdfs/samningur_656.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2017-05-01_2019-04-01",
+     "fra": "2017-05-01",
+     "til": "2019-04-01",
+     "manudir": 23,
+     "undan": "4,50%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.0,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2018-06-01",
+       "prosenta": 2.0,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.75,
+       "felog": 5
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2019-04-01",
+       "til": "2022-12-31",
+       "atvinnurekandi": "Ríkisútvarpið ohf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_661.pdf"
+      },
+      {
+       "fra": "2015-05-01",
+       "til": "2018-12-31",
+       "atvinnurekandi": "Ríkisútvarpið ohf.",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.is/pdfs/samningur_658.pdf"
+      },
+      {
+       "fra": "2015-05-01",
+       "til": "2018-12-01",
+       "atvinnurekandi": "Ríkisútvarpið ohf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_658.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2025-01-01_2027-01-01",
+     "fra": "2025-01-01",
+     "til": "2027-01-01",
+     "manudir": 24,
+     "undan": "3,50% / 23.750 kr",
+     "eftir": "3,50% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2026-04-01",
+       "prosenta": 3.5,
+       "felog": 34
+      },
+      {
+       "dagsetning": "2025-04-01",
+       "prosenta": 3.5,
+       "felog": 33
+      },
+      {
+       "dagsetning": "2027-01-01",
+       "prosenta": 3.5,
+       "felog": 27
+      },
+      {
+       "dagsetning": "2026-01-01",
+       "prosenta": 3.5,
+       "felog": 25
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2024-02-01",
+       "til": "2028-02-01",
+       "atvinnurekandi": "Ríkisútvarpið ohf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_16.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "kjarafelag-vidskiptafraedinga-og-hagfraedinga",
+   "felag": "Kjarafélag viðskiptafræðinga og hagfræðinga",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 14,
+   "timabil": "2011-06-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2011-07-01_2015-09-01",
+     "fra": "2011-07-01",
+     "til": "2015-09-01",
+     "manudir": 50,
+     "undan": "4,25%",
+     "eftir": "7,70%",
+     "algengt": [
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      },
+      {
+       "dagsetning": "2013-03-01",
+       "prosenta": 3.25,
+       "felog": 6
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-01",
+       "atvinnurekandi": "Ríkisútvarpið ohf.",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_684.pdf"
+      },
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Orkuveita Reykjavíkur",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_514.pdf"
+      },
+      {
+       "fra": "2014-03-01",
+       "til": "2015-04-30",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_519.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2015-09-01_2019-04-01",
+     "fra": "2015-09-01",
+     "til": "2019-04-01",
+     "manudir": 43,
+     "undan": "7,70%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.0,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2016-01-01",
+       "prosenta": 6.2,
+       "felog": 8
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2015-09-01",
+       "til": "2019-03-01",
+       "atvinnurekandi": "Reykjavíkurborg",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1008.pdf"
+      },
+      {
+       "fra": "2015-09-01",
+       "til": "2019-03-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/d6910c6d28d3504839b10b349e5f3728.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2022-11-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_516.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "tollvardafelag-islands",
+   "felag": "Tollvarðafélag Íslands",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 14,
+   "timabil": "2002-01-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2003-01-01_2005-05-01",
+     "fra": "2003-01-01",
+     "til": "2005-05-01",
+     "manudir": 28,
+     "undan": "3,00%",
+     "eftir": "1,75%",
+     "algengt": [
+      {
+       "dagsetning": "2005-01-01",
+       "prosenta": 3.0,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2004-01-01",
+       "prosenta": 3.0,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2004-12-01",
+       "prosenta": 3.25,
+       "felog": 4
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2005-05-01",
+       "til": "2008-10-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_566.pdf"
+      },
+      {
+       "fra": "2001-05-01",
+       "til": "2005-11-30",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_565.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2008-01-01_2019-04-01",
+     "fra": "2008-01-01",
+     "til": "2019-04-01",
+     "manudir": 135,
+     "undan": "2,50%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2008-11-01",
+       "til": "2009-05-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_571.pdf"
+      },
+      {
+       "fra": "2009-07-01",
+       "til": "2010-11-30",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Gerðardómur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_568.pdf"
+      },
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_570.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2022-01-01_2024-04-01",
+     "fra": "2022-01-01",
+     "til": "2024-04-01",
+     "manudir": 27,
+     "undan": "25.000 kr",
+     "eftir": "3,50%",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 21
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_572.pdf"
+      },
+      {
+       "fra": "2024-04-01",
+       "til": "2028-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1626.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_569.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "throskathjalfafelag-islands",
+   "felag": "Þroskaþjálfafélag Íslands",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 14,
+   "timabil": "2011-06-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2011-06-01_2015-03-01",
+     "fra": "2011-06-01",
+     "til": "2015-03-01",
+     "manudir": 45,
+     "undan": "4,60% / 12.000 kr",
+     "eftir": "6,35%",
+     "algengt": [
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      },
+      {
+       "dagsetning": "2013-03-01",
+       "prosenta": 3.25,
+       "felog": 6
+      },
+      {
+       "dagsetning": "2014-02-01",
+       "prosenta": 2.8,
+       "felog": 5
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/b829ae5c-c4cd-42f1-825f-a11095762130.pdf"
+      },
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.is/pdfs/samningur_205.pdf"
+      },
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_205.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2016-06-01_2019-04-01",
+     "fra": "2016-06-01",
+     "til": "2019-04-01",
+     "manudir": 34,
+     "undan": "7,50%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.0,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2017-05-01",
+       "prosenta": 3.0,
+       "felog": 7
+      },
+      {
+       "dagsetning": "2017-05-01",
+       "prosenta": 4.5,
+       "felog": 7
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2017-09-01",
+       "til": "2019-03-31",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.is/pdfs/samningur_204.pdf"
+      },
+      {
+       "fra": "2017-09-01",
+       "til": "2019-03-31",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_204.pdf"
+      },
+      {
+       "fra": "2017-09-01",
+       "til": "2019-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_407.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "bladamannafelag-islands",
+   "felag": "Blaðamannafélag Íslands",
+   "heilleiki": "of fáir punktar",
+   "fjoldi_haekkana": 13,
+   "timabil": "2015-05-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "2018-05-01_2019-12-01",
+     "fra": "2018-05-01",
+     "til": "2019-12-01",
+     "manudir": 19,
+     "undan": "3,00%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2018-06-01",
+       "prosenta": 2.0,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2019-01-01",
+       "prosenta": 1.5,
+       "felog": 3
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2019-12-01",
+       "til": "2022-11-01",
+       "atvinnurekandi": "Birtings, útgáfufélags ehf.",
+       "tegund": "Viðauki",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_118.pdf"
+      },
+      {
+       "fra": "2015-05-01",
+       "til": "2018-05-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_512.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2025-01-01_2027-01-01",
+     "fra": "2025-01-01",
+     "til": "2027-01-01",
+     "manudir": 24,
+     "undan": "3,50% / 23.750 kr",
+     "eftir": "3,50% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2026-04-01",
+       "prosenta": 3.5,
+       "felog": 34
+      },
+      {
+       "dagsetning": "2025-04-01",
+       "prosenta": 3.5,
+       "felog": 33
+      },
+      {
+       "dagsetning": "2027-01-01",
+       "prosenta": 3.5,
+       "felog": 27
+      },
+      {
+       "dagsetning": "2026-01-01",
+       "prosenta": 3.5,
+       "felog": 25
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2024-02-01",
+       "til": "2028-02-01",
+       "atvinnurekandi": "Bændasamtök Íslands",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1623.pdf"
+      },
+      {
+       "fra": "2024-02-01",
+       "til": "2028-02-01",
+       "atvinnurekandi": "Myllustetur ehf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1458.pdf"
+      },
+      {
+       "fra": "2024-02-01",
+       "til": "2028-02-01",
+       "atvinnurekandi": "Fjölmiðlatorgsins ehf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_121.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-islenskra-hjukrunarfraedinga",
+   "felag": "Félag íslenskra hjúkrunarfræðinga",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 13,
+   "timabil": "2015-05-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2015-05-01_2019-04-01",
+     "fra": "2015-05-01",
+     "til": "2019-04-01",
+     "manudir": 47,
+     "undan": "5,00%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.0,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2016-01-01",
+       "prosenta": 6.2,
+       "felog": 8
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2015-05-01",
+       "til": "2019-03-01",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.is/pdfs/samningur_245.pdf"
+      },
+      {
+       "fra": "2015-09-01",
+       "til": "2019-03-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_785.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Reykjavíkurborg",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_993.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "kjolur",
+   "felag": "Kjölur",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 13,
+   "timabil": "2011-06-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "2013-03-01_2015-05-01",
+     "fra": "2013-03-01",
+     "til": "2015-05-01",
+     "manudir": 26,
+     "undan": "3,25% / 11.000 kr",
+     "eftir": "7,70% / 25.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2014-02-01",
+       "prosenta": 2.8,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2014-01-01",
+       "prosenta": 2.8,
+       "felog": 4
+      },
+      {
+       "dagsetning": "2014-12-31",
+       "prosenta": 3.2,
+       "felog": 4
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-03-01",
+       "til": "2015-04-30",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_68.pdf"
+      },
+      {
+       "fra": "2014-05-01",
+       "til": "2015-04-30",
+       "atvinnurekandi": "Dvalarheimlið Dalbær",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_349.pdf"
+      },
+      {
+       "fra": "2014-11-01",
+       "til": "2015-10-31",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga vegna tónlistarskóla",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_672.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2017-06-01_2022-01-01",
+     "fra": "2017-06-01",
+     "til": "2022-01-01",
+     "manudir": 55,
+     "undan": "2,50%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2022-01-01",
+       "prosenta": 2.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.0,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2021-01-01",
+       "prosenta": 2.5,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2018-06-01",
+       "prosenta": 2.0,
+       "felog": 5
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_471.pdf"
+      },
+      {
+       "fra": "2020-01-01",
+       "til": "2023-03-31",
+       "atvinnurekandi": "Dvalarheimlið Dalbær",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_346.pdf"
+      },
+      {
+       "fra": "2020-01-01",
+       "til": "2023-03-31",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1823.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "viska",
+   "felag": "Viska",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 13,
+   "timabil": "2014-03-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2014-03-01_2016-06-01",
+     "fra": "2014-03-01",
+     "til": "2016-06-01",
+     "manudir": 27,
+     "undan": "2,00%",
+     "eftir": "6,50%",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2016-01-01",
+       "prosenta": 6.2,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2016-05-01",
+       "prosenta": 4.35,
+       "felog": 4
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-03-01",
+       "til": "2015-04-30",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_519.pdf"
+      },
+      {
+       "fra": "2014-03-01",
+       "til": "2015-08-31",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_982.pdf"
+      },
+      {
+       "fra": "2014-03-01",
+       "til": "2015-08-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_722.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "sjukralidafelag-islands",
+   "felag": "Sjúkraliðafélag Íslands",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 12,
+   "timabil": "2015-05-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2017-06-01_2019-04-01",
+     "fra": "2017-06-01",
+     "til": "2019-04-01",
+     "manudir": 22,
+     "undan": "4,00%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.0,
+       "felog": 8
+      },
+      {
+       "dagsetning": "2018-06-01",
+       "prosenta": 2.0,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2018-05-01",
+       "prosenta": 3.75,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2019-01-01",
+       "prosenta": 1.5,
+       "felog": 3
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_495.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_489.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Reykjavíkurborg",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1028.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "stettarfelag-logfraedinga",
+   "felag": "Stéttarfélag lögfræðinga",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 12,
+   "timabil": "2011-06-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2011-06-01_2019-04-01",
+     "fra": "2011-06-01",
+     "til": "2019-04-01",
+     "manudir": 94,
+     "undan": "4,60% / 12.000 kr",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/b829ae5c-c4cd-42f1-825f-a11095762130.pdf"
+      },
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_252.pdf"
+      },
+      {
+       "fra": "2015-02-28",
+       "til": "2017-09-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_255.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "salfraedingafelag-islands",
+   "felag": "Sálfræðingafélag Íslands",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 12,
+   "timabil": "2011-06-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2011-06-01_2019-04-01",
+     "fra": "2011-06-01",
+     "til": "2019-04-01",
+     "manudir": 94,
+     "undan": "4,60% / 12.000 kr",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2012-02-01",
+       "prosenta": 3.5,
+       "felog": 11
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/b829ae5c-c4cd-42f1-825f-a11095762130.pdf"
+      },
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.is/pdfs/samningur_205.pdf"
+      },
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_205.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "sjomannafelagid-islands",
+   "felag": "Sjómannafélagið Íslands",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 10,
+   "timabil": "2019-04-01 – 2028-01-01",
+   "eydur": [
+    {
+     "id": "2022-01-01_2024-02-01",
+     "fra": "2022-01-01",
+     "til": "2024-02-01",
+     "manudir": 25,
+     "undan": "25.000 kr",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 24
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      },
+      {
+       "dagsetning": "2023-03-31",
+       "prosenta": 0.85,
+       "felog": 9
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_377.pdf"
+      },
+      {
+       "fra": "2024-01-01",
+       "til": "2024-01-31",
+       "atvinnurekandi": "SA, SFS",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/Sjómannafélag Íslands og SA og SFS.pdf"
+      },
+      {
+       "fra": "2024-02-01",
+       "til": "2028-02-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, Sæferðir",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1379.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-haskolakennara",
+   "felag": "Félag háskólakennara",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 9,
+   "timabil": "2019-04-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2022-01-01_2024-04-01",
+     "fra": "2022-01-01",
+     "til": "2024-04-01",
+     "manudir": 27,
+     "undan": "17.250 kr",
+     "eftir": "3,50%",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 21
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_726.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_502.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "verkalydsfelag-vestfirdinga",
+   "felag": "Verkalýðsfélag Vestfirðinga",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 9,
+   "timabil": "2012-02-01 – 2026-04-01",
+   "eydur": [
+    {
+     "id": "2012-02-01_2020-01-01",
+     "fra": "2012-02-01",
+     "til": "2020-01-01",
+     "manudir": 95,
+     "undan": "11.000 kr",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2013-02-01",
+       "prosenta": 3.25,
+       "felog": 10
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2019-04-01",
+       "til": "2022-11-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_432.pdf"
+      },
+      {
+       "fra": "2020-01-01",
+       "til": "2023-09-30",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Kjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/7ac86eb5-a952-435b-8e32-64452d3c4554.pdf"
+      },
+      {
+       "fra": "2020-01-01",
+       "til": "2023-09-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_106.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "aldan-stettarfelag",
+   "felag": "Aldan stéttarfélag",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 8,
+   "timabil": "1995-06-09 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "1995-06-09_2019-05-01",
+     "fra": "1995-06-09",
+     "til": "2019-05-01",
+     "manudir": 287,
+     "undan": "3,20%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2007-01-01",
+       "prosenta": 2.25,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2002-01-01",
+       "prosenta": 3.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2003-01-01",
+       "prosenta": 3.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "1995-09-01",
+       "til": "1996-12-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23091414100.pdf"
+      },
+      {
+       "fra": "2014-04-01",
+       "til": "2015-04-01",
+       "atvinnurekandi": "Steinull hf.",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/Steinull_hf.pdf"
+      },
+      {
+       "fra": "2019-05-01",
+       "til": "2022-12-31",
+       "atvinnurekandi": "Steinull hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_363.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2020-05-01_2022-02-01",
+     "fra": "2020-05-01",
+     "til": "2022-02-01",
+     "manudir": 21,
+     "undan": "24.000 kr",
+     "eftir": "2,50% / 25.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2022-01-01",
+       "prosenta": 2.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2021-01-01",
+       "prosenta": 2.5,
+       "felog": 8
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2019-05-01",
+       "til": "2022-12-31",
+       "atvinnurekandi": "Steinull hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_363.pdf"
+      },
+      {
+       "fra": "2020-01-01",
+       "til": "2023-09-30",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Kjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/7ac86eb5-a952-435b-8e32-64452d3c4554.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2022-02-01_2024-04-01",
+     "fra": "2022-02-01",
+     "til": "2024-04-01",
+     "manudir": 26,
+     "undan": "2,50% / 25.000 kr",
+     "eftir": "3,38% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 21
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-31",
+       "atvinnurekandi": "Steinull hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_362.pdf"
+      },
+      {
+       "fra": "2023-10-01",
+       "til": "2024-03-31",
+       "atvinnurekandi": "Samband Íslenskra Sveitarfélaga",
+       "tegund": "Kjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/f9f903ff-d7f0-4f0e-8d70-ed785e71f939.pdf"
+      },
+      {
+       "fra": "2024-04-01",
+       "til": "2028-03-31",
+       "atvinnurekandi": "Steinull hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1696.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-geislafraedinga",
+   "felag": "Félag geislafræðinga",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 8,
+   "timabil": "2019-04-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2022-01-01_2024-04-01",
+     "fra": "2022-01-01",
+     "til": "2024-04-01",
+     "manudir": 27,
+     "undan": "17.250 kr",
+     "eftir": "3,50%",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 21
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_731.pdf"
+      },
+      {
+       "fra": "2024-04-01",
+       "til": "2028-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1791.pdf"
+      },
+      {
+       "fra": "2024-04-01",
+       "til": "2028-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1353.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-haskolamenntadra-starfsmanna-stjornarradsins",
+   "felag": "Félag háskólamenntaðra starfsmanna Stjórnarráðsins",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 8,
+   "timabil": "2019-04-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2022-01-01_2024-04-01",
+     "fra": "2022-01-01",
+     "til": "2024-04-01",
+     "manudir": 27,
+     "undan": "17.250 kr",
+     "eftir": "3,50%",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 21
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_21.pdf"
+      },
+      {
+       "fra": "2024-04-01",
+       "til": "2028-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1342.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_724.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-lifeindafraedinga",
+   "felag": "Félag lífeindafræðinga",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 8,
+   "timabil": "2019-04-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2022-01-01_2024-04-01",
+     "fra": "2022-01-01",
+     "til": "2024-04-01",
+     "manudir": 27,
+     "undan": "17.250 kr",
+     "eftir": "3,50%",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 21
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_702.pdf"
+      },
+      {
+       "fra": "2024-04-01",
+       "til": "2028-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1788.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_701.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-sjukrathjalfara",
+   "felag": "Félag sjúkraþjálfara",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 8,
+   "timabil": "2019-04-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2022-01-01_2024-04-01",
+     "fra": "2022-01-01",
+     "til": "2024-04-01",
+     "manudir": 27,
+     "undan": "17.000 kr",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 20
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-31",
+       "atvinnurekandi": "Reykjavíkurborg",
+       "tegund": "Kjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/74fb1464-e2ff-4cb8-82a9-1d15f03502d4.pdf"
+      },
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_415.pdf"
+      },
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Samtök fyrirtækja í velferðarþjónustu",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_207.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "skerpa-stettarfelag",
+   "felag": "Skerpa stéttarfélag",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 8,
+   "timabil": "2015-01-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "2018-05-01_2024-02-01",
+     "fra": "2018-05-01",
+     "til": "2024-02-01",
+     "manudir": 69,
+     "undan": "2,00%",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 24
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      },
+      {
+       "dagsetning": "2022-01-01",
+       "prosenta": 2.5,
+       "felog": 11
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2019-04-01",
+       "til": "2022-12-31",
+       "atvinnurekandi": "Landsvirkjun",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_366.pdf"
+      },
+      {
+       "fra": "2024-02-01",
+       "til": "2028-01-31",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_skerpa_sa.pdf"
+      },
+      {
+       "fra": "2024-02-01",
+       "til": "2028-02-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_5.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "verkfraedingafelag-islands",
+   "felag": "Verkfræðingafélag Íslands",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 8,
+   "timabil": "2009-03-01 – 2026-04-01",
+   "eydur": [
+    {
+     "id": "2009-03-01_2019-04-01",
+     "fra": "2009-03-01",
+     "til": "2019-04-01",
+     "manudir": 121,
+     "undan": "3,50%",
+     "eftir": "17.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_981.pdf"
+      },
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_521.pdf"
+      },
+      {
+       "fra": "2011-05-01",
+       "til": "2014-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_791.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2019-04-01_2021-01-01",
+     "fra": "2019-04-01",
+     "til": "2021-01-01",
+     "manudir": 21,
+     "undan": "17.000 kr",
+     "eftir": "2,50%",
+     "algengt": [
+      {
+       "dagsetning": "2021-01-01",
+       "prosenta": 2.5,
+       "felog": 7
+      },
+      {
+       "dagsetning": "2020-01-01",
+       "prosenta": 0.55,
+       "felog": 5
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2019-04-01",
+       "til": "2022-11-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_516.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Reykjavíkurborg",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_744.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_518.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2021-01-01_2023-04-01",
+     "fra": "2021-01-01",
+     "til": "2023-04-01",
+     "manudir": 27,
+     "undan": "2,50%",
+     "eftir": "5,00%",
+     "algengt": [
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 18
+      },
+      {
+       "dagsetning": "2022-01-01",
+       "prosenta": 2.5,
+       "felog": 11
+      },
+      {
+       "dagsetning": "2023-03-31",
+       "prosenta": 0.85,
+       "felog": 9
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2021-07-08",
+       "til": "2025-04-30",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_778.pdf"
+      },
+      {
+       "fra": "2023-01-01",
+       "til": "2024-03-31",
+       "atvinnurekandi": "Félag ráðgjafarverkfræðinga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_177.pdf"
+      },
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_980.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-leikstjora-a-islandi",
+   "felag": "Félag leikstjóra á Íslandi",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 7,
+   "timabil": "2020-01-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2021-01-01_2024-04-01",
+     "fra": "2021-01-01",
+     "til": "2024-04-01",
+     "manudir": 39,
+     "undan": "15.750 kr",
+     "eftir": "3,50%",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 21
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_707.pdf"
+      },
+      {
+       "fra": "2024-04-01",
+       "til": "2028-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1662.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_705.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-islenskra-hljomlistarmanna",
+   "felag": "Félag íslenskra hljómlistarmanna",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 7,
+   "timabil": "2003-11-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2003-11-01_2022-01-01",
+     "fra": "2003-11-01",
+     "til": "2022-01-01",
+     "manudir": 218,
+     "undan": "3,00%",
+     "eftir": "2,50%",
+     "algengt": [
+      {
+       "dagsetning": "2007-01-01",
+       "prosenta": 2.25,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2005-01-01",
+       "prosenta": 3.0,
+       "felog": 14
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2003-11-01",
+       "til": "2004-10-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SKM_C554e23092615440.pdf"
+      },
+      {
+       "fra": "2006-01-01",
+       "til": "2008-11-30",
+       "atvinnurekandi": "Íslenska útvarpsfélagið hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_874.pdf"
+      },
+      {
+       "fra": "2011-01-01",
+       "til": "2014-01-01",
+       "atvinnurekandi": "365 miðla ehf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_875.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2022-01-01_2024-04-01",
+     "fra": "2022-01-01",
+     "til": "2024-04-01",
+     "manudir": 27,
+     "undan": "2,50%",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 20
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2022-01-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1038.pdf"
+      },
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_394.pdf"
+      },
+      {
+       "fra": "2023-04-01",
+       "til": "2024-05-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_37.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "starfsmannafelag-kopavogs",
+   "felag": "Starfsmannafélag Kópavogs",
+   "heilleiki": "eyður",
+   "fjoldi_haekkana": 7,
+   "timabil": "2013-03-01 – 2026-04-01",
+   "eydur": [
+    {
+     "id": "2013-03-01_2015-05-01",
+     "fra": "2013-03-01",
+     "til": "2015-05-01",
+     "manudir": 26,
+     "undan": "3,25% / 11.000 kr",
+     "eftir": "25.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      },
+      {
+       "dagsetning": "2014-02-01",
+       "prosenta": 2.8,
+       "felog": 5
+      },
+      {
+       "dagsetning": "2014-01-01",
+       "prosenta": 2.8,
+       "felog": 4
+      },
+      {
+       "dagsetning": "2014-12-31",
+       "prosenta": 3.2,
+       "felog": 4
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2015-05-01",
+       "til": "2019-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_481.pdf"
+      },
+      {
+       "fra": "2015-05-01",
+       "til": "2019-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_481.pdf"
+      },
+      {
+       "fra": "2015-05-01",
+       "til": "2019-03-31",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_479.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2017-06-01_2024-04-01",
+     "fra": "2017-06-01",
+     "til": "2024-04-01",
+     "manudir": 82,
+     "undan": "2,50%",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 20
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2020-01-01",
+       "til": "2023-03-31",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_478.pdf"
+      },
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/Kjarasamningur BSRB og SÍS 2023-2024, dags. 10. júní 2023.pdf"
+      },
+      {
+       "fra": "2024-04-01",
+       "til": "2028-03-31",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1557.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "felag-professora-vid-rikishaskola",
+   "felag": "Félag prófessora við ríkisháskóla",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 6,
+   "timabil": "2019-04-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2020-09-01_2024-04-01",
+     "fra": "2020-09-01",
+     "til": "2024-04-01",
+     "manudir": 43,
+     "undan": "17.000 kr",
+     "eftir": "3,50%",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 21
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_698.pdf"
+      },
+      {
+       "fra": "2024-04-01",
+       "til": "2028-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_fpr_2024.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_699.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "liv",
+   "felag": "LÍV",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 6,
+   "timabil": "1998-01-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "1999-01-01_2024-02-01",
+     "fra": "1999-01-01",
+     "til": "2024-02-01",
+     "manudir": 301,
+     "undan": "4,00%",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 24
+      },
+      {
+       "dagsetning": "2007-01-01",
+       "prosenta": 2.25,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2002-01-01",
+       "prosenta": 3.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2003-01-01",
+       "prosenta": 3.0,
+       "felog": 19
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-02-01",
+       "til": "2015-02-28",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Kjarasamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/f13b6784-a257-43ae-be29-af47fe6f8f49.pdf"
+      },
+      {
+       "fra": "2024-01-01",
+       "til": "2028-02-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1702.pdf"
+      },
+      {
+       "fra": "2024-02-01",
+       "til": "2028-02-01",
+       "atvinnurekandi": "Félag atvinnurekenda",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1703.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "verkalydsfelag-akraness",
+   "felag": "Verkalýðsfélag Akraness",
+   "heilleiki": "eyður",
+   "fjoldi_haekkana": 6,
+   "timabil": "2010-01-01 – 2026-05-01",
+   "eydur": [
+    {
+     "id": "2010-01-01_2019-11-01",
+     "fra": "2010-01-01",
+     "til": "2019-11-01",
+     "manudir": 118,
+     "undan": "2,50%",
+     "eftir": "10.000 kr",
+     "algengt": [
+      {
+       "dagsetning": "2016-06-01",
+       "prosenta": 5.5,
+       "felog": 16
+      },
+      {
+       "dagsetning": "2017-06-01",
+       "prosenta": 2.5,
+       "felog": 15
+      },
+      {
+       "dagsetning": "2011-06-01",
+       "prosenta": 4.25,
+       "felog": 14
+      },
+      {
+       "dagsetning": "2015-05-01",
+       "prosenta": 7.7,
+       "felog": 12
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2014-01-01",
+       "til": "2017-01-01",
+       "atvinnurekandi": "Klafi ehf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_249.pdf"
+      },
+      {
+       "fra": "2014-04-29",
+       "til": "2019-03-31",
+       "atvinnurekandi": "Klafi ehf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_248.pdf"
+      },
+      {
+       "fra": "2015-05-01",
+       "til": "2019-03-31",
+       "atvinnurekandi": "Samband íslenskra sveitarfélaga",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_276.pdf"
+      }
+     ]
+    },
+    {
+     "id": "2019-11-01_2024-05-01",
+     "fra": "2019-11-01",
+     "til": "2024-05-01",
+     "manudir": 54,
+     "undan": "10.000 kr",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 21
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2020-01-01",
+       "til": "2024-12-31",
+       "atvinnurekandi": "Norðurál Grundartanga ehf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/Kjarasamningur_2020_Nordural.pdf"
+      },
+      {
+       "fra": "2020-01-01",
+       "til": "2024-12-01",
+       "atvinnurekandi": "Norðurál Grundartanga ehf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/Kjarasamningur_Norurals_2020-2024_copy.pdf"
+      },
+      {
+       "fra": "2021-01-01",
+       "til": "2022-12-31",
+       "atvinnurekandi": "Elkem Ísland ehf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1408.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "ljosmaedrafelag-islands",
+   "felag": "Ljósmæðrafélag Íslands",
+   "heilleiki": "samfelld",
+   "fjoldi_haekkana": 5,
+   "timabil": "2022-01-01 – 2027-04-01",
+   "eydur": [
+    {
+     "id": "2022-01-01_2024-04-01",
+     "fra": "2022-01-01",
+     "til": "2024-04-01",
+     "manudir": 27,
+     "undan": "17.000 kr",
+     "eftir": "3,50%",
+     "algengt": [
+      {
+       "dagsetning": "2024-02-01",
+       "prosenta": 3.25,
+       "felog": 25
+      },
+      {
+       "dagsetning": "2024-04-01",
+       "prosenta": 3.25,
+       "felog": 21
+      },
+      {
+       "dagsetning": "2023-04-01",
+       "prosenta": 5.0,
+       "felog": 19
+      },
+      {
+       "dagsetning": "2022-11-01",
+       "prosenta": 6.75,
+       "felog": 18
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2023-04-01",
+       "til": "2024-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_558.pdf"
+      },
+      {
+       "fra": "2024-04-01",
+       "til": "2028-03-31",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_559.pdf"
+      },
+      {
+       "fra": "2019-04-01",
+       "til": "2023-03-01",
+       "atvinnurekandi": "Ríkissjóður, SNR",
+       "tegund": "Samkomulag",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_561.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "rafidnadarsamband-islands-vm-felag-velstjora-og-malmtaeknima",
+   "felag": "Rafiðnaðarsamband Íslands, VM, Félag vélstjóra og málmtæknimanna",
+   "heilleiki": "of fáir punktar",
+   "fjoldi_haekkana": 3,
+   "timabil": "2024-02-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "2025-01-01_2027-01-01",
+     "fra": "2025-01-01",
+     "til": "2027-01-01",
+     "manudir": 24,
+     "undan": "3,50% / 23.750 kr",
+     "eftir": "3,50% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2026-04-01",
+       "prosenta": 3.5,
+       "felog": 34
+      },
+      {
+       "dagsetning": "2025-04-01",
+       "prosenta": 3.5,
+       "felog": 33
+      },
+      {
+       "dagsetning": "2027-01-01",
+       "prosenta": 3.5,
+       "felog": 27
+      },
+      {
+       "dagsetning": "2026-01-01",
+       "prosenta": 3.5,
+       "felog": 25
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "2024-08-01",
+       "til": "2027-12-31",
+       "atvinnurekandi": "HS Veitur hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samningur_1602.pdf"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "audkenni": "rafidnadarsamband-islands",
+   "felag": "Rafiðnaðarsamband Íslands",
+   "heilleiki": "of fáir punktar",
+   "fjoldi_haekkana": 2,
+   "timabil": "1996-01-01 – 2027-01-01",
+   "eydur": [
+    {
+     "id": "1996-01-01_2027-01-01",
+     "fra": "1996-01-01",
+     "til": "2027-01-01",
+     "manudir": 372,
+     "undan": "2.700 kr",
+     "eftir": "3,25% / 23.750 kr",
+     "algengt": [
+      {
+       "dagsetning": "2026-04-01",
+       "prosenta": 3.5,
+       "felog": 34
+      },
+      {
+       "dagsetning": "2025-04-01",
+       "prosenta": 3.5,
+       "felog": 33
+      },
+      {
+       "dagsetning": "2025-01-01",
+       "prosenta": 3.5,
+       "felog": 29
+      },
+      {
+       "dagsetning": "2027-01-01",
+       "prosenta": 3.5,
+       "felog": 28
+      }
+     ],
+     "samningar": [
+      {
+       "fra": "1997-01-04",
+       "til": "2000-03-01",
+       "atvinnurekandi": "Samtök atvinnulífsins, SA, kvikmyndahús",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/SA_v_kvikmyndahusa.pdf"
+      },
+      {
+       "fra": "2000-03-01",
+       "til": "2003-02-01",
+       "atvinnurekandi": "Íslenska útvarpsfélagið hf.",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/Islenska_utvarpsfelagid2.pdf"
+      },
+      {
+       "fra": "2000-07-01",
+       "til": "",
+       "atvinnurekandi": "Samtök verslunarinnar - FÍS",
+       "tegund": "Heildarsamningur",
+       "slod": "https://kjarasamningar.hestafl.is/pdfs/samtok_verzlunarinnar.pdf"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

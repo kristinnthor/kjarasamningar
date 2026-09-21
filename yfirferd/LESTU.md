@@ -18,6 +18,14 @@ Skráin er endurbyggð með `python scripts/yfirferd.py` (`--eydur-fra 1995`
 færir markið). Útfylltar línur flytjast yfir í nýju útgáfuna, og eyður sem
 leiðrétting hefur þegar lokað hverfa úr skránni.
 
+## Vefviðmót
+
+Auðveldast er að skrá í vefviðmótinu: https://claude.ai/artifact/LMzAy44rBRow3eRiddKot5
+(`eydur.html`, gögnin úr `eydur.json`). Þar er valið félag, eyðurnar sýndar með
+tenglum á líklega samninga og hækkanir skráðar beint. Skráningar eru tillögur;
+aðeins eigandinn samþykkir eða hafnar, og samþykktar skráningar má sækja sem
+`handvirkar_leidrettingar.csv` eða láta Claude lesa þær úr gagnagrunni síðunnar.
+
 ## Skrárnar
 
 | Skrá | Til hvers |
