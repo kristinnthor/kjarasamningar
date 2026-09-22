@@ -18,7 +18,25 @@ Skráin er endurbyggð með `python scripts/yfirferd.py` (`--eydur-fra 1995`
 færir markið). Útfylltar línur flytjast yfir í nýju útgáfuna, og eyður sem
 leiðrétting hefur þegar lokað hverfa úr skránni.
 
-## Vefviðmót
+## Opin eyðuskráning (hver sem er)
+
+https://kristinnthor.github.io/kjarasamningar/eydur.html (`docs/eydur.html`, gögnin
+úr `docs/eydur.json`). Hver sem er getur skráð hækkun sem vantar; skráningin
+opnast sem útfyllt issue á GitHub (`.github/ISSUE_TEMPLATE/leidretting.yml`,
+merkið `leiðrétting`) og sá sem skráir þarf GitHub-aðgang.
+
+**Yfirferð fer fram á GitHub:**
+
+- samþykkja: bæta merkinu `samþykkt` við issue-ið
+- hafna: bæta merkinu `hafnað` við og loka því
+
+Samþykktar skráningar eru festar með `python scripts/saekja_leidrettingar.py`
+(`--kanna` sýnir fyrst hvað yrði gert). Það sannreynir gildin, festir þau í
+`gogn/handvirkar_leidrettingar.csv` eða `gogn/stadfestar_eydur.csv`, merkir
+issue-ið `fest` og lokar því. Keyrðu svo sameina.py, launathroun.py,
+byggja_api.py, bua_til_deilisidur.py og yfirferd.py.
+
+## Vefviðmót (einkasíða)
 
 Auðveldast er að skrá í vefviðmótinu: https://claude.ai/artifact/LMzAy44rBRow3eRiddKot5
 (`eydur.html`, gögnin úr `eydur.json`). Þar er valið félag, eyðurnar sýndar með

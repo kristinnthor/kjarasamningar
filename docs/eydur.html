@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eyðuskráning</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#7a4f2c">
+<meta name="description" content="Hjálpaðu til við að fylla í eyður í gagnasafni um umsamdar launahækkanir. Skráðu hækkun sem vantar; hver skráning er yfirfarin áður en hún fer í gögnin.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kjarasamningar">
+<meta property="og:title" content="Eyðuskráning — hjálpaðu til við að fylla í eyðurnar">
+<meta property="og:description" content="Skráðu launahækkanir sem vantar í aðalsamninga stéttarfélaga. Hver skráning er yfirfarin áður en hún fer í gögnin.">
+<meta property="og:image" content="https://kristinnthor.github.io/kjarasamningar/deilimynd.png">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #fbfaf8; --yfirbord: #ffffff; --reitur: #f3f0ec;
+  --texti: #1a1815; --texti-2: #52514e; --texti-3: #86847e;
+  --lina: #e2ded8; --akser: #7a4f2c; --akser-mjukt: #f1e7db;
+  --gott: #2f6b3f; --gott-bg: #e3efe5;
+  --vidvorun: #8a5a00; --vidvorun-bg: #f6ecd3;
+  --slaemt: #a12a2a; --slaemt-bg: #f6e1df;
+  --hlutlaust-bg: #ecebe8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #171614; --yfirbord: #1f1e1b; --reitur: #26241f;
+    --texti: #f4f2ee; --texti-2: #c3c2b7; --texti-3: #8d8b82;
+    --lina: #34312c; --akser: #d4a373; --akser-mjukt: #3a2d20;
+    --gott: #8fcf9f; --gott-bg: #1f3325;
+    --vidvorun: #e6c070; --vidvorun-bg: #3a2f17;
+    --slaemt: #f0a39c; --slaemt-bg: #3d2020;
+    --hlutlaust-bg: #2a2825;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #171614; --yfirbord: #1f1e1b; --reitur: #26241f;
+  --texti: #f4f2ee; --texti-2: #c3c2b7; --texti-3: #8d8b82;
+  --lina: #34312c; --akser: #d4a373; --akser-mjukt: #3a2d20;
+  --gott: #8fcf9f; --gott-bg: #1f3325;
+  --vidvorun: #e6c070; --vidvorun-bg: #3a2f17;
+  --slaemt: #f0a39c; --slaemt-bg: #3d2020;
+  --hlutlaust-bg: #2a2825;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--texti);
+       font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.tolur, time, .dags { font-variant-numeric: tabular-nums; }
+a { color: var(--akser); }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--akser); outline-offset: 2px; }
+[hidden] { display: none !important; }
+
+.sida { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+header.haus { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 32px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--lina); margin-bottom: 16px; }
+.merki { display: flex; gap: 12px; align-items: center; }
+.merki svg { flex: none; }
+h1 { font-size: 1.45rem; margin: 0; letter-spacing: -.01em; }
+.undirtitill { margin: 2px 0 0; color: var(--texti-2); font-size: .92rem; }
+.samantekt { display: flex; gap: 20px; flex-wrap: wrap; margin-left: auto; }
+.samantekt div { display: grid; }
+.samantekt b { font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.samantekt span { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--texti-3); }
+
+.inngangur { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 22px; }
+@media (max-width: 760px) { .inngangur { grid-template-columns: minmax(0, 1fr); } }
+.skref { background: var(--reitur); border-radius: 10px; padding: 12px 14px; font-size: .88rem; color: var(--texti-2); }
+.skref b { display: block; color: var(--texti); font-size: .92rem; margin-bottom: 2px; }
+
+.skipulag { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 28px; align-items: start; }
+.skipulag > * { min-width: 0; }
+@media (max-width: 820px) { .skipulag { grid-template-columns: minmax(0, 1fr); } }
+
+.hlidar { position: sticky; top: 12px; display: grid; gap: 10px; }
+@media (max-width: 820px) { .hlidar { position: static; } }
+.leit { width: 100%; padding: 9px 12px; border: 1px solid var(--lina); border-radius: 8px; background: var(--yfirbord); }
+.sia { display: flex; gap: 8px; align-items: center; font-size: .86rem; color: var(--texti-2); }
+.felagalisti { list-style: none; margin: 0; padding: 0; max-height: min(70vh, 720px); overflow: auto;
+  border: 1px solid var(--lina); border-radius: 10px; background: var(--yfirbord); }
+@media (max-width: 820px) { .felagalisti { max-height: 260px; } }
+.felagalisti li + li { border-top: 1px solid var(--lina); }
+.felagalisti button { all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 8px; padding: 9px 12px; }
+.felagalisti button:hover { background: var(--reitur); }
+.felagalisti button:focus-visible { outline: 2px solid var(--akser); outline-offset: -2px; }
+.felagalisti button[aria-current="true"] { background: var(--akser-mjukt); }
+.felagalisti .nafn { font-size: .9rem; line-height: 1.3; }
+.felagalisti .fjoldi { font-size: .78rem; color: var(--texti-3); grid-column: 1; }
+.framvinda { grid-row: 1 / span 2; grid-column: 2; align-self: center; display: flex; gap: 3px; flex-wrap: wrap; max-width: 64px; justify-content: end; }
+.framvinda i { width: 8px; height: 8px; border-radius: 2px; background: var(--lina); }
+.framvinda i.bidur { background: var(--vidvorun); }
+.framvinda i.lokid { background: var(--gott); }
+
+.felagshaus h2 { margin: 0; font-size: 1.25rem; }
+.felagshaus p { margin: 4px 0 18px; color: var(--texti-2); font-size: .9rem; }
+.eydur { display: grid; gap: 18px; }
+.eyda { background: var(--yfirbord); border: 1px solid var(--lina); border-radius: 12px; padding: 16px 18px; display: grid; gap: 14px; }
+.eyda-haus { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; }
+.timabil { font-size: 1.08rem; font-weight: 600; }
+.timabil .or { color: var(--texti-3); font-weight: 400; padding-inline: 4px; }
+.manudir { color: var(--texti-3); font-size: .86rem; }
+.stada { margin-left: auto; font-size: .74rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 999px; background: var(--hlutlaust-bg); color: var(--texti-2); }
+.stada.bidur { background: var(--vidvorun-bg); color: var(--vidvorun); }
+.stada.lokid { background: var(--gott-bg); color: var(--gott); }
+
+.jadrar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 520px) { .jadrar { grid-template-columns: minmax(0, 1fr); } }
+.jadar { background: var(--reitur); border-radius: 8px; padding: 8px 12px; }
+.merkimidi { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .07em; color: var(--texti-3); margin-bottom: 4px; }
+.flisar { display: flex; flex-wrap: wrap; gap: 6px; }
+.flis { border: 1px solid var(--lina); background: var(--yfirbord); border-radius: 999px; padding: 4px 11px; font-size: .84rem; cursor: pointer; }
+.flis:hover { border-color: var(--akser); color: var(--akser); }
+.flis small { color: var(--texti-3); }
+.samningar { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.samningar a { display: inline-flex; gap: 8px; flex-wrap: wrap; text-decoration: none; padding: 4px 0; }
+.samningar a:hover .vidsemjandi { text-decoration: underline; }
+.samningar .dags { color: var(--texti-2); font-size: .86rem; }
+.samningar .tegund { color: var(--texti-3); font-size: .8rem; }
+.samningar .annar { color: var(--vidvorun); font-size: .76rem; }
+.enginn { color: var(--texti-3); font-size: .88rem; font-style: italic; margin: 0; }
+
+.tillogur { display: grid; gap: 6px; }
+.tillaga { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; border: 1px solid var(--lina); border-radius: 8px; padding: 8px 12px; font-size: .9rem; }
+.tillaga b { font-variant-numeric: tabular-nums; }
+.tillaga .mst { font-size: .72rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; margin-left: auto; }
+.mst.bidur { background: var(--vidvorun-bg); color: var(--vidvorun); }
+.mst.samthykkt, .mst.fest { background: var(--gott-bg); color: var(--gott); }
+.mst.hafnad { background: var(--slaemt-bg); color: var(--slaemt); }
+
+.hnappur { border: 1px solid var(--lina); background: var(--yfirbord); border-radius: 7px; padding: 6px 12px; cursor: pointer; font-size: .88rem; }
+.hnappur:hover { border-color: var(--texti-3); }
+.hnappur.adal { background: var(--akser); border-color: var(--akser); color: var(--bg); font-weight: 600; }
+.formhnappar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+form.skra { display: grid; gap: 10px; border-top: 1px dashed var(--lina); padding-top: 14px; }
+.reitir { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 640px) { .reitir { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.reitir label, .breidur label { display: grid; gap: 3px; font-size: .78rem; color: var(--texti-2); }
+.reitir input, .reitir select, .breidur input { width: 100%; padding: 7px 9px; border: 1px solid var(--lina); border-radius: 7px; background: var(--bg); }
+.breidur { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 10px; }
+@media (max-width: 640px) { .breidur { grid-template-columns: minmax(0, 1fr); } }
+.villa { color: var(--slaemt); font-size: .84rem; }
+.sent { color: var(--gott); font-size: .86rem; }
+.tomt { padding: 40px 0; text-align: center; color: var(--texti-3); }
+footer { margin-top: 36px; color: var(--texti-3); font-size: .85rem; }
+</style>
+</head>
+<body>
+<div class="sida">
+  <header class="haus">
+    <div class="merki">
+      <svg width="36" height="36" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="#7a4f2c"/>
+        <path d="M5 25 H13 V18 H21 V11 H27" fill="none" stroke="#f7f0e6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <h1>Eyðuskráning</h1>
+        <p class="undirtitill">Launahækkanir sem vantar í aðalsamninga stéttarfélaga, 1990 og síðar</p>
+      </div>
+    </div>
+    <div class="samantekt" id="samantekt" aria-live="polite"></div>
+  </header>
+
+  <div class="inngangur">
+    <div class="skref"><b>1. Finndu eyðu</b>Veldu félag. Eyða er bil lengra en 18 mánuðir milli hækkana í aðalsamningi þess.</div>
+    <div class="skref"><b>2. Skráðu hækkunina</b>Fylltu út úr samningnum, eða merktu að engin hækkun hafi verið. Skráningin opnast á GitHub, þar sem þú staðfestir hana (þarf GitHub-aðgang).</div>
+    <div class="skref"><b>3. Yfirferð</b>Hver skráning er yfirfarin. Aðeins samþykktar skráningar fara inn í gögnin og API-ið.</div>
+  </div>
+
+  <div class="skipulag" id="skipulag">
+    <aside class="hlidar">
+      <input id="leit" class="leit" type="search" placeholder="Leita að félagi…" aria-label="Leita að félagi" autocomplete="off">
+      <label class="sia"><input id="adeins-opnar" type="checkbox"> Aðeins félög með óskráðar eyður</label>
+      <ul class="felagalisti" id="felagalisti"><li class="tomt">Hleð…</li></ul>
+    </aside>
+    <main id="adal"><p class="tomt">Hleð eyðum…</p></main>
+  </div>
+
+  <footer>
+    <a href="./">Skjölun API-sins</a> ·
+    <a href="./haekkanir.html">Hækkanir félags</a> ·
+    <a href="./skyrsla.html">Samanburður stéttarfélaga</a> ·
+    <a href="https://github.com/kristinnthor/kjarasamningar/issues?q=label%3Aleiðrétting">Allar skráningar á GitHub</a>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const REPO = "kristinnthor/kjarasamningar";
+  const AVID = ["almenn laun", "kauptaxtar", "launatafla", "lágmarkstekjur", "byrjunarlaun", "óskilgreint"];
+  // Fyrirsagnir eyðublaðsins (.github/ISSUE_TEMPLATE/leidretting.yml) -> reitir
+  const REITIR = { "Félag": "felag", "Auðkenni félags": "audkenni", "Samningur": "samningur",
+    "Eyða": "eyda", "Tegund": "tegund", "Gildistaka": "dagsetning", "Prósenta": "prosenta",
+    "Krónur": "kronur", "Á við": "a_vid", "Heimild": "heimild", "Athugasemd": "athugasemd" };
+
+  let felog = [], tillogur = [], valid = null;
+  const opnirFormar = new Set();
+
+  const $ = (s) => document.querySelector(s);
+  const el = (tag, attrs = {}, ...born) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (v == null || v === false) continue;
+      if (k === "class") n.className = v;
+      else if (k === "text") n.textContent = v;
+      else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+      else n.setAttribute(k, v === true ? "" : v);
+    }
+    for (const b of born.flat()) if (b != null) n.append(b.nodeType ? b : document.createTextNode(b));
+    return n;
+  };
+  const ornggSlod = (s) => { try { const u = new URL(s); return /^https?:$/.test(u.protocol) ? u.href : null; } catch { return null; } };
+  const kommu = (x, d = 2) => Number(x).toFixed(d).replace(".", ",");
+  const lesaTolu = (s) => { s = (s || "").trim().replace(/\s|%/g, ""); if (!s) return null; const v = Number(s.replace(",", ".")); return Number.isFinite(v) ? v : NaN; };
+  const lesaKronur = (s) => { s = (s || "").trim().replace(/[\s.]/g, "").replace(/kr$/i, ""); if (!s) return null; const v = Number(s); return Number.isInteger(v) ? v : NaN; };
+  const gildDags = (s) => { if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false; const d = new Date(s + "T00:00:00Z"); return !isNaN(d) && d.toISOString().slice(0, 10) === s; };
+  const geyma = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
+  const saekjaGeymt = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
+
+  // ---- Skráningar á GitHub ----
+  function lesaIssue(i) {
+    const reitir = {};
+    const hlutar = (i.body || "").split(/^###\s+/m).slice(1);
+    for (const h of hlutar) {
+      const [fyrirsogn, ...rest] = h.split("\n");
+      const lykill = REITIR[fyrirsogn.trim()];
+      if (!lykill) continue;
+      const gildi = rest.join("\n").trim();
+      reitir[lykill] = gildi === "_No response_" ? "" : gildi;
+    }
+    const merki = (i.labels || []).map(l => typeof l === "string" ? l : l.name);
+    const stada = merki.includes("fest") ? "fest" : merki.includes("samþykkt") ? "samthykkt"
+      : merki.includes("hafnað") || i.state === "closed" ? "hafnad" : "bidur";
+    const dagar = (reitir.eyda || "").match(/\d{4}-\d{2}-\d{2}/g) || [];
+    return { ...reitir, numer: i.number, slod: i.html_url, stada,
+             eyda_id: dagar.length >= 2 ? `${dagar[0]}_${dagar[1]}` : "" };
+  }
+
+  async function saekjaTillogur() {
+    const ut = [];
+    for (let sida = 1; sida <= 5; sida++) {
+      const svar = await fetch(`https://api.github.com/repos/${REPO}/issues?labels=${encodeURIComponent("leiðrétting")}&state=all&per_page=100&page=${sida}`,
+        { headers: { Accept: "application/vnd.github+json" } });
+      if (!svar.ok) throw new Error(svar.status);
+      const gogn = await svar.json();
+      ut.push(...gogn.filter(i => !i.pull_request).map(lesaIssue));
+      if (gogn.length < 100) break;
+    }
+    return ut;
+  }
+
+  const tillogurEydu = (f, e) => tillogur.filter(t => t.audkenni === f.audkenni && t.eyda_id === e.id);
+  function stadaEydu(f, e) {
+    const t = tillogurEydu(f, e).filter(x => x.stada !== "hafnad");
+    if (!t.length) return "opin";
+    return t.some(x => x.stada === "bidur") ? "bidur" : "lokid";
+  }
+
+  // ---- Samantekt og listi ----
+  function teiknaSamantekt() {
+    let alls = 0, bidur = 0, lokid = 0;
+    for (const f of felog) for (const e of f.eydur) {
+      alls++; const s = stadaEydu(f, e);
+      if (s === "bidur") bidur++; if (s === "lokid") lokid++;
+    }
+    $("#samantekt").replaceChildren(
+      el("div", {}, el("b", { text: String(alls - bidur - lokid) }), el("span", { text: "Óskráðar eyður" })),
+      el("div", {}, el("b", { text: String(bidur) }), el("span", { text: "Bíða yfirferðar" })),
+      el("div", {}, el("b", { text: String(lokid) }), el("span", { text: "Samþykktar" })));
+  }
+
+  function teiknaLista() {
+    const q = $("#leit").value.trim().toLowerCase();
+    const adeinsOpnar = $("#adeins-opnar").checked;
+    const synd = felog.filter(f => (!q || f.felag.toLowerCase().includes(q))
+      && (!adeinsOpnar || f.eydur.some(e => stadaEydu(f, e) === "opin")));
+    $("#felagalisti").replaceChildren(...(synd.length ? synd.map(f => {
+      const stodur = f.eydur.map(e => stadaEydu(f, e));
+      return el("li", {}, el("button", { type: "button", "aria-current": String(f.audkenni === valid), onclick: () => velja(f.audkenni) },
+        el("span", { class: "nafn", text: f.felag }),
+        el("span", { class: "fjoldi", text: `${f.eydur.length} ${f.eydur.length === 1 ? "eyða" : "eyður"}` }),
+        el("span", { class: "framvinda", "aria-hidden": "true" }, stodur.map(s => el("i", { class: s === "opin" ? "" : s })))));
+    }) : [el("li", { class: "tomt", text: "Ekkert félag passar" })]));
+  }
+
+  function velja(audkenni) {
+    valid = audkenni; geyma("eydur.valid", audkenni);
+    history.replaceState(null, "", "#" + audkenni);
+    teiknaLista(); teiknaFelag();
+  }
+
+  // ---- Eyður félags ----
+  const STADA_TEXTI = { opin: "Óskráð", bidur: "Tillaga bíður", lokid: "Samþykkt" };
+  const TILLOGU_TEXTI = { bidur: "Bíður yfirferðar", samthykkt: "Samþykkt", fest: "Komin í gögnin", hafnad: "Hafnað" };
+
+  function teiknaFelag() {
+    const f = felog.find(x => x.audkenni === valid);
+    if (!f) { $("#adal").replaceChildren(el("p", { class: "tomt", text: "Veldu félag til vinstri." })); return; }
+    const drog = {};
+    document.querySelectorAll("form.skra").forEach(fm => { drog[fm.dataset.eyda] = Object.fromEntries(new FormData(fm)); });
+    $("#adal").replaceChildren(
+      el("div", { class: "felagshaus" }, el("h2", { text: f.felag }),
+        el("p", { text: (f.adalsamningur ? `Aðalsamningur við ${f.adalsamningur} · ` : "")
+          + `${f.fjoldi_haekkana} skráðar hækkanir · ${f.timabil}` })),
+      el("div", { class: "eydur" }, [...f.eydur].sort((a, b) => a.fra.localeCompare(b.fra)).map(e => teiknaEydu(f, e, drog[e.id]))));
+  }
+
+  function teiknaEydu(f, e, drog) {
+    const stada = stadaEydu(f, e);
+    const samningar = (e.samningar || []).map(s => ({ ...s, slod: ornggSlod(s.slod) })).filter(s => s.slod);
+    const kort = el("article", { class: "eyda", id: "eyda-" + e.id },
+      el("div", { class: "eyda-haus" },
+        el("span", { class: "timabil" }, el("time", { text: e.fra }), el("span", { class: "or", text: "→" }), el("time", { text: e.til })),
+        el("span", { class: "manudir", text: `${e.manudir} mánuðir án hækkunar` }),
+        el("span", { class: "stada " + (stada === "opin" ? "" : stada), text: STADA_TEXTI[stada] })),
+      el("div", { class: "jadrar" },
+        el("div", { class: "jadar" }, el("span", { class: "merkimidi", text: "Síðasta hækkun á undan" }), el("span", { class: "tolur", text: e.undan })),
+        el("div", { class: "jadar" }, el("span", { class: "merkimidi", text: "Fyrsta hækkun á eftir" }), el("span", { class: "tolur", text: e.eftir }))));
+
+    if (e.algengt?.length) kort.append(el("div", {},
+      el("span", { class: "merkimidi", text: "Hvað sömdu önnur félög um á tímabilinu — smelltu til að fylla út" }),
+      el("div", { class: "flisar" }, e.algengt.map(a => el("button", { type: "button", class: "flis tolur",
+        onclick: () => { opnirFormar.add(e.id); teiknaFelag(); fyllaUt(e.id, { dagsetning: a.dagsetning, prosenta: kommu(a.prosenta) }); } },
+        `${a.dagsetning} · ${kommu(a.prosenta)}% `, el("small", { text: `${a.felog} félög` }))))));
+
+    kort.append(el("div", {},
+      el("span", { class: "merkimidi", text: "Líklegir samningar — í gildi á tímabilinu, sami mótaðili fyrst" }),
+      samningar.length ? el("ul", { class: "samningar" }, samningar.map(s => el("li", {},
+        el("a", { href: s.slod, target: "_blank", rel: "noopener noreferrer" },
+          el("span", { class: "dags", text: `${s.fra}–${s.til || "?"}` }),
+          el("span", { class: "vidsemjandi", text: s.atvinnurekandi || "Óþekktur viðsemjandi" }),
+          el("span", { class: "tegund", text: s.tegund || "" }),
+          s.sami_motadili === false ? el("span", { class: "annar", text: "annar mótaðili — sérsamningur" }) : null))))
+        : el("p", { class: "enginn", text: "Enginn samningur fannst í heildarskrá ríkissáttasemjara fyrir þetta tímabil." })));
+
+    const tt = tillogurEydu(f, e);
+    if (tt.length) kort.append(el("div", {},
+      el("span", { class: "merkimidi", text: "Skráningar" }),
+      el("div", { class: "tillogur" }, tt.map(t => el("div", { class: "tillaga" },
+        /^Engin/.test(t.tegund || "") ? el("b", { text: "Engin hækkun á tímabilinu" })
+          : [el("b", { text: t.dagsetning || "?" }), t.prosenta ? el("b", { text: t.prosenta + "%" }) : null,
+             t.kronur ? el("b", { text: t.kronur + " kr" }) : null, el("span", { text: t.a_vid || "" })],
+        el("a", { href: ornggSlod(t.slod), target: "_blank", rel: "noopener noreferrer", text: `#${t.numer}` }),
+        el("span", { class: "mst " + t.stada, text: TILLOGU_TEXTI[t.stada] }))))));
+
+    if (opnirFormar.has(e.id)) kort.append(teiknaForm(f, e, samningar, drog));
+    else kort.append(el("div", { class: "formhnappar" },
+      el("button", { type: "button", class: "hnappur adal", onclick: () => { opnirFormar.add(e.id); teiknaFelag(); document.getElementById(`dags-${e.id}`)?.focus(); } }, "+ Skrá hækkun sem vantar"),
+      el("button", { type: "button", class: "hnappur", onclick: () => senda(f, e, { tegund: "engin" }) }, "Engin hækkun á tímabilinu")));
+    return kort;
+  }
+
+  function teiknaForm(f, e, samningar, drog) {
+    const v = drog || {};
+    const id = (n) => `${n}-${e.id}`;
+    const villa = el("div", { class: "villa", role: "alert" });
+    const form = el("form", { class: "skra", "data-eyda": e.id, novalidate: true,
+      onsubmit: (ev) => { ev.preventDefault(); skra(f, e, form, villa); } },
+      el("div", { class: "reitir" },
+        el("label", { for: id("dags") }, "Gildistaka",
+          el("input", { id: id("dags"), name: "dagsetning", inputmode: "numeric", maxlength: "10", placeholder: "áááá-mm-dd",
+            autocomplete: "off", class: "tolur", value: v.dagsetning || "", oninput: lagaDags })),
+        el("label", { for: id("pros") }, "Prósenta",
+          el("input", { id: id("pros"), name: "prosenta", inputmode: "decimal", placeholder: "t.d. 3,5", value: v.prosenta || "" })),
+        el("label", { for: id("kr") }, "Krónur",
+          el("input", { id: id("kr"), name: "kronur", inputmode: "numeric", placeholder: "t.d. 23750", value: v.kronur || "" })),
+        el("label", { for: id("avid") }, "Á við",
+          el("select", { id: id("avid"), name: "a_vid" }, AVID.map(a => el("option", { value: a, selected: (v.a_vid || "almenn laun") === a }, a))))),
+      el("div", { class: "breidur" },
+        el("label", { for: id("heim") }, "Heimild (slóð á samning)",
+          el("input", { id: id("heim"), name: "heimild", type: "url", value: v.heimild ?? (samningar.find(s => s.sami_motadili !== false)?.slod || ""), placeholder: "https://…" })),
+        el("label", { for: id("ath") }, "Athugasemd",
+          el("input", { id: id("ath"), name: "athugasemd", value: v.athugasemd || "", placeholder: "valkvætt" }))),
+      villa,
+      el("div", { class: "formhnappar" },
+        el("button", { type: "submit", class: "hnappur adal" }, "Senda á GitHub til yfirferðar"),
+        el("button", { type: "button", class: "hnappur", onclick: () => { opnirFormar.delete(e.id); teiknaFelag(); } }, "Loka")));
+    return form;
+  }
+
+  function lagaDags(ev) {
+    if (ev.inputType?.startsWith("delete")) return;
+    const n = ev.target, t = n.value.replace(/\D/g, "").slice(0, 8);
+    const ut = t.length > 6 ? `${t.slice(0, 4)}-${t.slice(4, 6)}-${t.slice(6)}` : t.length > 4 ? `${t.slice(0, 4)}-${t.slice(4)}` : t;
+    if (ut !== n.value) n.value = ut;
+  }
+
+  function fyllaUt(eydaId, gildi) {
+    const form = document.querySelector(`form.skra[data-eyda="${CSS.escape(eydaId)}"]`);
+    if (!form) return;
+    for (const [k, v] of Object.entries(gildi)) if (form.elements[k]) form.elements[k].value = v;
+    form.elements.prosenta?.focus();
+  }
+
+  function skra(f, e, form, villa) {
+    const d = Object.fromEntries(new FormData(form));
+    d.dagsetning = (d.dagsetning || "").trim();
+    const pros = lesaTolu(d.prosenta), kr = lesaKronur(d.kronur);
+    const villur = [];
+    if (!gildDags(d.dagsetning)) villur.push("Skrifaðu gildistökudag á forminu áááá-mm-dd, t.d. 2014-02-01.");
+    else if (d.dagsetning < e.fra || d.dagsetning >= e.til) villur.push(`Gildistakan þarf að vera frá ${e.fra} og fyrir ${e.til}.`);
+    if (pros == null && kr == null) villur.push("Settu inn prósentu, krónutölu eða hvort tveggja.");
+    if (Number.isNaN(pros) || (pros != null && !(pros > 0 && pros <= 25))) villur.push("Prósentan þarf að vera á bilinu 0–25.");
+    if (Number.isNaN(kr) || (kr != null && !(kr >= 500 && kr <= 200000))) villur.push("Krónutalan þarf að vera heil tala á bilinu 500–200.000.");
+    if (!ornggSlod(d.heimild || "")) villur.push("Settu inn slóð á samninginn sem hækkunin stendur í — það flýtir yfirferðinni.");
+    if (villur.length) { villa.textContent = villur.join(" "); return; }
+    villa.textContent = "";
+    senda(f, e, { tegund: "haekkun", dagsetning: d.dagsetning, prosenta: pros != null ? kommu(pros).replace(/,?0+$/, "") : "",
+                  kronur: kr != null ? String(kr) : "", a_vid: d.a_vid, heimild: d.heimild.trim(), athugasemd: (d.athugasemd || "").trim() }, form);
+  }
+
+  /* Skráningin fer fram á GitHub: eyðublaðið þar er fyllt út með gildunum og
+     notandinn staðfestir. Engar upplýsingar fara annað. */
+  function senda(f, e, g, form) {
+    const engin = g.tegund === "engin";
+    const p = new URLSearchParams({
+      template: "leidretting.yml",
+      title: `Leiðrétting: ${f.felag} — ${engin ? `engin hækkun ${e.fra} til ${e.til}` : g.dagsetning}`,
+      felag: f.felag, audkenni: f.audkenni, samningur: f.adalsamningur || "",
+      eyda: `${e.fra} til ${e.til}`,
+      tegund: engin ? "Engin hækkun á tímabilinu" : "Hækkun sem vantar",
+    });
+    if (!engin) for (const k of ["dagsetning", "prosenta", "kronur", "a_vid", "heimild", "athugasemd"]) if (g[k]) p.set(k, g[k]);
+    window.open(`https://github.com/${REPO}/issues/new?${p}`, "_blank", "noopener");
+    const skilabod = el("p", { class: "sent", role: "status",
+      text: "GitHub opnaðist í nýjum flipa með skráningunni útfylltri. Smelltu þar á „Create“ til að senda hana til yfirferðar." });
+    (form || document.getElementById("eyda-" + e.id)).append(skilabod);
+  }
+
+  // ---- Ræsing ----
+  async function raesa() {
+    try {
+      ({ felog } = await fetch("eydur.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }));
+    } catch {
+      $("#adal").replaceChildren(el("p", { class: "tomt", text: "Ekki tókst að sækja eyðurnar. Endurhladdu síðuna." }));
+      return;
+    }
+    const ur = decodeURIComponent(location.hash.slice(1));
+    const geymt = saekjaGeymt("eydur.valid");
+    valid = [ur, geymt].find(a => a && felog.some(f => f.audkenni === a)) || felog[0]?.audkenni || null;
+    $("#adeins-opnar").checked = saekjaGeymt("eydur.opnar") === "1";
+    teiknaSamantekt(); teiknaLista(); teiknaFelag();
+    // Staða skráninga kemur frá GitHub; síðan virkar án hennar ef það tekst ekki
+    try {
+      tillogur = await saekjaTillogur();
+      teiknaSamantekt(); teiknaLista(); teiknaFelag();
+    } catch { /* staða skráninga ekki tiltæk - t.d. takmörk á fyrirspurnum */ }
+  }
+
+  $("#leit").addEventListener("input", teiknaLista);
+  $("#adeins-opnar").addEventListener("change", () => { geyma("eydur.opnar", $("#adeins-opnar").checked ? "1" : ""); teiknaLista(); });
+  raesa();
+})();
+</script>
+</body>
+</html>

@@ -348,6 +348,11 @@ def main(argv):
     with open(os.path.join(YFIRFERD, "eydur.json"), "w", encoding="utf-8") as f:
         json.dump({"eydur_fra": eydur_fra, "felog": list(vefur.values())},
                   f, ensure_ascii=False, indent=1)
+    # Sama skrá fyrir opnu eyðuskráninguna á GitHub Pages (docs/eydur.html)
+    with open(os.path.join(ROT, "docs", "eydur.json"), "w", encoding="utf-8") as f:
+        json.dump({"eydur_fra": eydur_fra, "uppfaert": date.today().isoformat(),
+                   "felog": list(vefur.values())},
+                  f, ensure_ascii=False, separators=(",", ":"))
 
     # Læsilegt yfirlit til að skanna hratt
     md = [f"# Eyður til yfirferðar\n",

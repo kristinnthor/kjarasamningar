@@ -1,0 +1,82 @@
+name: Leiðrétting á eyðu
+description: Skráðu launahækkun sem vantar í aðalsamning félags, eða staðfestu að engin hækkun hafi verið á tímabilinu.
+title: "Leiðrétting: "
+labels: ["leiðrétting"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Takk fyrir að hjálpa til. Auðveldast er að skrá leiðréttingu á
+        [eyðuskráningarsíðunni](https://kristinnthor.github.io/kjarasamningar/eydur.html),
+        sem fyllir þetta eyðublað út fyrir þig.
+
+        Leiðréttingin birtist ekki í gögnunum fyrr en hún hefur verið yfirfarin og samþykkt.
+  - type: input
+    id: felag
+    attributes:
+      label: Félag
+      description: Stéttarfélagið sem hækkunin á við.
+    validations:
+      required: true
+  - type: input
+    id: audkenni
+    attributes:
+      label: Auðkenni félags
+      description: Auðkenni félagsins í API-inu, t.d. vr. Eyðuskráningarsíðan fyllir það út.
+  - type: input
+    id: samningur
+    attributes:
+      label: Samningur
+      description: Mótaðili aðalsamningsins, t.d. Samtök atvinnulífsins.
+  - type: input
+    id: eyda
+    attributes:
+      label: Eyða
+      description: Tímabilið sem vantar hækkun á, á forminu áááá-mm-dd til áááá-mm-dd.
+    validations:
+      required: true
+  - type: dropdown
+    id: tegund
+    attributes:
+      label: Tegund
+      options:
+        - Hækkun sem vantar
+        - Engin hækkun á tímabilinu
+    validations:
+      required: true
+  - type: input
+    id: dagsetning
+    attributes:
+      label: Gildistaka
+      description: Á forminu áááá-mm-dd. Autt ef engin hækkun var á tímabilinu.
+  - type: input
+    id: prosenta
+    attributes:
+      label: Prósenta
+      description: T.d. 3,5. Autt ef aðeins var samið um krónutölu.
+  - type: input
+    id: kronur
+    attributes:
+      label: Krónur
+      description: T.d. 23750. Autt ef aðeins var samið um prósentu.
+  - type: dropdown
+    id: a_vid
+    attributes:
+      label: Á við
+      options:
+        - almenn laun
+        - kauptaxtar
+        - launatafla
+        - lágmarkstekjur
+        - byrjunarlaun
+        - óskilgreint
+  - type: input
+    id: heimild
+    attributes:
+      label: Heimild
+      description: Slóð á samninginn sem hækkunin stendur í.
+  - type: textarea
+    id: athugasemd
+    attributes:
+      label: Athugasemd
+      description: Valkvætt.
