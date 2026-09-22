@@ -24,6 +24,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from launathroun import samhaefa_heiti  # noqa: E402
+import motadilar  # noqa: E402
 
 ROT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GOGN = os.path.join(ROT, "gogn")
@@ -95,7 +96,30 @@ def finna_felag(rad, kort):
 
 DALKAR = ["uppruni", "rakning", "felag", "felag_id", "atvinnurekandi",
           "markadur", "heildarsamtok", "gildir_fra", "tegund", "prosenta",
-          "kronur", "a_vid", "artal_stada", "skjal", "slod", "tilvitnun"]
+          "kronur", "a_vid", "artal_stada", "skjal", "slod", "tilvitnun",
+          "motadili", "motadili_heiti", "af_felagsvef"]
+
+
+def motadilar_eftir_slod():
+    """(pdf-slóð, samhæft félagsheiti) -> mótaðili úr skránni.
+
+    Sama PDF-skjal getur átt við fleiri en eitt félag með ólíkum mótaðila
+    (samningur_185 er bæði Flugvirkjafélagsins við Samgöngustofu og
+    flugumferðarstjóra við ríkið), svo félagið er hluti lykilsins.
+    """
+    leid = os.path.join(SAMNINGAR, "rikissattasemjari", "lysigogn.json")
+    if not os.path.exists(leid):
+        return {}
+    with open(leid, encoding="utf-8") as f:
+        gogn = json.load(f)
+    kort = {}
+    for x in gogn:
+        if not x.get("pdf_url"):
+            continue
+        felag = samhaefa_heiti(x.get("launthegi_canonical") or x.get("launthegi"))
+        kort.setdefault((x["pdf_url"], felag), motadilar.ur_skra(x.get("atvinnurekandi")))
+        kort.setdefault((x["pdf_url"], ""), motadilar.ur_skra(x.get("atvinnurekandi")))
+    return kort
 
 
 def skjalaslodir():
@@ -121,6 +145,18 @@ def skjalaslodir():
     return eftir_id, eftir_skra
 
 
+def fyrirtaekjaskra():
+    """Fyrirtæki úr skránni, svo þau þekkist líka í vefskjölum."""
+    leid = os.path.join(SAMNINGAR, "rikissattasemjari", "lysigogn.json")
+    if not os.path.exists(leid):
+        return None
+    with open(leid, encoding="utf-8") as f:
+        gogn = json.load(f)
+    return motadilar.Fyrirtaekjaskra(
+        [x.get("atvinnurekandi") or "" for x in gogn],
+        [x.get("launthegi_canonical") or x.get("launthegi") or "" for x in gogn])
+
+
 def main():
     skra = lesa(SKRA)
     vef = lesa(VEF)
@@ -133,12 +169,16 @@ def main():
     print(f"Þekkt félög úr heildarskránni: {len(kort)}")
 
     slod_id, slod_skra = skjalaslodir()
+    fyrirtaeki = fyrirtaekjaskra()
     ut = []
     for r in skra:
+        motadili, motadili_heiti = motadilar.ur_skra(r.get("atvinnurekandi"))
         ut.append({
             "uppruni": "ríkissáttasemjari", "rakning": "staðfest lýsigögn",
             **{k: r.get(k) for k in DALKAR if k not in ("uppruni", "rakning")},
             "slod": slod_id.get(str(r.get("samningur_id")), ""),
+            "motadili": motadili, "motadili_heiti": motadili_heiti,
+            "af_felagsvef": 0,
         })
 
     talning = collections.Counter()
@@ -147,8 +187,15 @@ def main():
         talning[adferd] += 1
         if not felag:
             continue
+        motadili, motadili_heiti = motadilar.ur_vefskjali(
+            r.get("adili_1"), r.get("adili_2"), r.get("skjal"), fyrirtaeki,
+            r.get("heimild") or "")
         ut.append({
             "uppruni": "vefskjal", "rakning": adferd, "felag": felag,
+            "motadili": motadili, "motadili_heiti": motadili_heiti,
+            # Skjal af vef félagsins sjálfs er langoftast aðalsamningur þess;
+            # það ræður hvert hækkun með óþekktum mótaðila fer.
+            "af_felagsvef": int((r.get("heimild") or "") in FELAGSVEFIR),
             "felag_id": "", "atvinnurekandi": r.get("adili_2") or "",
             "markadur": "", "heildarsamtok": "",
             "gildir_fra": r["gildir_fra"], "tegund": r["tegund"],
@@ -163,7 +210,16 @@ def main():
     # endurkeyrslu útdráttarins. Þær bera eigin uppruna og rakningu, svo
     # alltaf sé ljóst hvað var vélrænt lesið og hvað var lagfært af manni.
     handvirkt = lesa(HANDVIRKT)
+    motad_slod = motadilar_eftir_slod()
     for r in handvirkt:
+        # Mótaðili: skráður í leiðréttingunni, annars samningsins sem heimildin
+        # vísar í, annars autt = aðalsamningur félagsins
+        m = (r.get("motadili") or "").strip()
+        m_heiti = motadilar.HEITI.get(m, "")
+        heimild = (r.get("heimild") or "").strip()
+        if not m and heimild:
+            m, m_heiti = motad_slod.get((heimild, samhaefa_heiti(r["felag"])),
+                                        motad_slod.get((heimild, ""), ("", "")))
         ut.append({
             "uppruni": "handvirk leiðrétting",
             "rakning": "yfirfarið handvirkt",
@@ -180,6 +236,9 @@ def main():
                 ("http://", "https://")) else "",
             "tilvitnun": (r.get("athugasemd")
                           or "Handvirk leiðrétting við yfirferð eyðu."),
+            "motadili": m,
+            "motadili_heiti": m_heiti,
+            "af_felagsvef": 0,
         })
 
     # Handvirk leiðrétting ræður á sínum degi. Sá sem skráði hana fór yfir
@@ -187,7 +246,6 @@ def main():
     # hækkanir sama félags sama dag víkja - annars tvítelst hækkunin, eða
     # röng tala úr útdrættinum lifir áfram við hlið þeirrar réttu.
     if handvirkt:
-        from launathroun import samhaefa_heiti
         leidrettir = {(samhaefa_heiti(r["felag"]), r["gildir_fra"]) for r in handvirkt}
         fyrir = len(ut)
         ut = [r for r in ut if r["uppruni"] == "handvirk leiðrétting"
@@ -205,6 +263,10 @@ def main():
     for k, v in talning.most_common():
         print(f"   {k:<22} {v}")
     med_slod = sum(1 for r in ut if r.get("slod"))
+    motad = collections.Counter(
+        "óþekktur" if r["motadili"] in ("", motadilar.OTHEKKTUR) else "þekktur"
+        for r in ut if r["uppruni"] != "handvirk leiðrétting")
+    print(f"Mótaðili:              {dict(motad)}")
     print(f"\nSameinað:              {len(ut)}")
     print(f"Með slóð á skjal:      {med_slod}")
     print(f"Skrifað í {UT}")

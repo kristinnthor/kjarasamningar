@@ -35,6 +35,7 @@ from datetime import date
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from launathroun import samhaefa_heiti  # noqa: E402
+import motadilar  # noqa: E402
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -116,16 +117,20 @@ def lesa_samninga():
             # Skráarheitin eru ekki lýsandi - "SA_v_kvikmyndahusa.pdf" er
             # RSÍ-samningur. Viðsemjandinn segir notandanum hvað hann opnar.
             "atvinnurekandi": (x.get("atvinnurekandi") or "").strip(),
+            "motadili": motadilar.ur_skra(x.get("atvinnurekandi"))[0],
             "slod": x["pdf_url"],
         })
     return ut
 
 
-def samningar_a_bili(samningar, felag: str, fra: str, til: str, hamark: int = 3):
+def samningar_a_bili(samningar, felag: str, fra: str, til: str, hamark: int = 3,
+                     motadili: str | None = None):
     """Samningar félagsins sem gilda yfir eyðuna.
 
     Hækkun sem vantar á að standa í samningi sem var í gildi á tímabilinu, svo
-    skörun gildistíma er rétta viðmiðið - ekki undirritunardagur.
+    skörun gildistíma er rétta viðmiðið - ekki undirritunardagur. Eyðan er í
+    aðalsamningnum, svo samningar við sama mótaðila koma fyrst: sérsamningur
+    við annan mótaðila á ekki heima í þeirri röð.
     """
     n = samhaefa_heiti(felag)
     if not n or len(n) < 3:
@@ -149,8 +154,9 @@ def samningar_a_bili(samningar, felag: str, fra: str, til: str, hamark: int = 3)
         if s["til"] and s["til"] < fra:
             continue
         fundnir.append(s)
-    # Þeir sem hefjast innan eyðunnar eru líklegastir til að geyma hækkunina
-    fundnir.sort(key=lambda s: (not (fra <= s["fra"] <= til), s["fra"]))
+    # Sami mótaðili fyrst, svo þeir sem hefjast innan eyðunnar
+    fundnir.sort(key=lambda s: (motadili is not None and s["motadili"] != motadili,
+                                not (fra <= s["fra"] <= til), s["fra"]))
     return fundnir[:hamark]
 
 
@@ -158,7 +164,8 @@ DALKAR = [
     # Til útfyllingar
     "stada", "dagsetning", "prosenta", "kronur", "a_vid", "heimild", "athugasemd",
     # Samhengi, forútfyllt
-    "felag", "felag_audkenni", "eyda_fra", "eyda_til", "manudir",
+    "felag", "felag_audkenni", "motadili", "motadili_heiti",
+    "eyda_fra", "eyda_til", "manudir",
     "haekkun_a_undan", "haekkun_a_eftir", "algengt_hja_odrum",
     "samningar_fjoldi", "samningar", "slodir",
     "heilleiki", "fjoldi_haekkana", "timabil_felags",
@@ -223,6 +230,9 @@ def main(argv):
     except Exception:
         pass
 
+    # Eyður eru aðeins skoðaðar í aðalsamningi hvers félags. Sérsamningar eru
+    # stopulir í eðli sínu og bil í þeim þýðir ekki að hækkun vanti.
+    rod = [r for r in rod if r.get("adalsamningur", "1") == "1"]
     eftir_felagi = collections.defaultdict(list)
     for r in rod:
         eftir_felagi[r["felag_lykill"]].append(r)
@@ -248,7 +258,8 @@ def main(argv):
             if (f["felag"], fyrri["dagsetning"], thessi["dagsetning"]) in stadfestar:
                 continue
             tengdir = samningar_a_bili(samningar, f["felag"],
-                                       fyrri["dagsetning"], thessi["dagsetning"])
+                                       fyrri["dagsetning"], thessi["dagsetning"],
+                                       motadili=f.get("adalsamningur"))
             linur.append({
                 "_tengdir": tengdir,
                 "samningar_fjoldi": len(tengdir),
@@ -260,6 +271,8 @@ def main(argv):
                 "a_vid": "", "heimild": "", "athugasemd": "",
                 "felag": f["felag"],
                 "felag_audkenni": audkenni.get(f["felag"], ""),
+                "motadili": f.get("adalsamningur", ""),
+                "motadili_heiti": f.get("adalsamningur_heiti", ""),
                 "eyda_fra": fyrri["dagsetning"],
                 "eyda_til": thessi["dagsetning"],
                 "manudir": bil,
@@ -316,6 +329,8 @@ def main(argv):
         a = l["felag_audkenni"] or re.sub(r"[^a-z0-9]+", "-", l["felag"].lower())
         f = vefur.setdefault(a, {
             "audkenni": a, "felag": l["felag"], "heilleiki": l["heilleiki"],
+            "motadili": l.get("motadili", ""),
+            "adalsamningur": l.get("motadili_heiti", ""),
             "fjoldi_haekkana": int(l["fjoldi_haekkana"]),
             "timabil": l["timabil_felags"], "eydur": []})
         if any(e["id"] == f"{l['eyda_fra']}_{l['eyda_til']}" for e in f["eydur"]):
@@ -325,8 +340,9 @@ def main(argv):
             "fra": l["eyda_fra"], "til": l["eyda_til"], "manudir": l["manudir"],
             "undan": l["haekkun_a_undan"], "eftir": l["haekkun_a_eftir"],
             "algengt": l["_algengt"],
-            "samningar": [{k: s[k] for k in ("fra", "til", "atvinnurekandi",
-                                               "tegund", "slod")}
+            "samningar": [{**{k: s[k] for k in ("fra", "til", "atvinnurekandi",
+                                                  "tegund", "slod")},
+                           "sami_motadili": s["motadili"] == l.get("motadili")}
                           for s in l["_tengdir"]],
         })
     with open(os.path.join(YFIRFERD, "eydur.json"), "w", encoding="utf-8") as f:
@@ -335,8 +351,8 @@ def main(argv):
 
     # Læsilegt yfirlit til að skanna hratt
     md = [f"# Eyður til yfirferðar\n",
-          f"Félög með gögn frá og með {fra_ar}. Aðeins eyður sem ljúka "
-          f"{eydur_fra} eða síðar eru teknar með.\n",
+          f"Félög með gögn frá og með {fra_ar}. Aðeins eyður í aðalsamningi "
+          f"hvers félags sem ljúka {eydur_fra} eða síðar eru teknar með.\n",
           f"**{len(valin)} félög, {fjoldi_eyda} eyður.** "
           f"Eyða telst bil lengra en {EYDUMORK} mánuðir.\n"]
     eftir_heiti = collections.defaultdict(list)
@@ -345,7 +361,8 @@ def main(argv):
     for heiti in sorted(eftir_heiti, key=lambda h: -len(eftir_heiti[h])):
         hop = eftir_heiti[heiti]
         md.append(f"\n## {heiti}\n")
-        md.append(f"{hop[0]['fjoldi_haekkana']} hækkanir, "
+        md.append(f"Aðalsamningur við {hop[0].get('motadili_heiti') or '?'}: "
+                  f"{hop[0]['fjoldi_haekkana']} hækkanir, "
                   f"{hop[0]['timabil_felags']}, {len(hop)} eyður\n")
         for l in sorted(hop, key=lambda x: x["eyda_fra"]):
             md.append(f"\n**{l['eyda_fra']} → {l['eyda_til']}** "

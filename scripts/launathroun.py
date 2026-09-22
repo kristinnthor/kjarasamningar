@@ -24,6 +24,9 @@ import collections
 import re
 import statistics
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import motadilar  # noqa: E402
+
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,6 +36,7 @@ _SAMEINAD = os.path.join(GOGN, "haekkanir_sameinad.csv")
 INN = _SAMEINAD if os.path.exists(_SAMEINAD) else os.path.join(GOGN, "haekkanir.csv")
 UT_ROD = os.path.join(GOGN, "launathroun_eftir_felagi.csv")
 UT_FELOG = os.path.join(GOGN, "felog.csv")
+UT_LINUR = os.path.join(GOGN, "samningslinur.csv")
 
 # Hvaða viðmið gengur fyrir þegar fleiri en eitt er skráð sama dag
 FORGANGUR = ["almenn laun", "launatafla", "kauptaxtar",
@@ -185,6 +189,16 @@ def lesa_stadfestar_eydur():
                 for r in csv.DictReader(f)}
 
 
+def lesa_stadfestar_eydur_med_motadila():
+    """Staðfestar eyður með mótaðila; autt þýðir aðalsamningur félagsins."""
+    leid = os.path.join(os.path.dirname(UT_ROD), "stadfestar_eydur.csv")
+    if not os.path.exists(leid):
+        return set()
+    with open(leid, encoding="utf-8-sig", newline="") as f:
+        return {(samhaefa_heiti(r["felag"]), (r.get("motadili") or "").strip(),
+                 r["eyda_fra"], r["eyda_til"]) for r in csv.DictReader(f)}
+
+
 def finna_samfellu(linur, mork: int = EYDUMORK, stadfestar=frozenset()):
     """Finnur hvenær samfelld röð félagsins hefst, talið aftur á bak frá endanum.
 
@@ -225,128 +239,320 @@ def heilleiki(y) -> str:
     return "eyður"
 
 
-def main():
-    radir = lesa()
-    heiti = samraema_felog(radir)
+LANDSSAMBOND = os.path.join(GOGN, "landssambond.csv")
+ADALSAMNINGAR = os.path.join(GOGN, "adalsamningar.csv")
 
-    # Safna saman eftir (félag, dagsetning)
-    hopar = collections.defaultdict(list)
+# Heildarsamtök opinberra starfsmanna: ríkið er sjálfgefinn aðalsamningur
+OPINBER_SAMTOK = {"BSRB", "BHM", "KÍ"}
+
+# Fyrirtækjasamningur sem endurtekur hækkun aðalsamnings innan þessa glugga
+# er staðfesting á henni en ekki sjálfstæð hækkun
+SAMRUNI_FYRIRTAEKJA_DAGAR = 31
+
+# Eigin hækkun aðildarfélags víkur fyrir hækkun landssambands innan glugga
+ERFD_GLUGGI_DAGAR = 45
+
+
+def lesa_toflu(leid):
+    if not os.path.exists(leid):
+        return []
+    with open(leid, encoding="utf-8-sig", newline="") as f:
+        return [r for r in csv.DictReader(f)
+                if any((v or "").strip() for v in r.values())]
+
+
+def nafn_ur_lykli(lykill: str) -> str:
+    return lykill.split(":", 1)[1] if lykill.startswith("nafn:") else lykill
+
+
+def velja_adalsamninga(radir, landssambond, handstyrt):
+    """Aðalsamningur hvers félags: mótaðilinn sem sjálfgefna röðin fylgir.
+
+    Forgangur: handstýring í gogn/adalsamningar.csv, þá landssamband
+    (aðildarfélög SGS fylgja samningi SGS við SA), þá heildarsamtök (opinberir
+    starfsmenn: ríkið, ASÍ: SA) og loks flest skjöl síðustu tíu ár.
+    Talningin ein dugar ekki: hún myndi velja Advania sem aðalsamning RSÍ.
+    """
+    from datetime import date
+    talning = collections.defaultdict(collections.Counter)
+    nylegt = collections.defaultdict(collections.Counter)
+    samtok = collections.defaultdict(collections.Counter)
+    markadir = collections.defaultdict(collections.Counter)
+    tiu_ar = str(date.today().year - 10)
     for r in radir:
-        if r["artal_stada"] not in TRAUST:
+        lykill = lykill_felags(r)
+        if r.get("heildarsamtok"):
+            samtok[lykill][r["heildarsamtok"]] += 1
+        if r.get("markadur"):
+            markadir[lykill][r["markadur"]] += 1
+        m = r.get("motadili") or ""
+        if m in ("", motadilar.OTHEKKTUR):
             continue
-        hopar[(lykill_felags(r), r["gildir_fra"])].append(r)
+        talning[lykill][m] += 1
+        if r["gildir_fra"] >= tiu_ar:
+            nylegt[lykill][m] += 1
+    adal = {}
+    for lykill in {lykill_felags(r) for r in radir}:
+        nafn = nafn_ur_lykli(lykill)
+        if nafn in handstyrt:
+            adal[lykill] = handstyrt[nafn]
+            continue
+        if nafn in landssambond:
+            adal[lykill] = landssambond[nafn]["motadili"]
+            continue
+        c = talning[lykill]
+        if not c:
+            adal[lykill] = motadilar.OTHEKKTUR
+            continue
+        hs = algengast(samtok[lykill])
+        # Opinberir starfsmenn: ríkið. ASÍ-félög: SA, jafnvel þótt þau semji
+        # líka við sveitarfélög. Sérfélög fylgja markaðnum sem þau starfa á.
+        opinbert = hs in OPINBER_SAMTOK or (
+            hs != "ASÍ" and algengast(markadir[lykill]) == "opinber")
+        forgangur = (["riki", "sveitarfelog", "reykjavikurborg"] if opinbert
+                     else ["sa"] if hs == "ASÍ" else ["sa", "riki"])
+        nothaefir = {m for m, n in c.items() if n >= 3}
+        adal[lykill] = next((m for m in forgangur if m in nothaefir),
+                            max(c, key=lambda m: (nylegt[lykill][m], c[m])))
+    return adal
 
-    ut = []
-    for (lykill, dags), hopur in hopar.items():
-        # Velja viðmið eftir forgangi
-        besta = min(hopur, key=lambda r: FORGANGUR.index(r["a_vid"])
-                    if r["a_vid"] in FORGANGUR else len(FORGANGUR))
-        vidmid = besta["a_vid"]
-        sama = [r for r in hopur if r["a_vid"] == vidmid]
 
-        prosentur = [float(r["prosenta"]) for r in sama if r["prosenta"]]
-        kronur = [int(r["kronur"]) for r in sama if r["kronur"]]
+def draga_saman(hopur, lykill, motadili, heiti):
+    """Ein lína á hvern (félag, mótaðila, dag) úr öllum skjölum sem nefna hann."""
+    besta = min(hopur, key=lambda r: FORGANGUR.index(r["a_vid"])
+                if r["a_vid"] in FORGANGUR else len(FORGANGUR))
+    vidmid = besta["a_vid"]
+    sama = [r for r in hopur if r["a_vid"] == vidmid]
+    prosentur = [float(r["prosenta"]) for r in sama if r["prosenta"]]
+    kronur = [int(r["kronur"]) for r in sama if r["kronur"]]
+    pros = statistics.median(prosentur) if prosentur else None
+    kr = statistics.median(kronur) if kronur else None
+    heitin = collections.Counter(r.get("motadili_heiti") for r in hopur
+                                 if r.get("motadili_heiti"))
+    motadili_heiti = (heitin.most_common(1)[0][0] if heitin
+                      else motadilar.HEITI.get(motadili, motadili))
+    return {
+        "felag_lykill": lykill,
+        "felag_id": besta.get("felag_id") or "",
+        "felag": heiti.get(lykill, besta["felag"]),
+        "markadur": besta.get("markadur") or "",
+        "heildarsamtok": besta.get("heildarsamtok") or "",
+        "motadili": motadili,
+        "motadili_heiti": motadili_heiti,
+        "dagsetning": besta["gildir_fra"],
+        "a_vid": vidmid,
+        "prosenta": round(pros, 2) if pros is not None else None,
+        "kronur": int(kr) if kr is not None else None,
+        "tegund": besta["tegund"],
+        "upprunar": ",".join(sorted({r.get("uppruni") or "ríkissáttasemjari"
+                                     for r in hopur})),
+        "heimildir": len(hopur),
+        "olik_gildi": len(set(prosentur)) if prosentur else 0,
+        "skjal": besta["skjal"],
+        "slod": besta.get("slod") or "",
+        "erft_fra": "",
+        "ur_serssamningi": "",
+    }
 
-        pros = statistics.median(prosentur) if prosentur else None
-        kr = statistics.median(kronur) if kronur else None
-        olik = len(set(prosentur)) if prosentur else 0
 
-        ut.append({
-            "felag_lykill": lykill,
-            "felag_id": besta.get("felag_id") or "",
-            "felag": heiti.get(lykill, besta["felag"]),
-            "markadur": besta.get("markadur") or "",
-            "heildarsamtok": besta.get("heildarsamtok") or "",
-            "dagsetning": dags,
-            "a_vid": vidmid,
-            "prosenta": round(pros, 2) if pros is not None else None,
-            "kronur": int(kr) if kr is not None else None,
-            "tegund": besta["tegund"],
-            "upprunar": ",".join(sorted({r.get("uppruni") or "ríkissáttasemjari"
-                                         for r in hopur})),
-            "heimildir": len(hopur),
-            "olik_gildi": olik,
-            "skjal": besta["skjal"],
-            "slod": besta.get("slod") or "",
-        })
+def sama_haekkun(a, b, dagar: int) -> bool:
+    if dagar_milli(a["dagsetning"], b["dagsetning"]) > dagar:
+        return False
+    if a["prosenta"] is not None and b["prosenta"] is not None:
+        return abs(a["prosenta"] - b["prosenta"]) < 0.005
+    return bool(a["kronur"] and b["kronur"] and a["kronur"] == b["kronur"])
 
-    # Merkja hliðarsamninga áður en keðjað er
-    _eftir_felagi = collections.defaultdict(list)
-    for r in ut:
-        _eftir_felagi[r["felag_lykill"]].append(r)
-    for linur in _eftir_felagi.values():
-        merkja_hlidarsamninga(linur)
 
-    # Fella saman tvítalningu innan hvers félags áður en keðjað er
-    eftir_felagi = collections.defaultdict(list)
-    for r in ut:
-        eftir_felagi[r["felag_lykill"]].append(r)
-    ut, felld_alls = [], 0
-    for linur in eftir_felagi.values():
-        haldid, felld = fella_saman_tvitok(linur)
-        ut.extend(haldid)
-        felld_alls += felld
-    print(f"Tvítalningar felldar saman:  {felld_alls}")
+# Hækkun telst almenn hjá mótaðila ef minnst svona mörg félög hafa hana
+ALMENN_MORK = 3
 
-    ut.sort(key=lambda r: (r["felag"] or "", r["dagsetning"]))
 
-    # Keðjuð vísitala á hvert félag, ásamt mælingu á eyðum.
-    #
-    # Vísitalan er aðeins marktæk ef allar hækkanir félagsins náðust. Löng bil
-    # milli mælipunkta þýða að hækkanir vanti og vísitalan vanmeti þróunina.
-    # `bil_manudir` gerir það sýnilegt á hverri línu.
-    visitala = {}
-    sidasta = {}
-    for r in ut:
-        f = r["felag_lykill"]
+def almennar_haekkanir(linur):
+    """Hækkanir sem mörg félög hafa í línu sama mótaðila.
+
+    Lífskjarasamningurinn gaf t.d. 17.000 kr 1. apríl 2019 í tugum SA-lína.
+    Slík hækkun er almenn hækkun viðkomandi mótaðila og gagnast til að þekkja
+    fyrirtækjasamning sem aðeins endurtekur hana.
+    """
+    teljari = collections.defaultdict(collections.Counter)
+    for (_, m), rr in linur.items():
+        if m.startswith("fy-") or m == motadilar.OTHEKKTUR:
+            continue
+        for k in {(r["dagsetning"], r["prosenta"], r["kronur"]) for r in rr}:
+            teljari[m][k] += 1
+    return {m: [{"dagsetning": d, "prosenta": p, "kronur": k}
+                for (d, p, k), n in c.items() if n >= ALMENN_MORK]
+            for m, c in teljari.items()}
+
+
+def fella_fyrirtaekjasamninga(linur, adal):
+    """Fyrirtækjasamningar sem endurtaka hækkun aðalsamnings falla undir hann.
+
+    Samningur við einstakt fyrirtæki vísar oft í hækkanir almenns
+    kjarasamnings. Slík hækkun er staðfesting á aðalsamningnum, ekki
+    sjálfstæð hækkun, og bætist því við heimildir hans. Það sama gildir um
+    hækkun með óþekktum mótaðila. Aðrar hækkanir fyrirtækjasamnings standa
+    sem sérsamningur og eru ekki keðjaðar við aðalsamninginn.
+    """
+    almennar = almennar_haekkanir(linur)
+    fellt = fyllt = 0
+    for lina in list(linur):
+        lykill, m = lina
+        adal_lina = (lykill, adal.get(lykill))
+        if lina == adal_lina:
+            continue
+        if motadilar.TEGUND.get(m, "fyrirtaeki") not in ("fyrirtaeki", "othekkt"):
+            continue
+        adal_rod = linur.setdefault(adal_lina, [])
+        eftir = []
+        for r in linur[lina]:
+            passar = next((a for a in adal_rod
+                           if sama_haekkun(a, r, SAMRUNI_FYRIRTAEKJA_DAGAR)), None)
+            if passar is not None:
+                passar["heimildir"] += r["heimildir"]
+                passar["upprunar"] = ",".join(sorted(set(passar["upprunar"].split(","))
+                                                     | set(r["upprunar"].split(","))))
+                fellt += 1
+                continue
+            # Vanti aðalsamninginn hækkun sem fyrirtækjasamningurinn endurtekur
+            # úr almennum samningi mótaðilans, fyllir hún í skarðið
+            almenn = any(sama_haekkun(x, r, SAMRUNI_FYRIRTAEKJA_DAGAR)
+                         for x in almennar.get(adal_lina[1], []))
+            nalaeg = any(dagar_milli(a["dagsetning"], r["dagsetning"]) <= ERFD_GLUGGI_DAGAR
+                         for a in adal_rod)
+            if almenn and not nalaeg:
+                adal_rod.append({**r, "motadili": adal_lina[1],
+                                 "motadili_heiti": motadilar.HEITI.get(
+                                     adal_lina[1], adal_rod[0]["motadili_heiti"]
+                                     if adal_rod else adal_lina[1]),
+                                 "ur_serssamningi": r["motadili_heiti"]})
+                fyllt += 1
+                continue
+            eftir.append(r)
+        if eftir:
+            linur[lina] = eftir
+        else:
+            linur.pop(lina)
+        if not adal_rod:
+            linur.pop(adal_lina)
+    return fellt, fyllt
+
+
+def erfa_fra_landssambondum(linur, landssambond, heiti):
+    """Aðildarfélög fá hækkanir landssambandsins við mótaðilann.
+
+    Hækkun SGS við SA ræður fyrir aðildarfélögin: eigin hækkun félagsins
+    innan glugga frá hækkun SGS víkur, en eigin hækkanir á öðrum dögum
+    haldast þar sem SGS-röðin nær ekki til.
+    """
+    erft = 0
+    for nafn, x in landssambond.items():
+        felag, samband, m = f"nafn:{nafn}", f"nafn:{x['samband']}", x["motadili"]
+        rod_sambands = linur.get((samband, m))
+        felags_linur = [r for (lk, _), rr in linur.items() if lk == felag for r in rr]
+        if not rod_sambands or not felags_linur:
+            continue
+        fyrirmynd = felags_linur[0]
+        eigin = linur.get((felag, m), [])
+        haldid = [r for r in eigin
+                  if all(dagar_milli(r["dagsetning"], s["dagsetning"]) > ERFD_GLUGGI_DAGAR
+                         for s in rod_sambands)]
+        erfdar = [{**s,
+                   "felag_lykill": felag,
+                   "felag": fyrirmynd["felag"],
+                   "felag_id": fyrirmynd["felag_id"],
+                   "markadur": fyrirmynd["markadur"],
+                   "heildarsamtok": fyrirmynd["heildarsamtok"],
+                   "erft_fra": heiti.get(samband, x["samband"])}
+                  for s in rod_sambands]
+        linur[(felag, m)] = haldid + erfdar
+        erft += len(erfdar)
+    return erft
+
+
+def kedja(linur):
+    """Keðjuð vísitala einnar samningslínu, með mælingu á bilum."""
+    linur.sort(key=lambda r: r["dagsetning"])
+    visitala, sidasta = 100.0, None
+    for r in linur:
         d = r["dagsetning"]
-        if f not in visitala:
-            visitala[f] = 100.0
-            r["visitala"] = 100.0
-            r["bil_manudir"] = ""
+        if sidasta is None:
+            r["visitala"], r["bil_manudir"] = 100.0, ""
             r["visitala_athugasemd"] = "grunnur"
-            sidasta[f] = d
+            sidasta = d
             continue
-        bil = manudir_milli(sidasta[f], d)
+        bil = manudir_milli(sidasta, d)
         r["bil_manudir"] = bil
         if not r.get("i_kedju", 1):
             r["visitala_athugasemd"] = "hliðarsamningur - ekki keðjað"
         elif r["prosenta"]:
-            visitala[f] *= (1 + r["prosenta"] / 100)
+            visitala *= (1 + r["prosenta"] / 100)
             r["visitala_athugasemd"] = "" if bil <= 24 else "löng eyða á undan"
         else:
             r["visitala_athugasemd"] = "krónutöluhækkun - vísitala stendur í stað"
-        r["visitala"] = round(visitala[f], 2)
-        sidasta[f] = d
+        r["visitala"] = round(visitala, 2)
+        sidasta = d
 
-    # Samfella hvers félags, talin aftur á bak frá nýjustu mælingu
-    eftir_felagi_lokad = collections.defaultdict(list)
-    for r in ut:
-        eftir_felagi_lokad[r["felag_lykill"]].append(r)
-    samfella = {}
-    stadfestar = lesa_stadfestar_eydur()
-    for lykill, linur in eftir_felagi_lokad.items():
-        if not linur:
-            continue
-        nafn = samhaefa_heiti(linur[0]["felag"])
-        eigin = {(a, b) for f, a, b in stadfestar if f == nafn}
-        fra, n, eldri = finna_samfellu(linur, stadfestar=eigin)
-        sidasta = max(r["dagsetning"] for r in linur)
-        samfella[lykill] = {
-            "fra": fra, "n": n, "eldri": eldri,
-            "ar": int(sidasta[:4]) - int(fra[:4]),
-        }
+
+def main():
+    radir = [r for r in lesa() if r["artal_stada"] in TRAUST]
+    heiti = samraema_felog(radir)
+    landssambond = {r["felag"].strip(): r for r in lesa_toflu(LANDSSAMBOND)}
+    handstyrt = {r["felag"].strip(): r["motadili"].strip()
+                 for r in lesa_toflu(ADALSAMNINGAR)}
+    adal = velja_adalsamninga(radir, landssambond, handstyrt)
+
+    # Hver hækkun fær samningslínu (félag, mótaðili). Handvirk leiðrétting
+    # án mótaðila og hækkun með óþekktum mótaðila af vef félagsins sjálfs
+    # fara í aðalsamninginn; aðrar óþekktar standa sér.
+    hopar = collections.defaultdict(list)
+    for r in radir:
+        lykill = lykill_felags(r)
+        m = (r.get("motadili") or "").strip()
+        if not m or (m == motadilar.OTHEKKTUR and str(r.get("af_felagsvef")) == "1"):
+            m = adal[lykill]
+        hopar[(lykill, m, r["gildir_fra"])].append(r)
+
+    linur = collections.defaultdict(list)
+    for (lykill, m, _), hopur in hopar.items():
+        linur[(lykill, m)].append(draga_saman(hopur, lykill, m, heiti))
+
+    fellt, fyllt = fella_fyrirtaekjasamninga(linur, adal)
+    erft = erfa_fra_landssambondum(linur, landssambond, heiti)
+
+    stadfestar = lesa_stadfestar_eydur_med_motadila()
+    ut, felld_alls, samfella = [], 0, {}
+    for lina, rodin in linur.items():
+        lykill, m = lina
+        er_adal = m == adal.get(lykill)
+        merkja_hlidarsamninga(rodin)
+        haldid, felld = fella_saman_tvitok(rodin)
+        felld_alls += felld
+        kedja(haldid)
+        nafn = samhaefa_heiti(haldid[0]["felag"])
+        eigin = {(a, b) for fl, mm, a, b in stadfestar
+                 if fl == nafn and (mm == m or (not mm and er_adal))}
+        fra, n, eldri = finna_samfellu(haldid, stadfestar=eigin)
+        sidasta = max(r["dagsetning"] for r in haldid)
+        samfella[lina] = {"fra": fra, "n": n, "eldri": eldri,
+                          "ar": int(sidasta[:4]) - int(fra[:4])}
         # Vísitala endurgrunnuð á upphaf samfellunnar. Það er talan sem má
         # nota - keðjan yfir eyðuna er einmitt sá hluti sem ekki er treystandi.
-        grunnur = next((r["visitala"] for r in sorted(
-            linur, key=lambda x: x["dagsetning"]) if r["dagsetning"] >= fra), None)
-        for r in linur:
+        grunnur = next((r["visitala"] for r in haldid if r["dagsetning"] >= fra), None)
+        for r in haldid:
             innan = r["dagsetning"] >= fra
             r["innan_samfellu"] = int(innan)
             r["visitala_samfella"] = (round(r["visitala"] / grunnur * 100, 2)
                                       if innan and grunnur else "")
+            r["adalsamningur"] = int(er_adal)
+        ut.extend(haldid)
+
+    ut.sort(key=lambda r: (r["felag"] or "", -r["adalsamningur"],
+                           r["motadili"], r["dagsetning"]))
 
     dalkar = ["felag_lykill", "felag_id", "felag", "markadur", "heildarsamtok",
+              "motadili", "motadili_heiti", "adalsamningur", "erft_fra",
+              "ur_serssamningi",
               "dagsetning", "a_vid", "prosenta", "kronur", "tegund",
               "visitala", "visitala_samfella", "innan_samfellu", "i_kedju",
               "bil_manudir", "visitala_athugasemd",
@@ -356,64 +562,95 @@ def main():
         w.writeheader()
         w.writerows(ut)
 
-    # Uppflettitafla félaga. Markaður og heildarsamtök eru tekin sem algengasta
-    # gildið, ekki það síðasta - stök færsla getur borið villandi flokkun.
-    yfirlit = collections.defaultdict(
-        lambda: {"n": 0, "fra": "9999", "til": "0",
-                 "markadir": collections.Counter(),
-                 "samtok": collections.Counter(),
-                 "audkenni": collections.Counter()})
+    # Samningslínur: ein á hvern (félag, mótaðila)
+    eftir_linu = collections.defaultdict(list)
     for r in ut:
-        y = yfirlit[r["felag_lykill"]]
-        y["n"] += 1
-        y["fra"] = min(y["fra"], r["dagsetning"])
-        y["til"] = max(y["til"], r["dagsetning"])
-        y["felag"] = r["felag"]
+        eftir_linu[(r["felag_lykill"], r["motadili"])].append(r)
+
+    def lysing(lina, rr):
+        sf = samfella.get(lina) or {}
+        y = {"samfelld_n": sf.get("n", 0), "samfelld_ar": sf.get("ar", 0)}
+        return {
+            "felag_lykill": lina[0], "motadili": lina[1],
+            "motadili_heiti": rr[0]["motadili_heiti"],
+            "tegund": motadilar.TEGUND.get(lina[1], "fyrirtaeki"),
+            "adalsamningur": rr[0]["adalsamningur"],
+            "erft_fra": next((r["erft_fra"] for r in rr if r["erft_fra"]), ""),
+            "fjoldi_haekkana": len(rr),
+            "fyrsta": min(r["dagsetning"] for r in rr),
+            "sidasta": max(r["dagsetning"] for r in rr),
+            "samfelld_fra": sf.get("fra", ""), "samfelld_ar": sf.get("ar", ""),
+            "samfelld_punktar": sf.get("n", ""), "eldri_eydur": sf.get("eldri", ""),
+            "visitala_samfellu_lok": next((r["visitala_samfella"] for r in reversed(rr)
+                                           if r["visitala_samfella"] not in ("", None)), ""),
+            "heilleiki": heilleiki(y),
+        }
+
+    samningslinur = [lysing(l, sorted(rr, key=lambda r: r["dagsetning"]))
+                     for l, rr in eftir_linu.items()]
+    samningslinur.sort(key=lambda x: (x["felag_lykill"], -x["adalsamningur"],
+                                      -x["fjoldi_haekkana"]))
+    with open(UT_LINUR, "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(samningslinur[0]))
+        w.writeheader()
+        w.writerows(samningslinur)
+
+    # Uppflettitafla félaga. Tölur hennar miðast við aðalsamninginn; markaður
+    # og heildarsamtök eru algengasta gildið yfir allar línur félagsins.
+    flokkun = collections.defaultdict(lambda: {"markadir": collections.Counter(),
+                                               "samtok": collections.Counter(),
+                                               "audkenni": collections.Counter()})
+    for r in ut:
+        y = flokkun[r["felag_lykill"]]
         if r["felag_id"]:
             y["audkenni"][r["felag_id"]] += 1
         if r["markadur"]:
             y["markadir"][r["markadur"]] += 1
         if r["heildarsamtok"]:
             y["samtok"][r["heildarsamtok"]] += 1
-        y["visitala_lok"] = r["visitala"]
-        if r.get("visitala_samfella") not in ("", None):
-            y["visitala_samfellu_lok"] = r["visitala_samfella"]
-        if r.get("bil_manudir"):
-            y["mesta_bil"] = max(y.get("mesta_bil", 0), int(r["bil_manudir"]))
-    with open(UT_FELOG, "w", encoding="utf-8-sig", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["felag_lykill", "felag_id", "felag",
-                                          "markadur", "heildarsamtok",
-                                          "fjoldi_haekkana", "fyrsta", "sidasta",
-                                          "samfelld_fra", "samfelld_ar",
-                                          "samfelld_punktar", "eldri_eydur",
-                                          "visitala_lok", "visitala_samfellu_lok",
-                                          "mesta_bil_manudir", "heilleiki"])
-        w.writeheader()
-        for k, y in sorted(yfirlit.items(), key=lambda kv: -kv[1]["n"]):
-            w.writerow({"felag_lykill": k,
-                        "felag_id": algengast(y["audkenni"]),
-                        "felag": y.get("felag"),
-                        "markadur": algengast(y["markadir"]),
-                        "heildarsamtok": algengast(y["samtok"]),
-                        "fjoldi_haekkana": y["n"], "fyrsta": y["fra"],
-                        "sidasta": y["til"], "visitala_lok": y.get("visitala_lok"),
-                        "samfelld_fra": (samfella.get(k) or {}).get("fra", ""),
-                        "samfelld_ar": (samfella.get(k) or {}).get("ar", ""),
-                        "samfelld_punktar": (samfella.get(k) or {}).get("n", ""),
-                        "eldri_eydur": (samfella.get(k) or {}).get("eldri", ""),
-                        "visitala_samfellu_lok": y.get("visitala_samfellu_lok", ""),
-                        "mesta_bil_manudir": y.get("mesta_bil", ""),
-                        "heilleiki": heilleiki({
-                            **y,
-                            "samfelld_n": (samfella.get(k) or {}).get("n", 0),
-                            "samfelld_ar": (samfella.get(k) or {}).get("ar", 0)})})
+    linur_felags = collections.defaultdict(list)
+    for x in samningslinur:
+        linur_felags[x["felag_lykill"]].append(x)
 
-    print(f"Hækkanir inn:          {len(radir)}")
-    print(f"Línur í tímaröð:       {len(ut)}")
-    print(f"Félög:                 {len(yfirlit)}")
-    print(f"Tímabil:               {min(r['dagsetning'] for r in ut)} - "
-          f"{max(r['dagsetning'] for r in ut)}")
-    print(f"\n{UT_ROD}\n{UT_FELOG}")
+    felog_ut = []
+    for lykill, xx in linur_felags.items():
+        a = next((x for x in xx if x["adalsamningur"]), xx[0])
+        rr = sorted(eftir_linu[(lykill, a["motadili"])], key=lambda r: r["dagsetning"])
+        bil = [int(r["bil_manudir"]) for r in rr if r.get("bil_manudir") not in ("", None)]
+        y = flokkun[lykill]
+        felog_ut.append({
+            "felag_lykill": lykill,
+            "felag_id": algengast(y["audkenni"]),
+            "felag": rr[0]["felag"],
+            "markadur": algengast(y["markadir"]),
+            "heildarsamtok": algengast(y["samtok"]),
+            "adalsamningur": a["motadili"],
+            "adalsamningur_heiti": a["motadili_heiti"],
+            "fjoldi_samninga": len(xx),
+            "fjoldi_haekkana": a["fjoldi_haekkana"],
+            "fjoldi_haekkana_alls": sum(x["fjoldi_haekkana"] for x in xx),
+            "fyrsta": a["fyrsta"], "sidasta": a["sidasta"],
+            "samfelld_fra": a["samfelld_fra"], "samfelld_ar": a["samfelld_ar"],
+            "samfelld_punktar": a["samfelld_punktar"], "eldri_eydur": a["eldri_eydur"],
+            "visitala_lok": rr[-1]["visitala"],
+            "visitala_samfellu_lok": a["visitala_samfellu_lok"],
+            "mesta_bil_manudir": max(bil) if bil else "",
+            "heilleiki": a["heilleiki"],
+        })
+    felog_ut.sort(key=lambda x: -x["fjoldi_haekkana"])
+    with open(UT_FELOG, "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(felog_ut[0]))
+        w.writeheader()
+        w.writerows(felog_ut)
+
+    print(f"Hækkanir inn:                   {len(radir)}")
+    print(f"Fyrirtækjahækkanir í aðalsamn.: {fellt} staðfestu, {fyllt} fylltu í")
+    print(f"Erfðar frá landssambandi:       {erft}")
+    print(f"Tvítalningar felldar saman:     {felld_alls}")
+    print(f"Línur í tímaröð:                {len(ut)}")
+    print(f"Samningslínur:                  {len(samningslinur)}")
+    print(f"Félög:                          {len(felog_ut)}")
+    print(f"\n{UT_ROD}\n{UT_LINUR}\n{UT_FELOG}")
 
 
 if __name__ == "__main__":

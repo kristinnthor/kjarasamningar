@@ -8,8 +8,11 @@ launavísitala Hagstofunnar sem sjálfstætt viðmið.
 | `haekkanir.csv` | ein lína á hverja umsamda hækkun sem fannst í samningi |
 | `haekkanir_vefskjol.csv` | sama úr PDF-um af vefjum félaganna, með veikari rakningu |
 | `haekkanir_sameinad.csv` | hvort tveggja sameinað, aðeins það sem tókst að rekja til félags |
-| `launathroun_eftir_felagi.csv` | ein lína á hvert (félag, dagsetning) með keðjaðri vísitölu |
-| `felog.csv` | uppflettitafla félaga með mati á heilleika raðarinnar |
+| `launathroun_eftir_felagi.csv` | ein lína á hvert (félag, mótaðila, dagsetning) með keðjaðri vísitölu |
+| `samningslinur.csv` | ein lína á hverja samningslínu (félag × mótaðili) |
+| `felog.csv` | uppflettitafla félaga; tölurnar eiga við aðalsamninginn |
+| `landssambond.csv` | aðildarfélög sem fylgja samningi landssambands (SGS við SA) |
+| `adalsamningar.csv` | handstýring á aðalsamningi þar sem reglan velur rangt |
 | `launatoflur.csv.gz` | fullar launatöflur: fjárhæð á launaflokk og þrep |
 | `taxtahaekkanir.csv` | hækkanir mældar beint úr töflunum, óháð texta |
 | `launavisitala_*.csv` | launavísitala Hagstofunnar |
@@ -71,9 +74,32 @@ Prósentur eru takmarkaðar við 0–15% og krónutölur við 500–100.000 kr.
 
 ## launathroun_eftir_felagi.csv
 
-Ein lína á hvert (félag, dagsetning). Þegar fleiri samningar nefna sömu hækkun
-er miðgildi tekið og `heimildir` segir hve margir þeir voru; `olik_gildi` er
-hærra en 1 ef heimildum ber ekki saman.
+Ein lína á hvert (félag, mótaðila, dagsetning). Þegar fleiri skjöl nefna sömu
+hækkun er miðgildi tekið og `heimildir` segir hve mörg þau voru; `olik_gildi`
+er hærra en 1 ef heimildum ber ekki saman.
+
+### Samningslínur: sérsamningar eru aldrei lagðir saman
+
+Félag semur oft við marga mótaðila samtímis: aðalkjarasamning og sérsamninga
+við einstök fyrirtæki og stofnanir. Áður var röð félags keðjuð úr öllum
+hækkunum þess, og þá lögðust sérsamningar saman — röð RSÍ 2019–2023 var keðjuð
+úr sex mótaðilum. Nú er hver **samningslína** (félag × mótaðili) keðjuð sér.
+
+- **Mótaðili** er staðlaður í `scripts/motadilar.py`: samheiti, eignarfall og
+  forverar (VSÍ → SA, Samninganefnd bankanna → SA, LÍÚ → SFS). Vefskjöl fá
+  mótaðila úr aðilum skjalsins, skráarheiti eða vef viðsemjanda.
+  `scripts/profa_motadila.py` ver stöðlunina með 31 prófi.
+- **Aðalsamningur** (`adalsamningur = 1`): ríkið hjá opinberum starfsmönnum
+  (BSRB, BHM, KÍ, og sérfélögum á opinberum markaði), SA hjá ASÍ-félögum,
+  annars flest skjöl síðustu tíu ár. `adalsamningar.csv` hnekkir reglunni.
+- **Landssambönd**: aðildarfélög SGS fylgja samningi SGS við SA. Eigin hækkun
+  félagsins innan 45 daga frá hækkun SGS víkur (`erft_fra = SGS`).
+- **Fyrirtækjasamningar** sem endurtaka hækkun aðalsamningsins teljast
+  staðfesting hans. Vanti aðalsamninginn almenna hækkun mótaðilans (sem minnst
+  þrjú félög hafa) fyllir fyrirtækjasamningurinn í skarðið
+  (`ur_serssamningi`). Aðrar hækkanir hans standa sem sérsamningur.
+- **Handvirkar leiðréttingar** fá mótaðila samningsins sem heimildin vísar í,
+  annars aðalsamning félagsins.
 
 `visitala` er keðjuð út frá prósentuhækkunum, með grunn 100 við fyrstu mælingu
 hvers félags.
@@ -100,16 +126,12 @@ fóru nothæf félög úr 39 í 74.
 `heilleiki` lýsir nú aðeins samfellda kaflanum: `samfelld` ef hann spannar
 þrjú ár eða meira, annars `eyður` eða `of fáir punktar`.
 
-### Hliðarsamningar
+### Hliðarsamningar innan línu
 
-Stéttarfélag semur oft við marga viðsemjendur samtímis. RSÍ semur við SA,
-Samtök rafverktaka, Landsnet og Orkuveituna, hvert með eigin áföngum. Séu
-þeir allir keðjaðir saman margfaldast hækkunin — RSÍ mældist með tólf
-hækkanir á tveimur árum sem námu +56%.
-
-Hækkun sem aðeins eitt skjal nefnir, og stendur við hlið annarrar sem margfalt
-fleiri staðfesta, er því merkt `i_kedju = 0` og ekki keðjuð. Hún hverfur ekki
-úr gögnunum og sést áfram sem sjálfstæð færsla.
+Innan sömu samningslínu geta enn staðið hlið við hlið ólíkir samningar við
+sama mótaðila (t.d. SA um tæknifólk og SA/SART um rafvirkja). Hækkun sem aðeins
+eitt skjal nefnir, og stendur við hlið annarrar sem margfalt fleiri staðfesta,
+er merkt `i_kedju = 0` og ekki keðjuð. Hún hverfur ekki úr gögnunum.
 
 Það var samanburðurinn við launavísitölu Hagstofunnar sem afhjúpaði þetta:
 RSÍ mældist 265 þar sem raunveruleg launaþróun var 244, og umsamdar hækkanir

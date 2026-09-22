@@ -107,6 +107,7 @@ h1 { font-size: 1.45rem; margin: 0; letter-spacing: -.01em; text-wrap: balance; 
 .samningar a:hover .vidsemjandi { text-decoration: underline; }
 .samningar .dags { color: var(--texti-2); font-size: .86rem; }
 .samningar .tegund { color: var(--texti-3); font-size: .8rem; }
+.samningar .annar { color: var(--vidvorun); font-size: .76rem; }
 .enginn { color: var(--texti-3); font-size: .88rem; font-style: italic; margin: 0; }
 
 .skraningar { display: grid; gap: 6px; }
@@ -178,6 +179,8 @@ form.skra { display: grid; gap: 10px; border-top: 1px dashed var(--lina); paddin
   </div>
 
   <p class="fotur">
+    Eyðurnar eru í aðalsamningi hvers félags. Hækkun úr sérsamningi við annan mótaðila
+    á ekki heima þar nema hún endurtaki almenna hækkun aðalsamningsins.
     Eyða er bil lengra en 18 mánuðir milli skráðra hækkana. Annaðhvort vantar hækkun
     í gögnin eða félagið samdi ekki á tímabilinu. Skráðu hverja hækkun sem vantar —
     eða merktu að engin hækkun hafi verið. Skráningar eru tillögur þar til þær eru
@@ -279,7 +282,8 @@ form.skra { display: grid; gap: 10px; border-top: 1px dashed var(--lina); paddin
     adal.replaceChildren(
       el("div", { class: "felagshaus" },
         el("h2", { text: f.felag }),
-        el("p", { text: `${f.fjoldi_haekkana} skráðar hækkanir · ${f.timabil} · röð ${f.heilleiki}` })),
+        el("p", { text: (f.adalsamningur ? `Aðalsamningur við ${f.adalsamningur} · ` : "")
+          + `${f.fjoldi_haekkana} skráðar hækkanir · ${f.timabil} · röð ${f.heilleiki}` })),
       el("div", { class: "eydur" }, [...f.eydur].sort((a, b) => a.fra.localeCompare(b.fra)).map(e => teiknaEydu(f, e, drog[e.id]))),
     );
     // Endurteikning má ekki henda notandanum út úr reitnum sem hann skrifar í
@@ -317,12 +321,13 @@ form.skra { display: grid; gap: 10px; border-top: 1px dashed var(--lina); paddin
     }
 
     kort.append(el("div", { class: "hluti" },
-      el("span", { class: "merkimidi", text: "Líklegir samningar — í gildi á tímabilinu" }),
+      el("span", { class: "merkimidi", text: "Líklegir samningar — í gildi á tímabilinu, sami mótaðili fyrst" }),
       samningar.length
         ? el("ul", { class: "samningar" }, samningar.map(s => el("li", {}, el("a", { href: s.slod, target: "_blank", rel: "noopener noreferrer" },
             el("span", { class: "dags", text: `${s.fra}–${s.til || "?"}` }),
             el("span", { class: "vidsemjandi", text: s.atvinnurekandi || "Óþekktur viðsemjandi" }),
-            el("span", { class: "tegund", text: s.tegund || "" })))))
+            el("span", { class: "tegund", text: s.tegund || "" }),
+            s.sami_motadili === false ? el("span", { class: "annar", text: "annar mótaðili — sérsamningur" }) : null))))
         : el("p", { class: "enginn", text: "Enginn samningur fannst í heildarskrá ríkissáttasemjara fyrir þetta tímabil." })));
 
     if (tillogur.length) {

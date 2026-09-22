@@ -26,7 +26,7 @@ ROT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GOGN = os.path.join(ROT, "gogn")
 API = os.path.join(ROT, "docs", "api", "v1")
 
-UTGAFA = "1.0"
+UTGAFA = "1.1"
 GRUNNSLOD = "https://kristinnthor.github.io/kjarasamningar/api/v1"
 
 STAFIR = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u", "ý": "y",
@@ -80,9 +80,17 @@ FYRIRVARAR = [
     "samfelld_fra segir hvenær samfelldi kaflinn hefst; visitala_samfella er "
     "keðjuð frá þeim degi og er talan sem á að nota. Eldri eyður ógilda ekki "
     "röðina, enda skipta þær litlu fyrir greiningu á síðustu árum.",
-    "Hækkun sem merkt er i_kedju = 0 tilheyrir líklega hliðarsamningi við "
-    "annan viðsemjanda og er því ekki keðjuð. Félag semur oft við marga "
-    "viðsemjendur samtímis og keðjun allra saman margfaldar hækkunina.",
+    "Félag semur oft við marga mótaðila samtímis: aðalkjarasamning og "
+    "sérsamninga við einstök fyrirtæki og stofnanir. Hver samningslína "
+    "(félag × mótaðili) er keðjuð sér - hækkanir ólíkra samninga eru aldrei "
+    "lagðar saman. haekkanir og tölur félagsins eiga við aðalsamninginn "
+    "(adalsamningur); samningar geymir allar línur félagsins.",
+    "Aðalsamningur: ríkið hjá opinberum starfsmönnum, SA hjá ASÍ-félögum. "
+    "Aðildarfélög SGS fylgja samningi SGS við SA (erft_fra). "
+    "Fyrirtækjasamningur sem endurtekur almenna hækkun telst hluti "
+    "aðalsamningsins (ur_serssamningi).",
+    "Hækkun sem merkt er i_kedju = 0 tilheyrir líklega hliðarsamningi innan "
+    "sömu samningslínu og er því ekki keðjuð.",
     "Krónutöluhækkanir er ekki hægt að umbreyta í hlutfall án þess að vita "
     "launastigið. Þar stendur vísitalan í stað og línan er merkt.",
     "Launavísitala Hagstofunnar skiptist eftir markaði en ekki stéttarfélagi, "
@@ -99,6 +107,7 @@ FYRIRVARAR = [
 def main():
     felog = lesa("felog.csv")
     rod = lesa("launathroun_eftir_felagi.csv")
+    samningslinur = lesa("samningslinur.csv")
     # Sameinaða skráin er notuð þegar hún er til: hún ber bæði færslur með
     # staðfest lýsigögn og þær sem raktar voru úr vefskjölum.
     haekkanir = lesa("haekkanir_sameinad.csv") or lesa("haekkanir.csv")
@@ -115,7 +124,8 @@ def main():
 
     HEIL = ("fjoldi_haekkana", "kronur", "heimildir", "olik_gildi",
             "bil_manudir", "mesta_bil_manudir", "innan_samfellu", "i_kedju",
-            "samfelld_ar", "samfelld_punktar", "eldri_eydur")
+            "samfelld_ar", "samfelld_punktar", "eldri_eydur", "adalsamningur",
+            "fjoldi_samninga", "fjoldi_haekkana_alls", "af_felagsvef")
     FLEYTI = ("prosenta", "visitala", "visitala_samfella")
 
     # ---- auðkenni félaga ---- #
@@ -129,30 +139,48 @@ def main():
         notud.add(s)
         slod_eftir_lykli[f["felag_lykill"]] = s
 
-    # ---- tímaröð á hvert félag ---- #
-    eftir_felagi = defaultdict(list)
+    # ---- tímaröð á hvert félag, ein á hverja samningslínu ---- #
+    eftir_linu = defaultdict(list)
     for r in rod:
-        eftir_felagi[r["felag_lykill"]].append(tolur(r, HEIL, FLEYTI))
+        eftir_linu[(r["felag_lykill"], r["motadili"])].append(tolur(r, HEIL, FLEYTI))
+    linur_felags = defaultdict(list)
+    for x in samningslinur:
+        linur_felags[x["felag_lykill"]].append(tolur(x, HEIL, FLEYTI))
 
     for f in felog:
         lykill = f["felag_lykill"]
         s = slod_eftir_lykli[lykill]
-        linur = sorted(eftir_felagi[lykill], key=lambda r: r["dagsetning"])
+        adal = sorted(eftir_linu[(lykill, f["adalsamningur"])],
+                      key=lambda r: r["dagsetning"])
+        samningar = [{
+            **{k: x[k] for k in ("motadili", "motadili_heiti", "tegund",
+                                 "adalsamningur", "erft_fra", "fjoldi_haekkana",
+                                 "fyrsta", "sidasta", "samfelld_fra", "samfelld_ar",
+                                 "eldri_eydur", "heilleiki")},
+            "adalsamningur": bool(x["adalsamningur"]),
+            "haekkanir": sorted(eftir_linu[(lykill, x["motadili"])],
+                                key=lambda r: r["dagsetning"]),
+        } for x in linur_felags[lykill]]
         skrifa(os.path.join(API, "felog", f"{s}.json"), {
             "audkenni": s,
             "felag": f["felag"],
             "felag_id": f["felag_id"] or None,
             "markadur": f["markadur"] or None,
             "heildarsamtok": f["heildarsamtok"] or None,
+            "adalsamningur": {"motadili": f["adalsamningur"],
+                              "heiti": f["adalsamningur_heiti"]},
             "fyrsta": f["fyrsta"],
             "sidasta": f["sidasta"],
             "fjoldi_haekkana": int(f["fjoldi_haekkana"]),
+            "fjoldi_samninga": int(f["fjoldi_samninga"]),
             "heilleiki": f["heilleiki"],
             "samfelld_fra": f.get("samfelld_fra") or None,
             "samfelld_ar": int(f["samfelld_ar"]) if f.get("samfelld_ar") else None,
             "eldri_eydur": int(f["eldri_eydur"]) if f.get("eldri_eydur") else 0,
             "mesta_bil_manudir": int(f["mesta_bil_manudir"]) if f["mesta_bil_manudir"] else None,
-            "haekkanir": linur,
+            # Aðalsamningurinn; aðrar samningslínur eru í `samningar`
+            "haekkanir": adal,
+            "samningar": samningar,
             "taxtahaekkanir": sorted(
                 eftir_felagi_taxta.get(f["felag"], []),
                 key=lambda r: r["til_dags"]),
@@ -168,6 +196,9 @@ def main():
             "heildarsamtok": f["heildarsamtok"] or None,
             "fyrsta": f["fyrsta"], "sidasta": f["sidasta"],
             "fjoldi_haekkana": int(f["fjoldi_haekkana"]),
+            "adalsamningur": f["adalsamningur"],
+            "adalsamningur_heiti": f["adalsamningur_heiti"],
+            "fjoldi_samninga": int(f["fjoldi_samninga"]),
             "heilleiki": f["heilleiki"],
             "samfelld_fra": f.get("samfelld_fra") or None,
             "samfelld_ar": int(f["samfelld_ar"]) if f.get("samfelld_ar") else None,
@@ -177,7 +208,7 @@ def main():
     })
 
     # ---- allar hækkanir, og eftir ári ---- #
-    allar = [tolur(r, ("kronur",), ("prosenta",)) for r in haekkanir]
+    allar = [tolur(r, ("kronur", "af_felagsvef"), ("prosenta",)) for r in haekkanir]
     skrifa(os.path.join(API, "haekkanir.json"),
            {"fjoldi": len(allar), "haekkanir": allar})
 
@@ -232,6 +263,7 @@ def main():
             "felog": len(felog),
             "haekkanir": len(allar),
             "maelipunktar": len(rod),
+            "samningslinur": len(samningslinur),
             "taxtahaekkanir": len(taxtahaekk),
             "ar": [min(eftir_ari), max(eftir_ari)] if eftir_ari else None,
         },

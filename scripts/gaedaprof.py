@@ -79,18 +79,34 @@ def main():
           f"{len(fortid)} fyrir 1960")
 
     print("\nTímaröð")
-    lyklar = [(r["felag_lykill"], r["dagsetning"]) for r in rod]
-    profa("ein lína á hvert (félag, dagsetning)", len(lyklar) == len(set(lyklar)),
-          f"{len(lyklar) - len(set(lyklar))} tvítök")
+    lyklar = [(r["felag_lykill"], r["motadili"], r["dagsetning"]) for r in rod]
+    profa("ein lína á hvert (félag, mótaðila, dagsetning)",
+          len(lyklar) == len(set(lyklar)), f"{len(lyklar) - len(set(lyklar))} tvítök")
+
+    print("\nSamningslínur")
+    # Hver röð á að fylgja einum samningi. Blandist mótaðilar í sömu keðju
+    # leggjast sérsamningar saman og hækkunin margfaldast.
+    adal = {}
+    for r in rod:
+        if r["adalsamningur"] == "1":
+            adal.setdefault(r["felag_lykill"], set()).add(r["motadili"])
+    tvo = [k for k, v in adal.items() if len(v) > 1]
+    profa("einn aðalsamningur á hvert félag", not tvo, ", ".join(tvo[:5]))
+    an_adal = {r["felag_lykill"] for r in rod} - set(adal)
+    profa("hvert félag á aðalsamning", not an_adal, ", ".join(sorted(an_adal)[:5]))
+    felog_motad = {f["felag_lykill"]: f["adalsamningur"] for f in felog}
+    osamraemi = [k for k, v in adal.items() if felog_motad.get(k) not in v]
+    profa("felog.csv vísar á aðalsamninginn", not osamraemi, ", ".join(osamraemi[:5]))
 
     print("\nSamanburður við launavísitölu Hagstofunnar")
 
-    # Vísitala félagsins á tilteknum degi. Samningar ná fram í tímann (2028) en
-    # launavísitalan aðeins til dagsins í dag, svo bera verður saman á sama degi
-    # - annars er verið að mæla ólík tímabil hvort gegn öðru.
+    # Vísitala aðalsamnings félagsins á tilteknum degi. Samningar ná fram í
+    # tímann (2028) en launavísitalan aðeins til dagsins í dag, svo bera verður
+    # saman á sama degi - annars er verið að mæla ólík tímabil hvort gegn öðru.
     eftir_lykli = {}
     for r in rod:
-        eftir_lykli.setdefault(r["felag_lykill"], []).append(r)
+        if r["adalsamningur"] == "1":
+            eftir_lykli.setdefault(r["felag_lykill"], []).append(r)
     for linur in eftir_lykli.values():
         linur.sort(key=lambda r: r["dagsetning"])
 

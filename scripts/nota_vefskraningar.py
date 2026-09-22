@@ -37,8 +37,21 @@ LEIDRETTINGAR = os.path.join(GOGN, "handvirkar_leidrettingar.csv")
 STADFESTAR = os.path.join(GOGN, "stadfestar_eydur.csv")
 
 L_DALKAR = ["felag", "gildir_fra", "prosenta", "kronur", "a_vid",
-            "heimild", "athugasemd", "skradur"]
-S_DALKAR = ["felag", "eyda_fra", "eyda_til", "athugasemd", "skradur"]
+            "heimild", "athugasemd", "skradur", "motadili"]
+S_DALKAR = ["felag", "eyda_fra", "eyda_til", "athugasemd", "skradur", "motadili"]
+EYDUR_JSON = os.path.join(ROT, "yfirferd", "eydur.json")
+
+
+def adalsamningar():
+    """Auðkenni félags í vefviðmótinu -> mótaðili aðalsamnings þess.
+
+    Eyðurnar í vefviðmótinu eru allar í aðalsamningi félagsins, svo skráning
+    á eyðu á heima í þeirri samningslínu.
+    """
+    if not os.path.exists(EYDUR_JSON):
+        return {}
+    with open(EYDUR_JSON, encoding="utf-8") as f:
+        return {x["audkenni"]: x.get("motadili", "") for x in json.load(f)["felog"]}
 
 
 def lesa(leid):
@@ -72,13 +85,15 @@ def main(argv):
     mat = gogn.get("mat", {})
     samth = [t for t in gogn["tillogur"] if mat.get(t["id"]) == "samthykkt"]
     idag = date.today().isoformat()
+    adal = adalsamningar()
 
     nyjar_l, nyjar_s = [], []
     for t in samth:
         if t.get("tegund") == "engin":
             fra, til = t["eyda"].split("_")
             nyjar_s.append({"felag": t["felag"], "eyda_fra": fra, "eyda_til": til,
-                            "athugasemd": t.get("athugasemd") or "", "skradur": idag})
+                            "athugasemd": t.get("athugasemd") or "", "skradur": idag,
+                            "motadili": adal.get(t.get("felag_audkenni"), "")})
             continue
         nyjar_l.append({
             "felag": t["felag"], "gildir_fra": t["dagsetning"],
@@ -86,6 +101,7 @@ def main(argv):
             "a_vid": t.get("a_vid") or "óskilgreint",
             "heimild": t.get("heimild") or "", "athugasemd": t.get("athugasemd") or "",
             "skradur": idag,
+            "motadili": adal.get(t.get("felag_audkenni"), ""),
         })
 
     print(f"Skráningar: {len(gogn['tillogur'])}, samþykktar: {len(samth)}")

@@ -107,6 +107,8 @@
             background: var(--reitur); border: 1px solid var(--lina); }
   .kubbur button { all: unset; cursor: pointer; color: var(--texti-3);
                    font-size: .95rem; line-height: 1; }
+  .kubbur select.linuval { width: auto; max-width: 190px; height: 24px; padding: 0 4px;
+                           font-size: .76rem; border-radius: 4px; background: var(--yfirbord); }
   .kubbur button:hover { color: var(--texti); }
   .depill { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
 
@@ -352,6 +354,7 @@ const stada = {
   hagstofa: false,
   ollsagan: false,
   samningar: false,      // tenglar á samningana við hverja hækkun
+  linaVal: new Map(),    // audkenni -> mótaðili, ef annar en aðalsamningur
   mynd: true,
   visitala: null,        // gögn Hagstofunnar, sótt við fyrstu þörf
 };
@@ -366,9 +369,33 @@ async function saekja(slod) {
   return svar.json();
 }
 
+/* Punktar einnar samningslínu: öll sagan og samfelldi hlutinn. */
+function punktarLinu(haekkanir) {
+  return {
+    allt: haekkanir
+      .filter((h) => h.visitala != null && h.dagsetning <= LOKADAGUR)
+      .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning, v: h.visitala,
+                     s: ornggSlod(h.slod) })),
+    samfella: haekkanir
+      .filter((h) => h.innan_samfellu && h.visitala_samfella != null
+                     && h.dagsetning <= LOKADAGUR)
+      .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning,
+                     v: h.visitala_samfella, s: ornggSlod(h.slod) })),
+  };
+}
+
+/* Félag með öllum samningslínum sínum. Hver lína (mótaðili) er keðjuð sér;
+   sjálfgefin er aðalsamningurinn og hægt er að velja aðra á kubbnum. */
 async function saekjaFelag(audkenni) {
   if (stada.valin.has(audkenni)) return stada.valin.get(audkenni);
   const g = await saekja(`felog/${audkenni}.json`);
+  const hraar = g.samningar?.length ? g.samningar
+    : [{ motadili: "", motadili_heiti: "", adalsamningur: true, haekkanir: g.haekkanir }];
+  const linur = hraar.map((s) => ({
+    motadili: s.motadili, heiti: s.motadili_heiti, adal: !!s.adalsamningur,
+    ...punktarLinu(s.haekkanir),
+  }));
+  const adal = linur.find((l) => l.adal) || linur[0];
   return {
     audkenni,
     heiti: g.felag,
@@ -376,16 +403,16 @@ async function saekjaFelag(audkenni) {
     samfelld_fra: g.samfelld_fra,
     samfelld_ar: g.samfelld_ar,
     eldri_eydur: g.eldri_eydur,
-    allt: g.haekkanir
-      .filter((h) => h.visitala != null && h.dagsetning <= LOKADAGUR)
-      .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning, v: h.visitala,
-                     s: ornggSlod(h.slod) })),
-    samfella: g.haekkanir
-      .filter((h) => h.innan_samfellu && h.visitala_samfella != null
-                     && h.dagsetning <= LOKADAGUR)
-      .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning,
-                     v: h.visitala_samfella, s: ornggSlod(h.slod) })),
+    linur,
+    adalLina: adal.motadili,
   };
+}
+
+const nothaefLina = (l) => l.allt.length > 1;
+
+function valinLina(f) {
+  const m = stada.linaVal.get(f.audkenni);
+  return f.linur.find((l) => l.motadili === m) || f.linur.find((l) => l.adal) || f.linur[0];
 }
 
 async function saekjaVisitolu() {
@@ -425,11 +452,16 @@ function serier() {
   const grunnT = stada.grunnur ? Date.UTC(+stada.grunnur, 0, 1) : null;
   const ut = [];
   let i = 0;
-  for (const f of stada.valin.values()) {
+  for (const f0 of stada.valin.values()) {
+    // Hver sería er ein samningslína; heitið nefnir mótaðilann ef það er
+    // ekki aðalsamningurinn, svo aldrei fari á milli mála hvað er sýnt.
+    const L = valinLina(f0);
+    const f = { ...f0, felagHeiti: f0.heiti, lina: L,
+                heiti: L.adal ? f0.heiti : `${f0.heiti} (${L.heiti})` };
     // Samfelldi hlutinn er sjálfgefinn: keðjan yfir eyðu er einmitt sá hluti
     // sem ekki er treystandi. Öll sagan er þó í boði.
-    let punktar = stada.ollsagan ? f.allt : (f.samfella.length > 1 ? f.samfella
-                                                                  : f.allt);
+    let punktar = stada.ollsagan ? L.allt : (L.samfella.length > 1 ? L.samfella
+                                                                  : L.allt);
     if (grunnT !== null) {
       punktar = endurgrunna(punktar, grunnT);
       if (!punktar || punktar.length < 2) {
@@ -707,16 +739,35 @@ function samningalisti(virkar) {
 
 function tegraKubba() {
   const raðir = serier();
-  E("valin").innerHTML = raðir.map((s) =>
-    `<span class="kubbur">
+  E("valin").innerHTML = raðir.map((s) => {
+    const linur = s.linur.filter(nothaefLina);
+    const val = linur.length > 1
+      ? `<select class="linuval" data-lina="${esc(s.audkenni)}"
+           aria-label="Samningur ${esc(s.felagHeiti)}" title="Veldu samning">${
+          linur.map((l) => `<option value="${esc(l.motadili)}"${
+            l.motadili === s.lina.motadili ? " selected" : ""}>${esc(l.heiti)}${
+            l.adal ? " (aðalsamningur)" : ""}</option>`).join("")}</select>`
+      : "";
+    return `<span class="kubbur">
        <span class="depill" style="background:${s.litur || "var(--texti-3)"}"></span>
-       ${esc(s.heiti)}
+       ${esc(s.felagHeiti)}
+       ${val}
        <button data-fjarlaegja="${esc(s.audkenni)}"
-               aria-label="Fjarlægja ${esc(s.heiti)}">×</button>
-     </span>`).join("");
+               aria-label="Fjarlægja ${esc(s.felagHeiti)}">×</button>
+     </span>`;
+  }).join("");
+  E("valin").querySelectorAll("select.linuval").forEach((sel) =>
+    sel.addEventListener("change", () => {
+      const f = stada.valin.get(sel.dataset.lina);
+      if (!f) return;
+      if (f.adalLina === sel.value) stada.linaVal.delete(sel.dataset.lina);
+      else stada.linaVal.set(sel.dataset.lina, sel.value);
+      tegraKubba(); birta();
+    }));
   E("valin").querySelectorAll("[data-fjarlaegja]").forEach((b) =>
     b.addEventListener("click", () => {
       stada.valin.delete(b.dataset.fjarlaegja);
+      stada.linaVal.delete(b.dataset.fjarlaegja);
       teiknaLista(); tegraKubba(); birta();
     }));
 }
@@ -750,6 +801,7 @@ function teiknaLista() {
         stada.valin.set(i.value, await saekjaFelag(i.value));
       } else {
         stada.valin.delete(i.value);
+        stada.linaVal.delete(i.value);
       }
       teiknaLista(); tegraKubba(); birta();
     }));
@@ -757,7 +809,9 @@ function teiknaLista() {
 
 function skraSlod() {
   const p = new URLSearchParams();
-  if (stada.valin.size) p.set("felog", [...stada.valin.keys()].join(","));
+  // Samningur annar en aðalsamningur fylgir félaginu: felog=vr,rsi:fa
+  if (stada.valin.size) p.set("felog", [...stada.valin.keys()].map((a) =>
+    stada.linaVal.has(a) ? `${a}:${stada.linaVal.get(a)}` : a).join(","));
   if (stada.grunnur) p.set("grunnur", stada.grunnur);
   if (stada.hagstofa) p.set("hagstofa", "1");
   if (stada.ollsagan) p.set("ollsagan", "1");
@@ -808,7 +862,8 @@ function samantekt() {
    einu - á sérstakri deilisíðu þess. Annars er deilt slóð grafsins sjálfs. */
 function deiliSlod() {
   const valin = [...stada.valin.keys()];
-  if (valin.length === 1 && !stada.grunnur && !stada.ollsagan && stada.deilisidur?.has(valin[0])) {
+  if (valin.length === 1 && !stada.grunnur && !stada.ollsagan && !stada.linaVal.size
+      && stada.deilisidur?.has(valin[0])) {
     return { slod: new URL(`deila/${valin[0]}.html`, VEFUR).href, rik: true };
   }
   return { slod: location.href, rik: false };
@@ -995,12 +1050,17 @@ async function raesa() {
   if (stada.hagstofa) await saekjaVisitolu();
 
   const fra_slod = (p.get("felog") || "").split(",")
-    .filter((a) => /^[a-z0-9-]{1,60}$/.test(a));
+    .filter((a) => /^[a-z0-9-]{1,60}(:[a-z0-9-]{1,60})?$/.test(a));
   const sjalfgefin = fra_slod.length ? fra_slod
     : stada.felog.filter((f) => f.heilleiki === "samfelld")
                  .slice(0, 3).map((f) => f.audkenni);
-  for (const a of sjalfgefin) {
-    try { stada.valin.set(a, await saekjaFelag(a)); } catch { /* óþekkt auðkenni */ }
+  for (const x of sjalfgefin) {
+    const [a, m] = x.split(":");
+    try {
+      const f = await saekjaFelag(a);
+      stada.valin.set(a, f);
+      if (m && m !== f.adalLina && f.linur.some((l) => l.motadili === m)) stada.linaVal.set(a, m);
+    } catch { /* óþekkt auðkenni */ }
   }
 
   E("leit").addEventListener("input", teiknaLista);

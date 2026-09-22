@@ -80,8 +80,13 @@ def ein_sida(felag, hag, idag):
     heild = punktar[-1][1] / punktar[0][1] * 100 - 100
 
     nafn = felag["felag"]
+    # Röðin er aðalsamningur félagsins; mótaðilinn er nefndur svo ekki fari
+    # á milli mála hvaða samningur er sýndur
+    motadili = (felag.get("adalsamningur") or {}).get("heiti") or ""
+    vid = f" við {motadili}" if motadili and motadili != "Óþekktur mótaðili" else ""
     titill = f"{nafn}: umsamdar launahækkanir {upphaf.year}–{lok.year}"
-    lysing = f"Umsamdar hækkanir {upphaf.year}–{samanb_lok.year}: {prosenta(felag_samanb)}."
+    lysing = (f"Aðalsamningur{vid}. Umsamdar hækkanir {upphaf.year}–{samanb_lok.year}: "
+              f"{prosenta(felag_samanb)}.")
     if hag_breyting is not None:
         lysing += f" Launavísitala Hagstofunnar sama tímabil: {prosenta(hag_breyting)}."
     if lok > hag_lok:
@@ -98,7 +103,7 @@ def ein_sida(felag, hag, idag):
     fig.text(0.072, 0.905, "Kjarasamningar", fontsize=13, color=TEXTI2, va="center")
     fig.text(0.035, 0.80, nafn if len(nafn) <= 48 else nafn[:46] + "…",
              fontsize=25, fontweight="bold", color=TEXTI, va="center")
-    fig.text(0.035, 0.735, f"Umsamdar launahækkanir, keðjuð vísitala (100 = {upphaf.isoformat()})",
+    fig.text(0.035, 0.735, f"Aðalsamningur{vid} · keðjuð vísitala (100 = {upphaf.isoformat()})",
              fontsize=13, color=TEXTI2, va="center")
 
     ax = fig.add_axes([0.06, 0.12, 0.60, 0.55], facecolor=BG)

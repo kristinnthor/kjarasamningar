@@ -128,11 +128,34 @@
 const { felog } = await fetch(`${grunnur}/felog.json`).then(r =&gt; r.json());
 const nothaef = felog.filter(f =&gt; f.heilleiki === "samfelld");
 
-// Tímaröð VR
+// Tímaröð VR: aðalsamningurinn (við SA)
 const vr = await fetch(`${grunnur}/felog/vr.json`).then(r =&gt; r.json());
 for (const h of vr.haekkanir) {
   console.log(h.dagsetning, h.prosenta, h.visitala);
+}
+
+// Aðrir samningar VR, hver keðjaður sér - aldrei lagðir saman
+for (const s of vr.samningar) {
+  console.log(s.motadili_heiti, s.adalsamningur, s.haekkanir.length);
 }</code></pre>
+
+<h2>Samningar og mótaðilar</h2>
+<p>
+  Félag semur oft við marga mótaðila samtímis: aðalkjarasamning og sérsamninga við
+  einstök fyrirtæki og stofnanir. Hækkanir ólíkra samninga má ekki leggja saman, svo
+  hver <strong>samningslína</strong> (félag × mótaðili) er keðjuð sér.
+</p>
+<ul>
+  <li><code>haekkanir</code> og tölur félagsins (<code>heilleiki</code>,
+    <code>samfelld_fra</code> …) eiga við <strong>aðalsamninginn</strong>
+    (<code>adalsamningur</code>).</li>
+  <li><code>samningar</code> geymir allar samningslínur félagsins, hver með eigin
+    <code>haekkanir</code>, samfellu og vísitölu.</li>
+  <li>Aðalsamningur er ríkið hjá opinberum starfsmönnum og SA hjá ASÍ-félögum.
+    Aðildarfélög SGS fylgja samningi SGS við SA (<code>erft_fra</code>).</li>
+  <li>Fyrirtækjasamningur sem endurtekur almenna hækkun aðalsamningsins telst hluti
+    hans (<code>ur_serssamningi</code>). Aðrar hækkanir hans standa sem sérsamningur.</li>
+</ul>
 
 <h2>Reitir</h2>
 
@@ -151,6 +174,11 @@ for (const h of vr.haekkanir) {
   <tr><td><code>i_kedju</code></td><td>0 ef hækkunin tilheyrir líklega hliðarsamningi og er ekki keðjuð</td></tr>
   <tr><td><code>tilvitnun</code></td><td>textabúturinn úr samningnum, til sannreyningar</td></tr>
   <tr><td><code>slod</code></td><td>slóð á samninginn sjálfan (PDF) sem hækkunin var lesin úr</td></tr>
+  <tr><td><code>motadili</code></td><td>auðkenni mótaðila samningsins, t.d. <code>sa</code>, <code>riki</code>, <code>fy-siminn</code></td></tr>
+  <tr><td><code>motadili_heiti</code></td><td>heiti mótaðilans</td></tr>
+  <tr><td><code>adalsamningur</code></td><td>1 ef hækkunin tilheyrir aðalsamningi félagsins</td></tr>
+  <tr><td><code>erft_fra</code></td><td>landssambandið sem samdi um hækkunina fyrir aðildarfélagið, t.d. SGS</td></tr>
+  <tr><td><code>ur_serssamningi</code></td><td>fyrirtækjasamningurinn sem staðfesti almenna hækkun þar sem aðalsamninginn vantaði hana</td></tr>
 </table>
 
 <h2>Tvær mælingar á sömu stærð</h2>

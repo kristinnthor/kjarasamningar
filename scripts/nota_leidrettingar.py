@@ -33,7 +33,7 @@ INN = os.path.join(ROT, "yfirferd", "eydur.csv")
 UT = os.path.join(GOGN, "handvirkar_leidrettingar.csv")
 
 DALKAR = ["felag", "gildir_fra", "prosenta", "kronur", "a_vid",
-          "heimild", "athugasemd", "skradur"]
+          "heimild", "athugasemd", "skradur", "motadili"]
 
 GILD_AVID = {"almenn laun", "kauptaxtar", "launatafla", "lágmarkstekjur",
              "byrjunarlaun", "óskilgreint"}
@@ -114,6 +114,8 @@ def main(argv):
             "heimild": (r.get("heimild") or "").strip(),
             "athugasemd": (r.get("athugasemd") or "").strip(),
             "skradur": date.today().isoformat(),
+            # Eyðan er í aðalsamningnum; leiðréttingin á heima í sömu röð
+            "motadili": (r.get("motadili") or "").strip(),
         })
 
     print(f"Línur í yfirferðarskrá: {len(linur)}")

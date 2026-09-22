@@ -54,8 +54,9 @@
   .tolur, td, time { font-variant-numeric: tabular-nums; }
   :focus-visible { outline: 2px solid var(--akser); outline-offset: 2px; }
 
-  .stjornbord { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 12px 16px;
-                align-items: end; margin-bottom: 20px; }
+  .stjornbord { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 2fr) minmax(0, 1fr); gap: 12px 16px;
+                align-items: end; margin-bottom: 8px; }
+  .samnings-skyring { margin: 0 0 18px; font-size: .84rem; color: var(--texti-3); min-height: 1.3em; }
   @media (max-width: 640px) { .stjornbord { grid-template-columns: minmax(0, 1fr); } }
   .stjornbord label { display: grid; gap: 4px; font-size: .78rem; color: var(--texti-2);
                       text-transform: uppercase; letter-spacing: .06em; }
@@ -128,14 +129,20 @@
     <label for="felag">Stéttarfélag
       <select id="felag"><option>Hleð félögum…</option></select>
     </label>
+    <label for="samningur">Samningur
+      <select id="samningur" disabled><option>—</option></select>
+    </label>
     <label for="mork">Merkja bil lengri en
       <span class="maerk"><input id="mork" type="number" min="6" max="60" step="1" value="12"><span>mánuði</span></span>
     </label>
   </div>
 
+  <p class="samnings-skyring" id="samnings-skyring"></p>
   <div id="efni"><p class="tomur">Hleð gögnum…</p></div>
 
-  <p class="ath">Bil þýðir ekki endilega að hækkun vanti: stundum samdi félagið einfaldlega
+  <p class="ath">Félag semur oft við marga mótaðila samtímis. Hver samningur er sýndur sér og
+    hækkanir ólíkra samninga eru aldrei lagðar saman; sjálfgefið er aðalsamningur félagsins.
+    Bil þýðir ekki endilega að hækkun vanti: stundum samdi félagið einfaldlega
     ekki á tímabilinu. Hækkanir utan samfellu eru eldri en síðasta rof í röðinni
     (<code>samfelld_fra</code> í API-inu) og hliðarsamningar eru ekki keðjaðir í vísitöluna.</p>
 
@@ -168,7 +175,8 @@ const kronur = (x) => String(Math.round(Number(x))).replace(/\B(?=(\d{3})+(?!\d)
 const arOgMan = (m) => { const a = Math.floor(m / 12), r = m % 12;
   return [a ? `${a} ár` : "", r ? `${r} mán.` : ""].filter(Boolean).join(" og "); };
 
-let felog = [], gogn = null, synaBaraBil = false;
+let felog = [], gogn = null, synaBaraBil = false, samningur = null;
+const ALLIR = "__allir";
 const skyndiminni = new Map();
 
 async function saekja(slod) {
@@ -186,11 +194,13 @@ function lesaMork() {
 function uppfaeraSlod() {
   const p = new URLSearchParams();
   p.set("felag", $("#felag").value);
+  const adal = gogn?.adalsamningur?.motadili;
+  if (samningur && gogn && samningur !== adal) p.set("samningur", samningur);
   if (lesaMork() !== 12) p.set("mork", lesaMork());
   history.replaceState(null, "", "?" + p.toString());
 }
 
-async function veljaFelag(audkenni) {
+async function veljaFelag(audkenni, beidni = null) {
   $("#efni").replaceChildren(el("p", { class: "tomur", text: "Hleð gögnum…" }));
   try {
     gogn = await saekja(`felog/${encodeURIComponent(audkenni)}.json`);
@@ -198,18 +208,48 @@ async function veljaFelag(audkenni) {
     $("#efni").replaceChildren(el("p", { class: "tomur", text: "Ekki tókst að sækja gögn félagsins. Reyndu aftur." }));
     return;
   }
+  const linur = gogn.samningar || [];
+  const adal = gogn.adalsamningur?.motadili;
+  samningur = beidni === ALLIR || linur.some(s => s.motadili === beidni) ? beidni : adal;
+  const valkostir = linur.map(s => el("option", { value: s.motadili,
+    text: `${s.motadili_heiti}${s.adalsamningur ? " — aðalsamningur" : ""} (${s.fjoldi_haekkana})` }));
+  if (linur.length > 1) valkostir.push(el("option", { value: ALLIR, text: `Allir samningar (${linur.length}), ekki lagðir saman` }));
+  $("#samningur").replaceChildren(...valkostir);
+  $("#samningur").disabled = linur.length < 2;
+  $("#samningur").value = samningur;
+  uppfaeraSlod();
   teikna();
+}
+
+/* Hækkanir valins samnings. „Allir samningar“ sýnir línurnar hlið við hlið
+   með mótaðila á hverri, en bil eru þá ekki reiknuð - þau eiga aðeins við
+   innan eins samnings. */
+function valdarHaekkanir() {
+  const linur = gogn.samningar || [];
+  if (samningur === ALLIR) {
+    return { allir: true, lina: null,
+             haekkanir: linur.flatMap(s => s.haekkanir.map(h => ({ ...h, motadili_heiti: s.motadili_heiti }))) };
+  }
+  const lina = linur.find(s => s.motadili === samningur);
+  return { allir: false, lina, haekkanir: lina ? lina.haekkanir : gogn.haekkanir };
 }
 
 function teikna() {
   if (!gogn) return;
   const mork = lesaMork();
-  const haekkanir = [...gogn.haekkanir].sort((a, b) => a.dagsetning.localeCompare(b.dagsetning));
+  const { allir, lina, haekkanir: valdar } = valdarHaekkanir();
+  const haekkanir = [...valdar].sort((a, b) => a.dagsetning.localeCompare(b.dagsetning)
+    || (a.motadili_heiti || "").localeCompare(b.motadili_heiti || ""));
+  $("#samnings-skyring").textContent = allir
+    ? "Allir samningar félagsins í einni tímaröð, merktir með mótaðila. Hækkanir ólíkra samninga eru ekki lagðar saman, og bil eru aðeins reiknuð innan eins samnings."
+    : lina ? (lina.adalsamningur ? "Aðalsamningur félagsins" : "Sérsamningur")
+      + (lina.erft_fra ? ` · hækkanir ${lina.erft_fra} við ${lina.motadili_heiti} ráða` : "")
+      + ` · ${lina.fjoldi_haekkana} hækkanir · ${lina.fyrsta.slice(0, 4)}–${lina.sidasta.slice(0, 4)}` : "";
 
   // Einstakir gildistökudagar; bil eru reiknuð milli daga, ekki lína
   const dagar = [...new Set(haekkanir.map(h => h.dagsetning))];
   const bilin = [];
-  for (let i = 1; i < dagar.length; i++) {
+  for (let i = 1; i < dagar.length && !allir; i++) {
     const m = manudir(dagar[i - 1], dagar[i]);
     if (m > mork) bilin.push({ fra: dagar[i - 1], til: dagar[i], manudir: m, id: `bil-${dagar[i - 1]}` });
   }
@@ -224,7 +264,7 @@ function teikna() {
     el("div", {}, el("b", { class: "tolur", text: `${fyrsta?.slice(0, 4)}–${sidasta?.slice(0, 4)}` }), el("span", { text: "Tímabil" })),
     el("div", { class: "bil-tala" }, el("b", { class: "tolur", text: String(bilin.length) }), el("span", { text: `Bil > ${mork} mán.` })),
     el("div", { class: "bil-tala" }, el("b", { class: "tolur", text: String(nyleg) }), el("span", { text: "Þar af frá 1990" })),
-    el("div", {}, el("b", { class: "tolur", text: gogn.samfelld_fra ? gogn.samfelld_fra.slice(0, 4) : "–" }), el("span", { text: "Samfellt frá" })),
+    el("div", {}, el("b", { class: "tolur", text: (lina || gogn).samfelld_fra && !allir ? (lina || gogn).samfelld_fra.slice(0, 4) : "–" }), el("span", { text: "Samfellt frá" })),
   );
 
   // Árarönd: ár með a.m.k. einni hækkun, eða ár sem lendir inni í merktu bili
@@ -272,12 +312,16 @@ function teikna() {
       if (!h.innan_samfellu) merki.push(el("span", { class: "merki", text: "utan samfellu" }));
       if (h.i_kedju === 0) merki.push(el("span", { class: "merki", text: "hliðarsamningur" }));
       if (h.dagsetning > idag) merki.push(el("span", { class: "merki", text: "framundan" }));
+      if (h.erft_fra) merki.push(el("span", { class: "merki", text: `frá ${h.erft_fra}`,
+        title: `Hækkun ${h.erft_fra} við ${h.motadili_heiti || "mótaðila"} gildir fyrir aðildarfélögin` }));
+      if (h.ur_serssamningi) merki.push(el("span", { class: "merki", text: "almenn hækkun",
+        title: `Sótt í samning við ${h.ur_serssamningi}, sem endurtekur almenna hækkun aðalsamningsins` }));
       radir.push(el("tr", { class: h.innan_samfellu ? "" : "utan-samfellu" },
         el("td", { class: "dags" }, el("time", { datetime: h.dagsetning, text: nyrDagur ? h.dagsetning : "" }), merki),
         el("td", { class: "tala", text: h.prosenta != null && h.prosenta !== "" ? kommu(h.prosenta) + "%" : "" }),
         el("td", { class: "tala", text: h.kronur ? kronur(h.kronur) : "" }),
-        el("td", { text: h.a_vid || "" }),
-        el("td", { class: "bilmán", text: bilTil != null ? `${bilTil} mán.` : "" }),
+        el("td", { text: allir ? `${h.motadili_heiti} · ${h.a_vid || ""}` : (h.a_vid || "") }),
+        el("td", { class: "bilmán", text: bilTil != null && !allir ? `${bilTil} mán.` : "" }),
         el("td", { class: "upp" },
           ornggSlod(h.slod) ? el("a", { href: ornggSlod(h.slod), target: "_blank", rel: "noopener noreferrer",
             title: h.skjal || "", text: "Samningur ↗" }) : null,
@@ -289,7 +333,7 @@ function teikna() {
     el("table", {},
       el("thead", {}, el("tr", {},
         el("th", { text: "Gildistaka" }), el("th", { class: "tala", text: "Prósenta" }),
-        el("th", { class: "tala", text: "Krónur" }), el("th", { text: "Á við" }),
+        el("th", { class: "tala", text: "Krónur" }), el("th", { text: allir ? "Samningur · á við" : "Á við" }),
         el("th", { class: "tala", text: "Frá síðustu" }), el("th", { text: "Heimild" }))),
       el("tbody", {}, radir.length ? radir
         : el("tr", {}, el("td", { colspan: "6", class: "tomur", text: `Ekkert bil lengra en ${mork} mánuðir.` })))));
@@ -310,16 +354,16 @@ async function raesa() {
   }
   const radad = [...felog].sort((a, b) => a.felag.localeCompare(b.felag, "is"));
   $("#felag").replaceChildren(...radad.map(f =>
-    el("option", { value: f.audkenni, text: `${f.felag} (${f.fjoldi_haekkana})` })));
+    el("option", { value: f.audkenni, text: f.felag })));
   const beidni = leit.get("felag");
   const upphaf = felog.some(f => f.audkenni === beidni) ? beidni
     : ([...felog].sort((a, b) => b.fjoldi_haekkana - a.fjoldi_haekkana)[0]?.audkenni);
   $("#felag").value = upphaf;
-  $("#felag").addEventListener("change", () => { history.replaceState(null, "", location.pathname + location.search); uppfaeraSlod(); veljaFelag($("#felag").value); });
+  $("#felag").addEventListener("change", () => { history.replaceState(null, "", location.pathname + location.search); veljaFelag($("#felag").value); });
+  $("#samningur").addEventListener("change", (e) => { samningur = e.target.value; uppfaeraSlod(); teikna(); });
   $("#mork").addEventListener("input", () => { uppfaeraSlod(); teikna(); });
   window.addEventListener("hashchange", teikna);
-  uppfaeraSlod();
-  veljaFelag(upphaf);
+  veljaFelag(upphaf, leit.get("samningur"));
 }
 raesa();
 </script>
