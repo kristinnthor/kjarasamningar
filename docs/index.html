@@ -15,6 +15,10 @@
 <meta property="og:description" content="Umsamdar launahækkanir samkvæmt íslenskum kjarasamningum, dregnar úr frumtexta samninganna og birtar sem static JSON.">
 <meta property="og:image" content="https://kristinnthor.github.io/kjarasamningar/deilimynd.png">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="sameiginlegt.css">
 <style>
   :root {
     --bg: #fbfaf8; --texti: #22201d; --daufur: #6b6660;
@@ -33,10 +37,10 @@
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--texti);
-    font: 16px/1.65 ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    font: 16px/1.65 var(--letur);
   }
-  .umgjord { max-width: 780px; margin: 0 auto; padding: 56px 16px 96px; }
-  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .3em; letter-spacing: -.01em; }
+  .umgjord { max-width: 780px; margin: 0 auto; padding: 40px 16px 72px; }
+  h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 .3em; letter-spacing: -.01em; }
   h2 { font-size: 1.15rem; margin: 2.4em 0 .6em; letter-spacing: -.005em; }
   h3 { font-size: .95rem; margin: 1.6em 0 .4em; color: var(--daufur);
        text-transform: uppercase; letter-spacing: .06em; }
@@ -44,7 +48,7 @@
   .inngangur { color: var(--daufur); font-size: 1.05rem; margin-bottom: 2em; }
   a { color: var(--akser); }
   code, pre {
-    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-family: var(--letur-kodi);
     font-size: .875em;
   }
   code { background: var(--reitur); padding: .12em .38em; border-radius: 3px; }
@@ -71,12 +75,26 @@
 </style>
 </head>
 <body>
+<header class="vefhaus">
+  <div class="vefhaus-innri">
+    <a class="vorumerki" href="./" aria-label="Kjarasamningar, forsíða">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#7a4f2c"/><path d="M5 25 H13 V18 H21 V11 H27" fill="none" stroke="#f7f0e6" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="vorumerki-nafn"><b>Kjarasamningar</b><span>umsamdar launahækkanir</span></span>
+    </a>
+    <nav class="leidsogn" aria-label="Síður">
+      <a href="skyrsla.html">Samanburður</a>
+      <a href="haekkanir.html">Hækkanir félags</a>
+      <a href="eydur.html">Eyðuskráning</a>
+      <a href="./" aria-current="page">Gögn og API</a>
+    </nav>
+  </div>
+</header>
 <div class="umgjord">
 
-<div class="hausmerki"><svg class="merki-mynd" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#7a4f2c"/><path d="M5 25 H13 V18 H21 V11 H27" fill="none" stroke="#f7f0e6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>Kjarasamningar</h1></div>
+<h1>Umsamdar launahækkanir á Íslandi</h1>
 <p class="inngangur">
-  Umsamdar launahækkanir samkvæmt íslenskum kjarasamningum, dregnar úr
-  frumtexta samninganna og birtar sem static JSON.
+  Hækkanir samkvæmt kjarasamningum stéttarfélaga, dregnar úr frumtexta
+  samninganna og birtar sem opin gögn.
 </p>
 
 <p>
@@ -210,12 +228,13 @@ for (const s of vr.samningar) {
     <code>artal_stada</code> segir til um hvert tilvik.</li>
 </ul>
 
-<footer>
-  Frumgögnin eru opinber gögn útgefenda sinna.
-  Forritin og úrvinnslan eru á
-  <a href="https://github.com/kristinnthor/kjarasamningar">GitHub</a>.
-</footer>
 
 </div>
+<footer class="vef-fotur">
+  <div class="vef-fotur-innri">
+    <span>Frumgögn: heildarskrá ríkissáttasemjara, vefir stéttarfélaga og samtaka atvinnurekenda, launavísitala Hagstofu Íslands.</span>
+    <a href="https://github.com/kristinnthor/kjarasamningar">Kóði og úrvinnsla á GitHub</a>
+  </div>
+</footer>
 </body>
 </html>

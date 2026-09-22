@@ -1,0 +1,81 @@
+/* Sameiginlegt útlit allra síðna: letur, haus með leiðsögn og fótur.
+   Hver síða skilgreinir sína eigin liti og uppsetningu; hér eru aðeins þeir
+   hlutar sem eiga að vera eins alls staðar, svo leiðsögnin standi á sama
+   stað og líti eins út á hverri síðu. */
+
+:root {
+  --letur: "Schibsted Grotesk", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  --letur-kodi: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  /* Litir hauss og fótar, ef síðan skilgreinir þá ekki sjálf */
+  --vh-bg: var(--bg, #fbfaf8);
+  --vh-texti: var(--texti, #1a1815);
+  --vh-texti-2: var(--texti-2, var(--daufur, #52514e));
+  --vh-texti-3: var(--texti-3, var(--daufur, #86847e));
+  --vh-lina: var(--lina, #e2ded8);
+  --vh-akser: var(--akser, #7a4f2c);
+}
+
+code, pre, kbd, samp { font-family: var(--letur-kodi); }
+h1, h2, h3 { text-wrap: balance; }
+h1 { font-weight: 700; letter-spacing: -.022em; }
+
+/* ---- Haus ---------------------------------------------------------- */
+
+.vefhaus { background: var(--vh-bg); border-bottom: 1px solid var(--vh-lina);
+           font-family: var(--letur); }
+.vefhaus-innri { max-width: 1180px; margin: 0 auto; padding: 0 16px;
+                 display: flex; align-items: center; gap: 0 32px; flex-wrap: wrap; }
+
+.vorumerki { display: inline-flex; align-items: center; gap: 10px; padding: 14px 0;
+             color: var(--vh-texti); text-decoration: none; }
+.vorumerki svg { width: 28px; height: 28px; flex: none; display: block; }
+.vorumerki-nafn { display: grid; line-height: 1.1; }
+.vorumerki-nafn b { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; }
+.vorumerki-nafn span { font-size: .74rem; color: var(--vh-texti-3); letter-spacing: .01em; }
+
+.leidsogn { display: flex; gap: 0 26px; margin-left: auto; overflow-x: auto;
+            scrollbar-width: none; }
+.leidsogn::-webkit-scrollbar { display: none; }
+.leidsogn a { position: relative; padding: 21px 0 19px; white-space: nowrap;
+              color: var(--vh-texti-2); text-decoration: none;
+              font-size: .94rem; font-weight: 500; }
+.leidsogn a:hover { color: var(--vh-texti); }
+.leidsogn a:focus-visible { outline: 2px solid var(--vh-akser); outline-offset: -4px; border-radius: 3px; }
+.leidsogn a[aria-current="page"] { color: var(--vh-texti); font-weight: 600; }
+
+/* Virka síðan stendur á þremur þrepum - sama formi og í merkinu, því
+   gögnin eru einmitt þrepin sem laun hækka í. */
+.leidsogn a[aria-current="page"]::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
+  background:
+    linear-gradient(var(--vh-akser), var(--vh-akser)) 0 100% / 34% 2px no-repeat,
+    linear-gradient(var(--vh-akser), var(--vh-akser)) 33.33% 100% / 2px 5px no-repeat,
+    linear-gradient(var(--vh-akser), var(--vh-akser)) 50% calc(100% - 3px) / 34% 2px no-repeat,
+    linear-gradient(var(--vh-akser), var(--vh-akser)) 66.66% calc(100% - 3px) / 2px 5px no-repeat,
+    linear-gradient(var(--vh-akser), var(--vh-akser)) 100% calc(100% - 6px) / 34% 2px no-repeat;
+}
+
+@media (max-width: 720px) {
+  .vefhaus-innri { gap: 0; }
+  .vorumerki { padding: 12px 0 4px; }
+  .leidsogn { width: 100%; margin-left: 0; gap: 0 22px; }
+  .leidsogn a { padding: 10px 0 14px; }
+}
+
+/* ---- Fótur ---------------------------------------------------------- */
+
+.vef-fotur { margin: 0; padding: 0; border: 0; border-top: 1px solid var(--vh-lina);
+             color: var(--vh-texti-3); font: .84rem/1.5 var(--letur); }
+.vef-fotur-innri { max-width: 1180px; margin: 0 auto; padding: 18px 16px 28px;
+                   display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; }
+.vef-fotur a { color: var(--vh-texti-2); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .leidsogn a { transition: color .12s; }
+}
+
+/* Schibsted Grotesk gefur kommu og punkti fulla tölustafsbreidd í jafnbreiðum
+   tölum ("4 , 00%"). Íslenskir aukastafir standa með kommu, svo jafnbreiðir
+   tölustafir eru teknir af: hlutfallsleg breidd les betur en jöfnun um hálfan
+   staf. Kóði í IBM Plex Mono er jafnbreiður hvort sem er. */
+* { font-feature-settings: "tnum" 0; }

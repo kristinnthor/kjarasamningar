@@ -15,6 +15,10 @@
 <meta property="og:description" content="Berðu saman umsamdar launahækkanir stéttarfélaga á sameiginlegum tímaás.">
 <meta property="og:image" content="https://kristinnthor.github.io/kjarasamningar/deilimynd.png">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="sameiginlegt.css">
 <style>
   :root {
     color-scheme: light;
@@ -48,13 +52,13 @@
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--texti);
-    font: 15px/1.6 ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    font: 15px/1.6 var(--letur);
   }
-  .umgjord { max-width: 1060px; margin: 0 auto; padding: 40px 16px 80px; }
-  h1 { font-size: 1.6rem; margin: 0 0 .2em; letter-spacing: -.01em; }
+  .umgjord { max-width: 1180px; margin: 0 auto; padding: 32px 16px 56px; }
+  h1 { font-size: 1.75rem; margin: 0 0 .2em; letter-spacing: -.01em; }
   .undir { color: var(--texti-2); margin: 0 0 1.8em; max-width: 62ch; }
   a { color: var(--akser); }
-  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .86em;
+  code { font-family: var(--letur-kodi); font-size: .86em;
          background: var(--reitur); padding: .1em .35em; border-radius: 3px; }
 
   .stjornbord {
@@ -107,7 +111,7 @@
             background: var(--reitur); border: 1px solid var(--lina); }
   .kubbur button { all: unset; cursor: pointer; color: var(--texti-3);
                    font-size: .95rem; line-height: 1; }
-  .kubbur select.linuval { width: auto; max-width: 190px; height: 24px; padding: 0 4px;
+  .kubbur select.linuval { width: auto; max-width: 260px; height: 24px; padding: 0 4px;
                            font-size: .76rem; border-radius: 4px; background: var(--yfirbord); }
   .kubbur button:hover { color: var(--texti); }
   .depill { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
@@ -213,9 +217,23 @@
 </style>
 </head>
 <body>
+<header class="vefhaus">
+  <div class="vefhaus-innri">
+    <a class="vorumerki" href="./" aria-label="Kjarasamningar, forsíða">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#7a4f2c"/><path d="M5 25 H13 V18 H21 V11 H27" fill="none" stroke="#f7f0e6" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="vorumerki-nafn"><b>Kjarasamningar</b><span>umsamdar launahækkanir</span></span>
+    </a>
+    <nav class="leidsogn" aria-label="Síður">
+      <a href="skyrsla.html" aria-current="page">Samanburður</a>
+      <a href="haekkanir.html">Hækkanir félags</a>
+      <a href="eydur.html">Eyðuskráning</a>
+      <a href="./">Gögn og API</a>
+    </nav>
+  </div>
+</header>
 <div class="umgjord">
 
-<div class="hausmerki"><svg class="merki-mynd" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#7a4f2c"/><path d="M5 25 H13 V18 H21 V11 H27" fill="none" stroke="#f7f0e6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>Samanburður stéttarfélaga</h1></div>
+<h1>Samanburður stéttarfélaga</h1>
 <p class="undir">
   Veldu eitt eða fleiri félög og berðu saman umsamdar launahækkanir á sameiginlegum
   tímaás. Gögnin eru sótt beint af API-inu.
@@ -311,13 +329,6 @@
   </div>
 </dialog>
 
-<footer>
-  <a href="./">Skjölun API-sins</a> ·
-  <a href="./haekkanir.html">Hækkanir félags</a> ·
-  <a href="./eydur.html">Eyðuskráning</a> ·
-  <a href="./demo.html">Einfalt sýnidæmi</a> ·
-  <a href="https://github.com/kristinnthor/kjarasamningar">GitHub</a>
-</footer>
 
 </div>
 
@@ -747,7 +758,7 @@ function tegraKubba() {
            aria-label="Samningur ${esc(s.felagHeiti)}" title="Veldu samning">${
           linur.map((l) => `<option value="${esc(l.motadili)}"${
             l.motadili === s.lina.motadili ? " selected" : ""}>${esc(l.heiti)}${
-            l.adal ? " (aðalsamningur)" : ""}</option>`).join("")}</select>`
+            l.adal ? " · aðalsamningur" : ""}</option>`).join("")}</select>`
       : "";
     return `<span class="kubbur">
        <span class="depill" style="background:${s.litur || "var(--texti-3)"}"></span>
@@ -1102,5 +1113,11 @@ async function raesa() {
 
 raesa();
 </script>
+<footer class="vef-fotur">
+  <div class="vef-fotur-innri">
+    <span>Frumgögn: heildarskrá ríkissáttasemjara, vefir stéttarfélaga og samtaka atvinnurekenda, launavísitala Hagstofu Íslands.</span>
+    <a href="https://github.com/kristinnthor/kjarasamningar">Kóði og úrvinnsla á GitHub</a>
+  </div>
+</footer>
 </body>
 </html>

@@ -15,6 +15,10 @@
 <meta property="og:title" content="Eyðuskráning — hjálpaðu til við að fylla í eyðurnar">
 <meta property="og:description" content="Skráðu launahækkanir sem vantar í aðalsamninga stéttarfélaga. Hver skráning er yfirfarin áður en hún fer í gögnin.">
 <meta property="og:image" content="https://kristinnthor.github.io/kjarasamningar/deilimynd.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="sameiginlegt.css">
 <style>
 :root {
   color-scheme: light;
@@ -50,19 +54,19 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--texti);
-       font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+       font: 15px/1.5 var(--letur); }
 .tolur, time, .dags { font-variant-numeric: tabular-nums; }
 a { color: var(--akser); }
 button, input, select, textarea { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--akser); outline-offset: 2px; }
 [hidden] { display: none !important; }
 
-.sida { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+.sida { max-width: 1180px; margin: 0 auto; padding: 32px 16px 56px; }
 header.haus { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 32px;
   padding-bottom: 18px; border-bottom: 1px solid var(--lina); margin-bottom: 16px; }
 .merki { display: flex; gap: 12px; align-items: center; }
 .merki svg { flex: none; }
-h1 { font-size: 1.45rem; margin: 0; letter-spacing: -.01em; }
+h1 { font-size: 1.75rem; margin: 0; letter-spacing: -.01em; }
 .undirtitill { margin: 2px 0 0; color: var(--texti-2); font-size: .92rem; }
 .samantekt { display: flex; gap: 20px; flex-wrap: wrap; margin-left: auto; }
 .samantekt div { display: grid; }
@@ -153,17 +157,25 @@ footer { margin-top: 36px; color: var(--texti-3); font-size: .85rem; }
 </style>
 </head>
 <body>
+<header class="vefhaus">
+  <div class="vefhaus-innri">
+    <a class="vorumerki" href="./" aria-label="Kjarasamningar, forsíða">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#7a4f2c"/><path d="M5 25 H13 V18 H21 V11 H27" fill="none" stroke="#f7f0e6" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="vorumerki-nafn"><b>Kjarasamningar</b><span>umsamdar launahækkanir</span></span>
+    </a>
+    <nav class="leidsogn" aria-label="Síður">
+      <a href="skyrsla.html">Samanburður</a>
+      <a href="haekkanir.html">Hækkanir félags</a>
+      <a href="eydur.html" aria-current="page">Eyðuskráning</a>
+      <a href="./">Gögn og API</a>
+    </nav>
+  </div>
+</header>
 <div class="sida">
   <header class="haus">
-    <div class="merki">
-      <svg width="36" height="36" viewBox="0 0 32 32" aria-hidden="true">
-        <rect width="32" height="32" rx="7" fill="#7a4f2c"/>
-        <path d="M5 25 H13 V18 H21 V11 H27" fill="none" stroke="#f7f0e6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <div>
-        <h1>Eyðuskráning</h1>
-        <p class="undirtitill">Launahækkanir sem vantar í aðalsamninga stéttarfélaga, 1990 og síðar</p>
-      </div>
+    <div>
+      <h1>Eyðuskráning</h1>
+      <p class="undirtitill">Launahækkanir sem vantar í aðalsamninga stéttarfélaga, 1990 og síðar</p>
     </div>
     <div class="samantekt" id="samantekt" aria-live="polite"></div>
   </header>
@@ -171,7 +183,8 @@ footer { margin-top: 36px; color: var(--texti-3); font-size: .85rem; }
   <div class="inngangur">
     <div class="skref"><b>1. Finndu eyðu</b>Veldu félag. Eyða er bil lengra en 18 mánuðir milli hækkana í aðalsamningi þess.</div>
     <div class="skref"><b>2. Skráðu hækkunina</b>Fylltu út úr samningnum, eða merktu að engin hækkun hafi verið. Skráningin opnast á GitHub, þar sem þú staðfestir hana (þarf GitHub-aðgang).</div>
-    <div class="skref"><b>3. Yfirferð</b>Hver skráning er yfirfarin. Aðeins samþykktar skráningar fara inn í gögnin og API-ið.</div>
+    <div class="skref"><b>3. Yfirferð</b>Hver skráning er yfirfarin. Aðeins samþykktar skráningar fara inn í gögnin og API-ið.
+      <a href="https://github.com/kristinnthor/kjarasamningar/issues?q=label%3Aleiðrétting">Sjá allar skráningar</a></div>
   </div>
 
   <div class="skipulag" id="skipulag">
@@ -183,12 +196,6 @@ footer { margin-top: 36px; color: var(--texti-3); font-size: .85rem; }
     <main id="adal"><p class="tomt">Hleð eyðum…</p></main>
   </div>
 
-  <footer>
-    <a href="./">Skjölun API-sins</a> ·
-    <a href="./haekkanir.html">Hækkanir félags</a> ·
-    <a href="./skyrsla.html">Samanburður stéttarfélaga</a> ·
-    <a href="https://github.com/kristinnthor/kjarasamningar/issues?q=label%3Aleiðrétting">Allar skráningar á GitHub</a>
-  </footer>
 </div>
 
 <script>
@@ -459,5 +466,11 @@ footer { margin-top: 36px; color: var(--texti-3); font-size: .85rem; }
   raesa();
 })();
 </script>
+<footer class="vef-fotur">
+  <div class="vef-fotur-innri">
+    <span>Frumgögn: heildarskrá ríkissáttasemjara, vefir stéttarfélaga og samtaka atvinnurekenda, launavísitala Hagstofu Íslands.</span>
+    <a href="https://github.com/kristinnthor/kjarasamningar">Kóði og úrvinnsla á GitHub</a>
+  </div>
+</footer>
 </body>
 </html>
