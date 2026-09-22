@@ -161,6 +161,23 @@
        text-transform: uppercase; letter-spacing: .04em; }
   [hidden] { display: none !important; }
 
+  .samningspunktur { cursor: pointer; }
+  .samningspunktur circle { transition: r .1s; }
+  .samningspunktur:hover circle, .samningspunktur:focus circle { r: 6; }
+  .samningalisti { margin-top: 12px; background: var(--yfirbord); border: 1px solid var(--lina);
+                   border-radius: 8px; padding: 12px 16px; }
+  .samningalisti h3 { margin: 0 0 2px; font-size: .74rem; font-weight: 700; color: var(--texti-3);
+                      text-transform: uppercase; letter-spacing: .06em; }
+  .samningalisti .skyr { margin: 0 0 10px; font-size: .8rem; color: var(--texti-3); }
+  .samningafelag { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; padding: 8px 0;
+                   border-top: 1px solid var(--lina); }
+  .samningafelag h4 { margin: 0 0 4px; font-size: .88rem; display: flex; align-items: center; gap: 7px; }
+  .samningafelag ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px;
+                      grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
+  .samningafelag li { font-size: .84rem; font-variant-numeric: tabular-nums; }
+  .samningafelag li a { font-weight: 600; text-decoration: none; }
+  .samningafelag li a:hover { text-decoration: underline; }
+  .samningafelag li span { color: var(--texti-3); font-size: .78rem; }
   button.deila { font: inherit; font-size: .82rem; padding: 5px 12px; cursor: pointer;
     background: var(--akser); color: var(--bg); border: 1px solid var(--akser); border-radius: 5px; font-weight: 600; }
   button.deila:hover { filter: brightness(1.08); }
@@ -235,6 +252,12 @@
           Launavísitala Hagstofunnar
         </label>
       </div>
+      <div class="gatreitur">
+        <input type="checkbox" id="samningar">
+        <label for="samningar" style="all:unset;cursor:pointer">
+          Sýna samninga
+        </label>
+      </div>
       <div class="hnappar" style="margin-left:auto">
         <button class="flipa" id="f-mynd" aria-pressed="true">Mynd</button>
         <button class="flipa" id="f-tafla" aria-pressed="false">Tafla</button>
@@ -252,6 +275,7 @@
       <div class="visir" id="visir"></div>
       <div class="abending" id="abending"></div>
     </div>
+    <div class="samningalisti" id="samningalisti" hidden></div>
   </div>
 </div>
 
@@ -308,6 +332,11 @@ const E = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const dagur = (s) => new Date(s + "T00:00:00Z").getTime();
+// Aðeins vefslóðir verða að tenglum - aldrei javascript: eða annað
+const ornggSlod = (s) => {
+  try { const u = new URL(s); return /^https?:$/.test(u.protocol) ? u.href : null; }
+  catch { return null; }
+};
 /* Grafið nær aldrei lengra en til loka yfirstandandi árs. Umsamdar hækkanir
    fram í tímann eru ekki samanburðarhæfar: sum félög hafa samið lengra fram
    en önnur, og launavísitalan nær aðeins til dagsins í dag. */
@@ -322,6 +351,7 @@ const stada = {
   grunnur: "",           // "" eða "YYYY"
   hagstofa: false,
   ollsagan: false,
+  samningar: false,      // tenglar á samningana við hverja hækkun
   mynd: true,
   visitala: null,        // gögn Hagstofunnar, sótt við fyrstu þörf
 };
@@ -348,12 +378,13 @@ async function saekjaFelag(audkenni) {
     eldri_eydur: g.eldri_eydur,
     allt: g.haekkanir
       .filter((h) => h.visitala != null && h.dagsetning <= LOKADAGUR)
-      .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning, v: h.visitala })),
+      .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning, v: h.visitala,
+                     s: ornggSlod(h.slod) })),
     samfella: g.haekkanir
       .filter((h) => h.innan_samfellu && h.visitala_samfella != null
                      && h.dagsetning <= LOKADAGUR)
       .map((h) => ({ t: dagur(h.dagsetning), d: h.dagsetning,
-                     v: h.visitala_samfella })),
+                     v: h.visitala_samfella, s: ornggSlod(h.slod) })),
   };
 }
 
@@ -505,7 +536,20 @@ function teikna(allar) {
     ${linur}
     <rect id="naemt" x="${M.l}" y="${M.t}" width="${B - M.l - M.r}"
       height="${H - M.t - M.b}" fill="transparent"/>
+    ${stada.samningar ? samningspunktar(allar, sx, sy) : ""}
   </svg>`;
+}
+
+/* Einn punktur á hverja hækkun sem á slóð á samning. Punktarnir liggja ofan
+   á næmisvæði ábendingarinnar svo smellur nái til þeirra. */
+function samningspunktar(allar, sx, sy) {
+  return allar.filter((s) => !s.vidmid).map((s) => s.punktar
+    .filter((p) => p.s)
+    .map((p) => `<a class="samningspunktur" href="${esc(p.s)}" target="_blank"
+         rel="noopener noreferrer" aria-label="${esc(s.heiti)}, ${esc(p.d)}: opna samning">
+         <title>${esc(s.heiti)} · ${esc(p.d)} — smelltu til að opna samninginn</title>
+         <circle cx="${sx(p.t).toFixed(1)}" cy="${sy(p.v).toFixed(1)}" r="3.5"
+           fill="var(--yfirbord)" stroke="${s.litur}" stroke-width="2"/></a>`).join("")).join("");
 }
 
 /* Gildi raðar á tilteknum tíma. Vísitalan er þrepafall, svo rétt gildi er
@@ -596,6 +640,7 @@ function birta() {
 
   if (!virkar.length) {
     stada.birt = null; E("deila").disabled = true;
+    E("samningalisti").hidden = true;
     E("mynd").hidden = true; E("tafla").hidden = true;
     E("stada").hidden = false;
     E("stada").textContent = stada.valin.size
@@ -611,6 +656,8 @@ function birta() {
   E("tafla").innerHTML = taflan(allar);
   E("mynd").hidden = !stada.mynd;
   E("tafla").hidden = stada.mynd;
+  E("samningalisti").hidden = !stada.samningar;
+  if (stada.samningar) E("samningalisti").innerHTML = samningalisti(virkar);
   if (stada.mynd) tengjaAbendingu(allar, 900, 400, { t: 14, r: 96, b: 30, l: 50 });
 
   const vidv = E("vidvorun");
@@ -625,6 +672,37 @@ function birta() {
   }
 
   skraSlod();
+}
+
+/* Samningarnir sem hækkanirnar á myndinni koma úr, einn tengill á hvert
+   skjal með tímabilinu sem hækkanir þess ná yfir. */
+function samningalisti(virkar) {
+  const hopar = virkar.map((s) => {
+    const eftir = new Map();
+    for (const p of s.punktar) {
+      if (!p.s) continue;
+      const x = eftir.get(p.s) || { slod: p.s, fra: p.d, til: p.d, n: 0 };
+      if (p.d < x.fra) x.fra = p.d;
+      if (p.d > x.til) x.til = p.d;
+      x.n++;
+      eftir.set(p.s, x);
+    }
+    return { s, samningar: [...eftir.values()].sort((a, b) => a.fra.localeCompare(b.fra)) };
+  }).filter((h) => h.samningar.length);
+  if (!hopar.length) return `<h3>Samningar</h3><p class="skyr">Engin slóð á samning fannst fyrir hækkanirnar á myndinni.</p>`;
+  const hysill = (u) => {
+    const h = new URL(u).hostname.replace(/^www\./, "");
+    // Heildarskrá ríkissáttasemjara er hýst á tveimur lénum
+    return /^kjarasamningar\.(hestafl\.)?is$/.test(h) ? "ríkissáttasemjari" : h;
+  };
+  return `<h3>Samningar</h3>
+    <p class="skyr">Smelltu á punkt á myndinni eða á samning hér til að opna skjalið.</p>` +
+    hopar.map(({ s, samningar }) => `<div class="samningafelag">
+      <h4><span class="depill" style="background:${s.litur}"></span>${esc(s.heiti)}</h4>
+      <ul>${samningar.map((x) => `<li><a href="${esc(x.slod)}" target="_blank"
+          rel="noopener noreferrer">${esc(x.fra)}${x.til !== x.fra ? "–" + esc(x.til) : ""} ↗</a>
+          <span>${x.n} ${x.n === 1 ? "hækkun" : "hækkanir"} · ${esc(hysill(x.slod))}</span></li>`).join("")}</ul>
+    </div>`).join("");
 }
 
 function tegraKubba() {
@@ -683,6 +761,7 @@ function skraSlod() {
   if (stada.grunnur) p.set("grunnur", stada.grunnur);
   if (stada.hagstofa) p.set("hagstofa", "1");
   if (stada.ollsagan) p.set("ollsagan", "1");
+  if (stada.samningar) p.set("samningar", "1");
   history.replaceState(null, "", p.toString() ? `?${p}` : location.pathname);
 }
 
@@ -909,6 +988,8 @@ async function raesa() {
   stada.hagstofa = p.get("hagstofa") === "1";
   stada.ollsagan = p.get("ollsagan") === "1";
   E("ollsagan").checked = stada.ollsagan;
+  stada.samningar = p.get("samningar") === "1";
+  E("samningar").checked = stada.samningar;
   E("grunnur").value = stada.grunnur;
   E("hagstofa").checked = stada.hagstofa;
   if (stada.hagstofa) await saekjaVisitolu();
@@ -931,6 +1012,10 @@ async function raesa() {
   });
   E("ollsagan").addEventListener("change", (e) => {
     stada.ollsagan = e.target.checked;
+    birta();
+  });
+  E("samningar").addEventListener("change", (e) => {
+    stada.samningar = e.target.checked;
     birta();
   });
   E("hagstofa").addEventListener("change", async (e) => {
