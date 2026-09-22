@@ -69,6 +69,9 @@ h1 { font-weight: 700; letter-spacing: -.022em; }
 .vef-fotur-innri { max-width: 1180px; margin: 0 auto; padding: 18px 16px 28px;
                    display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; }
 .vef-fotur a { color: var(--vh-texti-2); }
+/* Ábyrgðarmaður og kóði standa saman hvort undir öðru: hægra megin við
+   frumgögnin þegar pláss leyfir, annars undir þeim. */
+.vef-fotur-abyrgd { display: grid; justify-items: start; }
 
 @media (prefers-reduced-motion: no-preference) {
   .leidsogn a { transition: color .12s; }
