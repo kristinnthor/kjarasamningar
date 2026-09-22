@@ -136,7 +136,7 @@ def fella_saman_tvitok(rod, dagamork: int = 90):
             continue
         felld += 1
         if r["heimildir"] > tviburi["heimildir"]:
-            tviburi.update({k: r[k] for k in ("a_vid", "tegund", "skjal", "kronur")})
+            tviburi.update({k: r[k] for k in ("a_vid", "tegund", "skjal", "slod", "kronur")})
             tviburi["heimildir"] = r["heimildir"]
         tviburi["sameinad"] = tviburi.get("sameinad", 0) + 1
     return haldid, felld
@@ -267,6 +267,7 @@ def main():
             "heimildir": len(hopur),
             "olik_gildi": olik,
             "skjal": besta["skjal"],
+            "slod": besta.get("slod") or "",
         })
 
     # Merkja hliðarsamninga áður en keðjað er
@@ -349,7 +350,7 @@ def main():
               "dagsetning", "a_vid", "prosenta", "kronur", "tegund",
               "visitala", "visitala_samfella", "innan_samfellu", "i_kedju",
               "bil_manudir", "visitala_athugasemd",
-              "heimildir", "olik_gildi", "sameinad", "upprunar", "skjal"]
+              "heimildir", "olik_gildi", "sameinad", "upprunar", "skjal", "slod"]
     with open(UT_ROD, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=dalkar, extrasaction="ignore")
         w.writeheader()

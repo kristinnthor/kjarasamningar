@@ -100,6 +100,9 @@
   td.dags { white-space: nowrap; font-weight: 600; }
   td.bilmán { color: var(--texti-3); text-align: right; white-space: nowrap; }
   td.upp { color: var(--texti-3); font-size: .82rem; }
+  td.upp a { font-size: .88rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  td.upp a:hover { text-decoration: underline; }
+  td.upp .uppruni { display: block; }
   tr.utan-samfellu td { color: var(--texti-2); }
   .merki { display: inline-block; font-size: .7rem; padding: 1px 7px; border-radius: 999px;
            background: var(--reitur); color: var(--texti-2); margin-left: 6px; white-space: nowrap; font-weight: 400; }
@@ -156,6 +159,8 @@ const el = (tag, attrs = {}, ...born) => {
   for (const b of born.flat()) if (b != null) n.append(b.nodeType ? b : document.createTextNode(String(b)));
   return n;
 };
+// Aðeins vefslóðir eru gerðar að tenglum - aldrei javascript: eða annað
+const ornggSlod = (s) => { try { const u = new URL(s); return /^https?:$/.test(u.protocol) ? u.href : null; } catch { return null; } };
 const manudir = (a, b) => (+b.slice(0, 4) - +a.slice(0, 4)) * 12 + (+b.slice(5, 7) - +a.slice(5, 7));
 // Íslenskt talnasnið smíðað í höndunum - ekki allir vafrar bera is-IS
 const kommu = (x) => Number(x).toFixed(2).replace(".", ",");
@@ -273,7 +278,10 @@ function teikna() {
         el("td", { class: "tala", text: h.kronur ? kronur(h.kronur) : "" }),
         el("td", { text: h.a_vid || "" }),
         el("td", { class: "bilmán", text: bilTil != null ? `${bilTil} mán.` : "" }),
-        el("td", { class: "upp", text: (h.upprunar || "").replaceAll(",", ", ") })));
+        el("td", { class: "upp" },
+          ornggSlod(h.slod) ? el("a", { href: ornggSlod(h.slod), target: "_blank", rel: "noopener noreferrer",
+            title: h.skjal || "", text: "Samningur ↗" }) : null,
+          el("span", { class: "uppruni", text: (h.upprunar || "").replaceAll(",", ", ") }))));
     }
     fyrriDagur = h.dagsetning;
   }

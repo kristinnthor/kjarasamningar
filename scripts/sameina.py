@@ -15,6 +15,7 @@ Notkun:
 from __future__ import annotations
 
 import csv
+import json
 import os
 import sys
 import collections
@@ -29,6 +30,9 @@ GOGN = os.path.join(ROT, "gogn")
 SKRA = os.path.join(GOGN, "haekkanir.csv")
 VEF = os.path.join(GOGN, "haekkanir_vefskjol.csv")
 HANDVIRKT = os.path.join(GOGN, "handvirkar_leidrettingar.csv")
+SAMNINGAR = os.path.join(ROT, "samningar")
+# Slóðir sem niðurhalsskrárnar ná ekki yfir, flettar upp handvirkt
+SLODIR_VIDBOT = os.path.join(GOGN, "skjalaslodir_vidbot.csv")
 UT = os.path.join(GOGN, "haekkanir_sameinad.csv")
 
 # Vefir stéttarfélaga: skjal þaðan á við það félag nema annað komi fram.
@@ -91,7 +95,30 @@ def finna_felag(rad, kort):
 
 DALKAR = ["uppruni", "rakning", "felag", "felag_id", "atvinnurekandi",
           "markadur", "heildarsamtok", "gildir_fra", "tegund", "prosenta",
-          "kronur", "a_vid", "artal_stada", "skjal", "tilvitnun"]
+          "kronur", "a_vid", "artal_stada", "skjal", "slod", "tilvitnun"]
+
+
+def skjalaslodir():
+    """Slóð á hvert skjal á netinu, svo hægt sé að vísa á samninginn sjálfan.
+
+    Samningar heildarskrárinnar eru paraðir eftir auðkenni samnings, ekki
+    skráarheiti: sama skráarheitið er stundum notað fyrir ólík skjöl.
+    Vefskjöl eru pöruð eftir staðbundinni slóð í niðurhalsskránum.
+    """
+    eftir_id, eftir_skra = {}, {}
+    leid = os.path.join(SAMNINGAR, "rikissattasemjari", "lysigogn.json")
+    if os.path.exists(leid):
+        with open(leid, encoding="utf-8") as f:
+            for x in json.load(f):
+                if x.get("pdf_url"):
+                    eftir_id[str(x["id"])] = x["pdf_url"]
+    for nafn in ("_skra.csv", "_skra_wp.csv"):
+        for r in lesa(os.path.join(SAMNINGAR, nafn)):
+            if r.get("skra") and r.get("slod"):
+                eftir_skra.setdefault(r["skra"], r["slod"])
+    for r in lesa(SLODIR_VIDBOT):
+        eftir_skra.setdefault(r["skra"], r["slod"])
+    return eftir_id, eftir_skra
 
 
 def main():
@@ -105,11 +132,13 @@ def main():
     kort = thekkt_felog(skra)
     print(f"Þekkt félög úr heildarskránni: {len(kort)}")
 
+    slod_id, slod_skra = skjalaslodir()
     ut = []
     for r in skra:
         ut.append({
             "uppruni": "ríkissáttasemjari", "rakning": "staðfest lýsigögn",
             **{k: r.get(k) for k in DALKAR if k not in ("uppruni", "rakning")},
+            "slod": slod_id.get(str(r.get("samningur_id")), ""),
         })
 
     talning = collections.Counter()
@@ -125,7 +154,9 @@ def main():
             "gildir_fra": r["gildir_fra"], "tegund": r["tegund"],
             "prosenta": r["prosenta"], "kronur": r["kronur"],
             "a_vid": r["a_vid"], "artal_stada": r["artal_stada"],
-            "skjal": r["skjal"], "tilvitnun": r["tilvitnun"],
+            "skjal": r["skjal"],
+            "slod": slod_skra.get((r["skjal"] or "").replace("\\", "/"), ""),
+            "tilvitnun": r["tilvitnun"],
         })
 
     # Handvirkar leiðréttingar eru geymdar sérstaklega svo þær lifi af
@@ -145,6 +176,8 @@ def main():
             "prosenta": r["prosenta"], "kronur": r["kronur"],
             "a_vid": r["a_vid"], "artal_stada": "úr texta",
             "skjal": r.get("heimild") or "",
+            "slod": (r.get("heimild") or "") if (r.get("heimild") or "").startswith(
+                ("http://", "https://")) else "",
             "tilvitnun": (r.get("athugasemd")
                           or "Handvirk leiðrétting við yfirferð eyðu."),
         })
@@ -171,7 +204,9 @@ def main():
     print(f"Úr vefskjölum:         {len(vef)}")
     for k, v in talning.most_common():
         print(f"   {k:<22} {v}")
+    med_slod = sum(1 for r in ut if r.get("slod"))
     print(f"\nSameinað:              {len(ut)}")
+    print(f"Með slóð á skjal:      {med_slod}")
     print(f"Skrifað í {UT}")
 
 
