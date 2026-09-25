@@ -27,7 +27,7 @@
     --lina: #e2ded8; --reitur: #f3f0ec; --akser: #7a4f2c;
     --rod-1:#2a78d6; --rod-2:#eb6834; --rod-3:#1baf7a; --rod-4:#eda100;
     --rod-5:#e87ba4; --rod-6:#008300; --rod-7:#4a3aa7; --rod-8:#e34948;
-    --vidmid: #8d8b82;
+    --vidmid: #8d8b82; --verdlag: #5c5a54;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -37,7 +37,7 @@
       --lina:#302d29; --reitur:#211f1c; --akser:#d4a373;
       --rod-1:#3987e5; --rod-2:#d95926; --rod-3:#199e70; --rod-4:#c98500;
       --rod-5:#d55181; --rod-6:#008300; --rod-7:#9085e9; --rod-8:#e66767;
-      --vidmid:#6f6d66;
+      --vidmid:#6f6d66; --verdlag:#a8a69c;
     }
   }
   :root[data-theme="dark"] {
@@ -47,7 +47,7 @@
     --lina:#302d29; --reitur:#211f1c; --akser:#d4a373;
     --rod-1:#3987e5; --rod-2:#d95926; --rod-3:#199e70; --rod-4:#c98500;
     --rod-5:#d55181; --rod-6:#008300; --rod-7:#9085e9; --rod-8:#e66767;
-    --vidmid:#6f6d66;
+    --vidmid:#6f6d66; --verdlag:#a8a69c;
   }
   * { box-sizing: border-box; }
   body {
@@ -115,6 +115,8 @@
                            font-size: .76rem; border-radius: 4px; background: var(--yfirbord); }
   .kubbur button:hover { color: var(--texti); }
   .depill { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
+  /* Viðmiðslínur þekkjast á strikamynstri, ekki lit einum */
+  svg.strik { width: 22px; height: 8px; display: inline-block; flex: 0 0 auto; overflow: visible; }
 
   .stillingar { display: flex; flex-wrap: wrap; gap: 14px; align-items: end;
                 margin-bottom: 12px; }
@@ -273,6 +275,12 @@
         </label>
       </div>
       <div class="gatreitur">
+        <input type="checkbox" id="verdlag">
+        <label for="verdlag" style="all:unset;cursor:pointer">
+          Vísitala neysluverðs
+        </label>
+      </div>
+      <div class="gatreitur">
         <input type="checkbox" id="samningar">
         <label for="samningar" style="all:unset;cursor:pointer">
           Sýna samninga
@@ -359,16 +367,34 @@ const isl = (n, aukastafir = 0) =>
   n.toLocaleString("is-IS", { minimumFractionDigits: aukastafir,
                               maximumFractionDigits: aukastafir });
 
+/* Viðmiðsraðir Hagstofunnar. Lykillinn er jafnframt auðkenni gátreitsins og
+   færibreytan í slóðinni. Þær mæla aðrar stærðir en samningarnir og eru
+   aðgreindar með strikamynstri svo liturinn beri ekki auðkennið einn. */
+const VIDMID = {
+  hagstofa: {
+    heiti: "Launavísitala Hagstofunnar",
+    slod: "launavisitala/launavisitala_manadarleg.json",
+    velja: (x) => x["Eining"] === "Vísitölugildi",
+    litur: "var(--vidmid)", strik: "5 4", breidd: 1.6,
+  },
+  verdlag: {
+    heiti: "Vísitala neysluverðs",
+    slod: "visitala_neysluverds.json",
+    velja: (x) => x["Vísitala"] === "Vísitala neysluverðs" && x["Liður"] === "Vísitala",
+    litur: "var(--verdlag)", strik: "0.5 4", breidd: 2,
+  },
+};
+
 const stada = {
   felog: [],
   valin: new Map(),      // audkenni -> gögn félagsins
   grunnur: "",           // "" eða "YYYY"
-  hagstofa: false,
+  vidmid: new Set(),     // lyklar í VIDMID sem eru sýndir
   ollsagan: false,
   samningar: false,      // tenglar á samningana við hverja hækkun
   linaVal: new Map(),    // audkenni -> mótaðili, ef annar en aðalsamningur
   mynd: true,
-  visitala: null,        // gögn Hagstofunnar, sótt við fyrstu þörf
+  visitolur: {},         // gögn Hagstofunnar eftir lykli, sótt við fyrstu þörf
 };
 
 // ------------------------------------------------------------------ //
@@ -427,17 +453,24 @@ function valinLina(f) {
   return f.linur.find((l) => l.motadili === m) || f.linur.find((l) => l.adal) || f.linur[0];
 }
 
-async function saekjaVisitolu() {
-  if (stada.visitala) return stada.visitala;
-  const g = await saekja("launavisitala/launavisitala_manadarleg.json");
-  stada.visitala = g.gildi
-    .filter((x) => x["Eining"] === "Vísitölugildi")
+async function saekjaVisitolu(lykill) {
+  if (stada.visitolur[lykill]) return stada.visitolur[lykill];
+  const V = VIDMID[lykill];
+  const g = await saekja(V.slod);
+  stada.visitolur[lykill] = g.gildi
+    .filter(V.velja)
     .map((x) => {
       const m = x["Mánuður"];
       return { t: Date.UTC(+m.slice(0, 4), +m.slice(5) - 1, 1), v: +x.gildi };
     })
     .sort((a, b) => a.t - b.t);
-  return stada.visitala;
+  return stada.visitolur[lykill];
+}
+
+/* Sækir þær viðmiðsraðir sem eru valdar. Takist það ekki er röðinni sleppt
+   í stað þess að stöðva síðuna. */
+async function saekjaVidmid() {
+  await Promise.all([...stada.vidmid].map((k) => saekjaVisitolu(k).catch(() => null)));
 }
 
 // ------------------------------------------------------------------ //
@@ -487,31 +520,50 @@ function serier() {
   return ut;
 }
 
-function vidmidsrod(serierList) {
-  if (!stada.hagstofa || !stada.visitala) return null;
+function vidmidsrod(lykill, serierList) {
+  const V = VIDMID[lykill], gogn = stada.visitolur[lykill];
+  if (!gogn) return null;
   const allir = serierList.flatMap((s) => s.punktar);
   if (!allir.length) return null;
   const fra = Math.min(...allir.map((p) => p.t));
   const til = Math.max(...allir.map((p) => p.t));
-  const innan = stada.visitala.filter((p) => p.t >= fra && p.t <= til);
+  const innan = gogn.filter((p) => p.t >= fra && p.t <= til);
   if (innan.length < 2) return null;
   let grunngildi;
   if (stada.grunnur) {
     const grunnT = Date.UTC(+stada.grunnur, 0, 1);
-    const fyrir = stada.visitala.filter((p) => p.t <= grunnT);
+    const fyrir = gogn.filter((p) => p.t <= grunnT);
     if (!fyrir.length) return null;
     grunngildi = fyrir[fyrir.length - 1].v;
   } else {
     grunngildi = innan[0].v;
   }
   return {
-    heiti: "Launavísitala Hagstofunnar",
+    lykill,
+    heiti: V.heiti,
     vidmid: true,
-    litur: "var(--vidmid)",
+    litur: V.litur,
+    strik: V.strik,
+    breidd: V.breidd,
     punktar: innan.map((p) => ({ ...p, v: (p.v / grunngildi) * 100,
                                  d: new Date(p.t).toISOString().slice(0, 10) })),
   };
 }
+
+/* Valdar viðmiðsraðir, alltaf í sömu röð svo mynstrin fylgi röðinni en ekki
+   því í hvaða röð hakað var við. */
+const vidmidsradir = (serierList) => Object.keys(VIDMID)
+  .filter((k) => stada.vidmid.has(k))
+  .map((k) => vidmidsrod(k, serierList))
+  .filter(Boolean);
+
+/* Auðkenni raðar í skýringum og ábendingu: punktur fyrir félag, strik í
+   sama mynstri og á myndinni fyrir viðmið. */
+const synishorn = (s) => s.vidmid
+  ? `<svg class="strik" viewBox="0 0 22 8" aria-hidden="true"><line x1="2" y1="4" x2="20" y2="4"
+       stroke="${s.litur}" stroke-width="2" stroke-dasharray="${s.strik}"
+       stroke-linecap="round"/></svg>`
+  : `<span class="depill" style="background:${s.litur}"></span>`;
 
 // ------------------------------------------------------------------ //
 // Teikning                                                           //
@@ -550,7 +602,7 @@ function teikna(allar) {
       `${i ? "L" : "M"}${sx(p.t).toFixed(1)},${sy(p.v).toFixed(1)}`).join("");
     const sid = s.punktar[s.punktar.length - 1];
     const stroke = s.vidmid
-      ? `stroke="${s.litur}" stroke-width="1.6" stroke-dasharray="5 4"`
+      ? `stroke="${s.litur}" stroke-width="${s.breidd}" stroke-dasharray="${s.strik}"`
       : `stroke="${s.litur}" stroke-width="2"`;
     let endi = "";
     if (!s.vidmid) {
@@ -642,7 +694,7 @@ function tengjaAbendingu(allar, B, H, M) {
       .sort((a, b) => b.p.v - a.p.v)
       .map(({ s, p }) => `<div class="rod">
           <span style="display:flex;align-items:center;gap:6px">
-            <span class="depill" style="background:${s.litur}"></span>${esc(s.heiti)}
+            ${synishorn(s)}${esc(s.heiti)}
           </span><span>${isl(p.v, 1)}</span></div>`).join("");
     const haegri = px > spjald.width / 2;
     ab.style.left = haegri ? "" : `${px + 14}px`;
@@ -674,13 +726,11 @@ function birta() {
   const raðir = serier();
   const sleppt = raðir.filter((s) => s.sleppt);
   const virkar = raðir.filter((s) => !s.sleppt && s.punktar.length > 1);
-  const vidmid = vidmidsrod(virkar);
-  const allar = vidmid ? [vidmid, ...virkar] : virkar;
+  const vidmid = vidmidsradir(virkar);
+  const allar = [...vidmid, ...virkar];
 
   E("skyringar").innerHTML = allar.map((s) =>
-    `<li><span class="depill" style="background:${s.litur};
-       ${s.vidmid ? "opacity:.8" : ""}"></span>${esc(s.heiti)}${
-       s.vidmid ? " (viðmið)" : ""}</li>`).join("");
+    `<li>${synishorn(s)}${esc(s.heiti)}${s.vidmid ? " (viðmið)" : ""}</li>`).join("");
 
   if (!virkar.length) {
     stada.birt = null; E("deila").disabled = true;
@@ -713,6 +763,15 @@ function birta() {
     vidv.append(feitt, document.createTextNode(
       `${sleppt.map((s) => s.heiti).join(", ")} — engin mæling fyrir `
       + `${stada.grunnur}, svo ekki er hægt að endurgrunna.`));
+  }
+  if (vidmid.some((s) => s.lykill === "verdlag")) {
+    vidv.append(document.createElement("br"));
+    const feitt = document.createElement("strong");
+    feitt.textContent = "Vísitala neysluverðs ";
+    vidv.append(feitt, document.createTextNode(
+      "mælir verðlag, ekki laun. Liggi félag ofan hennar yfir sama tímabil hafa "
+      + "kauptaxtar hækkað umfram verðlag; liggi það undir henni hafa þeir rýrnað "
+      + "að raunvirði."));
   }
 
   skraSlod();
@@ -825,7 +884,7 @@ function skraSlod() {
   if (stada.valin.size) p.set("felog", [...stada.valin.keys()].map((a) =>
     stada.linaVal.has(a) ? `${a}:${stada.linaVal.get(a)}` : a).join(","));
   if (stada.grunnur) p.set("grunnur", stada.grunnur);
-  if (stada.hagstofa) p.set("hagstofa", "1");
+  for (const k of Object.keys(VIDMID)) if (stada.vidmid.has(k)) p.set(k, "1");
   if (stada.ollsagan) p.set("ollsagan", "1");
   if (stada.samningar) p.set("samningar", "1");
   history.replaceState(null, "", p.toString() ? `?${p}` : location.pathname);
@@ -840,7 +899,7 @@ function skraSlod() {
 const LJOS = {
   "--rod-1": "#2a78d6", "--rod-2": "#eb6834", "--rod-3": "#1baf7a", "--rod-4": "#eda100",
   "--rod-5": "#e87ba4", "--rod-6": "#008300", "--rod-7": "#4a3aa7", "--rod-8": "#e34948",
-  "--vidmid": "#8d8b82", "--yfirbord": "#fbfaf8", "--bg": "#fbfaf8", "--lina": "#e2ded8",
+  "--vidmid": "#8d8b82", "--verdlag": "#5c5a54", "--yfirbord": "#fbfaf8", "--bg": "#fbfaf8", "--lina": "#e2ded8",
   "--texti": "#0b0b0b", "--texti-2": "#52514e", "--texti-3": "#86847e", "--akser": "#7a4f2c",
 };
 const ljos = (s) => String(s).replace(/var\((--[a-z0-9-]+)\)/g, (_, n) => LJOS[n] || "#888");
@@ -855,13 +914,13 @@ function samantekt() {
              breyting: (b.v / a.v - 1) * 100 };
   };
   const radir = virkar.map(breyting);
-  const vm = vidmid ? breyting(vidmid) : null;
+  const vm = vidmid.map((s) => ({ ...breyting(s), vidmid: true, strik: s.strik }));
   const saman = stada.grunnur || (radir.every((r) => r.fra === radir[0].fra) ? radir[0].fra : null);
   let texti;
   if (saman) {
     texti = `Umsamdar launahækkanir frá ${saman}: `
       + radir.map((r) => `${r.heiti} ${pros(r.breyting)}`).join(", ") + ".";
-    if (vm) texti += ` Launavísitala Hagstofunnar sama tímabil: ${pros(vm.breyting)}.`;
+    for (const v of vm) texti += ` ${v.heiti} sama tímabil: ${pros(v.breyting)}.`;
   } else {
     texti = "Umsamdar launahækkanir: "
       + radir.map((r) => `${r.heiti} ${pros(r.breyting)} (${r.fra}–${r.til})`).join(", ") + ".";
@@ -927,14 +986,22 @@ async function teiknaDeilimynd() {
 
   // Lykiltölur hægra megin
   const x0 = 862, breidd = W - x0 - 36;
-  const allar = vm ? [...radir, { ...vm, heiti: "Launavísitala Hagstofunnar", litur: "var(--vidmid)", vidmid: true }] : radir;
+  const allar = [...radir, ...vm];
   const thett = allar.length > 4;
   const hae = thett ? Math.min(44, 370 / allar.length) : 86;
   let y = 196;
   for (const r of allar) {
     const litur = ljos(r.litur);
-    g.fillStyle = litur;
-    g.beginPath(); g.arc(x0 + 6, y + 8, 6, 0, Math.PI * 2); g.fill();
+    if (r.vidmid) {
+      // Sama strikamynstur og á myndinni, svo viðmiðin þekkist ekki á lit einum
+      g.strokeStyle = litur; g.lineWidth = 2.5; g.lineCap = "round";
+      g.setLineDash(r.strik.split(" ").map((x) => +x * 1.3));
+      g.beginPath(); g.moveTo(x0, y + 8); g.lineTo(x0 + 13, y + 8); g.stroke();
+      g.setLineDash([]);
+    } else {
+      g.fillStyle = litur;
+      g.beginPath(); g.arc(x0 + 6, y + 8, 6, 0, Math.PI * 2); g.fill();
+    }
     g.fillStyle = LJOS["--texti-2"]; g.font = `15px ${letur}`; g.textBaseline = "middle";
     if (thett) {
       g.font = `700 20px ${letur}`;
@@ -955,7 +1022,12 @@ async function teiknaDeilimynd() {
   // Fótur
   g.textBaseline = "alphabetic"; g.font = `13px ${letur}`; g.fillStyle = LJOS["--texti-3"];
   g.fillText("kristinnthor.github.io/kjarasamningar · umsamdar hækkanir, ekki mæld launaþróun", 42, 604);
-  if (vm) { g.textAlign = "right"; g.fillText("Launavísitala: Hagstofa Íslands", W - 36, 604); g.textAlign = "left"; }
+  if (vm.length) {
+    g.textAlign = "right";
+    g.fillText(vm.length > 1 ? "Viðmið: Hagstofa Íslands"
+      : `${vm[0].heiti.replace(/ Hagstofunnar$/, "")}: Hagstofa Íslands`, W - 36, 604);
+    g.textAlign = "left";
+  }
 
   return new Promise((leysa) => c.toBlob(leysa, "image/png"));
 }
@@ -1052,14 +1124,16 @@ async function raesa() {
   const p = new URLSearchParams(location.search);
   const grunnurUrSlod = p.get("grunnur") || "";
   stada.grunnur = /^\d{4}$/.test(grunnurUrSlod) ? grunnurUrSlod : "";
-  stada.hagstofa = p.get("hagstofa") === "1";
+  for (const k of Object.keys(VIDMID)) {
+    if (p.get(k) === "1") stada.vidmid.add(k);
+    E(k).checked = stada.vidmid.has(k);
+  }
   stada.ollsagan = p.get("ollsagan") === "1";
   E("ollsagan").checked = stada.ollsagan;
   stada.samningar = p.get("samningar") === "1";
   E("samningar").checked = stada.samningar;
   E("grunnur").value = stada.grunnur;
-  E("hagstofa").checked = stada.hagstofa;
-  if (stada.hagstofa) await saekjaVisitolu();
+  await saekjaVidmid();
 
   const fra_slod = (p.get("felog") || "").split(",")
     .filter((a) => /^[a-z0-9-]{1,60}(:[a-z0-9-]{1,60})?$/.test(a));
@@ -1079,7 +1153,6 @@ async function raesa() {
   E("adeins-samfelld").addEventListener("change", teiknaLista);
   E("grunnur").addEventListener("change", async (e) => {
     stada.grunnur = /^\d{4}$/.test(e.target.value) ? e.target.value : "";
-    if (stada.hagstofa) await saekjaVisitolu();
     tegraKubba(); birta();
   });
   E("ollsagan").addEventListener("change", (e) => {
@@ -1090,11 +1163,13 @@ async function raesa() {
     stada.samningar = e.target.checked;
     birta();
   });
-  E("hagstofa").addEventListener("change", async (e) => {
-    stada.hagstofa = e.target.checked;
-    if (stada.hagstofa) await saekjaVisitolu();
-    birta();
-  });
+  for (const k of Object.keys(VIDMID)) {
+    E(k).addEventListener("change", async (e) => {
+      if (e.target.checked) stada.vidmid.add(k); else stada.vidmid.delete(k);
+      await saekjaVidmid();
+      birta();
+    });
+  }
   E("f-mynd").addEventListener("click", () => {
     stada.mynd = true;
     E("f-mynd").setAttribute("aria-pressed", "true");
@@ -1115,7 +1190,7 @@ raesa();
 </script>
 <footer class="vef-fotur">
   <div class="vef-fotur-innri">
-    <span>Frumgögn: heildarskrá ríkissáttasemjara, vefir stéttarfélaga og samtaka atvinnurekenda, launavísitala Hagstofu Íslands.</span>
+    <span>Frumgögn: heildarskrá ríkissáttasemjara, vefir stéttarfélaga og samtaka atvinnurekenda, launavísitala og vísitala neysluverðs Hagstofu Íslands.</span>
     <span class="vef-fotur-abyrgd">
       <span>Ábyrgðarmaður: <a rel="author" href="https://kristinn.eu">Kristinn Þór Sigurjónsson</a></span>
       <a href="https://github.com/kristinnthor/kjarasamningar">Kóði og úrvinnsla á GitHub</a>

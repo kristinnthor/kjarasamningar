@@ -1,7 +1,7 @@
 # Gagnasett
 
 Þrjú lög: hráar hækkanir úr samningum, tímaröð eftir stéttarfélagi, og
-launavísitala Hagstofunnar sem sjálfstætt viðmið.
+launavísitala og vísitala neysluverðs Hagstofunnar sem sjálfstæð viðmið.
 
 | Skrá | Inntak |
 |---|---|
@@ -16,6 +16,7 @@ launavísitala Hagstofunnar sem sjálfstætt viðmið.
 | `launatoflur.csv.gz` | fullar launatöflur: fjárhæð á launaflokk og þrep |
 | `taxtahaekkanir.csv` | hækkanir mældar beint úr töflunum, óháð texta |
 | `launavisitala_*.csv` | launavísitala Hagstofunnar |
+| `visitala_neysluverds.csv` | vísitala neysluverðs Hagstofunnar |
 
 ---
 
@@ -214,6 +215,25 @@ launaskriði, ekki umsamdar hækkanir.
 
 Grunnárin eru ólík milli taflna og því þarf að keðja þær saman til að fá
 samfellda röð frá 1990.
+
+---
+
+## visitala_neysluverds.csv
+
+Vísitala neysluverðs Hagstofunnar (tafla VIS01000), mánaðarleg frá maí 1988
+með grunn 100 í maí 1988. Sótt með `scripts/saekja_hagstofu.py`.
+
+| Dálkur | Lýsing |
+|---|---|
+| `Mánuður` | `ÁÁÁÁMmm`, t.d. `2026M08` |
+| `Vísitala` | `Vísitala neysluverðs` eða `Vísitala neysluverðs án húsnæðis` |
+| `Liður` | `Vísitala`, `Mánaðarbreyting, %` eða `Ársbreyting, %` |
+| `gildi` | talan sjálf |
+
+**Hún mælir verðlag, ekki laun.** Hún er því annars konar viðmið en
+launavísitalan: umsamin hækkun umfram hana yfir sama tímabil er raunhækkun
+kauptaxta, hækkun undir henni er kjararýrnun. Samanburðarsíðan og
+`daemi/graf.py --verdlag` nota vísitöluna með húsnæði.
 
 ---
 

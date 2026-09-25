@@ -26,7 +26,7 @@ ROT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GOGN = os.path.join(ROT, "gogn")
 API = os.path.join(ROT, "docs", "api", "v1")
 
-UTGAFA = "1.1"
+UTGAFA = "1.2"
 GRUNNSLOD = "https://kristinnthor.github.io/kjarasamningar/api/v1"
 
 STAFIR = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u", "ý": "y",
@@ -95,6 +95,9 @@ FYRIRVARAR = [
     "launastigið. Þar stendur vísitalan í stað og línan er merkt.",
     "Launavísitala Hagstofunnar skiptist eftir markaði en ekki stéttarfélagi, "
     "og mælir raunverulega launaþróun með launaskriði - ekki umsamdar hækkanir.",
+    "Vísitala neysluverðs mælir verðlag, ekki laun. Umsamin hækkun umfram hana "
+    "yfir sama tímabil er raunhækkun kauptaxta; hækkun undir henni er "
+    "kjararýrnun.",
     "Gögnin eru unnin vélrænt úr OCR-texta. Hver hækkun ber tilvitnun í "
     "frumtextann svo hægt sé að sannreyna hana.",
     "Hækkanir mældar úr launatöflum (taxtahaekkanir) geta verið hærri en þær "
@@ -238,6 +241,19 @@ def main():
                    {"heiti": heiti, "fjoldi": len(linur), "gildi": linur})
             visitolur[heiti] = f"{GRUNNSLOD}/launavisitala/{heiti}.json"
 
+    # ---- vísitala neysluverðs ---- #
+    vnv = lesa("visitala_neysluverds.csv")
+    if vnv:
+        skrifa(os.path.join(API, "visitala_neysluverds.json"), {
+            "heiti": "visitala_neysluverds",
+            "grunnur": "1988M05 = 100",
+            "skyring": "Vísitala neysluverðs Hagstofunnar, með og án húsnæðis. "
+                       "Mælir verðlag, ekki laun: umsamin hækkun umfram hana "
+                       "er raunhækkun kauptaxta.",
+            "fjoldi": len(vnv),
+            "gildi": vnv,
+        })
+
     # ---- rót ---- #
     skrifa(os.path.join(API, "index.json"), {
         "heiti": "Kjarasamningar - umsamdar launahækkanir á Íslandi",
@@ -258,6 +274,8 @@ def main():
             "haekkanir_eftir_ari": f"{GRUNNSLOD}/haekkanir/{{ar}}.json",
             "taxtahaekkanir": f"{GRUNNSLOD}/taxtahaekkanir.json",
             "launavisitala": visitolur,
+            **({"visitala_neysluverds": f"{GRUNNSLOD}/visitala_neysluverds.json"}
+               if vnv else {}),
         },
         "tolur": {
             "felog": len(felog),

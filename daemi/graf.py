@@ -11,13 +11,14 @@ Notkun:
     python daemi/graf.py                       # fjögur félög með samfellda röð
     python daemi/graf.py vr samidnar efling    # tiltekin félög eftir auðkenni
     python daemi/graf.py --grunnur 2015        # allar raðir á sama grunn
+    python daemi/graf.py vr --verdlag          # líka vísitala neysluverðs
     python daemi/graf.py --listi               # sýnir öll fáanleg auðkenni
     python daemi/graf.py --vista graf.png      # vistar í skrá í stað þess að birta
 
 Án --grunnur hefst hver röð í 100 við sína eigin fyrstu mælingu, sem sýnir
 heildarþróun hvers félags en gerir þau ekki samanburðarhæf innbyrðis. Með
 --grunnur eru þær allar settar á 100 á sama degi, og þá er samanburður gildur
-- líka við launavísitölu Hagstofunnar.
+- líka við launavísitölu Hagstofunnar og, með --verdlag, vísitölu neysluverðs.
 """
 from __future__ import annotations
 
@@ -36,6 +37,7 @@ GRUNNUR = "https://kristinnthor.github.io/kjarasamningar/api/v1"
 # aftur fyrsta litinn heldur er sleppt.
 LITIR = ["#2a78d6", "#eb6834", "#1baf7a", "#4a3aa7", "#f50b3e", "#d14f9c", "#6b6660"]
 VIDMID = "#9a948c"
+VERDLAG = "#5c5a54"
 
 
 def saekja(slod: str):
@@ -59,19 +61,36 @@ def velja_felog(audkenni: list[str]):
     return samfelld[:4]
 
 
-def hagstofan(fra: str, til: str, grunndagur: date | None = None):
-    """Launavísitala Hagstofunnar, endurgrunnuð á 100.
+def launavisitala():
+    """Launavísitala Hagstofunnar sem (mánuður, gildi).
 
     Hún er höfð með sem viðmið því hún mælir aðra stærð: raunverulega
     launaþróun með launaskriði, ekki umsamdar hækkanir. Samningsraðirnar eiga
     því að liggja undir henni.
+    """
+    gogn = saekja("launavisitala/launavisitala_manadarleg.json")["gildi"]
+    return sorted((g["Mánuður"], float(g["gildi"])) for g in gogn
+                  if g["Eining"] == "Vísitölugildi")
+
+
+def neysluverd():
+    """Vísitala neysluverðs sem (mánuður, gildi).
+
+    Hún mælir verðlag, ekki laun. Liggi félag ofan hennar hafa kauptaxtar
+    hækkað umfram verðlag; liggi það undir henni hafa þeir rýrnað að raunvirði.
+    """
+    gogn = saekja("visitala_neysluverds.json")["gildi"]
+    return sorted((g["Mánuður"], float(g["gildi"])) for g in gogn
+                  if g["Vísitala"] == "Vísitala neysluverðs"
+                  and g["Liður"] == "Vísitala")
+
+
+def vidmid(rod, fra: str, til: str, grunndagur: date | None = None):
+    """Mánaðarleg vísitala Hagstofunnar, endurgrunnuð á 100.
 
     Án `grunndagur` er grunnurinn fyrsti punktur tímabilsins; með honum er
     hann sá sami og raðirnar nota, svo allt sé samanburðarhæft.
     """
-    gogn = saekja("launavisitala/launavisitala_manadarleg.json")["gildi"]
-    rod = sorted((g["Mánuður"], float(g["gildi"])) for g in gogn
-                 if g["Eining"] == "Vísitölugildi")
     innan = [(m, v) for m, v in rod
              if fra[:4] + "M" + fra[5:7] <= m <= til[:4] + "M" + til[5:7]]
     if not innan:
@@ -121,7 +140,7 @@ def endurgrunna(punktar, grunndagur: date):
     return [(grunndagur, 100.0)] + eftir
 
 
-def teikna(felog, vista=None, grunndagur=None):
+def teikna(felog, vista=None, grunndagur=None, verdlag=False):
     radir = []
     for f in felog:
         gogn = saekja(f"felog/{f['audkenni']}.json")
@@ -155,18 +174,25 @@ def teikna(felog, vista=None, grunndagur=None):
     # Viðmiðslínan á aðeins við þegar allar raðir deila grunni. Án --grunnur
     # er hver röð grunnuð á sinni eigin fyrstu mælingu, og þá getur ein
     # viðmiðslína ekki átt við fleiri en eina þeirra - hún myndi láta félag
-    # með styttri sögu líta út fyrir að hafa dregist aftur úr.
-    if grunndagur is not None:
-        hx, hy = hagstofan(grunndagur.isoformat(), til, grunndagur)
-    elif len(radir) == 1:
-        hx, hy = hagstofan(radir[0][2][0][0].isoformat(), til)
-    else:
-        hx, hy = [], []
-        print("Viðmiðslína Hagstofunnar er sleppt: raðirnar hafa ekki sama "
+    # með styttri sögu líta út fyrir að hafa dregist aftur úr. Viðmiðin
+    # þekkjast á strikamynstri, ekki lit einum.
+    vidmidin = [(launavisitala, "Launavísitala Hagstofunnar", VIDMID,
+                 1.6, (0, (4, 3)))]
+    if verdlag:
+        vidmidin.append((neysluverd, "Vísitala neysluverðs", VERDLAG,
+                         1.8, (0, (1, 2))))
+    if grunndagur is None and len(radir) > 1:
+        vidmidin = []
+        print("Viðmiðslínum Hagstofunnar er sleppt: raðirnar hafa ekki sama "
               "grunn. Notaðu --grunnur ÁÁÁÁ til að setja þær á sama grunn.")
-    if hx:
-        ax.plot(hx, hy, color=VIDMID, linewidth=1.6, linestyle=(0, (4, 3)),
-                label="Launavísitala Hagstofunnar (viðmið)", zorder=1)
+    for saekja_rod, heiti, litur, breidd, strik in vidmidin:
+        if grunndagur is not None:
+            hx, hy = vidmid(saekja_rod(), grunndagur.isoformat(), til, grunndagur)
+        else:
+            hx, hy = vidmid(saekja_rod(), radir[0][2][0][0].isoformat(), til)
+        if hx:
+            ax.plot(hx, hy, color=litur, linewidth=breidd, linestyle=strik,
+                    label=f"{heiti} (viðmið)", zorder=1)
 
     for i, (heiti, heilleiki, punktar) in enumerate(radir):
         litur = LITIR[i % len(LITIR)]
@@ -224,6 +250,9 @@ def main(argv):
         grunndagur = lesa_grunndag(argv[i + 1])
         argv = argv[:i] + argv[i + 2:]
 
+    verdlag = "--verdlag" in argv
+    argv = [a for a in argv if a != "--verdlag"]
+
     vista = None
     if "--vista" in argv:
         i = argv.index("--vista")
@@ -234,7 +263,7 @@ def main(argv):
     audkenni = [a for a in argv if not a.startswith("--")]
     felog = velja_felog(audkenni)
     print("Sæki: " + ", ".join(f["felag"] for f in felog))
-    teikna(felog, vista, grunndagur)
+    teikna(felog, vista, grunndagur, verdlag)
 
 
 if __name__ == "__main__":

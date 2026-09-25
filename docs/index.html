@@ -117,7 +117,8 @@
 <p>
   <a href="./skyrsla.html"><strong>Samanburður stéttarfélaga</strong></a> —
   veldu eitt eða fleiri félög og berðu þau saman á sameiginlegum tímaás, með
-  valkvæmum sameiginlegum grunni og launavísitölu Hagstofunnar sem viðmiði.
+  valkvæmum sameiginlegum grunni og launavísitölu og vísitölu neysluverðs
+  Hagstofunnar sem viðmiðum.
   <br>
   <a href="./eydur.html"><strong>Eyðuskráning</strong></a> — hjálpaðu til við að fylla
   í eyðurnar: skráðu hækkun sem vantar. Hver skráning er yfirfarin áður en hún fer í gögnin.
@@ -140,6 +141,7 @@
   <tr><td><code>api/v1/haekkanir/{ar}.json</code></td><td>hækkanir eins árs</td></tr>
   <tr><td><code>api/v1/taxtahaekkanir.json</code></td><td>hækkanir mældar beint úr launatöflum</td></tr>
   <tr><td><code>api/v1/launavisitala/…</code></td><td>launavísitala Hagstofunnar</td></tr>
+  <tr><td><code>api/v1/visitala_neysluverds.json</code></td><td>vísitala neysluverðs Hagstofunnar, mánaðarleg frá maí 1988</td></tr>
 </table>
 
 <h3>Dæmi</h3>
@@ -223,6 +225,9 @@ for (const s of vr.samningar) {
   <li><strong>Launavísitala Hagstofunnar skiptist eftir markaði</strong> —
     almennur, ríki, sveitarfélög — en ekki eftir stéttarfélagi. Hún mælir líka
     raunverulega launaþróun með launaskriði, ekki umsamdar hækkanir.</li>
+  <li><strong>Vísitala neysluverðs mælir verðlag, ekki laun.</strong> Umsamin
+    hækkun umfram hana yfir sama tímabil er raunhækkun kauptaxta; hækkun undir
+    henni er kjararýrnun.</li>
   <li><strong>Gögnin eru unnin vélrænt úr OCR-texta.</strong> Eldri skjöl eru
     misvel lesin; ártöl eru sannreynd gegn gildistíma samningsins og reiturinn
     <code>artal_stada</code> segir til um hvert tilvik.</li>
@@ -232,7 +237,7 @@ for (const s of vr.samningar) {
 </div>
 <footer class="vef-fotur">
   <div class="vef-fotur-innri">
-    <span>Frumgögn: heildarskrá ríkissáttasemjara, vefir stéttarfélaga og samtaka atvinnurekenda, launavísitala Hagstofu Íslands.</span>
+    <span>Frumgögn: heildarskrá ríkissáttasemjara, vefir stéttarfélaga og samtaka atvinnurekenda, launavísitala og vísitala neysluverðs Hagstofu Íslands.</span>
     <span class="vef-fotur-abyrgd">
       <span>Ábyrgðarmaður: <a rel="author" href="https://kristinn.eu">Kristinn Þór Sigurjónsson</a></span>
       <a href="https://github.com/kristinnthor/kjarasamningar">Kóði og úrvinnsla á GitHub</a>

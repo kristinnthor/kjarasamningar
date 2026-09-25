@@ -55,6 +55,9 @@ def main():
     profa("hækkanir til", bool(haekkanir), "haekkanir_sameinad.csv er tóm")
     profa("tímaröð til", bool(rod), "launathroun_eftir_felagi.csv er tóm")
     profa("launavísitala til", bool(lv), "launavisitala_manadarleg.csv er tóm")
+    profa("vísitala neysluverðs til", bool(lesa("visitala_neysluverds.csv")),
+          "visitala_neysluverds.csv er tóm - keyrðu scripts/saekja_hagstofu.py",
+          alvarlegt=False)
     if not (haekkanir and rod and lv):
         return 1
 
