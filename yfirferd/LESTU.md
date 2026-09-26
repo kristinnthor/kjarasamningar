@@ -20,7 +20,7 @@ leiðrétting hefur þegar lokað hverfa úr skránni.
 
 ## Opin eyðuskráning (hver sem er)
 
-https://kristinnthor.github.io/kjarasamningar/eydur.html (`docs/eydur.html`, gögnin
+https://kjarasamningar.kristinn.eu/eydur.html (`docs/eydur.html`, gögnin
 úr `docs/eydur.json`). Hver sem er getur skráð hækkun sem vantar; skráningin
 opnast sem útfyllt issue á GitHub (`.github/ISSUE_TEMPLATE/leidretting.yml`,
 merkið `leiðrétting`) og sá sem skráir þarf GitHub-aðgang.

@@ -30,7 +30,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
-GRUNNUR = "https://kristinnthor.github.io/kjarasamningar/api/v1"
+GRUNNUR = "https://kjarasamningar.kristinn.eu/api/v1"
 
 # Litir í fastri röð. Þeir eru valdir svo aðgreining haldist fyrir
 # litblindu og eru aldrei endurnýttir í hringi - fimmta félagið fær ekki

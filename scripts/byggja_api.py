@@ -27,7 +27,7 @@ GOGN = os.path.join(ROT, "gogn")
 API = os.path.join(ROT, "docs", "api", "v1")
 
 UTGAFA = "1.2"
-GRUNNSLOD = "https://kristinnthor.github.io/kjarasamningar/api/v1"
+GRUNNSLOD = "https://kjarasamningar.kristinn.eu/api/v1"
 
 STAFIR = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u", "ý": "y",
           "þ": "th", "æ": "ae", "ö": "o", "ð": "d"}
