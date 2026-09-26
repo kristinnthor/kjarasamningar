@@ -33,7 +33,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 ROT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 API = os.path.join(ROT, "docs", "api", "v1")
 UT = os.path.join(ROT, "docs", "deila")
-VEFUR = "https://kristinnthor.github.io/kjarasamningar"
+VEFUR = "https://kjarasamningar.kristinn.eu"
 
 BG, TEXTI, TEXTI2, TEXTI3, LINA = "#fbfaf8", "#0b0b0b", "#52514e", "#86847e", "#e2ded8"
 AKSER, ROD, VIDMID = "#7a4f2c", "#2a78d6", "#8d8b82"
@@ -141,7 +141,7 @@ def ein_sida(felag, hag, idag):
     if lok > hag_lok:
         fig.text(0.70, 0.12, f"Með umsömdum hækkunum\ntil {lok.year}: {prosenta(heild)}",
                  fontsize=12, color=TEXTI2, linespacing=1.4)
-    fig.text(0.035, 0.035, "kristinnthor.github.io/kjarasamningar · umsamdar hækkanir, ekki mæld launaþróun",
+    fig.text(0.035, 0.035, "kjarasamningar.kristinn.eu · umsamdar hækkanir, ekki mæld launaþróun",
              fontsize=10.5, color=TEXTI3)
     if h0:
         fig.text(0.965, 0.035, "Launavísitala: Hagstofa Íslands", fontsize=10.5,

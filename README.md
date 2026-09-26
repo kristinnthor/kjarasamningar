@@ -48,9 +48,9 @@ sem hafa enga mælingu fyrir grunndaginn falla út með skýringu, því ekki er
 hægt að endurgrunna þau án þess að giska.
 
 Forritið sækir allt yfir netið af API-inu - ekkert af gögnunum er innbyggt í
-það. Í vafra: [samanburður stéttarfélaga](https://kristinnthor.github.io/kjarasamningar/skyrsla.html)
-(fjölval, sameiginlegur tímaás), [einfalt sýnidæmi](https://kristinnthor.github.io/kjarasamningar/demo.html)
-og [skjölun API-sins](https://kristinnthor.github.io/kjarasamningar/).
+það. Í vafra: [samanburður stéttarfélaga](https://kjarasamningar.kristinn.eu/skyrsla.html)
+(fjölval, sameiginlegur tímaás), [einfalt sýnidæmi](https://kjarasamningar.kristinn.eu/demo.html)
+og [skjölun API-sins](https://kjarasamningar.kristinn.eu/).
 
 ---
 
